@@ -38,7 +38,7 @@ public class StrutturaDAO {
             ps.setInt(1, struttura.getIdStruttura());
             ResultSet rs = ps.executeQuery();
 
-            list = alloggioDAO.copyResultIntoListReturn(rs);
+            alloggioDAO.copyResultIntoList(rs, list);
 
             return list;
         } catch (SQLException e) {

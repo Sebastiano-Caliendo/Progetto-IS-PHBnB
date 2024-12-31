@@ -22,24 +22,6 @@ public class AlloggioDAO  {
             list.add(a);
         }
     }
-
-    public List<Alloggio> copyResultIntoListReturn (ResultSet rs) throws SQLException {
-        List<Alloggio> list = new ArrayList<>();
-        while (rs.next()) {
-            Alloggio a = new Alloggio();
-
-            a.setNumeroAlloggio(rs.getInt(1));
-            a.setFkStruttura(rs.getInt(2));
-            a.setPrezzoNotte(rs.getDouble(3));
-            a.setPostiletto(rs.getInt(4));
-            a.setTipoAlloggio(rs.getString(5));
-            a.setDescrizione(rs.getString(6));
-
-            list.add(a);
-        }
-
-        return list;
-    }
     public List<Alloggio> doRetrieveAll() {
         try (Connection con = Connessione.getConnection()) {
             List<Alloggio> list = new ArrayList<>();
