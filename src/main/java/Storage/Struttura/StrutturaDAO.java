@@ -60,6 +60,33 @@ public class StrutturaDAO {
         }
     }
 
+    public Struttura doRetrieveById(int idStruttura) {
+        try (Connection con = Connessione.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("select * from\n" +
+                            "struttura where id_struttura = ?");
+            ps.setInt(1, idStruttura);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Struttura s = new Struttura();
+
+                s.setIdStruttura(rs.getInt(1));
+                s.setFkHost(rs.getString(2));
+                s.setNomeStruttura(rs.getString(3));
+                s.setVia(rs.getString(4));
+                s.setNumCivico(Integer.parseInt(rs.getString(5)));
+                s.setCitta(rs.getString(6));
+                s.setNumAlloggi(rs.getInt(7));
+                s.setDescrizione(rs.getString(8));
+
+                return s;
+            }
+            return null;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public List<Struttura> doRetrieveByCriteria(String field, String criteria) {
         try (Connection con = Connessione.getConnection()) {
             List<Struttura> list = new ArrayList<>();
@@ -123,7 +150,7 @@ public class StrutturaDAO {
         }
     }
 
-
+    // quando elimino una struttura con on delete cascade -> eliminerò anche gli alloggi di quella struttura
     public int doDelete(int idStruttura) {
         try (Connection con = Connessione.getConnection()) {
             PreparedStatement ps =

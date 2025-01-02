@@ -1,6 +1,9 @@
 package Storage.Prenotazione;
 
+import Storage.Alloggio.Alloggio;
 import Storage.Connessione;
+import Storage.Struttura.Struttura;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +21,26 @@ public class PrenotazioneDAO {
 
             return list;
 
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Prenotazione> doRetrievePrenotazioniByAlloggio(Alloggio alloggio) {
+        try (Connection con = Connessione.getConnection()) {
+            List<Prenotazione> prenotazioniAlloggio = new ArrayList<>();
+            PreparedStatement ps = con.prepareStatement(
+                    "select distinct prenotazione.* from prenotazione " +
+                            "join occupa on prenotazione.codice_prenotazione = occupa.fk_prenotazione " +
+                            "join alloggio on occupa.fk_strutturaAlloggio = ? " +
+                            "AND occupa.fk_alloggio = ?");
+            ps.setInt(1, alloggio.getFkStruttura());
+            ps.setInt(2, alloggio.getNumeroAlloggio());
+
+
+            this.copyResultIntoList(ps.executeQuery(), prenotazioniAlloggio);
+
+            return prenotazioniAlloggio;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

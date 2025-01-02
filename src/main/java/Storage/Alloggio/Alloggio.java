@@ -11,6 +11,15 @@ public class Alloggio {
     public Alloggio() {
     }
 
+    public Alloggio(int numeroAlloggio, int fkStruttura, double prezzoNotte, int postiletto, String tipoAlloggio, String descrizione) {
+        this.numeroAlloggio = numeroAlloggio;
+        this.fkStruttura = fkStruttura;
+        this.prezzoNotte = prezzoNotte;
+        Postiletto = postiletto;
+        this.tipoAlloggio = tipoAlloggio;
+        this.descrizione = descrizione;
+    }
+
     public int getNumeroAlloggio() {
         return numeroAlloggio;
     }

@@ -13,6 +13,17 @@ public class Struttura {
     public Struttura() {
     }
 
+    public Struttura(int idStruttura, String fkHost, String nomeStruttura, String via, int numCivico, String citta, String descrizione) {
+        this.idStruttura = idStruttura;
+        this.fkHost = fkHost;
+        this.nomeStruttura = nomeStruttura;
+        this.via = via;
+        this.numCivico = numCivico;
+        this.citta = citta;
+        this.numAlloggi = 0;
+        this.descrizione = descrizione;
+    }
+
     public int getIdStruttura() {
         return idStruttura;
     }

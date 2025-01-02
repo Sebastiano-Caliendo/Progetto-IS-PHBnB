@@ -36,6 +36,32 @@ public class AlloggioDAO  {
         }
     }
 
+    public Alloggio doRetrieveById(int numeroAlloggio, int fkStruttura) {
+        try (Connection con = Connessione.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("select * from\n" +
+                            "alloggio where numero_alloggio = ? and fk_struttura = ? ");
+            ps.setInt(1, numeroAlloggio);
+            ps.setInt(2, fkStruttura);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Alloggio a = new Alloggio();
+
+                a.setNumeroAlloggio(rs.getInt(1));
+                a.setFkStruttura(rs.getInt(2));
+                a.setPrezzoNotte(rs.getDouble(3));
+                a.setPostiletto(rs.getInt(4));
+                a.setTipoAlloggio(rs.getString(5));
+                a.setDescrizione(rs.getString(6));
+
+                return a;
+            }
+            return null;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public List<Alloggio> doRetrieveByCriteria(String field, String criteria) {
         try (Connection con = Connessione.getConnection()) {
             List<Alloggio> list = new ArrayList<>();
@@ -52,7 +78,7 @@ public class AlloggioDAO  {
         }
     }
 
-    public int doSave(Alloggio alloggio) {
+    public List<Integer> doSave(Alloggio alloggio) {
         try (Connection con = Connessione.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
                     "insert into alloggio (numero_alloggio, fk_struttura, prezzo_notte, numero_posti_letto, tipo_alloggio, descrizione) " +
@@ -68,9 +94,16 @@ public class AlloggioDAO  {
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
             }
+
+            List<Integer> chiavi = new ArrayList<>();
             ResultSet rs = ps.getGeneratedKeys();
+
             rs.next();
-            return rs.getInt(1);
+
+            chiavi.add(rs.getInt(1));
+            chiavi.add(rs.getInt(2));
+
+            return chiavi;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
