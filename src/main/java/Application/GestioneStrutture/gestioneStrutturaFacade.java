@@ -1,5 +1,7 @@
 package Application.GestioneStrutture;
 
+import Storage.Host.Host;
+import Storage.Prenotazione.Prenotazione;
 import Storage.Struttura.Struttura;
 
 import java.util.List;
