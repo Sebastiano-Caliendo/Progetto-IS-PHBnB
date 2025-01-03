@@ -1,0 +1,23 @@
+header {
+    top: 0; /* tutto in alto a sinistra */
+    left: 0;
+    background-color: var(--color-primary);
+    width: 100%;
+    height: 15vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 3%;
+    position: fixed; /* posizione fissa nella finistre, rimane attaccato lì */
+    z-index: 999;
+}
+
+header .logo {
+    font-style: italic /* corsivo */
+}
+
+header .logo a{
+    text-decoration: none;
+    color: var(--color-secondary);
+}
+

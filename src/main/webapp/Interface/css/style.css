@@ -1,0 +1,25 @@
+/* variabili di stile */
+:root {
+    --color-primary: goldenrod;
+    --color-secondary: black;
+}
+
+/* grandezza font */
+.mid-text { font-size: 35px; font-weight: 600; }
+.big-text { font-size: 50px; font-weight: 900; }
+.normal-text { font-size: 25px; font-weight: 500; }
+.small-text { font-size: 12px; font-weight: 400; }
+
+/* reset css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+}
+
+body{
+    overflow-x: hidden; /* nascondi tutto ciò che supera il 100vw */
+}
+
