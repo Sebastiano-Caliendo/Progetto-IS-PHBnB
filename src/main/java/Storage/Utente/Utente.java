@@ -1,6 +1,6 @@
 package Storage.Utente;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Utente {
 
@@ -11,7 +11,7 @@ public class Utente {
     private String citta;
     private String numeroCivico;
     private String via;
-    private Date dataNascita;
+    private LocalDate dataNascita;
     private String recapitoTelefonico;
     private boolean isAdmin;
 
@@ -19,7 +19,7 @@ public class Utente {
 
     }
 
-    public Utente(String email, String nome, String cognome, String password, String citta, String numeroCivico, String via, Date dataNascita, String recapitoTelefonico, boolean isAdmin) {
+    public Utente(String email, String nome, String cognome, String password, String citta, String numeroCivico, String via, LocalDate dataNascita, String recapitoTelefonico, boolean isAdmin) {
         this.email = email;
         this.nome = nome;
         this.cognome = cognome;
@@ -86,11 +86,11 @@ public class Utente {
         this.via = via;
     }
 
-    public Date getDataNascita() {
+    public LocalDate getDataNascita() {
         return dataNascita;
     }
 
-    public void setDataNascita(Date dataNascita) {
+    public void setDataNascita(LocalDate dataNascita) {
         this.dataNascita = dataNascita;
     }
 
