@@ -142,7 +142,7 @@ public class gestioneAmministratoreFacade {
         }
     }
 
-    public void modificaDatiSistemaHost(Host h, String email, String nome, String cognome, String password, Date dataNascita, String recapitoTelefonico, HttpSession session){
+    public void modificaDatiSistemaHost(Host h, String email, String nome, String cognome, String password, String recapitoTelefonico, HttpSession session){
         boolean successo = false;
 
         if(proxy.isAutenticato(session)){
@@ -152,7 +152,7 @@ public class gestioneAmministratoreFacade {
         }
         if(successo){
             HostDAO hostDAO = new HostDAO();
-            hostDAO.doUpdate(h, email, nome, cognome, password, dataNascita, recapitoTelefonico);
+            hostDAO.doUpdate(h, email, nome, cognome, password, recapitoTelefonico);
         }
     }
 
@@ -199,7 +199,7 @@ public class gestioneAmministratoreFacade {
         }
     }
 
-    public void modificaDatiSistemaUtente(Utente utente, String email, String nome, String cognome, String password, String citta, String numeroCivico, String via, Date dataNascita, String recapitoTelefonico, HttpSession session){
+    public void modificaDatiSistemaUtente(Utente utente, String email, String nome, String cognome, String password, String citta, String numeroCivico, String via, String recapitoTelefonico, HttpSession session){
         boolean successo = false;
 
         if(proxy.isAutenticato(session)){
@@ -209,7 +209,7 @@ public class gestioneAmministratoreFacade {
         }
         if(successo){
             UtenteDAO utenteDAO = new UtenteDAO();
-            utenteDAO.doUpdate(utente, email, nome, cognome, password, citta, numeroCivico, via, dataNascita, recapitoTelefonico);
+            utenteDAO.doUpdate(utente, email, nome, cognome, password, citta, numeroCivico, via, recapitoTelefonico);
         }
     }
 

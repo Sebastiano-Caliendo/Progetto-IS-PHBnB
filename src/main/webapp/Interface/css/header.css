@@ -1,0 +1,32 @@
+header {
+    top: 0; /* tutto in alto a sinistra */
+    left: 0;
+    background-color: var(--rosa-bianchissimo);
+    width: 100%;
+    height: 15vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 3%;
+    position: fixed; /* posizione fissa nella finistre, rimane attaccato lì */
+    z-index: 999;
+}
+
+header .logo {
+    font-style: italic /* corsivo */
+}
+
+hr {
+    position: absolute;
+    width: 90%;
+    border: 1px solid var(--color-primary);
+    height: 2px; /* Spessore della linea */
+    background-color: #b8860b; /* Colore gold scuro */
+    margin-top: 15vh;
+}
+
+header .logo a{
+    text-decoration: none;
+    color : var(--color-primary);
+}
+

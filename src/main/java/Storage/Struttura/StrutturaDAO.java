@@ -91,7 +91,7 @@ public class StrutturaDAO {
         try (Connection con = Connessione.getConnection()) {
             List<Struttura> list = new ArrayList<>();
             PreparedStatement ps = con.prepareStatement(
-                    "select distinct struttura.* from struttura join host on id_prodotto = host.email" +
+                    "select distinct struttura.* from struttura join host on fk_host = host.email" +
                             " where " + field + " = ?");
             ps.setString(1, criteria);
 

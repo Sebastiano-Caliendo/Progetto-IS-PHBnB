@@ -1,0 +1,68 @@
+#areaHost{
+    width : 93%;
+    text-align: center;
+    margin-top: 16vh;
+    color : var(--color-primary);
+}
+
+body{
+    background-color: var(--rosa-bianchissimo);
+}
+
+.sezione-aggiungi{
+    width : 87%;
+    margin: 2% 3% 2% 3%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.rigaStruttura{
+    background-color: white;
+    border-radius : 20px;
+    border : 1px solid var(--color-primary);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 200px;
+}
+
+.title{
+    margin-left: 2%;
+}
+
+.container{
+    margin-left: 3%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    width: 100%;
+}
+
+.elementiStruttura{
+    margin-top: 1%;
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.immagine{
+    justify-content: center;
+    margin-left: 80%;
+    position: absolute;
+    display: flex;
+    height: 94%;
+    width: 20%;
+}
+
+.descrizione{
+    height: 64%;
+    justify-content: center;
+    width: 80%;
+    display: flex;
+    position: absolute;
+    margin-top: 5%;
+}

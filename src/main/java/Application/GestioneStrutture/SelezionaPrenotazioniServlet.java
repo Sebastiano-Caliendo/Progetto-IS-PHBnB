@@ -33,6 +33,9 @@ public class SelezionaPrenotazioniServlet extends HttpServlet {
         // tutte le prenotazioni di questa struttura
         req.setAttribute("listaPrenotazioni", prenotazioniStruttura);
 
+        // inserisco anche il nome della struttura che servirà alla jsp
+        req.setAttribute("nomeStruttura", struttura.getNomeStruttura());
+
         // passo il controllo alla jsp PrenotazioniStruttura
         RequestDispatcher dispatcher = req.getRequestDispatcher("PrenotazioniStruttura.jsp");
         dispatcher.forward(req,resp);

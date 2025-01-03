@@ -25,17 +25,44 @@ public class HostDAO {
         }
     }
 
+    public Host doRetrieveByEmailAndPassword(String email, String password) {
+        try (Connection con = Connessione.getConnection()) {
+
+            Host h = null;
+            PreparedStatement ps = con.prepareStatement("select * from host where email=? and password_=SHA1(?)");
+
+            ps.setString(1, email);
+            ps.setString(2, password);
+
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()) {
+                h.setEmail(rs.getString(1));
+                h.setNome(rs.getString(2));
+                h.setCognome(rs.getString(3));
+                h.setPassword(rs.getString(4));
+                h.setDataNascita(rs.getDate(5).toLocalDate());
+                h.setRecapitoTelefonico(rs.getString(6));
+            }
+
+            return h;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     public int doSave(Host host) {
         try (Connection con = Connessione.getConnection()) {
 
-            PreparedStatement ps = con.prepareStatement("insert into host (email, nome, cognome, password_, data_nascita, recapito_telefonico) values (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement("insert into host (email, nome, cognome, password_, data_nascita, recapito_telefonico) values (?, ?, ?, SHA1(?), ?, ?)", Statement.RETURN_GENERATED_KEYS);
 
             ps.setString(1, host.getEmail());
             ps.setString(2, host.getNome());
             ps.setString(3, host.getCognome());
             ps.setString(4, host.getPassword());
-            ps.setDate(5, (Date) host.getDataNascita());
+            ps.setString(5, host.getDataNascita().toString());
             ps.setString(6, host.getRecapitoTelefonico());
 
             if (ps.executeUpdate() != 1) {
@@ -52,18 +79,32 @@ public class HostDAO {
         }
     }
 
-    public void doUpdate(Host host, String email, String nome, String cognome, String password, Date dataNascita, String recapitoTelefonico) {
+    public void doUpdate(Host host, String email, String nome, String cognome, String password, String recapitoTelefonico) {
         try (Connection con = Connessione.getConnection()) {
 
-            PreparedStatement ps = con.prepareStatement("UPDATE utente SET email=?, nome=?, cognome=?, password_=?, data_nascita=?, recapito_telefonico=? WHERE email=?");
+            PreparedStatement ps = con.prepareStatement("UPDATE utente SET email=?, nome=?, cognome=?, password_=SHA1(?), recapito_telefonico=? WHERE email=?");
 
             ps.setString(1, email);
             ps.setString(2, nome);
             ps.setString(3, cognome);
             ps.setString(4, password);
-            ps.setDate(5, dataNascita);
-            ps.setString(6, recapitoTelefonico);
-            ps.setString(7, host.getEmail());
+            ps.setString(5, recapitoTelefonico);
+            ps.setString(6, host.getEmail());
+
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("UPDATE error.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void doDelete(String email) {
+        try (Connection con = Connessione.getConnection()) {
+
+            PreparedStatement ps = con.prepareStatement("DELETE FROM host  WHERE email=?");
+
+            ps.setString(1, email);
 
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("UPDATE error.");
@@ -82,7 +123,7 @@ public class HostDAO {
             h.setNome(rs.getString(2));
             h.setCognome(rs.getString(3));
             h.setPassword(rs.getString(4));
-            h.setDataNascita(rs.getDate(5));
+            h.setDataNascita(rs.getDate(5).toLocalDate());
             h.setRecapitoTelefonico(rs.getString(6));
 
             list.add(h);

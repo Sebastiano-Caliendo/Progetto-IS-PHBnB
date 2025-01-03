@@ -1,0 +1,26 @@
+/* variabili di stile */
+:root {
+    --color-primary: #b8860b;
+    --color-secondary: black;
+    --rosa-bianchissimo : #fff4f6;
+}
+
+/* grandezza font */
+.mid-text { font-size: 35px; font-weight: 650; }
+.big-text { font-size: 40px; font-weight: 900; }
+.normal-text { font-size: 25px; font-weight: 600; }
+.small-text { font-size: 15px; font-weight: 400; }
+
+/* reset css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+}
+
+body{
+    overflow-x: hidden; /* nascondi tutto ciò che supera il 100vw */
+}
+
