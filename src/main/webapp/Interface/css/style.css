@@ -1,14 +1,15 @@
 /* variabili di stile */
 :root {
-    --color-primary: goldenrod;
+    --color-primary: #b8860b;
     --color-secondary: black;
+    --rosa-bianchissimo : #fff4f6;
 }
 
 /* grandezza font */
-.mid-text { font-size: 35px; font-weight: 600; }
-.big-text { font-size: 50px; font-weight: 900; }
-.normal-text { font-size: 25px; font-weight: 500; }
-.small-text { font-size: 12px; font-weight: 400; }
+.mid-text { font-size: 35px; font-weight: 650; }
+.big-text { font-size: 40px; font-weight: 900; }
+.normal-text { font-size: 25px; font-weight: 600; }
+.small-text { font-size: 15px; font-weight: 400; }
 
 /* reset css */
 * {

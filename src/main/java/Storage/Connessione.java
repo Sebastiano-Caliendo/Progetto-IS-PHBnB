@@ -16,7 +16,7 @@ public class Connessione {
     public static Connection getConnection() throws SQLException {
         if (datasource == null) {
             PoolProperties p = new PoolProperties();
-            p.setUrl("jdbc:mysql://localhost:3306/db_phbeb?serverTimezone=" + TimeZone.getDefault().getID());
+            p.setUrl("jdbc:mysql://localhost:3306/phbeb?serverTimezone=" + TimeZone.getDefault().getID());
             p.setDriverClassName("com.mysql.cj.jdbc.Driver");
             p.setUsername("root");
             p.setPassword("Mysql25");
