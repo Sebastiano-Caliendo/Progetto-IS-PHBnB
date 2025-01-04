@@ -41,10 +41,6 @@
         </div>
     </div>
 
-    <div class ="griglia">
-        <!-- ci vanno tutti gli alloggi -->
-    </div>
-
     <%  if(strutture.isEmpty()) { %>
             <div class="mid-text">Non hai nessuna struttura :( </div>
     <%  }
@@ -57,6 +53,9 @@
                             <div class="numAlloggi small-text"> <b>Numero Alloggi</b> : <%= strutture.get(i).getNumAlloggi() %></div>
                             <div class="immagine">immagine</div>
                             <div class="descrizione small-text"><%= strutture.get(i).getDescrizione() %></div>
+                        </div>
+                        <div class="button">
+                            <!-- immagini della modifica e dell'elimina -->
                         </div>
                     </div>
                 <% } %>

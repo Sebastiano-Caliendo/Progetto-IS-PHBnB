@@ -47,10 +47,10 @@ public class ModificaDatiSistemaUtenteServlet extends HttpServlet {
         utente.setNumeroCivico(numeroCivico);
         utente.setVia(via);
         utente.setRecapitoTelefonico(recapitoTelefonico);
-        utente.setDataNascita(dataNascitaUtente);
+        //utente.setDataNascita(dataNascitaUtente);
 
         gestioneAmministratoreFacade gestioneAmministratoreFacade = new gestioneAmministratoreFacade();
-        gestioneAmministratoreFacade.modificaDatiSistemaUtente(utente, email, nome, cognome, password, citta, numeroCivico, via, dataNascitaUtente, recapitoTelefonico, req.getSession());
+        //gestioneAmministratoreFacade.modificaDatiSistemaUtente(utente, email, nome, cognome, password, citta, numeroCivico, via, dataNascitaUtente, recapitoTelefonico, req.getSession());
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("VisTotaleUtenti.jsp");
         dispatcher.forward(req, resp);

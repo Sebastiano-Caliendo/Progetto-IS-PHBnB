@@ -8,5 +8,6 @@
 <h1><%= "Hello World!" %></h1>
 <br/>
 <a href="Interface/riepilogoStruttureGUI.jsp">riepilogoStruttre</a>
+<a href="Interface/VisAlloggiStruttureGUI.jsp">riepilogoAlloggiStruttura</a>
 </body>
 </html>
