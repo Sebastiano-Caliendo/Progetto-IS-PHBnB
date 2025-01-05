@@ -17,6 +17,17 @@ body{
     justify-content: space-between;
 }
 
+.rigaStruttura #rigaAlloggio{
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.primaColonna{
+    flex-direction: column;
+    text-align: center;
+    display: flex;
+}
+
 .rigaStruttura{
     background-color: white;
     border-radius : 20px;

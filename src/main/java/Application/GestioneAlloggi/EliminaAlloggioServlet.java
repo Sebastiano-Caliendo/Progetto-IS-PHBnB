@@ -23,7 +23,7 @@ public class EliminaAlloggioServlet extends HttpServlet {
         alloggioFacade.eliminaAlloggio(numeroAlloggio, idStruttura);
 
         // passo il controllo alla jsp ModificaAlloggio
-        RequestDispatcher dispatcher = req.getRequestDispatcher("VisAlloggiStrutture.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("VisAlloggiStruttureGUI.jsp");
         dispatcher.forward(req,resp);
     }
 

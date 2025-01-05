@@ -39,10 +39,10 @@ public class ModificaDatiSistemaHostServlet extends HttpServlet {
         host.setNome(nome);
         host.setCognome(cognome);
         host.setPassword(password);
-        host.setDataNascita(dataNascitaDate);
+        //host.setDataNascita(dataNascitaDate);
         host.setRecapitoTelefonico(recapitoTelefonico);
 
-        gestioneAmministratoreFacade.modificaDatiSistemaHost(host, email, nome, cognome, password, (java.sql.Date) dataNascitaDate, recapitoTelefonico, req.getSession());
+        //gestioneAmministratoreFacade.modificaDatiSistemaHost(host, email, nome, cognome, password, (java.sql.Date) dataNascitaDate, recapitoTelefonico, req.getSession());
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("VisTotaleHost.jsp");
         dispatcher.forward(req, resp);

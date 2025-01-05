@@ -49,7 +49,7 @@ public class ModificaDatiSistemaUtenteServlet extends HttpServlet {
         utente.setRecapitoTelefonico(recapitoTelefonico);
         utente.setDataNascita(dataNascitaUtente);
 
-        GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
+        gestioneAmministratoreFacade gestioneAmministratoreFacade = new gestioneAmministratoreFacade();
         gestioneAmministratoreFacade.modificaDatiSistemaUtente(utente, email, nome, cognome, password, citta, numeroCivico, via, dataNascitaUtente, recapitoTelefonico, req.getSession());
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("VisTotaleUtenti.jsp");
