@@ -1,7 +1,6 @@
 package Application.GestioneAmministratore;
 
 import Storage.Alloggio.Alloggio;
-import Storage.Alloggio.AlloggioDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -29,7 +28,7 @@ public class ModificaDatiSistemaAlloggioServlet extends HttpServlet {
         alloggio.setPostiletto(postiLetto);
         alloggio.setPrezzoNotte(prezzoNotte);
 
-        gestioneAmministratoreFacade gestioneAmministratoreFacade = new gestioneAmministratoreFacade();
+        GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
         gestioneAmministratoreFacade.modificaDatiSistemaAlloggio(alloggio, numeroAlloggio, fkStruttura, req.getSession());
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("VisTotaleAlloggi.jsp");

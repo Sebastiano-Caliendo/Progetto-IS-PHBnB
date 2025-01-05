@@ -33,7 +33,7 @@ public class ModificaDatiSistemaStrutturaServlet extends HttpServlet {
         struttura.setNumCivico(numCivico);
         struttura.setNumAlloggi(numAlloggi);
 
-        gestioneAmministratoreFacade gestioneAmministratoreFacade = new gestioneAmministratoreFacade();
+        GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
 
         gestioneAmministratoreFacade.modificaDatiSistemaStruttura(idStruttura, struttura, req.getSession());
 

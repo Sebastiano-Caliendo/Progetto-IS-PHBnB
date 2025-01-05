@@ -17,7 +17,7 @@ public class CancellazioneDatiSistemaRecensioneServlet extends HttpServlet {
         String codicePrenotazione = req.getParameter("codicePrenotazione");
         int numeroAlloggio = Integer.parseInt(req.getParameter("numAlloggio"));
 
-        gestioneAmministratoreFacade gestioneAmministratoreFacade = new gestioneAmministratoreFacade();
+        GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
         gestioneAmministratoreFacade.cancellazioneDatiSitemaRecensione(email, codicePrenotazione, numeroAlloggio, req.getSession());
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("VisTotaleRecensioni.jsp");

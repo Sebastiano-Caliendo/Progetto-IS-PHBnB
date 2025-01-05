@@ -32,6 +32,30 @@ public class RecensioneDAO {
         return recensioneList;
     }
 
+    public List<Recensione> doRetrieveByStruttura(String idStruttura)
+    {
+        List<Recensione> recensioneList = new ArrayList<>();
+        try(Connection con = Connessione.getConnection()){
+            PreparedStatement ps =
+                    con.prepareStatement("SELECT email, descrizione, votorecensione, datarecensione, codiceprenotazione, numeroalloggio, s.id_struttura FROM recensioni r JOIN alloggio a ON r.numeroalloggio = a.numero_alloggio JOIN struttura s ON a.fk_struttura = s.id_struttura WHERE r.codiceprenotazione = ?");
+            ps.setString(1, idStruttura);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Recensione pr = new Recensione();
+                pr.setEmailRecensore(rs.getString(1));
+                pr.setDescrizione(rs.getString(2));
+                pr.setVotoRecensione(rs.getInt(3));
+                pr.setDataRecensione(rs.getDate(4));
+                pr.setCodicePrenotazione(rs.getString(5));
+                pr.setNumeroAlloggio(rs.getInt(6));
+                recensioneList.add(pr);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return recensioneList;
+    }
+
     public Recensione doRetrieveByCodicePrenotazione(String codicePrenotazione) {
         try (Connection con = Connessione.getConnection()) {
             PreparedStatement ps =
@@ -48,10 +72,10 @@ public class RecensioneDAO {
                 pr.setNumeroAlloggio(rs.getInt(6));
                 return pr;
             }
-            return null;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return null;
     }
 
     public void doSave(Recensione recensione) {

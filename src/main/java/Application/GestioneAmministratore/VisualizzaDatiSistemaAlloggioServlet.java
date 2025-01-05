@@ -17,7 +17,7 @@ import java.util.List;
 public class VisualizzaDatiSistemaAlloggioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        gestioneAmministratoreFacade gestioneAmministratoreFacade = new gestioneAmministratoreFacade();
+        GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
         List<Alloggio> alloggi = new ArrayList<>();
 
         alloggi = gestioneAmministratoreFacade.visualizzaDatiSistemaAlloggio(req.getSession());

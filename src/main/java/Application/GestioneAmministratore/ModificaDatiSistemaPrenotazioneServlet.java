@@ -1,7 +1,5 @@
 package Application.GestioneAmministratore;
 
-import Storage.Alloggio.Alloggio;
-import Storage.Alloggio.AlloggioDAO;
 import Storage.Prenotazione.Prenotazione;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -38,7 +36,7 @@ public class ModificaDatiSistemaPrenotazioneServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-        gestioneAmministratoreFacade gestioneAmministratoreFacade = new gestioneAmministratoreFacade();
+        GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
 
         Prenotazione p = new Prenotazione();
         p.setFkUtente(fkUtente);

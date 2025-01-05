@@ -33,7 +33,7 @@ public class ModificaDatiSistemaHostServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-        gestioneAmministratoreFacade gestioneAmministratoreFacade = new gestioneAmministratoreFacade();
+        GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
         Host host = new Host();
 
         host.setNome(nome);

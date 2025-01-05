@@ -1,6 +1,5 @@
 package Application.GestioneAmministratore;
 
-import Storage.Alloggio.Alloggio;
 import Storage.Prenotazione.Prenotazione;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -17,7 +16,7 @@ import java.util.List;
 public class VisualizzaDatiSistemaPrenotazioneServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        gestioneAmministratoreFacade gestioneAmministratoreFacade = new gestioneAmministratoreFacade();
+        GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
         List<Prenotazione> prenotazioni = new ArrayList<>();
 
         prenotazioni = gestioneAmministratoreFacade.visualizzaDatiSistemaPrenotazione(req.getSession());

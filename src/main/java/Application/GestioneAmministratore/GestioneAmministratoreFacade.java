@@ -17,12 +17,12 @@ import jakarta.servlet.http.HttpSession;
 import java.sql.Date;
 import java.util.List;
 
-public class gestioneAmministratoreFacade {
+public class GestioneAmministratoreFacade {
 
-    private gestioneAmministratoreProxy proxy;
+    private GestioneAmministratoreProxy proxy;
 
-    public gestioneAmministratoreFacade(){
-        this.proxy = new gestioneAmministratoreProxy();
+    public GestioneAmministratoreFacade(){
+        this.proxy = new GestioneAmministratoreProxy();
     }
 
     public List<Alloggio> visualizzaDatiSistemaAlloggio(HttpSession session){
@@ -142,7 +142,7 @@ public class gestioneAmministratoreFacade {
         }
     }
 
-    public void modificaDatiSistemaHost(Host h, String email, String nome, String cognome, String password, String recapitoTelefonico, HttpSession session){
+    public void modificaDatiSistemaHost(Host h, String email, String nome, String cognome, String password, Date dataNascitaDate, String recapitoTelefonico, HttpSession session){
         boolean successo = false;
 
         if(proxy.isAutenticato(session)){

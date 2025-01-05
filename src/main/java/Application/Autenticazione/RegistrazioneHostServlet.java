@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Date;
 
 @WebServlet("/registrazioneHost")
 public class RegistrazioneHostServlet extends HttpServlet {
@@ -29,7 +30,7 @@ public class RegistrazioneHostServlet extends HttpServlet {
 
         String address = "areaHost.jsp";
 
-        Host h = new Host(email, nome, cognome, password, LocalDate.parse(dataNascita), recapitoTelefonico);
+        Host h = new Host(email, nome, cognome, password, (Date)dataNascita, recapitoTelefonico);
 
         AutenticazioneFacade autenticazioneFacade = new AutenticazioneFacade(req.getSession());
         autenticazioneFacade.registrazioneHost(h);
