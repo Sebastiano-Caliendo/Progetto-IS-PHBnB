@@ -6,9 +6,9 @@
 }
 
 /* grandezza font */
-.mid-text { font-size: 35px; font-weight: 650; }
-.big-text { font-size: 40px; font-weight: 900; }
-.normal-text { font-size: 25px; font-weight: 600; }
+.mid-text { font-size: 32px; font-weight: 800; }
+.big-text { font-size: 45px; font-weight: 900; }
+.normal-text { font-size: 27px; font-weight: 600; }
 .small-text { font-size: 15px; font-weight: 400; }
 
 /* reset css */
@@ -21,6 +21,16 @@
 }
 
 body{
-    overflow-x: hidden; /* nascondi tutto ciò che supera il 100vw */
+    overflow-x: hidden;  /* nascondi tutto ciò che supera il 100vw */
+}
+
+form input[type = submit] {
+    border: none;
+    height : 20px;
+    width : 120px;
+    border-radius: 20px;
+    background-color: var(--color-primary);
+    color : white;
+    font-weight: 700;
 }
 
