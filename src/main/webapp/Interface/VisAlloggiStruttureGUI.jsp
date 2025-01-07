@@ -12,27 +12,34 @@
 <html>
 <head>
     <title>Visita alloggi della struttura</title>
-    <link rel="stylesheet" href="css/riepilogoStrutture.css">
-    <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="Interface/css/riepilogoStrutture.css">
+    <link rel="stylesheet" href="Interface/css/footer.css">
+    <link rel="stylesheet" href="Interface/css/header.css">
+    <link rel="stylesheet" href="Interface/css/style.css">
 </head>
 <body>
     <%@ include file="../WEB-INF/moduli/header.jsp"%>
 
     <%
-        StrutturaDAO strutturaDAO = new StrutturaDAO();
-        Struttura struttura = strutturaDAO.doRetrieveById(1);
-        List<Alloggio> alloggi = strutturaDAO.doRetrieveAlloggiByStruttura(struttura);
+        List<Alloggio> alloggi = (List<Alloggio>) request.getAttribute("alloggi");
+        Struttura struttura = (Struttura) request.getAttribute("struttura");
     %>
     <div class="big-text" id="areaHost"> AREA HOST</div>
 
     <div class="sezione-aggiungi">
-        <div class="normal-text" id="sezione"><%= struttura.getNomeStruttura() %></div>
-        <div class="aggiungiStruttura">
-            <form action="login-servlet" method="post">
-                <input type="submit" value="Aggiungi Alloggio">
-            </form>
+        <div class="mid-text" id="sezione"><%= struttura.getNomeStruttura() %></div>
+        <div class="button-sezione-aggiungi">
+            <div class="visualizzaPrenotazioni">
+                <form action="../selezionaPrenotazioniServlet" method="post">
+                    <input type="hidden" name="idStruttura" value="<%= struttura.getIdStruttura() %>" >
+                    <input type="submit" value="Visualizza Prenotazioni" class="button" style="width:160px;" >
+                </form>
+            </div>
+            <div class="aggiungiStruttura">
+                <form action="login-servlet" method="post">
+                    <input type="submit" value="Aggiungi Alloggio" class="button">
+                </form>
+            </div>
         </div>
     </div>
 
@@ -45,8 +52,8 @@
         <div class="rigaStruttura" id="rigaAlloggio" style="flex-direction: row;
     justify-content: space-between;">
             <div class="primaColonna">
-                <div class="nomeAlloggio">ALLOGGIO <%= alloggi.get(i).getNumeroAlloggio() %></div>
-                <div class="tipoPostiLetto">
+                <div class="nomeAlloggio normal-text">Alloggio <%= alloggi.get(i).getNumeroAlloggio() %></div>
+                <div class="tipoPostiLetto small-text">
                     <div class="tipoStanza">
                         Tipo stanza : <%= alloggi.get(i).getTipoAlloggio() %>
                     </div>
@@ -56,8 +63,9 @@
                 </div>
             </div>
             <div class="secondaColonna">
-                <div class="prezzoNotte">
+                <div class="prezzoNotte"><b>
                     Prezzo/notte : <%= alloggi.get(i).getPrezzoNotte() %>
+                </b>
                 </div>
                 <div class="descrizioneAlloggio">
                     <%= alloggi.get(i).getDescrizione() %>
@@ -65,12 +73,11 @@
             </div>
             <div class="terzaColonna">
                 <div class="button">
-                    <!-- immagini della modifica e dell'elimina -->
                     <form action="login-servlet" method="post">
-                        <input type="submit" value="Modifica Alloggio">
+                        <input type="submit" value="Modifica Alloggio" class="button">
                     </form>
                     <form action="login-servlet" method="post">
-                        <input type="submit" value="Elimina Alloggio">
+                        <input type="submit" value="Elimina Alloggio" class="button">
                     </form>
                 </div>
             </div>

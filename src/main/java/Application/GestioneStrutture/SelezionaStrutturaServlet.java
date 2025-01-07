@@ -36,11 +36,11 @@ public class SelezionaStrutturaServlet extends HttpServlet {
         // inserisco la lista degli alloggi di una struttura nella richiesta
         req.setAttribute("alloggi", alloggi);
 
-        // inserisco il nome della struttura che servirà alla jsp
-        req.setAttribute("nomeStruttura", struttura.getNomeStruttura());
+        // inserisco la struttura che servirà alla jsp per : avere id e nome della struttura
+        req.setAttribute("struttura", struttura);
 
         // passo il controllo alla jsp che mostrerà la lista degli alloggi di una struttura
-        RequestDispatcher dispatcher = req.getRequestDispatcher("VisAlloggiStruttura.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("Interface/VisAlloggiStruttureGUI.jsp");
         dispatcher.forward(req,resp);
     }
 

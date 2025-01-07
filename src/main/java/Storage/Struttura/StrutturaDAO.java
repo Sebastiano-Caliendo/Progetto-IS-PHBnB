@@ -33,7 +33,7 @@ public class StrutturaDAO {
             List<Alloggio> list = new ArrayList<>();
 
             PreparedStatement ps = con.prepareStatement(
-                    "select alloggio.* from alloggio join struttura on alloggio.fk_struttura = ?" );
+                    "select distinct alloggio.* from alloggio join struttura on alloggio.fk_struttura = ?" );
 
             ps.setInt(1, struttura.getIdStruttura());
             ResultSet rs = ps.executeQuery();

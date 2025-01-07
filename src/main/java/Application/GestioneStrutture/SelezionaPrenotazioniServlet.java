@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "SelezionaPrenotazioniServlet", value = "/selezionaPrenotazioniServlet")
+@WebServlet(value = "/selezionaPrenotazioniServlet")
 public class SelezionaPrenotazioniServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -33,11 +33,11 @@ public class SelezionaPrenotazioniServlet extends HttpServlet {
         // tutte le prenotazioni di questa struttura
         req.setAttribute("listaPrenotazioni", prenotazioniStruttura);
 
-        // inserisco anche il nome della struttura che servirà alla jsp
-        req.setAttribute("nomeStruttura", struttura.getNomeStruttura());
+        // inserisco la struttura che servirà alla jsp : per avere il nome
+        req.setAttribute("struttura", struttura);
 
         // passo il controllo alla jsp PrenotazioniStruttura
-        RequestDispatcher dispatcher = req.getRequestDispatcher("PrenotazioniStruttura.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("Interface/PrenotazioniStrutturaGUI.jsp");
         dispatcher.forward(req,resp);
     }
 

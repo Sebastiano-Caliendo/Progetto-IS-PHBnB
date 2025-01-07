@@ -33,10 +33,10 @@
     <div class="big-text" id="areaHost"> AREA HOST</div>
 
     <div class="sezione-aggiungi">
-        <div class="normal-text" id="sezione"> Visualizza le tue strutture </div>
+        <div class="mid-text" id="sezione"> Visualizza le tue strutture </div>
         <div class="aggiungiStruttura">
             <form action="login-servlet" method="post">
-                <input type="submit" value="Aggiungi Struttura">
+                <input type="submit" value="Aggiungi Struttura" class="button" style="width: 140px;">
             </form>
         </div>
     </div>
@@ -47,21 +47,40 @@
         else { %>
             <div class="container" id="containerStrutture">
                 <% for(int i=0; i<strutture.size(); i++) { %>
-                    <div class="rigaStruttura">
-                        <div class="elementiStruttura">
-                            <div class="title normal-text"><%= strutture.get(i).getNomeStruttura() %></div>
-                            <div class="numAlloggi small-text"> <b>Numero Alloggi</b> : <%= strutture.get(i).getNumAlloggi() %></div>
-                            <div class="immagine">immagine</div>
-                            <div class="descrizione small-text"><%= strutture.get(i).getDescrizione() %></div>
+                    <form id="form_<%= i %>" action="../selezionaStrutturaServlet" method="post">
+                        <input type="hidden" value="<%= strutture.get(i).getIdStruttura() %>" name="idStruttura">
+
+                        <div class="containerRigaStruttura" onclick="submitForm(<%= i %>)">
+                            <div class="rigaStruttura">
+                                <div class="elementiStruttura">
+                                    <div class="title normal-text"><%= strutture.get(i).getNomeStruttura() %></div>
+                                    <div class="numAlloggi small-text"> <b>Numero Alloggi</b> : <%= strutture.get(i).getNumAlloggi() %></div>
+                                    <div class="immagine">immagine</div>
+                                    <div class="descrizione small-text"><%= strutture.get(i).getDescrizione() %></div>
+                                </div>
+                            </div>
+                            <div class="buttonRigaStruttura">
+                                <form action="login-servlet" method="post">
+                                    <input type="submit" value="Modifica" class="button" style="width: 80px;">
+                                </form>
+                                <form action="login-servlet" method="post">
+                                    <input type="submit" value="Elimina" class="button" style="width: 80px;">
+                                </form>
+                            </div>
                         </div>
-                        <div class="button">
-                            <!-- immagini della modifica e dell'elimina -->
-                        </div>
-                    </div>
+                    </form>
                 <% } %>
             </div>
     <%  }  %>
 
     <%@ include file="../WEB-INF/moduli/footer.jsp"%>
+
+    <!-- Script utilizzato per inviare il form nascosto quando clicchi su una struttura -->
+    <script>
+        function submitForm(index) {
+            // Invia il form corrispondente alla riga cliccata
+            document.getElementById('form_' + index).submit();
+        }
+    </script>
 </body>
 </html>
