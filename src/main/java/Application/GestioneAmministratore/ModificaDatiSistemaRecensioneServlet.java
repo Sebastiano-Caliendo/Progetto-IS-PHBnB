@@ -20,7 +20,7 @@ public class ModificaDatiSistemaRecensioneServlet extends HttpServlet {
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
         gestioneAmministratoreFacade.modificaDatiSistemaRecensione(emailRecensore, codicePrenotazione, numAlloggio, req.getSession());
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("VisTotaleRecensioni.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("VisDatiSistema.jsp");
         dispatcher.forward(req, resp);
     }
 

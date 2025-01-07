@@ -21,17 +21,7 @@ public class ModificaDatiSistemaHostServlet extends HttpServlet {
         String nome = req.getParameter("nomeHost");
         String cognome = req.getParameter("cognomeHost");
         String password = req.getParameter("passwordHost");
-        String dataNascita = req.getParameter("dataNascitaHost");
         String recapitoTelefonico = req.getParameter("recapitoTelHost");
-
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        Date dataNascitaDate;
-
-        try {
-            dataNascitaDate = formatter.parse(dataNascita);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
 
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
         Host host = new Host();
@@ -39,12 +29,11 @@ public class ModificaDatiSistemaHostServlet extends HttpServlet {
         host.setNome(nome);
         host.setCognome(cognome);
         host.setPassword(password);
-        //host.setDataNascita(dataNascitaDate);
         host.setRecapitoTelefonico(recapitoTelefonico);
 
-        //gestioneAmministratoreFacade.modificaDatiSistemaHost(host, email, nome, cognome, password, (java.sql.Date) dataNascitaDate, recapitoTelefonico, req.getSession());
+        gestioneAmministratoreFacade.modificaDatiSistemaHost(host, email, nome, cognome, password, recapitoTelefonico, req.getSession());
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("VisTotaleHost.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("VisDatiSistema.jsp");
         dispatcher.forward(req, resp);
     }
 

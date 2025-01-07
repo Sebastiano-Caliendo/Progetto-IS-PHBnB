@@ -20,7 +20,7 @@ public class CancellazioneDatiSistemaRecensioneServlet extends HttpServlet {
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
         gestioneAmministratoreFacade.cancellazioneDatiSitemaRecensione(email, codicePrenotazione, numeroAlloggio, req.getSession());
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("VisTotaleRecensioni.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("VisDatiSistema.jsp");
         dispatcher.forward(req, resp);
     }
 

@@ -31,7 +31,7 @@ public class ModificaDatiSistemaAlloggioServlet extends HttpServlet {
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
         gestioneAmministratoreFacade.modificaDatiSistemaAlloggio(alloggio, numeroAlloggio, fkStruttura, req.getSession());
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("VisTotaleAlloggi.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("VisDatiSistema.jsp");
         dispatcher.forward(req, resp);
     }
 

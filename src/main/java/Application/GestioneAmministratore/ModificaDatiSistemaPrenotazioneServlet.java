@@ -25,7 +25,7 @@ public class ModificaDatiSistemaPrenotazioneServlet extends HttpServlet {
         int numeroAlloggio = Integer.parseInt(req.getParameter("numeroAlloggioPrenotazione"));
         int fkStruttura = Integer.parseInt(req.getParameter("fkStrutturaPrenotazione"));
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date checkInDate;
         Date checkOutDate;
 
@@ -43,7 +43,7 @@ public class ModificaDatiSistemaPrenotazioneServlet extends HttpServlet {
         p.setCodicePrenotazione(codicePrenotazione);
         gestioneAmministratoreFacade.modificaDatiSistemaPrenotazione(p, checkInDate, checkOutDate, numeroPersone, req.getSession());
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("VisTotalePrenotazioni.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("VisDatiSistema.jsp");
         dispatcher.forward(req, resp);
     }
 

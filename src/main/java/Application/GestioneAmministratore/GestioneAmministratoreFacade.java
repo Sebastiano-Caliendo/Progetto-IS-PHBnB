@@ -142,7 +142,7 @@ public class GestioneAmministratoreFacade {
         }
     }
 
-    public void modificaDatiSistemaHost(Host h, String email, String nome, String cognome, String password, Date dataNascitaDate, String recapitoTelefonico, HttpSession session){
+    public void modificaDatiSistemaHost(Host h, String email, String nome, String cognome, String password, String recapitoTelefonico, HttpSession session){
         boolean successo = false;
 
         if(proxy.isAutenticato(session)){

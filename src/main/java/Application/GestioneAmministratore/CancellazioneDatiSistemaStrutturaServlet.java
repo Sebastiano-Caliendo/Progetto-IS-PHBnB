@@ -17,7 +17,7 @@ public class CancellazioneDatiSistemaStrutturaServlet extends HttpServlet {
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
         gestioneAmministratoreFacade.cancellazioneDatiSitemaStruttura(idStruttura, numAlloggio, req.getSession());
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("VisTotaleStrutture.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("VisDatiSistema.jsp");
         dispatcher.forward(req, resp);
     }
 

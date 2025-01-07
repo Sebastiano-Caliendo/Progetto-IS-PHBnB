@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.util.Date;
 import java.text.SimpleDateFormat;
 
 @WebServlet(name = "modificaDatiSistemaUtenteServlet", value = "/modificaDatiSistemaUtenteServlet")
@@ -23,18 +23,8 @@ public class ModificaDatiSistemaUtenteServlet extends HttpServlet {
         String citta = req.getParameter("cittaUtente");
         String numeroCivico = req.getParameter("numeroCivicoUtente");
         String via = req.getParameter("viaUtente");
-        String dataNascita = req.getParameter("dataNascitaUtente");
         String recapitoTelefonico = req.getParameter("recapitoTelefonicoUtente");
         boolean isAdmin = Boolean.parseBoolean(req.getParameter("isAdminUtente"));
-
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        Date dataNascitaUtente;
-
-        try{
-            dataNascitaUtente = (Date) formatter.parse(dataNascita);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
 
         Utente utente = new Utente();
 
@@ -47,12 +37,11 @@ public class ModificaDatiSistemaUtenteServlet extends HttpServlet {
         utente.setNumeroCivico(numeroCivico);
         utente.setVia(via);
         utente.setRecapitoTelefonico(recapitoTelefonico);
-        utente.setDataNascita(dataNascitaUtente);
 
-        gestioneAmministratoreFacade gestioneAmministratoreFacade = new gestioneAmministratoreFacade();
-        gestioneAmministratoreFacade.modificaDatiSistemaUtente(utente, email, nome, cognome, password, citta, numeroCivico, via, dataNascitaUtente, recapitoTelefonico, req.getSession());
+        GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
+        gestioneAmministratoreFacade.modificaDatiSistemaUtente(utente, email, nome, cognome, password, citta, numeroCivico, via, recapitoTelefonico, req.getSession());
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("VisTotaleUtenti.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("VisDatiSistema.jsp");
         dispatcher.forward(req, resp);
     }
 
