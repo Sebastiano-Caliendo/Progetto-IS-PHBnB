@@ -1,4 +1,4 @@
-package Application.GestioneAmministratore;
+package Application.InserimentoRecensione;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -9,18 +9,20 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(name = "modificaDatiSistemaRecensioneServlet", value = "/modificaDatiSistemaRecensioneServlet")
-public class ModificaDatiSistemaRecensioneServlet extends HttpServlet {
+@WebServlet(name = "eliminaRecensioneServlet", value = "/eliminaRecensioneServlet")
+public class EliminaRecensioneServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String emailRecensore = req.getParameter("emailRecensore");
         String codicePrenotazione = req.getParameter("codicePrenotazione");
-        int numAlloggio = Integer.parseInt(req.getParameter("numeroAlloggio"));
+        int numeroAlloggio = Integer.parseInt(req.getParameter("numeroAlloggio"));
 
-        GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
-        gestioneAmministratoreFacade.modificaDatiSistemaRecensione(emailRecensore, codicePrenotazione, numAlloggio, req.getSession());
+        InserimentoRecensioneFacade inserimentoRecensioneFacade = new InserimentoRecensioneFacade();
+        inserimentoRecensioneFacade.eliminaRecensione(req.getSession(), emailRecensore, codicePrenotazione, numeroAlloggio);
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("VisDatiSistema.jsp");
+        String nameAlloggio = req.getParameter("nameAlloggio");
+
+        RequestDispatcher dispatcher = req.getRequestDispatcher("viewAlloggio.jsp?nameAlloggio=" + nameAlloggio);
         dispatcher.forward(req, resp);
     }
 

@@ -1,7 +1,5 @@
 package Application.GestioneAmministratore;
 
-import Storage.Alloggio.Alloggio;
-import Storage.Alloggio.AlloggioDAO;
 import Storage.Prenotazione.Prenotazione;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -27,7 +25,7 @@ public class ModificaDatiSistemaPrenotazioneServlet extends HttpServlet {
         int numeroAlloggio = Integer.parseInt(req.getParameter("numeroAlloggioPrenotazione"));
         int fkStruttura = Integer.parseInt(req.getParameter("fkStrutturaPrenotazione"));
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date checkInDate;
         Date checkOutDate;
 
@@ -38,14 +36,14 @@ public class ModificaDatiSistemaPrenotazioneServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-        gestioneAmministratoreFacade gestioneAmministratoreFacade = new gestioneAmministratoreFacade();
+        GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
 
         Prenotazione p = new Prenotazione();
         p.setFkUtente(fkUtente);
         p.setCodicePrenotazione(codicePrenotazione);
         gestioneAmministratoreFacade.modificaDatiSistemaPrenotazione(p, checkInDate, checkOutDate, numeroPersone, req.getSession());
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("VisTotalePrenotazioni.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("VisDatiSistema.jsp");
         dispatcher.forward(req, resp);
     }
 

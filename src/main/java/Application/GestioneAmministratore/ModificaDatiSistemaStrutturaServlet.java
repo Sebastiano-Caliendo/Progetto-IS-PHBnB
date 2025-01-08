@@ -33,11 +33,12 @@ public class ModificaDatiSistemaStrutturaServlet extends HttpServlet {
         struttura.setNumCivico(numCivico);
         struttura.setNumAlloggi(numAlloggi);
 
-        gestioneAmministratoreFacade gestioneAmministratoreFacade = new gestioneAmministratoreFacade();
+        GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
 
         gestioneAmministratoreFacade.modificaDatiSistemaStruttura(idStruttura, struttura, req.getSession());
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("VisTotaleStrutture.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("VisDatiSistema.jsp");
+        dispatcher.forward(req, resp);
     }
 
     @Override

@@ -13,7 +13,7 @@ public class RecensioneDAO {
         List<Recensione> recensioneList = new ArrayList<>();
         try (Connection con = Connessione.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT email, descrizione, votorecensione, datarecensione, codiceprenotazione, numeroalloggio FROM recensioni WHERE email=?");
+                    con.prepareStatement("SELECT idRecensione, fk_utente, descrizione, votorecensione, datarecensione, fk_codiceprenotazione, fk_numeroalloggio, fk_codicestruttura FROM recensioni WHERE fk_utente=?");
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -32,10 +32,34 @@ public class RecensioneDAO {
         return recensioneList;
     }
 
+    public List<Recensione> doRetrieveByStruttura(String idStruttura)
+    {
+        List<Recensione> recensioneList = new ArrayList<>();
+        try(Connection con = Connessione.getConnection()){
+            PreparedStatement ps =
+                    con.prepareStatement("SELECT idRecensione, fk_utente, descrizione, votorecensione, datarecensione, fk_codiceprenotazione, fk_numeroalloggio, fk_idstruttura FROM recensioni WHERE fk_idstruttura = ?");
+            ps.setString(1, idStruttura);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Recensione pr = new Recensione();
+                pr.setEmailRecensore(rs.getString(1));
+                pr.setDescrizione(rs.getString(2));
+                pr.setVotoRecensione(rs.getInt(3));
+                pr.setDataRecensione(rs.getDate(4));
+                pr.setCodicePrenotazione(rs.getString(5));
+                pr.setNumeroAlloggio(rs.getInt(6));
+                recensioneList.add(pr);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return recensioneList;
+    }
+
     public Recensione doRetrieveByCodicePrenotazione(String codicePrenotazione) {
         try (Connection con = Connessione.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT email, descrizione, votorecensione, datarecensione, codiceprenotazione, numeroalloggio FROM recensioni WHERE codiceprenotazione=?");
+                    con.prepareStatement("SELECT idRecensione, fk_utente, descrizione, votorecensione, datarecensione, fk_codiceprenotazione, fk_numeroalloggio, fk_idstruttura FROM recensioni WHERE fk_codiceprenotazione=?");
             ps.setString(1, codicePrenotazione);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -48,10 +72,10 @@ public class RecensioneDAO {
                 pr.setNumeroAlloggio(rs.getInt(6));
                 return pr;
             }
-            return null;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return null;
     }
 
     public void doSave(Recensione recensione) {
@@ -106,12 +130,11 @@ public class RecensioneDAO {
     public void doDelete(String email, String codicePrenotazione, int numeroAlloggio) {
         try(Connection con = Connessione.getConnection()){
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO recensioni (email, descrizione, votorecensione, datarecensione, codiceprenotazione, numeroalloggio) VALUES(?,?,?,?,?,?)",
+                    "DELETE FROM recensioni WHERE idRecensioneemail = ? AND fk_codiceprenotazione = ? AND fk_numeroalloggio = ?",
                     Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, email);
             ps.setString(2, codicePrenotazione);
             ps.setInt(3, numeroAlloggio);
-            ps.setInt(4, numeroAlloggio);
             ps.executeUpdate();
         }catch(SQLException e){
             throw new RuntimeException(e);

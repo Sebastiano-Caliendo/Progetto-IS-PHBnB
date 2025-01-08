@@ -2,6 +2,7 @@ package Storage.Host;
 
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class Host {
 
@@ -9,13 +10,13 @@ public class Host {
     private String nome;
     private String cognome;
     private String password;
-    private LocalDate dataNascita;
+    private Date dataNascita;
     private String recapitoTelefonico;
 
     public Host() {
     }
 
-    public Host(String email, String nome, String cognome, String password, LocalDate dataNascita, String recapitoTelefonico) {
+    public Host(String email, String nome, String cognome, String password, Date dataNascita, String recapitoTelefonico) {
         this.email = email;
         this.nome = nome;
         this.cognome = cognome;
@@ -56,11 +57,11 @@ public class Host {
         this.password = password;
     }
 
-    public LocalDate getDataNascita() {
+    public Date getDataNascita() {
         return dataNascita;
     }
 
-    public void setDataNascita(LocalDate dataNascita) {
+    public void setDataNascita(Date dataNascita) {
         this.dataNascita = dataNascita;
     }
 
