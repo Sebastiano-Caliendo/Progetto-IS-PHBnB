@@ -99,12 +99,12 @@ public class AlloggioDAO  {
             }
 
             List<Integer> chiavi = new ArrayList<>();
-            ResultSet rs = ps.getGeneratedKeys();
+            /*ResultSet rs = ps.getGeneratedKeys();
 
-            rs.next();
+            rs.next();*/
 
-            chiavi.add(rs.getInt(1));
-            chiavi.add(rs.getInt(2));
+            chiavi.add(alloggio.getNumeroAlloggio());
+            chiavi.add(alloggio.getFkStruttura());
 
             return chiavi;
         } catch (SQLException e) {
@@ -115,7 +115,7 @@ public class AlloggioDAO  {
     public void doUpdate(Alloggio alloggio, int numeroAlloggio, int fkStruttura) {
         try (Connection con = Connessione.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "UPDATE alloggio SET numero_alloggio =?, fk_struttura =?, prezzo_notte =?, numero_posti_letto =?, tipo_alloggio =?, descrizione=?, url_immagine=? WHERE id_struttura=? and fk_struttura =?");
+                    "UPDATE alloggio SET numero_alloggio =?, fk_struttura =?, prezzo_notte =?, numero_posti_letto =?, tipo_alloggio =?, descrizione=?, url_immagine=? WHERE numero_alloggio=? and id_struttura =?");
 
             ps.setInt(1, alloggio.getNumeroAlloggio());
             ps.setInt(2, alloggio.getFkStruttura());

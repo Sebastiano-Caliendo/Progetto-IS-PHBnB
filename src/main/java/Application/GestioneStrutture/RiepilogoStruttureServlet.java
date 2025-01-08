@@ -31,7 +31,7 @@ public class RiepilogoStruttureServlet extends HttpServlet {
         req.setAttribute("listaStrutture", strutture);
 
         // passo il controllo alla jsp che mostrerà il riepilogo delle strutture
-        RequestDispatcher dispatcher = req.getRequestDispatcher("riepilogoStrutture.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("Interface/RiepilogoStruttureGUI.jsp");
         dispatcher.forward(req,resp);
     }
 

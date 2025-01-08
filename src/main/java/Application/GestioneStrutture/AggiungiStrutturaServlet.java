@@ -41,7 +41,7 @@ public class AggiungiStrutturaServlet extends HttpServlet {
         strutturaFacade.aggiungiStruttura(struttura);
 
         // passo il controllo alla jsp che mostrerà il riepilogo delle strutture
-        RequestDispatcher dispatcher = req.getRequestDispatcher("riepilogoStrutture.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("Interface/RiepilogoStruttureGUI.jsp");
         dispatcher.forward(req,resp);
     }
 

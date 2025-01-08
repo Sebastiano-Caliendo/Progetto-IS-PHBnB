@@ -30,10 +30,10 @@ public class RegistrazioneHostServlet extends HttpServlet {
 
         String address = "areaHost.jsp";
 
-        Host h = new Host(email, nome, cognome, password, (Date)dataNascita, recapitoTelefonico);
+        //Host h = new Host(email, nome, cognome, password, (Date) dataNascita, recapitoTelefonico);
 
         AutenticazioneFacade autenticazioneFacade = new AutenticazioneFacade(req.getSession());
-        autenticazioneFacade.registrazioneHost(h);
+        //autenticazioneFacade.registrazioneHost(h);
 
         RequestDispatcher rd = req.getRequestDispatcher(address);
         rd.forward(req, resp);

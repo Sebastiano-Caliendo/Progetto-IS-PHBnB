@@ -35,7 +35,7 @@
         </div>
         <div class="formInserisci">
             <div class="title mid-text"> Inserisci la tua struttura! </div>
-            <form action="/aggiungiStrutturaServlet" method="post">
+            <form action="../aggiungiStrutturaServlet" method="post">
                 <div class="input">
                     <!-- <panel for="nomeStruttura"> Nome Struttura : </panel> -->
                     <input id="nomeStruttura" type="text" name="nomeStruttura" required placeholder="Nome struttura">

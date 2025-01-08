@@ -30,13 +30,14 @@
         <div class="mid-text" id="sezione"><%= struttura.getNomeStruttura() %></div>
         <div class="button-sezione-aggiungi">
             <div class="visualizzaPrenotazioni">
-                <form action="../selezionaPrenotazioniServlet" method="post">
+                <form action="../Progetto_IS_PHBnB_war_exploded/selezionaPrenotazioniServlet" method="post">
                     <input type="hidden" name="idStruttura" value="<%= struttura.getIdStruttura() %>" >
                     <input type="submit" value="Visualizza Prenotazioni" class="button" style="width:160px;" >
                 </form>
             </div>
             <div class="aggiungiStruttura">
-                <form action="login-servlet" method="post">
+                <form action="../Progetto_IS_PHBnB_war_exploded/redirectToAggiungiAlloggioServlet" method="post">
+                    <input type="hidden" value="<%= struttura.getIdStruttura() %>" name="idStruttura">
                     <input type="submit" value="Aggiungi Alloggio" class="button">
                 </form>
             </div>
@@ -44,7 +45,7 @@
     </div>
 
     <%  if(alloggi.isEmpty()) { %>
-    <div class="mid-text">Non hai nessun'alloggio :( </div>
+    <div class="nessuno mid-text">Non hai nessun'alloggio :( </div>
     <%  }
     else { %>
     <div class="container" id="containerStrutture">
@@ -73,10 +74,14 @@
             </div>
             <div class="terzaColonna">
                 <div class="button">
-                    <form action="login-servlet" method="post">
+                    <form action="../Progetto_IS_PHBnB_war_exploded/redirectToModificaAlloggioServlet" method="post">
+                        <input type="hidden" value="<%= alloggi.get(i).getNumeroAlloggio() %>" name="numeroAlloggio">
+                        <input type="hidden" value="<%= struttura.getIdStruttura() %>" name="idStruttura">
                         <input type="submit" value="Modifica Alloggio" class="button">
                     </form>
-                    <form action="login-servlet" method="post">
+                    <form action="../Progetto_IS_PHBnB_war_exploded/eliminaAlloggioServlet" method="post">
+                        <input type="hidden" value="<%= alloggi.get(i).getNumeroAlloggio() %>" name="numeroAlloggio">
+                        <input type="hidden" value="<%= struttura.getIdStruttura() %>" name="idStruttura">
                         <input type="submit" value="Elimina Alloggio" class="button">
                     </form>
                 </div>

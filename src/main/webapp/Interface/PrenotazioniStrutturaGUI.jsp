@@ -18,21 +18,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prenotazioni Struttura</title>
-    <link rel="stylesheet" href="css/prenotazioniStruttura.css">
-    <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="Interface/css/prenotazioniStruttura.css">
+    <link rel="stylesheet" href="Interface/css/footer.css">
+    <link rel="stylesheet" href="Interface/css/header.css">
+    <link rel="stylesheet" href="Interface/css/style.css">
 </head>
 <body>
     <%@ include file="../WEB-INF/moduli/header.jsp"%>
     <%
-        /*List<Prenotazione> prenotazioni = (List<Prenotazione>) request.getAttribute("listaPrenotazioni");
-        Struttura struttura = (Struttura) request.getAttribute("struttura");*/
-        PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
+        List<Prenotazione> prenotazioni = (List<Prenotazione>) request.getAttribute("listaPrenotazioni");
+        Struttura struttura = (Struttura) request.getAttribute("struttura");
+        /*PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
         gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
         Struttura struttura = strutturaFacade.returnStruttura(1);
         List<Prenotazione> prenotazioni = new ArrayList<>();
-        prenotazioni = strutturaFacade.visualizzaPrenotazioni(struttura);
+        prenotazioni = strutturaFacade.visualizzaPrenotazioni(struttura);*/
     %>
 
     <div class="title mid-text">

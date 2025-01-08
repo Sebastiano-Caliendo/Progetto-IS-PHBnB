@@ -29,7 +29,7 @@ public class RedirectToModificaStrutturaServlet extends HttpServlet {
         req.setAttribute("struttura", struttura);
 
         // passo il controllo alla jsp ModificaStruttura
-        RequestDispatcher dispatcher = req.getRequestDispatcher("ModificaStruttura.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("Interface/ModificaStrutturaGUI.jsp");
         dispatcher.forward(req,resp);
     }
 

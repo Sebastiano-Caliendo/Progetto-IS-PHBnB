@@ -52,7 +52,7 @@ public class ModificaStrutturaServlet extends HttpServlet {
         strutturaFacade.modificaStruttura(struttura, oldIdStruttura);
 
         // ritorno alla jsp che mi fa vedere tutti gli alloggi della struttura
-        RequestDispatcher dispatcher = req.getRequestDispatcher("RiepilogoStrutture.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("Interface/RiepilogoStruttureGUI.jsp");
         dispatcher.forward(req,resp);
     }
 

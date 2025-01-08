@@ -1,6 +1,7 @@
-package Application.GestioneStrutture;
+package Application.GestioneAlloggi;
 
-import Application.GestioneAlloggi.gestioneAlloggioFacade;
+import Storage.Alloggio.Alloggio;
+import Storage.Alloggio.AlloggioDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,25 +10,26 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-@WebServlet(name = "EliminaStrutturaServlet", value = "/eliminaStrutturaServlet")
-public class EliminaStrutturaServlet extends HttpServlet {
+
+@WebServlet(name = "RedirectToAggiungiAlloggioServlet", value = "/redirectToAggiungiAlloggioServlet")
+public class RedirectToAggiungiAlloggioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // prendiamo l'id della struttura che vogliamo eliminare
+        // prendiamo l'id della struttura
 
         int idStruttura = Integer.parseInt(req.getParameter("idStruttura"));
 
-        // elimino la struttura dal DB
-        gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
-        strutturaFacade.eliminaStruttura(idStruttura);
+        //aggiungiamo l'id della struttura nella richiesta
+        req.setAttribute("idStruttura", idStruttura);
 
         // passo il controllo alla jsp ModificaAlloggio
-        RequestDispatcher dispatcher = req.getRequestDispatcher("Interface/RiepilogoStruttureGUI.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("Interface/InserisciAlloggioGUI.jsp");
         dispatcher.forward(req,resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
+        doGet(req,resp);
     }
 }
+

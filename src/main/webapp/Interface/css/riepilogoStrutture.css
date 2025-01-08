@@ -9,6 +9,14 @@ body {
     background-color: var(--rosa-bianchissimo);
 }
 
+.nessuno {
+    justify-content: center;
+    display: flex;
+    height: 50%;
+    text-align: center;
+    align-items: center;
+}
+
 .sezione-aggiungi {
     align-items: center;
     width : 90%;
