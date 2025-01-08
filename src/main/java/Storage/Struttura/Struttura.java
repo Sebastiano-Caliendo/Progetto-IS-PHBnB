@@ -10,10 +10,12 @@ public class Struttura {
     private int numAlloggi;
     private String descrizione;
 
+    private String urlImmagine;
+
     public Struttura() {
     }
 
-    public Struttura(int idStruttura, String fkHost, String nomeStruttura, String via, int numCivico, String citta, String descrizione) {
+    public Struttura(int idStruttura, String fkHost, String nomeStruttura, String via, int numCivico, String citta, String descrizione, String urlImmagine) {
         this.idStruttura = idStruttura;
         this.fkHost = fkHost;
         this.nomeStruttura = nomeStruttura;
@@ -22,6 +24,7 @@ public class Struttura {
         this.citta = citta;
         this.numAlloggi = 0;
         this.descrizione = descrizione;
+        this.urlImmagine = urlImmagine;
     }
 
     public int getIdStruttura() {
@@ -82,6 +85,14 @@ public class Struttura {
 
     public String getDescrizione() {
         return descrizione;
+    }
+
+    public String getUrlImmagine() {
+        return urlImmagine;
+    }
+
+    public void setUrlImmagine(String urlImmagine) {
+        this.urlImmagine = urlImmagine;
     }
 
     public void setDescrizione(String descrizione) {

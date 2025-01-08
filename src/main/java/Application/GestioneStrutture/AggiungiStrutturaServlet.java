@@ -24,6 +24,7 @@ public class AggiungiStrutturaServlet extends HttpServlet {
         String citta = req.getParameter("citta");
         int numAlloggi = Integer.parseInt(req.getParameter("numAlloggi"));
         String descrizione = req.getParameter("descrizione");
+        String urlImmagine = req.getParameter("urlImmagine");
 
         // creiamo la struttura
         Struttura struttura = new Struttura();
@@ -33,6 +34,7 @@ public class AggiungiStrutturaServlet extends HttpServlet {
         struttura.setNomeStruttura(nomeStruttura);
         struttura.setCitta(citta);
         struttura.setVia(via);
+        struttura.setUrlImmagine(urlImmagine);
 
         // inseriamo la struttura nel DB
         gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();

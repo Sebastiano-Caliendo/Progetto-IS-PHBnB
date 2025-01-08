@@ -6,9 +6,10 @@
 }
 
 /* grandezza font */
-.mid-text { font-size: 32px; font-weight: 800; }
 .big-text { font-size: 45px; font-weight: 900; }
+.mid-text { font-size: 32px; font-weight: 800; }
 .normal-text { font-size: 27px; font-weight: 600; }
+.normal-small-text { font-size: 20px; font-weight: 500; }
 .small-text { font-size: 15px; font-weight: 400; }
 
 /* reset css */
@@ -20,7 +21,7 @@
     text-decoration: none;
 }
 
-body{
+body {
     overflow-x: hidden;  /* nascondi tutto ciò che supera il 100vw */
 }
 

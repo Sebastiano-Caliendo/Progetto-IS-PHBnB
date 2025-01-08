@@ -35,6 +35,7 @@ public class ModificaStrutturaServlet extends HttpServlet {
         String citta = req.getParameter("citta");
         int numAlloggi = Integer.parseInt(req.getParameter("numAlloggi"));
         String descrizione = req.getParameter("descrizione");
+        String urlImmagine = req.getParameter("urlImmagine");
 
         // creo la struttura che voglio inserire
         Struttura struttura = new Struttura();
@@ -44,6 +45,7 @@ public class ModificaStrutturaServlet extends HttpServlet {
         struttura.setNomeStruttura(nomeStruttura);
         struttura.setCitta(citta);
         struttura.setVia(via);
+        struttura.setUrlImmagine(urlImmagine);
 
         // elimino la vecchia struttura dal DB ed inserisco la struttura modificata
         gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();

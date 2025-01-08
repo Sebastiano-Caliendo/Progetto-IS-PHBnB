@@ -1,0 +1,109 @@
+body {
+    margin-top: 20vh;
+    background-color: var(--color-primary);
+}
+
+.img-form {
+    margin-top: 3%;
+    height: 100%;
+    flex-direction: row;
+    display: flex;
+    width: 90%;
+    margin-left: 3%;
+}
+
+form input[type="submit"] {
+    font-size: xx-small; !important;
+}
+
+.immagini {
+    text-align: center;
+    width: 50%;
+}
+
+.title {
+    text-align: center;
+}
+
+
+.formInserisci  {
+    flex-direction: column;
+    height: 100%;
+    display: flex;
+    width: 60%;
+}
+
+
+form {
+    /*border: 2px solid var(--color-secondary);*/
+    row-gap: 30px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+    background-color: var(--color-primary);
+    margin: 0 auto;
+    margin-top: 3%;
+    height: 100%;
+    width: 60%;
+    border-radius: 40px;
+}
+
+.riga1 {
+    text-align: center;
+    flex-direction: row;
+    display: flex;
+    width: 100%;
+    height: 50%;
+}
+
+.riga2 {
+    text-align: center;
+    flex-direction: row;
+    display: flex;
+    height: 50%;
+    width: 100%;
+}
+
+.ele1 {
+    overflow: hidden;
+    width : 50%;
+}
+
+.ele2 {
+    overflow: hidden;
+    width : 50%;
+}
+
+img {
+    margin: 10%;
+    width: 80%; /* L'immagine si adatta alla larghezza del div */
+    height: 80%; /* L'immagine si adatta all'altezza del div */
+    object-fit: cover; /* Fa in modo che l'immagine riempia il div, mantenendo il suo rapporto di aspetto e tagliando le parti in eccesso se necessario */
+}
+
+.input {
+    align-items: center;
+    width: 100%;
+    column-gap: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+panel {
+    text-align: center;
+    width: 50%;
+}
+
+input {
+    border-radius: 20px;
+    border : 1px solid black;
+    width: 50%;
+    text-align: center;
+}
+
+textarea {
+    text-align: center;
+    border-radius: 20px;
+    border : 1px solid black;
+}

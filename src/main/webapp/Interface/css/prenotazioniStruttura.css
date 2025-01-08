@@ -1,0 +1,52 @@
+body {
+    margin-top: 20vh;
+    background-color: var(--rosa-bianchissimo);
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 2%;
+    width : 90%;
+    margin-left: 3%;
+}
+
+.nomiCampi {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width : 90%;
+    margin-left: 3%;
+    height : 10%;
+}
+
+.rigaPrenotazione {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: 3%;
+    width : 90%;
+    background-color: white;
+    height : 10%;
+}
+
+.campo {
+    font-style: italic;
+    /*font-family: cursive;*/
+    width : 20%;
+    text-align: center;
+}
+
+.valore {
+    width : 20%;
+    text-align: center;
+}
+
+.prenotazione {
+    margin-bottom: 1%;
+    margin-left: 3%;
+    position: absolute;
+    width: 90%;
+    border: 1px solid var(--color-primary);
+    height: 1px; /* Spessore della linea */
+    background-color: #b8860b; /* Colore gold scuro */
+}

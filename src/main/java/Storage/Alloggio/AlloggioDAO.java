@@ -18,6 +18,7 @@ public class AlloggioDAO  {
             a.setPostiletto(rs.getInt(4));
             a.setTipoAlloggio(rs.getString(5));
             a.setDescrizione(rs.getString(6));
+            a.setUrlImmagine(rs.getString(7));
 
             list.add(a);
         }
@@ -53,6 +54,7 @@ public class AlloggioDAO  {
                 a.setPostiletto(rs.getInt(4));
                 a.setTipoAlloggio(rs.getString(5));
                 a.setDescrizione(rs.getString(6));
+                a.setUrlImmagine(rs.getString(7));
 
                 return a;
             }
@@ -81,8 +83,8 @@ public class AlloggioDAO  {
     public List<Integer> doSave(Alloggio alloggio) {
         try (Connection con = Connessione.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "insert into alloggio (numero_alloggio, fk_struttura, prezzo_notte, numero_posti_letto, tipo_alloggio, descrizione) " +
-                            "values (?, ?, ?, ?, ?, ?)",
+                    "insert into alloggio (numero_alloggio, fk_struttura, prezzo_notte, numero_posti_letto, tipo_alloggio, descrizione, url_immagine) " +
+                            "values (?, ?, ?, ?, ?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, alloggio.getNumeroAlloggio());
             ps.setInt(2, alloggio.getFkStruttura());
@@ -90,6 +92,7 @@ public class AlloggioDAO  {
             ps.setInt(4, alloggio.getPostiletto());
             ps.setString(5, alloggio.getTipoAlloggio());
             ps.setString(6, alloggio.getDescrizione());
+            ps.setString(7, alloggio.getUrlImmagine());
 
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
@@ -112,7 +115,7 @@ public class AlloggioDAO  {
     public void doUpdate(Alloggio alloggio, int numeroAlloggio, int fkStruttura) {
         try (Connection con = Connessione.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "UPDATE alloggio SET numero_alloggio =?, fk_struttura =?, prezzo_notte =?, numero_posti_letto =?, tipo_alloggio =?, descrizione=? WHERE id_struttura=? and fk_struttura =?");
+                    "UPDATE alloggio SET numero_alloggio =?, fk_struttura =?, prezzo_notte =?, numero_posti_letto =?, tipo_alloggio =?, descrizione=?, url_immagine=? WHERE id_struttura=? and fk_struttura =?");
 
             ps.setInt(1, alloggio.getNumeroAlloggio());
             ps.setInt(2, alloggio.getFkStruttura());
@@ -120,8 +123,9 @@ public class AlloggioDAO  {
             ps.setInt(4, alloggio.getPostiletto());
             ps.setString(5, alloggio.getTipoAlloggio());
             ps.setString(6, alloggio.getDescrizione());
-            ps.setInt(7, numeroAlloggio);
-            ps.setInt(8, fkStruttura); // id da passare come parametro
+            ps.setString(7, alloggio.getUrlImmagine());
+            ps.setInt(8, numeroAlloggio);
+            ps.setInt(9, fkStruttura); // id da passare come parametro
 
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("UPDATE error.");
