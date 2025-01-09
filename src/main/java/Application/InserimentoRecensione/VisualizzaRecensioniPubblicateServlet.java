@@ -1,24 +1,35 @@
 package Application.InserimentoRecensione;
 
+import Storage.Host.Host;
+import Storage.Recensione.Recensione;
+import Storage.Utente.Utente;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "visualizzaRecensioniPubblicateServlet", value = "/visualizzaRecensioniPubblicateServlet")
 public class VisualizzaRecensioniPubblicateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String emailRecensore = req.getParameter("emailRecensore");
+        Utente utente = (Utente) req.getSession().getAttribute("utente");
+        String emailRecensore = utente.getEmail();
+
+        List<Recensione> recensioniUtente = new ArrayList<>();
 
         InserimentoRecensioneFacade inserimentoRecensioneFacade = new InserimentoRecensioneFacade();
-        inserimentoRecensioneFacade.visualizzaRecensioniPubblicate(req.getSession(), emailRecensore);
+        recensioniUtente = inserimentoRecensioneFacade.visualizzaRecensioniPubblicate(req.getSession(), emailRecensore);
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("listRecensioni.jsp");
+        req.setAttribute("recensioniUtente", recensioniUtente);
+
+        RequestDispatcher dispatcher = req.getRequestDispatcher("Interface/listRecensioniUtente.jsp");
         dispatcher.forward(req, resp);
     }
 

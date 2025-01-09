@@ -18,7 +18,7 @@ import java.util.HashMap;
 public class ModificaStrutturaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        req.setAttribute("callByServlet", "yes");
         // prendiamo l'oggetto host dalla sessione perchè ci serve l'fkHost da associare alla struttura
         // L'host nella pagina modifica.jsp non inserirà il campo fk_host
         Host host = (Host) req.getSession().getAttribute("host");

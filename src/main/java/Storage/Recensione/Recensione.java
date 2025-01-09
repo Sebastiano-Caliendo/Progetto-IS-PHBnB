@@ -3,20 +3,32 @@ package Storage.Recensione;
 import java.util.Date;
 
 public class Recensione {
+
+    private int idRecensione;
     private String emailRecensore;
     private String descrizione;
     private int votoRecensione;
     private Date dataRecensione;
-    private String codicePrenotazione;
+    private int codicePrenotazione;
     private int numeroAlloggio;
 
-    public String getCodicePrenotazione() {
+    private int idStrutturaAlloggio;
+
+    public int getIdRecensione() { return idRecensione; }
+
+    public void setIdRecensione(int idRecensione) { this.idRecensione = idRecensione; }
+
+    public int getCodicePrenotazione() {
         return codicePrenotazione;
     }
 
-    public void setCodicePrenotazione(String codicePrenotazione) {
+    public void setCodicePrenotazione(int codicePrenotazione) {
         this.codicePrenotazione = codicePrenotazione;
     }
+
+    public int getIdStrutturaAlloggio() { return idStrutturaAlloggio; }
+
+    public void setIdStrutturaAlloggio(int idStrutturaAlloggio) { this.idStrutturaAlloggio = idStrutturaAlloggio; }
 
     public int getNumeroAlloggio() {
         return numeroAlloggio;

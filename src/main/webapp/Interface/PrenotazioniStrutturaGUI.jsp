@@ -15,13 +15,28 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <%
+        int callByServlet = 0;
+        String isCallByServlet = (String) request.getAttribute("callByServlet");
+        if(isCallByServlet != null && isCallByServlet.equalsIgnoreCase("yes"))
+            callByServlet = 1;
+    %>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prenotazioni Struttura</title>
+    <% if(callByServlet == 1) { %>
     <link rel="stylesheet" href="Interface/css/prenotazioniStruttura.css">
     <link rel="stylesheet" href="Interface/css/footer.css">
     <link rel="stylesheet" href="Interface/css/header.css">
     <link rel="stylesheet" href="Interface/css/style.css">
+    <%
+    }
+    else { %>
+    <link rel="stylesheet" href="css/prenotazioniStruttura.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/style.css">
+    <% } %>
+    <title> Prenotazioni Struttura </title>
 </head>
 <body>
     <%@ include file="../WEB-INF/moduli/header.jsp"%>

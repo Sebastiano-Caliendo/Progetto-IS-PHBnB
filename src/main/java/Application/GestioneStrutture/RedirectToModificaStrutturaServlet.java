@@ -17,6 +17,8 @@ import java.io.IOException;
 public class RedirectToModificaStrutturaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("callByServlet", "yes");
+
         // prendiamo l'identificatore della struttura che vogliamo modificare
 
         int idStruttura = Integer.parseInt(req.getParameter("idStruttura"));

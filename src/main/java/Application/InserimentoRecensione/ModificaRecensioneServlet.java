@@ -13,17 +13,15 @@ import java.io.IOException;
 public class ModificaRecensioneServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String emailRecensore = req.getParameter("emailRecensore");
-        String codicePrenotazione = req.getParameter("codicePrenotazione");
-        int numeroAlloggio = Integer.parseInt(req.getParameter("numeroAlloggio"));
+        /*int idRecensione = Integer.parseInt(req.getParameter("idRecensione"));
 
         InserimentoRecensioneFacade inserimentoRecensioneFacade = new InserimentoRecensioneFacade();
-        inserimentoRecensioneFacade.modificaRecensione(req.getSession(), emailRecensore, codicePrenotazione, numeroAlloggio);
+        inserimentoRecensioneFacade.modificaRecensione(req.getSession(), idRecensione);
 
         String nameAlloggio = req.getParameter("nameAlloggio");
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("viewAlloggio.jsp?nameAlloggio=" + nameAlloggio);
-        dispatcher.forward(req, resp);
+        dispatcher.forward(req, resp);*/
     }
 
     @Override

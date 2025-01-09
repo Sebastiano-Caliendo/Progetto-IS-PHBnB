@@ -18,6 +18,7 @@ import java.util.List;
 public class AggiungiAlloggioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("callByServlet", "yes");
         // prendiamo tutti i valori dell'alloggio che si vuole inserire
 
         int numeroAlloggio = Integer.parseInt(req.getParameter("numeroAlloggio"));

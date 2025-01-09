@@ -15,6 +15,7 @@ import java.io.IOException;
 public class AggiungiStrutturaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("callByServlet", "yes");
         // prendiamo l'host dalla sessione (il campo fk_host non verrà inserito)
         Host host = (Host) req.getSession().getAttribute("host");
 
@@ -41,7 +42,7 @@ public class AggiungiStrutturaServlet extends HttpServlet {
         strutturaFacade.aggiungiStruttura(struttura);
 
         // passo il controllo alla jsp che mostrerà il riepilogo delle strutture
-        RequestDispatcher dispatcher = req.getRequestDispatcher("Interface/RiepilogoStruttureGUI.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("RiepilogoStruttureGUI.jsp");
         dispatcher.forward(req,resp);
     }
 

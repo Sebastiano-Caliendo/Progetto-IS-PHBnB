@@ -13,6 +13,7 @@ import java.io.IOException;
 public class EliminaStrutturaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("callByServlet", "yes");
         // prendiamo l'id della struttura che vogliamo eliminare
 
         int idStruttura = Integer.parseInt(req.getParameter("idStruttura"));

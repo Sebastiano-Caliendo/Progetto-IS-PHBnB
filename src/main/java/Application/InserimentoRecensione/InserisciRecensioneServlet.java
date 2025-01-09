@@ -16,12 +16,13 @@ import java.util.Date;
 public class InserisciRecensioneServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String emailRecensore = req.getParameter("emailRecensore");
+        String emailRecensore = req.getParameter("emailRecensore"); // type = "hidden" nella jsp
         String descrizioneRecensione = req.getParameter("descrizioneRecensione");
         int votoRecensione = Integer.parseInt(req.getParameter("votoRecensione"));
         String dataRecensione = req.getParameter("dataRecensione");
-        String codicePrenotazione = req.getParameter("codicePrenotazione");
-        int numeroAlloggio = Integer.parseInt(req.getParameter("numeroAlloggio"));
+        int codicePrenotazione = Integer.parseInt(req.getParameter("codicePrenotazione")); // type = "hidden" nella jsp
+        int numeroAlloggio = Integer.parseInt(req.getParameter("numeroAlloggio")); // type = "hidden" nella jsp
+        int idStruttura = Integer.parseInt(req.getParameter("idStruttura")); // type = "hidden" nella jsp
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         Date date = new Date();
@@ -40,6 +41,7 @@ public class InserisciRecensioneServlet extends HttpServlet {
         recensione.setDataRecensione(date);
         recensione.setNumeroAlloggio(numeroAlloggio);
         recensione.setCodicePrenotazione(codicePrenotazione);
+        recensione.setIdStrutturaAlloggio(idStruttura);
 
         InserimentoRecensioneFacade inserimentoRecensioneFacade = new InserimentoRecensioneFacade();
         inserimentoRecensioneFacade.inserisciRecensione(req.getSession(), recensione);

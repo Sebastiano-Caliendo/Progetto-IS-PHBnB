@@ -18,6 +18,7 @@ import java.util.List;
 public class ModificaAlloggioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("callByServlet", "yes");
 
         // prende il vecchio numero alloggio che potrebbe essere modificato
         int oldNumeroAlloggio = Integer.parseInt(req.getParameter("oldNumeroAlloggio"));

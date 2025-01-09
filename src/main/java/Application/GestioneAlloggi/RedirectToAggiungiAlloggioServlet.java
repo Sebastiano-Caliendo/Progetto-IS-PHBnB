@@ -15,6 +15,7 @@ import java.io.IOException;
 public class RedirectToAggiungiAlloggioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("callByServlet", "yes");
         // prendiamo l'id della struttura
 
         int idStruttura = Integer.parseInt(req.getParameter("idStruttura"));

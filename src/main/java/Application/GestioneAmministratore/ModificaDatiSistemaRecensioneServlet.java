@@ -13,12 +13,11 @@ import java.io.IOException;
 public class ModificaDatiSistemaRecensioneServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String emailRecensore = req.getParameter("emailRecensore");
-        String codicePrenotazione = req.getParameter("codicePrenotazione");
-        int numAlloggio = Integer.parseInt(req.getParameter("numeroAlloggio"));
+        int idRecensione = Integer.parseInt(req.getParameter("idRecensione"));
+        int codicePrenotazione = Integer.parseInt(req.getParameter("codicePrenotazione"));
 
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
-        gestioneAmministratoreFacade.modificaDatiSistemaRecensione(emailRecensore, codicePrenotazione, numAlloggio, req.getSession());
+        gestioneAmministratoreFacade.modificaDatiSistemaRecensione(idRecensione, codicePrenotazione, req.getSession());
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("VisDatiSistema.jsp");
         dispatcher.forward(req, resp);

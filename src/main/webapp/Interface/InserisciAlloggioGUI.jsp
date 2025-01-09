@@ -9,12 +9,28 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <%
+        int callByServlet = 0;
+        String isCallByServlet = (String) request.getAttribute("callByServlet");
+        if(isCallByServlet != null && isCallByServlet.equalsIgnoreCase("yes"))
+            callByServlet = 1;
+    %>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Interface/css/inserisciStruttura.css">
-    <link rel="stylesheet" href="Interface/css/footer.css">
-    <link rel="stylesheet" href="Interface/css/header.css">
-    <link rel="stylesheet" href="Interface/css/style.css">
+    <% if(callByServlet == 1) { %>
+        <link rel="stylesheet" href="Interface/css/inserisciStruttura.css">
+        <link rel="stylesheet" href="Interface/css/footer.css">
+        <link rel="stylesheet" href="Interface/css/header.css">
+        <link rel="stylesheet" href="Interface/css/style.css">
+    <%
+    }
+    else { %>
+        <link rel="stylesheet" href="css/inserisciStruttura.css">
+        <link rel="stylesheet" href="css/footer.css">
+        <link rel="stylesheet" href="css/header.css">
+        <link rel="stylesheet" href="css/style.css">
+    <% } %>
+
     <title>Inserisci Alloggio</title>
 </head>
 <body>
@@ -30,7 +46,13 @@
 <div class="img-form">
     <div class="immagini">
         <div class="riga1 small-text">
-            <div class="ele1"> <img src="img/alloggio1.jpg">   </div>
+            <div class="ele1">
+                <% if(callByServlet == 1) { %>
+                    <img src="Interface/img/alloggio1.jpg">
+                <% } else {%>
+                    <img src="img/alloggio1.jpg">
+                <% } %>
+            </div>
             <div class="ele2" style="padding: 5%; display: flex; align-items: center;">
                 Con PHB&B, inserire il tuo alloggio è facile e veloce! Raggiungi milioni di potenziali ospiti,
             </div>
@@ -38,12 +60,23 @@
         <div class="riga2 small-text">
             <div class="ele1" style="padding: 5%; display: flex; align-items: center;"> aumenta la visibilità della tua struttura e inizia a ricevere prenotazioni in pochi semplici passaggi. Fai crescere la tua attività e sfrutta la potenza di una piattaforma globale.
             </div>
-            <div class="ele2"> <img src="img/alloggio2.jpg">   </div>
+            <div class="ele2">
+                <% if(callByServlet == 1) { %>
+                    <img src="Interface/img/alloggio2.jpg">
+                <% } else {%>
+                    <img src="img/alloggio2.jpg">
+                <% } %>
+            </div>
         </div>
     </div>
     <div class="formInserisci">
         <div class="title mid-text"> Inserisci il tuo alloggio! </div>
-        <form action="../Progetto_IS_PHBnB_war_exploded/aggiungiAlloggioServlet" method="post">
+        <%
+            String servlet = "";
+            if(callByServlet == 0)
+                servlet = "../";
+        %>
+        <form action="<%= servlet %>aggiungiAlloggioServlet" method="post">
             <input type="hidden" value="<%= idStruttura %>" name="idStruttura">
             <div class="input">
                 <!-- <panel for="numeroAlloggio"> Numero Alloggio : </panel> -->

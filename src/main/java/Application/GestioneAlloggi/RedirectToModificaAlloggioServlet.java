@@ -19,6 +19,7 @@ import java.io.IOException;
 public class RedirectToModificaAlloggioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("callByServlet", "yes");
         // prendiamo gli identificatori dell'alloggio che vogliamo modificare
 
         int numeroAlloggio = Integer.parseInt(req.getParameter("numeroAlloggio"));

@@ -171,3 +171,55 @@ body {
 .nomeAlloggio {
     font-family: cursive;
 }
+
+/* RecensioniStrutturaGUI.jsp */
+
+#mediaRecensioni {
+    text-align: center;
+    width: 17%;
+}
+
+.mediaRecensioni {
+    color : var(--color-primary);
+}
+
+#rigaRecensioni {
+    flex-direction: column;
+}
+
+.titoliRecensione {
+    align-items: center;
+    text-align: center;
+    height: 25%;
+    width: 100%;
+    flex-direction: row;
+    display: flex;
+}
+
+.colonnaNormale {
+    width : 16%;
+    text-align: center;
+}
+
+.colonnaDescrizione {
+    width: 36%;
+    text-align: center;
+}
+
+.valoreNormale {
+    width : 16%;
+    text-align: center;
+}
+
+.valoreDescrizione {
+    width : 36%;
+    text-align: center;
+}
+
+.valoriRecensione {
+    align-items: center;
+    height: 75%;
+    width: 100%;
+    flex-direction: row;
+    display: flex;
+}

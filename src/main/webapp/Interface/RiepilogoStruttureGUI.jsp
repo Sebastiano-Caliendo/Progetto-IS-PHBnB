@@ -11,13 +11,28 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <%
+        int callByServlet = 0;
+        String isCallByServlet = (String) request.getAttribute("callByServlet");
+        if(isCallByServlet != null && isCallByServlet.equalsIgnoreCase("yes"))
+            callByServlet = 1;
+    %>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Riepilogo Strutture</title>
-    <link rel="stylesheet" href="css/riepilogoStrutture.css">
-    <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/style.css">
+    <% if(callByServlet == 1) { %>
+        <link rel="stylesheet" href="Interface/css/riepilogoStrutture.css">
+        <link rel="stylesheet" href="Interface/css/footer.css">
+        <link rel="stylesheet" href="Interface/css/header.css">
+        <link rel="stylesheet" href="Interface/css/style.css">
+    <%
+    }
+    else { %>
+        <link rel="stylesheet" href="css/riepilogoStrutture.css">
+        <link rel="stylesheet" href="css/footer.css">
+        <link rel="stylesheet" href="css/header.css">
+        <link rel="stylesheet" href="css/style.css">
+    <% } %>
+    <title> Riepilogo Strutture </title>
 </head>
 <body>
     <%@ include file="../WEB-INF/moduli/header.jsp"%>
@@ -32,10 +47,23 @@
 
     <div class="big-text" id="areaHost"> AREA HOST</div>
 
+    <%
+        String servlet = "";
+        String jsp = "";
+        if(callByServlet == 0) { // chiamata da jsp
+            servlet = "../";
+            jsp = "";
+        }
+        else  {  // chiamata da servlet
+            servlet = "";
+            jsp = "Interface/";
+        }
+    %>
+
     <div class="sezione-aggiungi">
         <div class="mid-text" id="sezione"> Visualizza le tue strutture </div>
         <div class="aggiungiStruttura">
-            <form action="InserisciStrutturaGUI.jsp" method="post">
+            <form action="<%= jsp %>InserisciStrutturaGUI.jsp" method="post">
                 <input type="submit" value="Aggiungi Struttura" class="button" style="width: 140px;">
             </form>
         </div>
@@ -47,7 +75,7 @@
         else { %>
             <div class="container" id="containerStrutture">
                 <% for(int i=0; i<strutture.size(); i++) { %>
-                    <form id="form_<%= i %>" action="../selezionaStrutturaServlet" method="post">
+                    <form id="form_<%= i %>" action="<%= servlet %>selezionaStrutturaServlet" method="post">
                         <input type="hidden" value="<%= strutture.get(i).getIdStruttura() %>" name="idStruttura">
 
                         <div class="containerRigaStruttura">
@@ -60,11 +88,11 @@
                                 </div>
                             </div>
                             <div class="buttonRigaStruttura">
-                                <form action="../redirectToModificaStrutturaServlet" method="post">
+                                <form action="<%= servlet %>redirectToModificaStrutturaServlet" method="post">
                                     <input type="hidden" value="<%= strutture.get(i).getIdStruttura() %>" name="idStruttura">
                                     <!-- <input type="hidden" value="strutture.get(i).getIdStruttura() %>" name="idStruttura"> -->
-                                    <input type="submit" value="Modifica" class="button" style="width: 80px;" formaction="../redirectToModificaStrutturaServlet">
-                                    <input type="submit" value="Elimina" class="button" style="width: 80px;" formaction="../eliminaStrutturaServlet">
+                                    <input type="submit" value="Modifica" class="button" style="width: 80px;" formaction="<%= servlet %>redirectToModificaStrutturaServlet">
+                                    <input type="submit" value="Elimina" class="button" style="width: 80px;" formaction="<%= servlet %>eliminaStrutturaServlet">
                                 </form>
                             </div>
                         </div>

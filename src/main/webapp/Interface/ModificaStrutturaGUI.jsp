@@ -9,12 +9,27 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <%
+        int callByServlet = 0;
+        String isCallByServlet = (String) request.getAttribute("callByServlet");
+        if(isCallByServlet != null && isCallByServlet.equalsIgnoreCase("yes"))
+            callByServlet = 1;
+    %>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <% if(callByServlet == 1) { %>
     <link rel="stylesheet" href="Interface/css/inserisciStruttura.css">
     <link rel="stylesheet" href="Interface/css/footer.css">
     <link rel="stylesheet" href="Interface/css/header.css">
     <link rel="stylesheet" href="Interface/css/style.css">
+    <%
+    }
+    else { %>
+    <link rel="stylesheet" href="css/inserisciStruttura.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/style.css">
+    <% } %>
     <title>Modifica Struttura</title>
 </head>
 <body>
@@ -29,7 +44,12 @@
 <div class="img-form">
     <div class="formInserisci">
         <div class="title mid-text"> Modifica la tua struttura! </div>
-        <form action="../Progetto_IS_PHBnB_war_exploded/modificaStrutturaServlet" method="post">
+        <%
+            String servlet = "";
+            if(callByServlet == 0)
+                servlet = "../";
+        %>
+        <form action="<%= servlet %>modificaStrutturaServlet" method="post">
             <input type="hidden" value="<%= struttura.getIdStruttura() %>" name="oldIdStruttura">
             <div class="input">
                 <panel for="nomeStruttura"> <b>Nome Struttura :</b> </panel>
@@ -71,10 +91,22 @@
             <div class="ele2" style="padding: 5%; display: flex; align-items: center;">
                 PHB&B è l'app ideale per prenotare alloggi in tutto il mondo, con una vasta selezione che include hotel, B&B e appartamenti. Grazie a una ricerca intuitiva e filtri avanzati, trovare l'alloggio perfetto è semplice e veloce.
             </div>
-            <div class="ele1"> <img src="img/struttura1.jpg">   </div>
+            <div class="ele1">
+                <% if(callByServlet == 1) { %>
+                <img src="Interface/img/struttura1.jpg">
+                <% } else {%>
+                <img src="img/struttura1.jpg">
+                <% } %>
+            </div>
         </div>
         <div class="riga2 small-text">
-            <div class="ele2"> <img src="img/struttura4.jpg">   </div>
+            <div class="ele2">
+                <% if(callByServlet == 1) { %>
+                <img src="Interface/img/struttura4.jpg">
+                <% } else {%>
+                <img src="img/struttura4.jpg">
+                <% } %>
+            </div>
             <div class="ele1" style="padding: 5%; display: flex; align-items: center;"> Un aspetto distintivo di PHB&B è la funzionalità "modifica struttura", che permette agli utenti di modificare facilmente le prenotazioni in caso di imprevisti, adattando la scelta all’ultimo minuto. Con conferme istantanee e recensioni verificate, PHB&B garantisce un'esperienza di viaggio senza stress, rendendo ogni soggiorno ancora più personalizzabile e conveniente.
             </div>
         </div>

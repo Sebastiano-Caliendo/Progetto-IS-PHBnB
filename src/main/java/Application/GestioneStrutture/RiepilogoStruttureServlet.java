@@ -18,6 +18,7 @@ public class RiepilogoStruttureServlet extends HttpServlet {
     // servlet che restituisce la lista delle strutture di un host //
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("callByServlet", "yes");
         // quando l'host accede, lo salviamo nella sessione,
         // quindi prendiamo le info dell'host dalla sessione
         Host host = (Host) req.getSession().getAttribute("host");
