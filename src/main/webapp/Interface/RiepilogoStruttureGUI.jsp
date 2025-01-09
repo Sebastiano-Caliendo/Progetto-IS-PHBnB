@@ -70,7 +70,7 @@
     </div>
 
     <%  if(strutture.isEmpty()) { %>
-            <div class="nessuno mid-text">Non hai nessuna struttura :( </div>
+            <div class="nessuno normal-text">Non hai nessuna struttura :( </div>
     <%  }
         else { %>
             <div class="container" id="containerStrutture">

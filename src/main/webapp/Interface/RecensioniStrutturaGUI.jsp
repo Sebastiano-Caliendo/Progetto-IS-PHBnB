@@ -46,13 +46,15 @@
         <div class="mid-text" id="sezione" style="width: 83%;"><%= nomeStruttura %></div>
         <div class="button-sezione-aggiungi" id="mediaRecensioni">
             <div class="mediaRecensioni big-text">
-                <%= media %>
+                <% if(!media.isNaN()) { %>
+                    <%= media %>
+                <% } %>
             </div>
         </div>
     </div>
 
     <%  if(recensioni.isEmpty()) { %>
-    <div class="nessuno mid-text">Non hai nessuna recensione :( </div>
+    <div class="nessuno normal-text">Non hai nessuna recensione :( </div>
     <%  }
     else { %>
     <div class="container" id="containerStrutture">

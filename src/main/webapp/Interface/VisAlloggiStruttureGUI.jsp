@@ -81,7 +81,7 @@
     </div>
 
     <%  if(alloggi.isEmpty()) { %>
-    <div class="nessuno mid-text">Non hai nessun'alloggio :( </div>
+    <div class="nessuno normal-text">Non hai nessun'alloggio :( </div>
     <%  }
     else { %>
     <div class="container" id="containerStrutture">

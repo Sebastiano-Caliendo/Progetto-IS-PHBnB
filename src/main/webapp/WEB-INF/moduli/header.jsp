@@ -13,7 +13,12 @@
 <body>
     <header>
         <div class="logo mid-text">
-            <a href="../../index.jsp" title="home">PHB<span class="normal-text">&</span>B</a>
+            <%
+                String header = "Interface/";
+                if(callByServlet == 0)
+                    header = "";
+            %>
+            <a href="<%= header %>index.jsp" title="home">PHB<span class="normal-text">&</span>B</a>
         </div>
         <hr class="rigaHeader">
     </header>

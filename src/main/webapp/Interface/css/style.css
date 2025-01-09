@@ -35,3 +35,11 @@ form input[type = submit] {
     font-weight: 700;
 }
 
+.nessuno {
+    margin-right: 7%;
+    justify-content: center;
+    display: flex;
+    height: 50%;
+    text-align: center;
+    align-items: center;
+}
