@@ -18,7 +18,7 @@ import java.util.HashMap;
 public class ModificaStrutturaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        req.setAttribute("callByServlet", "yes");
         // prendiamo l'oggetto host dalla sessione perchè ci serve l'fkHost da associare alla struttura
         // L'host nella pagina modifica.jsp non inserirà il campo fk_host
         Host host = (Host) req.getSession().getAttribute("host");
@@ -35,6 +35,7 @@ public class ModificaStrutturaServlet extends HttpServlet {
         String citta = req.getParameter("citta");
         int numAlloggi = Integer.parseInt(req.getParameter("numAlloggi"));
         String descrizione = req.getParameter("descrizione");
+        String urlImmagine = req.getParameter("urlImmagine");
 
         // creo la struttura che voglio inserire
         Struttura struttura = new Struttura();
@@ -44,13 +45,14 @@ public class ModificaStrutturaServlet extends HttpServlet {
         struttura.setNomeStruttura(nomeStruttura);
         struttura.setCitta(citta);
         struttura.setVia(via);
+        struttura.setUrlImmagine(urlImmagine);
 
         // elimino la vecchia struttura dal DB ed inserisco la struttura modificata
         gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
         strutturaFacade.modificaStruttura(struttura, oldIdStruttura);
 
         // ritorno alla jsp che mi fa vedere tutti gli alloggi della struttura
-        RequestDispatcher dispatcher = req.getRequestDispatcher("RiepilogoStrutture.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("Interface/RiepilogoStruttureGUI.jsp");
         dispatcher.forward(req,resp);
     }
 

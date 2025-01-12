@@ -20,6 +20,7 @@ public class SelezionaStrutturaServlet extends HttpServlet {
     // servlet che restituisce la lista degli alloggi di una struttura //
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("callByServlet", "yes");
         // prendo l'id della struttura che voglio selezionare (voglio visualizzare i suoi alloggi)
         int idStruttura = Integer.parseInt(req.getParameter("idStruttura"));
 

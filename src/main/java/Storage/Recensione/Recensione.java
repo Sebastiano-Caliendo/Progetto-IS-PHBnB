@@ -3,6 +3,7 @@ package Storage.Recensione;
 import java.util.Date;
 
 public class Recensione {
+
     private int idRecensione;
     private String emailRecensore;
     private String descrizione;
@@ -10,23 +11,12 @@ public class Recensione {
     private Date dataRecensione;
     private int codicePrenotazione;
     private int numeroAlloggio;
-    private int fk_codiceStruttura;
 
-    public void setIdRecensione(int idRecensione) {
-        this.idRecensione = idRecensione;
-    }
+    private int idStrutturaAlloggio;
 
-    public void setFk_codiceStruttura(int fk_codiceStruttura) {
-        this.fk_codiceStruttura = fk_codiceStruttura;
-    }
+    public int getIdRecensione() { return idRecensione; }
 
-    public int getIdRecensione() {
-        return idRecensione;
-    }
-
-    public int getFk_codiceStruttura() {
-        return fk_codiceStruttura;
-    }
+    public void setIdRecensione(int idRecensione) { this.idRecensione = idRecensione; }
 
     public int getCodicePrenotazione() {
         return codicePrenotazione;
@@ -35,6 +25,10 @@ public class Recensione {
     public void setCodicePrenotazione(int codicePrenotazione) {
         this.codicePrenotazione = codicePrenotazione;
     }
+
+    public int getIdStrutturaAlloggio() { return idStrutturaAlloggio; }
+
+    public void setIdStrutturaAlloggio(int idStrutturaAlloggio) { this.idStrutturaAlloggio = idStrutturaAlloggio; }
 
     public int getNumeroAlloggio() {
         return numeroAlloggio;

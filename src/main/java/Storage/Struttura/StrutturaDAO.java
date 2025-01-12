@@ -22,6 +22,7 @@ public class StrutturaDAO {
             s.setCitta(rs.getString(6));
             s.setNumAlloggi(rs.getInt(7));
             s.setDescrizione(rs.getString(8));
+            s.setUrlImmagine(rs.getString(9));
 
             list.add(s);
         }
@@ -90,6 +91,7 @@ public class StrutturaDAO {
                 s.setCitta(rs.getString(6));
                 s.setNumAlloggi(rs.getInt(7));
                 s.setDescrizione(rs.getString(8));
+                s.setUrlImmagine(rs.getString(9));
 
                 return s;
             }
@@ -118,8 +120,8 @@ public class StrutturaDAO {
     public int doSave(Struttura struttura) {
         try (Connection con = Connessione.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "insert into struttura (fk_host, nome_struttura, via, numero_civico, citta, numero_alloggi, descrizione) " +
-                            "values (?, ?, ?, ?, ?, ?, ?)",
+                    "insert into struttura (fk_host, nome_struttura, via, numero_civico, citta, numero_alloggi, descrizione, url_immagine) " +
+                            "values (?, ?, ?, ?, ?, ?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, struttura.getFkHost());
             ps.setString(2, struttura.getNomeStruttura());
@@ -128,6 +130,7 @@ public class StrutturaDAO {
             ps.setString(5, struttura.getCitta());
             ps.setInt(6, struttura.getNumAlloggi());
             ps.setString(7, struttura.getDescrizione());
+            ps.setString(8, struttura.getUrlImmagine());
 
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
@@ -143,7 +146,7 @@ public class StrutturaDAO {
     public void doUpdate(Struttura struttura, int idStruttura) {
         try (Connection con = Connessione.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "UPDATE prodotti SET fk_host=?, nome_struttura=?, via=?, numero_civico=?, citta=?, numero_alloggi=?, descrizione=? WHERE id_struttura=?");
+                    "UPDATE prodotti SET fk_host=?, nome_struttura=?, via=?, numero_civico=?, citta=?, numero_alloggi=?, descrizione=?, url_immagine=? WHERE id_struttura=?");
 
             ps.setString(1, struttura.getFkHost());
             ps.setString(2, struttura.getNomeStruttura());
@@ -152,7 +155,8 @@ public class StrutturaDAO {
             ps.setString(5, struttura.getCitta());
             ps.setInt(6, struttura.getNumAlloggi());
             ps.setString(7, struttura.getDescrizione());
-            ps.setInt(8, idStruttura); // id da passare come parametro
+            ps.setString(8, struttura.getUrlImmagine());
+            ps.setInt(9, idStruttura); // id da passare come parametro
 
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("UPDATE error.");

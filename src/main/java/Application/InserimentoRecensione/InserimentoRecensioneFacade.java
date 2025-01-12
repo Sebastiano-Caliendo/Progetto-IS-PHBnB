@@ -4,7 +4,6 @@ import Storage.Recensione.Recensione;
 import Storage.Recensione.RecensioneDAO;
 import jakarta.servlet.http.HttpSession;
 
-import java.sql.Date;
 import java.util.List;
 
 public class InserimentoRecensioneFacade {
@@ -30,7 +29,7 @@ public class InserimentoRecensioneFacade {
         }
     }
 
-    public void modificaRecensione(HttpSession session, String email, String descrizione, int votoRecensione, Date dataRecensione, int codicePrenotazione, int numeroAlloggio){
+    public void modificaRecensione(HttpSession session, int idRecensione, Recensione recensione){
         boolean successo = false;
 
         if(proxy.isUser(session)){
@@ -42,12 +41,12 @@ public class InserimentoRecensioneFacade {
 
         if(successo){
             RecensioneDAO recensioneDAO = new RecensioneDAO();
-            Recensione r = recensioneDAO.doRetrieveByCodicePrenotazione(codicePrenotazione);
-            recensioneDAO.doUpdate(r, email, descrizione, votoRecensione, dataRecensione, codicePrenotazione, numeroAlloggio);
+            //Recensione r = recensioneDAO.doRetrieveById(idRecensione);
+            recensioneDAO.doUpdate(recensione, idRecensione);
         }
     }
 
-    public void eliminaRecensione(HttpSession session, String email, String codicePrenotazione, int numeroAlloggio){
+    public void eliminaRecensione(HttpSession session, int idRecensione){
         boolean successo = false;
 
         if(proxy.isUser(session)){
@@ -59,10 +58,11 @@ public class InserimentoRecensioneFacade {
 
         if(successo){
             RecensioneDAO recensioneDAO = new RecensioneDAO();
-            recensioneDAO.doDelete(email, codicePrenotazione, numeroAlloggio);
+            recensioneDAO.doDelete(idRecensione);
         }
     }
 
+    // email = fk_utente in recensione
     public List<Recensione> visualizzaRecensioniPubblicate(HttpSession session, String email){
         boolean successo = false;
         List<Recensione> recensioniPubblicate;
@@ -82,22 +82,23 @@ public class InserimentoRecensioneFacade {
         return null;
     }
 
-    public List<Recensione> visualizzaRecensioniRicevute(HttpSession session, String idStruttura){
-        boolean successo = false;
+    // controlli commentati per testare il servizio (parte HOST e UTENTE ancora non fatta)
+    public List<Recensione> visualizzaRecensioniRicevute(HttpSession session, int idStruttura){
+        //boolean successo = false;
         List<Recensione> recensioniRicevute;
 
-        if(proxy.isHost(session)){
+        /*if(proxy.isHost(session)){
             successo = true;
         }
         else{
             System.out.println("Operazione non ammessa");
-        }
+        }*/
 
-        if(successo){
+        //if(successo){
             RecensioneDAO recensioneDAO = new RecensioneDAO();
             recensioniRicevute = recensioneDAO.doRetrieveByStruttura(idStruttura);
             return recensioniRicevute;
-        }
-        return null;
+        //}
+        //return null;
     }
 }

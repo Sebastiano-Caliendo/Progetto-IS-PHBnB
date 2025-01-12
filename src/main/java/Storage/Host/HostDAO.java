@@ -10,31 +10,19 @@ import java.util.List;
 public class HostDAO {
 
     public List<Host> doRetrieveAll() {
-        List<Host> list = new ArrayList<>();
-
         try (Connection con = Connessione.getConnection()) {
+
+            List<Host> list = new ArrayList<>();
             PreparedStatement ps = con.prepareStatement("select * from host");
             ResultSet rs = ps.executeQuery();
 
-            while(rs.next()) {
-                Host host = new Host();
-
-                host.setEmail(rs.getString("email"));
-                host.setNome(rs.getString("nome"));
-                host.setCognome(rs.getString("cognome"));
-                host.setPassword(rs.getString("password_"));
-                host.setDataNascita(rs.getDate("data_nascita"));
-                host.setRecapitoTelefonico(rs.getString("recapito_telefonico"));
-
-                list.add(host);
-            }
-
             copyResultIntoList(rs, list);
+
+            return list;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return list;
     }
 
     public Host doRetrieveByEmailAndPassword(String email, String password) {
@@ -53,7 +41,7 @@ public class HostDAO {
                 h.setNome(rs.getString(2));
                 h.setCognome(rs.getString(3));
                 h.setPassword(rs.getString(4));
-                h.setDataNascita(rs.getDate(5));
+                h.setDataNascita(rs.getDate(5).toLocalDate());
                 h.setRecapitoTelefonico(rs.getString(6));
             }
 
@@ -135,7 +123,7 @@ public class HostDAO {
             h.setNome(rs.getString(2));
             h.setCognome(rs.getString(3));
             h.setPassword(rs.getString(4));
-            h.setDataNascita(rs.getDate(5));
+            h.setDataNascita(rs.getDate(5).toLocalDate());
             h.setRecapitoTelefonico(rs.getString(6));
 
             list.add(h);

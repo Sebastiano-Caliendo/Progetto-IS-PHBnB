@@ -11,11 +11,28 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Visita alloggi della struttura</title>
+    <%
+        int callByServlet = 0;
+        String isCallByServlet = (String) request.getAttribute("callByServlet");
+        if(isCallByServlet != null && isCallByServlet.equalsIgnoreCase("yes"))
+            callByServlet = 1;
+    %>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <% if(callByServlet == 1) { %>
     <link rel="stylesheet" href="Interface/css/riepilogoStrutture.css">
     <link rel="stylesheet" href="Interface/css/footer.css">
     <link rel="stylesheet" href="Interface/css/header.css">
     <link rel="stylesheet" href="Interface/css/style.css">
+    <%
+    }
+    else { %>
+    <link rel="stylesheet" href="css/riepilogoStrutture.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/style.css">
+    <% } %>
+    <title> Alloggi Struttura </title>
 </head>
 <body>
     <%@ include file="../WEB-INF/moduli/header.jsp"%>
@@ -26,17 +43,37 @@
     %>
     <div class="big-text" id="areaHost"> AREA HOST</div>
 
+    <%
+        String servlet = "";
+        String jsp = "";
+        if(callByServlet == 0) { // chiamata da jsp
+            servlet = "../";
+            jsp = "";
+        }
+        else  {  // chiamata da servlet
+            servlet = "";
+            jsp = "Interface/";
+        }
+    %>
+
     <div class="sezione-aggiungi">
         <div class="mid-text" id="sezione"><%= struttura.getNomeStruttura() %></div>
         <div class="button-sezione-aggiungi">
             <div class="visualizzaPrenotazioni">
-                <form action="../selezionaPrenotazioniServlet" method="post">
+                <form action="<%= servlet %>selezionaPrenotazioniServlet" method="post">
                     <input type="hidden" name="idStruttura" value="<%= struttura.getIdStruttura() %>" >
                     <input type="submit" value="Visualizza Prenotazioni" class="button" style="width:160px;" >
                 </form>
             </div>
+            <div class="visualizzaRecensioni">
+                <form action="<%= servlet %>visualizzaRecensioneRicevuteServlet" method="post">
+                    <input type="hidden" name="idStruttura" value="<%= struttura.getIdStruttura() %>" >
+                    <input type="submit" value="Visualizza Recensioni" class="button" style="width:160px;" >
+                </form>
+            </div>
             <div class="aggiungiStruttura">
-                <form action="login-servlet" method="post">
+                <form action="<%= servlet %>redirectToAggiungiAlloggioServlet" method="post">
+                    <input type="hidden" value="<%= struttura.getIdStruttura() %>" name="idStruttura">
                     <input type="submit" value="Aggiungi Alloggio" class="button">
                 </form>
             </div>
@@ -44,7 +81,7 @@
     </div>
 
     <%  if(alloggi.isEmpty()) { %>
-    <div class="mid-text">Non hai nessun'alloggio :( </div>
+    <div class="nessuno normal-text">Non hai nessun'alloggio :( </div>
     <%  }
     else { %>
     <div class="container" id="containerStrutture">
@@ -73,10 +110,14 @@
             </div>
             <div class="terzaColonna">
                 <div class="button">
-                    <form action="login-servlet" method="post">
+                    <form action="<%= servlet %>redirectToModificaAlloggioServlet" method="post">
+                        <input type="hidden" value="<%= alloggi.get(i).getNumeroAlloggio() %>" name="numeroAlloggio">
+                        <input type="hidden" value="<%= struttura.getIdStruttura() %>" name="idStruttura">
                         <input type="submit" value="Modifica Alloggio" class="button">
                     </form>
-                    <form action="login-servlet" method="post">
+                    <form action="<%= servlet %>eliminaAlloggioServlet" method="post">
+                        <input type="hidden" value="<%= alloggi.get(i).getNumeroAlloggio() %>" name="numeroAlloggio">
+                        <input type="hidden" value="<%= struttura.getIdStruttura() %>" name="idStruttura">
                         <input type="submit" value="Elimina Alloggio" class="button">
                     </form>
                 </div>

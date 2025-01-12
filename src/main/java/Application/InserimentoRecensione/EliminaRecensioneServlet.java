@@ -9,20 +9,18 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+// solo admin potrà eliminare
 @WebServlet(name = "eliminaRecensioneServlet", value = "/eliminaRecensioneServlet")
 public class EliminaRecensioneServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String emailRecensore = req.getParameter("emailRecensore");
-        String codicePrenotazione = req.getParameter("codicePrenotazione");
-        int numeroAlloggio = Integer.parseInt(req.getParameter("numeroAlloggio"));
+
+        int idRecensione = Integer.parseInt(req.getParameter("idRecensione")); // type = "hidden" nella jsp
 
         InserimentoRecensioneFacade inserimentoRecensioneFacade = new InserimentoRecensioneFacade();
-        inserimentoRecensioneFacade.eliminaRecensione(req.getSession(), emailRecensore, codicePrenotazione, numeroAlloggio);
+        inserimentoRecensioneFacade.eliminaRecensione(req.getSession(), idRecensione);
 
-        String nameAlloggio = req.getParameter("nameAlloggio");
-
-        RequestDispatcher dispatcher = req.getRequestDispatcher("viewAlloggio.jsp?nameAlloggio=" + nameAlloggio);
+        RequestDispatcher dispatcher = req.getRequestDispatcher("VisDatiSistema.jsp");
         dispatcher.forward(req, resp);
     }
 

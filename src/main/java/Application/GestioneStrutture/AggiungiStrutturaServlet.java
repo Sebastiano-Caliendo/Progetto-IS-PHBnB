@@ -15,6 +15,7 @@ import java.io.IOException;
 public class AggiungiStrutturaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("callByServlet", "yes");
         // prendiamo l'host dalla sessione (il campo fk_host non verrà inserito)
         Host host = (Host) req.getSession().getAttribute("host");
 
@@ -24,6 +25,7 @@ public class AggiungiStrutturaServlet extends HttpServlet {
         String citta = req.getParameter("citta");
         int numAlloggi = Integer.parseInt(req.getParameter("numAlloggi"));
         String descrizione = req.getParameter("descrizione");
+        String urlImmagine = req.getParameter("urlImmagine");
 
         // creiamo la struttura
         Struttura struttura = new Struttura();
@@ -33,13 +35,14 @@ public class AggiungiStrutturaServlet extends HttpServlet {
         struttura.setNomeStruttura(nomeStruttura);
         struttura.setCitta(citta);
         struttura.setVia(via);
+        struttura.setUrlImmagine(urlImmagine);
 
         // inseriamo la struttura nel DB
         gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
         strutturaFacade.aggiungiStruttura(struttura);
 
         // passo il controllo alla jsp che mostrerà il riepilogo delle strutture
-        RequestDispatcher dispatcher = req.getRequestDispatcher("riepilogoStrutture.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("RiepilogoStruttureGUI.jsp");
         dispatcher.forward(req,resp);
     }
 

@@ -19,10 +19,11 @@ import java.io.IOException;
 public class RedirectToModificaAlloggioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("callByServlet", "yes");
         // prendiamo gli identificatori dell'alloggio che vogliamo modificare
 
         int numeroAlloggio = Integer.parseInt(req.getParameter("numeroAlloggio"));
-        int fkStruttura = Integer.parseInt(req.getParameter("fkStruttura"));
+        int fkStruttura = Integer.parseInt(req.getParameter("idStruttura"));
 
         //prendiamo i dati dell'alloggio che vogliamo modificare
         AlloggioDAO alloggioDAO = new AlloggioDAO();
@@ -32,7 +33,7 @@ public class RedirectToModificaAlloggioServlet extends HttpServlet {
         req.setAttribute("alloggio", alloggio);
 
         // passo il controllo alla jsp ModificaAlloggio
-        RequestDispatcher dispatcher = req.getRequestDispatcher("ModificaAlloggio.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("Interface/ModificaAlloggioGUI.jsp");
         dispatcher.forward(req,resp);
     }
 

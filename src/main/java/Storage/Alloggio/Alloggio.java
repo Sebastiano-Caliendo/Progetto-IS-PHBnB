@@ -8,16 +8,19 @@ public class Alloggio {
     private String tipoAlloggio;
     private String descrizione;
 
+    private String urlImmagine;
+
     public Alloggio() {
     }
 
-    public Alloggio(int numeroAlloggio, int fkStruttura, double prezzoNotte, int postiletto, String tipoAlloggio, String descrizione) {
+    public Alloggio(int numeroAlloggio, int fkStruttura, double prezzoNotte, int postiletto, String tipoAlloggio, String descrizione, String urlImmagine) {
         this.numeroAlloggio = numeroAlloggio;
         this.fkStruttura = fkStruttura;
         this.prezzoNotte = prezzoNotte;
         Postiletto = postiletto;
         this.tipoAlloggio = tipoAlloggio;
         this.descrizione = descrizione;
+        this.urlImmagine = urlImmagine;
     }
 
     public int getNumeroAlloggio() {
@@ -62,6 +65,14 @@ public class Alloggio {
 
     public String getDescrizione() {
         return descrizione;
+    }
+
+    public String getUrlImmagine() {
+        return urlImmagine;
+    }
+
+    public void setUrlImmagine(String urlImmagine) {
+        this.urlImmagine = urlImmagine;
     }
 
     public void setDescrizione(String descrizione) {
