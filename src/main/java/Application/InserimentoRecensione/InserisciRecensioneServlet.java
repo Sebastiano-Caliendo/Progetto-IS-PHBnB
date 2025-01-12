@@ -20,8 +20,9 @@ public class InserisciRecensioneServlet extends HttpServlet {
         String descrizioneRecensione = req.getParameter("descrizioneRecensione");
         int votoRecensione = Integer.parseInt(req.getParameter("votoRecensione"));
         String dataRecensione = req.getParameter("dataRecensione");
-        String codicePrenotazione = req.getParameter("codicePrenotazione");
+        int codicePrenotazione = Integer.parseInt(req.getParameter("codicePrenotazione"));
         int numeroAlloggio = Integer.parseInt(req.getParameter("numeroAlloggio"));
+        int codiceStruttura = Integer.parseInt(req.getParameter("codiceStruttura"));
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         Date date = new Date();
@@ -40,6 +41,7 @@ public class InserisciRecensioneServlet extends HttpServlet {
         recensione.setDataRecensione(date);
         recensione.setNumeroAlloggio(numeroAlloggio);
         recensione.setCodicePrenotazione(codicePrenotazione);
+        recensione.setFk_codiceStruttura(codiceStruttura);
 
         InserimentoRecensioneFacade inserimentoRecensioneFacade = new InserimentoRecensioneFacade();
         inserimentoRecensioneFacade.inserisciRecensione(req.getSession(), recensione);

@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -29,8 +30,17 @@ public class RegistrazioneHostServlet extends HttpServlet {
         String recapitoTelefonico = req.getParameter("recapitoTelefonico");
 
         String address = "areaHost.jsp";
+        Date dataNascitaDate = null;
 
-        Host h = new Host(email, nome, cognome, password, (Date)dataNascita, recapitoTelefonico);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        try{
+            dataNascitaDate = formatter.parse(dataNascita);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        Host h = new Host(email, nome, cognome, password, dataNascitaDate, recapitoTelefonico);
 
         AutenticazioneFacade autenticazioneFacade = new AutenticazioneFacade(req.getSession());
         autenticazioneFacade.registrazioneHost(h);

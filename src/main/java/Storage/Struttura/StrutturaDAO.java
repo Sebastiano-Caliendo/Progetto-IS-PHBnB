@@ -47,17 +47,29 @@ public class StrutturaDAO {
 
     }
     public List<Struttura> doRetrieveAll() {
+        List<Struttura> list = new ArrayList<>();
         try (Connection con = Connessione.getConnection()) {
-            List<Struttura> list = new ArrayList<>();
             PreparedStatement ps = con.prepareStatement("select * from struttura");
             ResultSet rs = ps.executeQuery();
 
-            copyResultIntoList(rs, list);
+            while(rs.next()){
+                Struttura struttura = new Struttura();
 
-            return list;
+                struttura.setFkHost(rs.getString("fk_host"));
+                struttura.setNomeStruttura(rs.getString("nome_struttura"));
+                struttura.setVia(rs.getString("via"));
+                struttura.setNumCivico(rs.getInt("numero_civico"));
+                struttura.setCitta(rs.getString("citta"));
+                struttura.setNumAlloggi(rs.getInt("numero_alloggi"));
+                struttura.setDescrizione(rs.getString("descrizione"));
+                list.add(struttura);
+            }
+
+            copyResultIntoList(rs, list);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return list;
     }
 
     public Struttura doRetrieveById(int idStruttura) {

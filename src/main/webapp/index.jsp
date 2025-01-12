@@ -10,6 +10,6 @@
 <a href="Interface/riepilogoStruttureGUI.jsp">riepilogoStruttre</a>
 <!-- <a href="Interface/VisAlloggiStruttureGUI.jsp">riepilogoAlloggiStruttura</a> -->
 <a href="Interface/PrenotazioniStrutturaGUI.jsp">Prenotazioni Struttura</a>
-
+<a href = "Interface/VisDatiSistema.jsp">Visualizza dati sistema</a>
 </body>
 </html>

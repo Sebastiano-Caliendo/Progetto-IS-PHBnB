@@ -4,6 +4,7 @@ import Storage.Recensione.Recensione;
 import Storage.Recensione.RecensioneDAO;
 import jakarta.servlet.http.HttpSession;
 
+import java.sql.Date;
 import java.util.List;
 
 public class InserimentoRecensioneFacade {
@@ -29,7 +30,7 @@ public class InserimentoRecensioneFacade {
         }
     }
 
-    public void modificaRecensione(HttpSession session, String email, String codicePrenotazione, int numeroAlloggio){
+    public void modificaRecensione(HttpSession session, String email, String descrizione, int votoRecensione, Date dataRecensione, int codicePrenotazione, int numeroAlloggio){
         boolean successo = false;
 
         if(proxy.isUser(session)){
@@ -42,7 +43,7 @@ public class InserimentoRecensioneFacade {
         if(successo){
             RecensioneDAO recensioneDAO = new RecensioneDAO();
             Recensione r = recensioneDAO.doRetrieveByCodicePrenotazione(codicePrenotazione);
-            recensioneDAO.doUpdate(r, email, codicePrenotazione, numeroAlloggio);
+            recensioneDAO.doUpdate(r, email, descrizione, votoRecensione, dataRecensione, codicePrenotazione, numeroAlloggio);
         }
     }
 
