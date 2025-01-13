@@ -108,7 +108,7 @@
                 <textarea id="descrizione" name="descrizione" rows="10" cols="50" placeholder="Scrivi qui la tua descrizione dettagliata..." required></textarea>
             </div>
 
-            <input type="submit" value="Aggiungi Alloggio" style="border : 1px solid black;">
+            <input type="submit" value="Aggiungi Alloggio" style="border : 1px solid black; width : 50%; height : 30px;">
         </form>
     </div>
 </div>

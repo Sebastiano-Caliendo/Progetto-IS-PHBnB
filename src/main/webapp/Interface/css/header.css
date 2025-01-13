@@ -12,6 +12,16 @@ header {
     z-index: 999;
 }
 
+.buttonHeader {
+    column-gap: 20px;
+    /* row-gap: 20px; */
+    width: 20%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    display: flex;
+}
+
 header .logo {
     font-style: italic /* corsivo */
 }

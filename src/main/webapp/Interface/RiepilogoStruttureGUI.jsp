@@ -81,9 +81,10 @@
                         <div class="containerRigaStruttura">
                             <div class="rigaStruttura">
                                 <div class="elementiStruttura" onclick="submitForm(<%= i %>)">
+                                    <div class="immagine"><img src="img/struttura1.jpg"></div>
                                     <div class="title normal-text"><%= strutture.get(i).getNomeStruttura() %></div>
                                     <div class="numAlloggi small-text"> <b>Numero Alloggi</b> : <%= strutture.get(i).getNumAlloggi() %></div>
-                                    <div class="immagine">immagine</div>
+
                                     <div class="descrizione small-text"><%= strutture.get(i).getDescrizione() %></div>
                                 </div>
                             </div>

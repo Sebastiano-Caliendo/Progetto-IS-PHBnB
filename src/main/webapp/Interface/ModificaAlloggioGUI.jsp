@@ -84,7 +84,7 @@
                 </textarea>
             </div>
 
-            <input type="submit" value="Modifica Alloggio" style="border : 1px solid black;">
+            <input type="submit" value="Modifica Alloggio" style="border : 1px solid black; width : 50%; height : 30px;">
         </form>
     </div>
     <div class="immagini">

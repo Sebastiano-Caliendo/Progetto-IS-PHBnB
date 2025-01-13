@@ -51,7 +51,7 @@
     %>
 
     <div class="title mid-text">
-        Nome della struttura
+        <%= struttura.getNomeStruttura() %>
     </div>
 
     <div class="nomiCampi normal-small-text">

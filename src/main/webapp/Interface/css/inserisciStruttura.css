@@ -1,8 +1,13 @@
+/* utilizzato da inserisciAllogioGUI.jsp, inserisciStrutturaGUI.jsp,
+   modificaStrutturaGUI.jsp e modificaAlloggioGUI.jsp
+ */
+
 body {
     margin-top: 20vh;
     background-color: var(--color-primary);
 }
 
+/* contiene le immagini ed il form, contenitore */
 .img-form {
     margin-top: 3%;
     height: 100%;
@@ -12,20 +17,23 @@ body {
     margin-left: 3%;
 }
 
+/* riduce la grandezza del font del button */
 form input[type="submit"] {
     font-size: xx-small; !important;
 }
 
+/* contiene le immagini e le descrizioni */
 .immagini {
     text-align: center;
     width: 50%;
 }
 
+/* titolo sopra al form */
 .title {
     text-align: center;
 }
 
-
+/* contiene il form */
 .formInserisci  {
     flex-direction: column;
     height: 100%;
@@ -33,7 +41,7 @@ form input[type="submit"] {
     width: 60%;
 }
 
-
+/* stile per il form */
 form {
     /*border: 2px solid var(--color-secondary);*/
     row-gap: 30px;
@@ -49,6 +57,7 @@ form {
     border-radius: 40px;
 }
 
+/* la classe immagini contiene 2 righe, questa è la prima riga che contiene 1 descrizione ed 1 immagine */
 .riga1 {
     text-align: center;
     flex-direction: row;
@@ -57,6 +66,7 @@ form {
     height: 50%;
 }
 
+/* la seconda riga che contiene 1 descrizione ed 1 immagine ma con ordine inverso rispetto alla prima */
 .riga2 {
     text-align: center;
     flex-direction: row;
@@ -65,6 +75,7 @@ form {
     width: 100%;
 }
 
+/* gli elementi della riga1 e della riga2 */
 .ele1 {
     overflow: hidden;
     width : 50%;
@@ -75,13 +86,16 @@ form {
     width : 50%;
 }
 
+/* stile per le 4 immagini */
 img {
+    border-radius: 40px;
     margin: 10%;
     width: 80%; /* L'immagine si adatta alla larghezza del div */
     height: 80%; /* L'immagine si adatta all'altezza del div */
     object-fit: cover; /* Fa in modo che l'immagine riempia il div, mantenendo il suo rapporto di aspetto e tagliando le parti in eccesso se necessario */
 }
 
+/* contiene l'input ed anche il panel per le pagine che effettuano modifiche */
 .input {
     align-items: center;
     width: 100%;
@@ -96,13 +110,17 @@ panel {
 }
 
 input {
+    height : 30px;
     border-radius: 20px;
     border : 1px solid black;
-    width: 50%;
+    width: 100%;
+    align-content: center;
     text-align: center;
 }
 
 textarea {
+    width : 100%;
+    align-content: center;
     text-align: center;
     border-radius: 20px;
     border : 1px solid black;

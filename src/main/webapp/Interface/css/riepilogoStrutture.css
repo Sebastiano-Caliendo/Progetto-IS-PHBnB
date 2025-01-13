@@ -1,3 +1,9 @@
+/* utilizzato da : riepilogoStruttureGUI.jsp, VisAlloggiStruttureGUI.jsp e RecensioniStrutturaGUI,jsp */
+
+
+/* --------------  riepilogoStruttureGUI.jsp */
+
+/* scritta AREA HOST */
 #areaHost{
     width : 93%;
     text-align: center;
@@ -5,10 +11,19 @@
     color : var(--color-primary);
 }
 
+img {
+    border-radius: 20px;
+    margin: 10%;
+    width: 80%; /* L'immagine si adatta alla larghezza del div */
+    height: 80%; /* L'immagine si adatta all'altezza del div */
+    object-fit: cover; /* Fa in modo che l'immagine riempia il div, mantenendo il suo rapporto di aspetto e tagliando le parti in eccesso se necessario */
+}
+
 body {
     background-color: var(--rosa-bianchissimo);
 }
 
+/* prima sezione utilizzata da più pagine */
 .sezione-aggiungi {
     align-items: center;
     width : 90%;
@@ -18,6 +33,7 @@ body {
     justify-content: space-between;
 }
 
+/* modifica ed elimina button */
 .buttonRigaStruttura {
     row-gap: 20px;
     align-items: center;
@@ -29,17 +45,88 @@ body {
     justify-content: center;
 }
 
+/* container utilizzato in più pagine */
 .containerRigaStruttura {
     flex-direction: row;
     align-items: center;
     display: flex;
 }
 
+/* riga che contiene una struttura oppure un alloggio */
+.rigaStruttura{
+    background-color: white;
+    border-radius : 20px;
+    border : 1px solid var(--color-primary);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 200px;
+}
+
+/* nome della struttura nella rigaStruttura */
+.title {
+    margin-top: 1%;
+    font-family: cursive;
+}
+
+/* container che contiene la rigaStruttura e i button */
+.container {
+    margin-left: 3%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    width: 100%;
+}
+
+/* contiene gli elementi che compongono la riga di una struttura */
+.elementiStruttura{
+    height : 100%;
+    width: 80%;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+/* elemento numero alloggi */
+.numAlloggi {
+    margin-top: 1%;
+    font-style: italic;
+}
+
+/* dove si trova l'immagine della struttura */
+.immagine {
+    justify-content: center;
+    margin-left: 100%;
+    position: absolute;
+    display: flex;
+    height: 100%;
+    width: 20%;
+}
+
+/* descrizione solo della struttura */
+.descrizione {
+    text-align: center;
+    align-items: center;
+    height: 75%;
+    justify-content: center;
+    width: 80%;
+    display: flex;
+}
+
+/* -------------- VisAlloggiStruttureGUI.jsp */
+
+/* alcune differenze rispetto alla riga di una struttura */
 .rigaStruttura #rigaAlloggio{
     flex-direction: row;
     justify-content: space-between;
 }
 
+/* la riga di un alloggio è divisa in 3 colonne */
+
+/* nome dell'alloggio con tipo alloggio e numero di posti letto */
 .primaColonna{
     flex-direction: column;
     text-align: center;
@@ -48,6 +135,7 @@ body {
     width: 25%;
 }
 
+/* prezzo notte e descrizione */
 .secondaColonna {
     margin : 2%;
     text-align: center;
@@ -57,6 +145,7 @@ body {
     display: flex;
 }
 
+/* dove ci sono i button */
 .terzaColonna {
     align-items: center;
     justify-content: center;
@@ -82,17 +171,6 @@ body {
     font-style: italic;
 }
 
-.rigaStruttura{
-    background-color: white;
-    border-radius : 20px;
-    border : 1px solid var(--color-primary);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 90%;
-    height: 200px;
-}
-
 .tipoPostiLetto {
     font-style: italic;
     height: 100%;
@@ -101,11 +179,13 @@ body {
     justify-content: center;
 }
 
+/* nome della struttura in VisAllogi */
 #sezione {
     width : 75%;
     /*text-transform: uppercase;*/
 }
 
+/* contenitore che contiene i 3 button nella pagina VisAlloggi (visualizza pren., agg. all. e vis. pren.) */
 .button-sezione-aggiungi {
     display : flex;
     flex-direction: row;
@@ -114,57 +194,11 @@ body {
     justify-content: center;
 }
 
-.title {
-    margin-top: 1%;
-    font-family: cursive;
-}
-
-.container {
-    margin-left: 3%;
-    display: flex;
-    flex-direction: column;
-    row-gap: 20px;
-    width: 100%;
-}
-
-.numAlloggi {
-    margin-top: 1%;
-    font-style: italic;
-}
-
-.elementiStruttura{
-    height : 100%;
-    width: 80%;
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-around;
-}
-
-.immagine {
-    justify-content: center;
-    margin-left: 100%;
-    position: absolute;
-    display: flex;
-    height: 100%;
-    width: 20%;
-}
-
-.descrizione {
-    text-align: center;
-    align-items: center;
-    height: 75%;
-    justify-content: center;
-    width: 80%;
-    display: flex;
-}
-
 .nomeAlloggio {
     font-family: cursive;
 }
 
-/* RecensioniStrutturaGUI.jsp */
+/* --------------- RecensioniStrutturaGUI.jsp */
 
 #mediaRecensioni {
     text-align: center;
