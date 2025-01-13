@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Progetto-IS-PHBnB:war">
+    <output-path>$PROJECT_DIR$/out/artifacts/Progetto_IS_PHBnB_war</output-path>
+    <root id="archive" name="Progetto-IS-PHBnB_war.war">
+      <element id="artifact" artifact-name="Progetto-IS-PHBnB:war exploded" />
+    </root>
+  </artifact>
+</component>

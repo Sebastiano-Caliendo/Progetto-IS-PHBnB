@@ -11,19 +11,29 @@ import java.util.List;
 public class PrenotazioneDAO {
 
     public List<Prenotazione> doRetrieveAll() {
-        try (Connection con = Connessione.getConnection()) {
+        List<Prenotazione> list = new ArrayList<>();
 
-            List<Prenotazione> list = new ArrayList<>();
+        try (Connection con = Connessione.getConnection()) {
             PreparedStatement ps = con.prepareStatement("select * from prenotazione");
             ResultSet rs = ps.executeQuery();
 
-            copyResultIntoList(rs, list);
+            while(rs.next()) {
+                Prenotazione prenotazione = new Prenotazione();
 
-            return list;
+                prenotazione.setCheckIn(rs.getDate("check_in"));
+                prenotazione.setCheckOut(rs.getDate("check_out"));
+                prenotazione.setFkUtente(rs.getString("fk_utente"));
+                prenotazione.setNumeroPersone(rs.getInt("numero_persone"));
+
+                list.add(prenotazione);
+            }
+
+            copyResultIntoList(rs, list);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return list;
     }
 
     public List<Prenotazione> doRetrievePrenotazioniByAlloggio(Alloggio alloggio) {

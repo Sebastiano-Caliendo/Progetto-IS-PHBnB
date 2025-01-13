@@ -170,7 +170,7 @@ public class GestioneAmministratoreFacade {
         }
     }
 
-    public void modificaDatiSistemaRecensione(int idRecensione, int codicePrenotazione, HttpSession session){
+    public void modificaDatiSistemaRecensione(String email, String codicePrenotazione, int numeroAlloggio, HttpSession session){
         boolean successo = false;
 
         if(proxy.isAutenticato(session)){
@@ -181,7 +181,7 @@ public class GestioneAmministratoreFacade {
         if(successo){
             RecensioneDAO recensioneDAO = new RecensioneDAO();
             Recensione recensione = recensioneDAO.doRetrieveByCodicePrenotazione(codicePrenotazione);
-            recensioneDAO.doUpdate(recensione, idRecensione);
+            recensioneDAO.doUpdate(recensione, email, codicePrenotazione, numeroAlloggio);
         }
     }
 
@@ -229,7 +229,7 @@ public class GestioneAmministratoreFacade {
         }
     }
 
-    public void cancellazioneDatiSitemaRecensione(int idRecensione, HttpSession session){
+    public void cancellazioneDatiSitemaRecensione(String email, String codicePrenotazione, int numeroAlloggio, HttpSession session){
         boolean successo = false;
 
         if(proxy.isAutenticato(session)){
@@ -239,7 +239,7 @@ public class GestioneAmministratoreFacade {
         }
         if(successo){
             RecensioneDAO recensioneDAO = new RecensioneDAO();
-            recensioneDAO.doDelete(idRecensione);
+            recensioneDAO.doDelete(email, codicePrenotazione, numeroAlloggio);
         }
     }
     public void cancellazioneDatiSitemaStruttura(int idStruttura, int numAlloggio, HttpSession session){

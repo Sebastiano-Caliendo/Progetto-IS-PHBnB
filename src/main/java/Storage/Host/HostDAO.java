@@ -41,7 +41,7 @@ public class HostDAO {
                 h.setNome(rs.getString(2));
                 h.setCognome(rs.getString(3));
                 h.setPassword(rs.getString(4));
-                //h.setDataNascita(rs.getDate(5).toLocalDate());
+                h.setDataNascita(rs.getDate(5).toLocalDate());
                 h.setRecapitoTelefonico(rs.getString(6));
             }
 
@@ -123,7 +123,7 @@ public class HostDAO {
             h.setNome(rs.getString(2));
             h.setCognome(rs.getString(3));
             h.setPassword(rs.getString(4));
-            //h.setDataNascita(rs.getDate(5).toLocalDate());
+            h.setDataNascita(rs.getDate(5).toLocalDate());
             h.setRecapitoTelefonico(rs.getString(6));
 
             list.add(h);
