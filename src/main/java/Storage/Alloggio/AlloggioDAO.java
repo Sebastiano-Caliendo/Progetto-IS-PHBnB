@@ -4,6 +4,7 @@ import Storage.Connessione;
 import Storage.Struttura.Struttura;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,35 @@ public class AlloggioDAO  {
             a.setUrlImmagine(rs.getString(7));
 
             list.add(a);
+        }
+    }
+
+    // filtro utilizzato per cercare gli alloggi disponibili
+    public List<Alloggio> doRetrieveAlloggiDisponibili(LocalDate checkIn, LocalDate checkOut, String luogo, int numPostiLetto) {
+        List<Alloggio> alloggi = new ArrayList<>();
+        try (Connection con = Connessione.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("select * from alloggio join struttura on alloggio.fk_struttura = struttura.id_struttura " +
+                            " where struttura.citta = ? and alloggio.numero_posti_letto = ? and " +
+                            " (numero_alloggio, fk_struttura) not in " +
+                            " (select occupa.fk_alloggio, occupa.fk_strutturaAlloggio " +
+                            " from occupa, prenotazione where occupa.fk_prenotazione = prenotazione.codice_prenotazione and " +
+                            " (prenotazione.check_in between ? and ? or prenotazione.check_out between ? and ?) " );
+
+            ps.setString(1, luogo);
+            ps.setInt(2, numPostiLetto);
+            ps.setDate(3, Date.valueOf(checkIn));
+            ps.setDate(4, Date.valueOf(checkOut));
+            ps.setDate(5, Date.valueOf(checkIn));
+            ps.setDate(6, Date.valueOf(checkOut));
+            ResultSet rs = ps.executeQuery();
+
+            copyResultIntoList(rs, alloggi);
+
+            return alloggi;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
     public List<Alloggio> doRetrieveAll() {

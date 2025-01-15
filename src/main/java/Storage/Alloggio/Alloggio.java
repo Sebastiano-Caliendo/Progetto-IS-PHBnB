@@ -4,7 +4,7 @@ public class Alloggio {
     private int numeroAlloggio;
     private int fkStruttura;
     private double prezzoNotte;
-    private int Postiletto;
+    private int postiletto;
     private String tipoAlloggio;
     private String descrizione;
 
@@ -17,7 +17,7 @@ public class Alloggio {
         this.numeroAlloggio = numeroAlloggio;
         this.fkStruttura = fkStruttura;
         this.prezzoNotte = prezzoNotte;
-        Postiletto = postiletto;
+        this.postiletto = postiletto;
         this.tipoAlloggio = tipoAlloggio;
         this.descrizione = descrizione;
         this.urlImmagine = urlImmagine;
@@ -47,13 +47,9 @@ public class Alloggio {
         this.prezzoNotte = prezzoNotte;
     }
 
-    public int getPostiletto() {
-        return Postiletto;
-    }
+    public int getPostiletto() { return this.postiletto; }
 
-    public void setPostiletto(int postiletto) {
-        Postiletto = postiletto;
-    }
+    public void setPostiletto(int postiletto) { this.postiletto = postiletto; }
 
     public String getTipoAlloggio() {
         return tipoAlloggio;
@@ -67,9 +63,7 @@ public class Alloggio {
         return descrizione;
     }
 
-    public String getUrlImmagine() {
-        return urlImmagine;
-    }
+    public String getUrlImmagine() { return urlImmagine; }
 
     public void setUrlImmagine(String urlImmagine) {
         this.urlImmagine = urlImmagine;

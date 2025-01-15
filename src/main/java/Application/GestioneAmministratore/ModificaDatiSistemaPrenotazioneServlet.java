@@ -43,7 +43,7 @@ public class ModificaDatiSistemaPrenotazioneServlet extends HttpServlet {
         p.setCodicePrenotazione(codicePrenotazione);
         gestioneAmministratoreFacade.modificaDatiSistemaPrenotazione(p, checkInDate, checkOutDate, numeroPersone, req.getSession());
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("VisDatiSistema.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("VisDatiSistemaGUI.jsp");
         dispatcher.forward(req, resp);
     }
 

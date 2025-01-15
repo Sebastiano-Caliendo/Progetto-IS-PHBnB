@@ -41,7 +41,7 @@ public class ModificaDatiSistemaUtenteServlet extends HttpServlet {
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
         gestioneAmministratoreFacade.modificaDatiSistemaUtente(utente, email, nome, cognome, password, citta, numeroCivico, via, recapitoTelefonico, req.getSession());
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("VisDatiSistema.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("VisDatiSistemaGUI.jsp");
         dispatcher.forward(req, resp);
     }
 

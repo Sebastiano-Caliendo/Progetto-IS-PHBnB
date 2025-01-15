@@ -36,7 +36,7 @@ public class VisualizzaDatiSistemaAmministratoreServlet extends HttpServlet {
         req.setAttribute("strutture", strutture);
         req.setAttribute("utenti", utenti);
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("VisDatiSistema.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("VisDatiSistemaGUI.jsp");
         dispatcher.forward(req, resp);
     }
 

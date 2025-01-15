@@ -33,7 +33,7 @@ public class ModificaDatiSistemaHostServlet extends HttpServlet {
 
         gestioneAmministratoreFacade.modificaDatiSistemaHost(host, email, nome, cognome, password, recapitoTelefonico, req.getSession());
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("VisDatiSistema.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("VisDatiSistemaGUI.jsp");
         dispatcher.forward(req, resp);
     }
 

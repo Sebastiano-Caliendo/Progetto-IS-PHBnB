@@ -20,7 +20,7 @@ public class EliminaRecensioneServlet extends HttpServlet {
         InserimentoRecensioneFacade inserimentoRecensioneFacade = new InserimentoRecensioneFacade();
         inserimentoRecensioneFacade.eliminaRecensione(req.getSession(), idRecensione);
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("VisDatiSistema.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("Interface/VisDatiSistemaGUI.jsp");
         dispatcher.forward(req, resp);
     }
 
