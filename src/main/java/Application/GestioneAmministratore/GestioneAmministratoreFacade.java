@@ -15,6 +15,7 @@ import Storage.Utente.UtenteDAO;
 import jakarta.servlet.http.HttpSession;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class GestioneAmministratoreFacade {
@@ -156,7 +157,7 @@ public class GestioneAmministratoreFacade {
         }
     }
 
-    public void modificaDatiSistemaPrenotazione(Prenotazione p, Date checkIn, Date checkOut, int numPersone, HttpSession session){
+    public void modificaDatiSistemaPrenotazione(Prenotazione p, LocalDate checkIn, LocalDate checkOut, int numPersone, HttpSession session){
         boolean successo = false;
 
         if(proxy.isAutenticato(session)){

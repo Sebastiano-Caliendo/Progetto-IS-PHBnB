@@ -1,14 +1,14 @@
 package Storage.Prenotazione;
 
-import Storage.Utente.Utente;
+import java.sql.Date;
+import java.time.LocalDate;
 
-import java.util.Date;
 
 public class Prenotazione {
 
     private int codicePrenotazione;
-    private Date checkIn;
-    private Date checkOut;
+    private LocalDate checkIn;
+    private LocalDate checkOut;
     private String fkUtente;
     private int numeroPersone;
 
@@ -16,8 +16,7 @@ public class Prenotazione {
 
     }
 
-    public Prenotazione(int codicePrenotazione, Date checkIn, Date checkOut, String fkUtente, int numeroPersone) {
-        this.codicePrenotazione = codicePrenotazione;
+    public Prenotazione(LocalDate checkIn, LocalDate checkOut, String fkUtente, int numeroPersone) {
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.fkUtente = fkUtente;
@@ -32,19 +31,19 @@ public class Prenotazione {
         this.codicePrenotazione = codicePrenotazione;
     }
 
-    public Date getCheckIn() {
+    public LocalDate getCheckIn() {
         return checkIn;
     }
 
-    public void setCheckIn(Date checkIn) {
+    public void setCheckIn(LocalDate checkIn) {
         this.checkIn = checkIn;
     }
 
-    public Date getCheckOut() {
+    public LocalDate getCheckOut() {
         return checkOut;
     }
 
-    public void setCheckOut(Date checkOut) {
+    public void setCheckOut(LocalDate checkOut) {
         this.checkOut = checkOut;
     }
 

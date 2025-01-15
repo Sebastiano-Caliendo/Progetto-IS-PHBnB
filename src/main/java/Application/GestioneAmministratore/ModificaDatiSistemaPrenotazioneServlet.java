@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 @WebServlet(name = "modificaDatiSistemaPrenotazioneSerlvet", value = "/modificaDatiSistemaPrenotazioneServlet")
 public class ModificaDatiSistemaPrenotazioneServlet extends HttpServlet {
@@ -25,23 +26,23 @@ public class ModificaDatiSistemaPrenotazioneServlet extends HttpServlet {
         int numeroAlloggio = Integer.parseInt(req.getParameter("numeroAlloggioPrenotazione"));
         int fkStruttura = Integer.parseInt(req.getParameter("fkStrutturaPrenotazione"));
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date checkInDate;
-        Date checkOutDate;
+        /*SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        LocalDate checkInDate;
+        LocalDate checkOutDate;
 
         try{
             checkInDate = (Date) formatter.parse(checkIn);
             checkOutDate = (Date) formatter.parse(checkOut);
         } catch (ParseException e) {
             throw new RuntimeException(e);
-        }
+        }*/
 
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
 
         Prenotazione p = new Prenotazione();
         p.setFkUtente(fkUtente);
         p.setCodicePrenotazione(codicePrenotazione);
-        gestioneAmministratoreFacade.modificaDatiSistemaPrenotazione(p, checkInDate, checkOutDate, numeroPersone, req.getSession());
+        gestioneAmministratoreFacade.modificaDatiSistemaPrenotazione(p, LocalDate.parse(checkIn), LocalDate.parse(checkOut), numeroPersone, req.getSession());
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("VisDatiSistemaGUI.jsp");
         dispatcher.forward(req, resp);

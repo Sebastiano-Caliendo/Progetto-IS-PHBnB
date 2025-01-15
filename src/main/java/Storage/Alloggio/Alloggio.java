@@ -7,7 +7,6 @@ public class Alloggio {
     private int postiletto;
     private String tipoAlloggio;
     private String descrizione;
-
     private String urlImmagine;
 
     public Alloggio() {
