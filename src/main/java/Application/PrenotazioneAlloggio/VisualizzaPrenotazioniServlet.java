@@ -1,6 +1,7 @@
 package Application.PrenotazioneAlloggio;
 
-import Storage.Alloggio.Alloggio;
+import Storage.Prenotazione.Prenotazione;
+import Storage.Utente.Utente;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,29 +10,25 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.List;
 
-@WebServlet("/visualizzaAlloggi")
-public class VisualizzaAlloggiServlet extends HttpServlet {
+@WebServlet("/visualizzaPrenotazioni")
+public class VisualizzaPrenotazioniServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String destinazione = req.getParameter("destinazione");
-        String dataCheckIn = req.getParameter("dataCheckIn");
-        String dataCheckOut = req.getParameter("dataCheckOut");
-        String numPostiLetto = req.getParameter("numPostiLetto");
+        Utente u = (Utente) req.getSession().getAttribute("utente");
 
         PrenotazioneAlloggioFacade prenotazioneAlloggioFacade = new PrenotazioneAlloggioFacade();
 
-        List<Alloggio> alloggi = prenotazioneAlloggioFacade.visualizzaListaAlloggi(LocalDate.parse(dataCheckIn), LocalDate.parse(dataCheckOut), destinazione, Integer.parseInt(numPostiLetto));
+        List<Prenotazione> prenotazioni = prenotazioneAlloggioFacade.visualizzaPrenotazioni(u.getEmail());
 
-        if(!alloggi.isEmpty()) {
-            req.setAttribute("alloggiPrenotabili", alloggi);
+        if(!prenotazioni.isEmpty()) {
+            req.setAttribute("prenotazioni", prenotazioni);
         }
 
-        String address = "alloggiPrenotabiliGUI.jsp";
+        String address = "listaPrenotazioniGUI.jsp";
 
         RequestDispatcher rd = req.getRequestDispatcher(address);
         rd.forward(req, resp);
