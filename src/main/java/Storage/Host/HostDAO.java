@@ -21,10 +21,7 @@ public class HostDAO {
                 host.setNome(rs.getString(2));
                 host.setCognome(rs.getString(3));
                 host.setPassword(rs.getString(4));
-                host.setCitta(rs.getString(5));
-                host.setNumCivico(rs.getString(6));
-                host.setVia(rs.getString(7));
-                host.setDataNascita(rs.getDate(8));
+                host.setDataNascita(rs.getDate(8).toLocalDate());
                 host.setRecapitoTelefonico(rs.getString(9));
                 list.add(host);
             }
@@ -50,7 +47,7 @@ public class HostDAO {
                 h.setNome(rs.getString(2));
                 h.setCognome(rs.getString(3));
                 h.setPassword(rs.getString(4));
-                h.setDataNascita(rs.getDate(5));
+                h.setDataNascita(rs.getDate(5).toLocalDate());
                 h.setRecapitoTelefonico(rs.getString(6));
             }
 
@@ -77,7 +74,7 @@ public class HostDAO {
                 h.setNome(rs.getString(2));
                 h.setCognome(rs.getString(3));
                 h.setPassword(rs.getString(4));
-                h.setDataNascita(rs.getDate(5));
+                h.setDataNascita(rs.getDate(5).toLocalDate());
                 h.setRecapitoTelefonico(rs.getString(6));
             }
 
@@ -159,7 +156,7 @@ public class HostDAO {
             h.setNome(rs.getString(2));
             h.setCognome(rs.getString(3));
             h.setPassword(rs.getString(4));
-            h.setDataNascita(rs.getDate(5));
+            h.setDataNascita(rs.getDate(5).toLocalDate());
             h.setRecapitoTelefonico(rs.getString(6));
 
             list.add(h);

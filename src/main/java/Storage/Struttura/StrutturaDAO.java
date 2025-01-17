@@ -14,7 +14,7 @@ public class StrutturaDAO {
     public void copyResultIntoList(ResultSet rs, List<Struttura> list) throws SQLException {
         while (rs.next()) {
             Struttura s = new Struttura();
-            Host host = new Host(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"));
+            Host host = new Host(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password_"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"));
 
             s.setIdStruttura(rs.getInt("id_struttura"));
             s.setHost(host);
@@ -58,7 +58,7 @@ public class StrutturaDAO {
             while(rs.next()){
                 Struttura struttura = new Struttura();
 
-                Host host = new Host(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"));
+                Host host = new Host(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password_"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"));
 
                 struttura.setHost(host);
                 struttura.setNomeStruttura(rs.getString("nome_struttura"));
@@ -87,7 +87,7 @@ public class StrutturaDAO {
             if (rs.next()) {
                 Struttura struttura = new Struttura();
 
-                Host host = new Host(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"));
+                Host host = new Host(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password_"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"));
 
                 struttura.setIdStruttura(rs.getInt("id_struttura"));
                 struttura.setHost(host);
@@ -110,7 +110,7 @@ public class StrutturaDAO {
         try (Connection con = Connessione.getConnection()) {
             List<Struttura> list = new ArrayList<>();
             PreparedStatement ps = con.prepareStatement(
-                    "select distinct struttura.* from struttura join host on fk_host = host.email" +
+                    "select distinct * from struttura join host on struttura.fk_host = host.email" +
                             " where " + field + " = ?");
             ps.setString(1, criteria);
 

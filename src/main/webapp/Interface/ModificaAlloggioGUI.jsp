@@ -51,7 +51,7 @@
         %>
         <form action="<%= servlet %>modificaAlloggioServlet" method="post">
             <input type="hidden" value="<%= alloggio.getNumeroAlloggio() %>" name="oldNumeroAlloggio">
-            <input type="hidden" value="<%= alloggio.getFkStruttura() %>" name="idStruttura">
+            <input type="hidden" value="<%= alloggio.getStruttura().getIdStruttura() %>" name="idStruttura">
             <div class="input">
                 <panel for="numeroAlloggio"> <b>Numero Alloggio :</b> </panel>
                 <input id="numeroAlloggio" value="<%= alloggio.getNumeroAlloggio() %>" type="number" name="numeroAlloggio" required>

@@ -85,7 +85,7 @@ public class OccupaDAO {
 
             ps.setInt(1, occupa.getPrenotazione().getCodicePrenotazione());
             ps.setInt(2, occupa.getAlloggio().getNumeroAlloggio());
-            ps.setInt(3, occupa.getAlloggio().getFkStruttura());
+            ps.setInt(3, occupa.getAlloggio().getStruttura().getIdStruttura());
             ps.setDouble(4, occupa.getCostoPrenotazione());
 
             if (ps.executeUpdate() != 1) {

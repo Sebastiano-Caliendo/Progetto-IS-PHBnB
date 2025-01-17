@@ -14,7 +14,7 @@ public class AlloggioDAO  {
         while (rs.next()) {
             Alloggio a = new Alloggio();
 
-            Host host = new Host(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"));
+            Host host = new Host(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password_"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"));
             Struttura struttura = new Struttura(rs.getInt("id_struttura"), host , rs.getString("nome_struttura"), rs.getString("struttura.via"), rs.getString("struttura.numero_civico"), rs.getString("struttura.citta"), rs.getString("struttura.descrizione"), rs.getString("struttura.url_immagine"));
 
             a.setNumeroAlloggio(rs.getInt("numero_alloggio"));
@@ -80,7 +80,7 @@ public class AlloggioDAO  {
             ps.setInt(2, fkStruttura);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                Host host = new Host(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"));
+                Host host = new Host(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password_"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"));
                 Struttura struttura = new Struttura(rs.getInt("id_struttura"), host , rs.getString("nome_struttura"), rs.getString("struttura.via"), rs.getString("struttura.numero_civico"), rs.getString("struttura.citta"), rs.getString("struttura.descrizione"), rs.getString("struttura.url_immagine"));
                 Alloggio a = new Alloggio();
 

@@ -30,7 +30,7 @@ public class RecensioneDAO {
 
                 pr.setIdRecensione(rs.getInt("idRecensione"));
                 pr.setUtente(user);
-                pr.setDescrizione(rs.getString("recensione.descrizione"));
+                pr.setDescrizione(rs.getString("recensioni.descrizione"));
                 pr.setVotoRecensione(rs.getInt("votorecensione"));
                 pr.setDataRecensione(rs.getDate("data_recensione").toLocalDate());
                 pr.setPrenotazione(prenotazione);
@@ -61,7 +61,7 @@ public class RecensioneDAO {
 
                 pr.setIdRecensione(rs.getInt("idRecensione"));
                 pr.setUtente(user);
-                pr.setDescrizione(rs.getString("recensione.descrizione"));
+                pr.setDescrizione(rs.getString("recensioni.descrizione"));
                 pr.setVotoRecensione(rs.getInt("votorecensione"));
                 pr.setDataRecensione(rs.getDate("data_recensione").toLocalDate());
                 pr.setPrenotazione(prenotazione);
@@ -95,7 +95,7 @@ public class RecensioneDAO {
 
                 pr.setIdRecensione(rs.getInt("idRecensione"));
                 pr.setUtente(user);
-                pr.setDescrizione(rs.getString("recensione.descrizione"));
+                pr.setDescrizione(rs.getString("recensioni.descrizione"));
                 pr.setVotoRecensione(rs.getInt("votorecensione"));
                 pr.setDataRecensione(rs.getDate("data_recensione").toLocalDate());
                 pr.setPrenotazione(prenotazione);
@@ -127,7 +127,7 @@ public class RecensioneDAO {
 
                 pr.setIdRecensione(rs.getInt("idRecensione"));
                 pr.setUtente(user);
-                pr.setDescrizione(rs.getString("recensione.descrizione"));
+                pr.setDescrizione(rs.getString("recensioni.descrizione"));
                 pr.setVotoRecensione(rs.getInt("votorecensione"));
                 pr.setDataRecensione(rs.getDate("data_recensione").toLocalDate());
                 pr.setPrenotazione(prenotazione);
@@ -177,7 +177,7 @@ public class RecensioneDAO {
 
                 r.setIdRecensione(rs.getInt("idRecensione"));
                 r.setUtente(user);
-                r.setDescrizione(rs.getString("recensione.descrizione"));
+                r.setDescrizione(rs.getString("recensioni.descrizione"));
                 r.setVotoRecensione(rs.getInt("votorecensione"));
                 r.setDataRecensione(rs.getDate("data_recensione").toLocalDate());
                 r.setPrenotazione(prenotazione);
