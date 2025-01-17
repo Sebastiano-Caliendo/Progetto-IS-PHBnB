@@ -1,9 +1,16 @@
 package Application.InserimentoRecensione;
 
+import Storage.Alloggio.Alloggio;
+import Storage.Alloggio.AlloggioDAO;
+import Storage.Prenotazione.Prenotazione;
+import Storage.Prenotazione.PrenotazioneDAO;
 import Storage.Recensione.Recensione;
 import Storage.Recensione.RecensioneDAO;
+import Storage.Utente.Utente;
+import Storage.Utente.UtenteDAO;
 import jakarta.servlet.http.HttpSession;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class InserimentoRecensioneFacade {
@@ -13,7 +20,7 @@ public class InserimentoRecensioneFacade {
         this.proxy = new InserimentoRecensioneProxy();
     }
 
-    public void inserisciRecensione(HttpSession session, Recensione r){
+    public void inserisciRecensione(HttpSession session, String email, String descrizione, int votoRecensione, LocalDate dataRecensione, int codicePrenotazione, int numeroAlloggio, int idStruttura){
         boolean successo = false;
 
         if(proxy.isUser(session)){
@@ -25,11 +32,21 @@ public class InserimentoRecensioneFacade {
 
         if(successo){
             RecensioneDAO recensioneDAO = new RecensioneDAO();
-            recensioneDAO.doSave(r);
+            AlloggioDAO alloggioDAO = new AlloggioDAO();
+            PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
+            Recensione recensione = new Recensione();
+
+            recensione.setUtente((Utente) session.getAttribute("utente"));
+            recensione.setDescrizione(descrizione);
+            recensione.setVotoRecensione(votoRecensione);
+            recensione.setDataRecensione(dataRecensione);
+            recensione.setAlloggio(alloggioDAO.doRetrieveById(numeroAlloggio, idStruttura));
+            recensione.setPrenotazione(prenotazioneDAO.doRetrieveById(codicePrenotazione));
+            recensioneDAO.doSave(recensione);
         }
     }
 
-    public void modificaRecensione(HttpSession session, int idRecensione, Recensione recensione){
+    /*public void modificaRecensione(HttpSession session, int idRecensione, Recensione recensione){
         boolean successo = false;
 
         if(proxy.isUser(session)){
@@ -44,7 +61,7 @@ public class InserimentoRecensioneFacade {
             //Recensione r = recensioneDAO.doRetrieveById(idRecensione);
             recensioneDAO.doUpdate(recensione, idRecensione);
         }
-    }
+    }*/
 
     public void eliminaRecensione(HttpSession session, int idRecensione){
         boolean successo = false;

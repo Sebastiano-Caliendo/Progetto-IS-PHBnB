@@ -1,6 +1,8 @@
 package Application.InserimentoRecensione;
 
 import Storage.Recensione.Recensione;
+import Storage.Utente.Utente;
+import Storage.Utente.UtenteDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 @WebServlet(name = "inserisciRecensioneServlet", value = "/inserisciRecensioneServlet")
@@ -19,32 +22,13 @@ public class InserisciRecensioneServlet extends HttpServlet {
         String emailRecensore = req.getParameter("emailRecensore"); // type = "hidden" nella jsp
         String descrizioneRecensione = req.getParameter("descrizioneRecensione");
         int votoRecensione = Integer.parseInt(req.getParameter("votoRecensione"));
-        String dataRecensione = req.getParameter("dataRecensione");
+        LocalDate dataRecensione = LocalDate.parse(req.getParameter("dataRecensione"));
         int codicePrenotazione = Integer.parseInt(req.getParameter("codicePrenotazione")); // type = "hidden" nella jsp
         int numeroAlloggio = Integer.parseInt(req.getParameter("numeroAlloggio")); // type = "hidden" nella jsp
         int idStruttura = Integer.parseInt(req.getParameter("idStruttura")); // type = "hidden" nella jsp
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        Date date = new Date();
-
-        try{
-            date = formatter.parse(dataRecensione);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        Recensione recensione = new Recensione();
-
-        recensione.setEmailRecensore(emailRecensore);
-        recensione.setDescrizione(descrizioneRecensione);
-        recensione.setVotoRecensione(votoRecensione);
-        recensione.setDataRecensione(date);
-        recensione.setNumeroAlloggio(numeroAlloggio);
-        recensione.setCodicePrenotazione(codicePrenotazione);
-        recensione.setIdStrutturaAlloggio(idStruttura);
-
         InserimentoRecensioneFacade inserimentoRecensioneFacade = new InserimentoRecensioneFacade();
-        inserimentoRecensioneFacade.inserisciRecensione(req.getSession(), recensione);
+        inserimentoRecensioneFacade.inserisciRecensione(req.getSession(), emailRecensore, descrizioneRecensione, votoRecensione, dataRecensione, codicePrenotazione, numeroAlloggio, idStruttura);
 
         String nameAlloggio = req.getParameter("nameAlloggio");
 

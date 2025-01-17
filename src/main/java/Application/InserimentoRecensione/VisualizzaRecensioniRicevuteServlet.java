@@ -21,6 +21,7 @@ public class VisualizzaRecensioniRicevuteServlet extends HttpServlet {
         req.setAttribute("callByServlet", "yes");
         // prendo l'id della struttura
         int idStruttura = Integer.parseInt(req.getParameter("idStruttura"));
+        String nomeStruttura = req.getParameter("nomeStruttura");
 
         List<Recensione> recensioniStruttura = new ArrayList<>();
 
@@ -40,7 +41,7 @@ public class VisualizzaRecensioniRicevuteServlet extends HttpServlet {
 
         // utilizza un servizio della gestione Struttura per ricevere il nome della struttura
         gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
-        String nomeStruttura = strutturaFacade.returnStruttura(idStruttura).getNomeStruttura();
+        //String nomeStruttura = recensioniStruttura.get(0).getAlloggio().getFkStruttura().getNomeStruttura();
 
         // inserisco la lista delle recensioni nella richiesta, in modo che la jsp l'avrà a disposizione
         req.setAttribute("recensioniStruttura", recensioniStruttura);

@@ -46,7 +46,6 @@ public class PrenotazioneAlloggioFacade {
     }
 
     public void modificaPrenotazione(LocalDate checkIn, LocalDate checkOut, int numPostiLetto, int codPrenotazione) {
-
         PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
         Prenotazione p = new Prenotazione();
         p.setCodicePrenotazione(codPrenotazione);

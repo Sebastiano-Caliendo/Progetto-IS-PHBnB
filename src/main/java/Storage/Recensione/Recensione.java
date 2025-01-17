@@ -1,53 +1,38 @@
 package Storage.Recensione;
 
-import java.util.Date;
+import Storage.Alloggio.Alloggio;
+import Storage.Prenotazione.Prenotazione;
+import Storage.Utente.Utente;
+
+import java.time.LocalDate;
 
 public class Recensione {
 
     private int idRecensione;
-    private String emailRecensore;
+    private Utente utente;
     private String descrizione;
     private int votoRecensione;
-    private Date dataRecensione;
-    private int codicePrenotazione;
-    private int numeroAlloggio;
-
-    private int idStrutturaAlloggio;
-
-    public int getIdRecensione() { return idRecensione; }
-
-    public void setIdRecensione(int idRecensione) { this.idRecensione = idRecensione; }
-
-    public int getCodicePrenotazione() {
-        return codicePrenotazione;
-    }
-
-    public void setCodicePrenotazione(int codicePrenotazione) {
-        this.codicePrenotazione = codicePrenotazione;
-    }
-
-    public int getIdStrutturaAlloggio() { return idStrutturaAlloggio; }
-
-    public void setIdStrutturaAlloggio(int idStrutturaAlloggio) { this.idStrutturaAlloggio = idStrutturaAlloggio; }
-
-    public int getNumeroAlloggio() {
-        return numeroAlloggio;
-    }
-
-    public void setNumeroAlloggio(int numeroAlloggio) {
-        this.numeroAlloggio = numeroAlloggio;
-    }
+    private LocalDate dataRecensione;
+    private Prenotazione prenotazione;
+    private Alloggio alloggio;
 
     public Recensione() {
     }
 
-
-    public String getEmailRecensore() {
-        return emailRecensore;
+    public int getIdRecensione() {
+        return idRecensione;
     }
 
-    public void setEmailRecensore(String emailRecensore) {
-        this.emailRecensore = emailRecensore;
+    public void setIdRecensione(int idRecensione) {
+        this.idRecensione = idRecensione;
+    }
+
+    public Utente getUtente() {
+        return utente;
+    }
+
+    public void setUtente(Utente utente) {
+        this.utente = utente;
     }
 
     public String getDescrizione() {
@@ -58,19 +43,35 @@ public class Recensione {
         this.descrizione = descrizione;
     }
 
-    public java.sql.Date getDataRecensione() {
-        return (java.sql.Date) dataRecensione;
-    }
-
-    public void setDataRecensione(Date dataRecensione) {
-        this.dataRecensione = dataRecensione;
-    }
-
     public int getVotoRecensione() {
         return votoRecensione;
     }
 
     public void setVotoRecensione(int votoRecensione) {
         this.votoRecensione = votoRecensione;
+    }
+
+    public LocalDate getDataRecensione() {
+        return dataRecensione;
+    }
+
+    public void setDataRecensione(LocalDate dataRecensione) {
+        this.dataRecensione = dataRecensione;
+    }
+
+    public Prenotazione getPrenotazione() {
+        return prenotazione;
+    }
+
+    public void setPrenotazione(Prenotazione prenotazione) {
+        this.prenotazione = prenotazione;
+    }
+
+    public Alloggio getAlloggio() {
+        return alloggio;
+    }
+
+    public void setAlloggio(Alloggio alloggio) {
+        this.alloggio = alloggio;
     }
 }

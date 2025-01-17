@@ -15,6 +15,6 @@
   <a href="ModificaStrutturaGUI.jsp">Modifica Struttura</a>
   <a href="InserisciAlloggioGUI.jsp">Inserisci Alloggio</a>
   <a href="ModificaAlloggioGUI.jsp">Modifica Alloggio</a> -->
-  <a href="VisDatiSistemaGUI.jsp">VisDatiSistema</a>
+<a href = "VisDatiSistemaGUI.jsp">Visualizza dati sistema</a>
 </body>
 </html>

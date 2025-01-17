@@ -2,7 +2,9 @@ package Storage.Recensione;
 
 import Storage.Alloggio.Alloggio;
 import Storage.Connessione;
-import Storage.Struttura.Struttura;
+import Storage.Prenotazione.Prenotazione;
+import Storage.Struttura.StrutturaDAO;
+import Storage.Utente.Utente;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,22 +13,27 @@ import java.util.List;
 public class RecensioneDAO {
 
     public Recensione doRetrieveById(int idRecensione) {
-        //List<Recensione> recensioneList = new ArrayList<>();
         Recensione pr = new Recensione();
         try (Connection con = Connessione.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT * FROM recensioni WHERE idRecensione =?");
+                    con.prepareStatement("SELECT * FROM ((recensioni JOIN utente ON recensioni.fk_utente = utente.email)" +
+                            " JOIN alloggio ON recensioni.fk_numeroalloggio = alloggio.numero_alloggio AND recensioni.fk_codicestruttura = alloggio.fk_struttura) JOIN prenotazione ON recensioni.fk_codiceprenotazione = prenotazione.codice_prenotazione WHERE idRecensione =?");
             ps.setInt(1, idRecensione);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                pr.setIdRecensione(rs.getInt(1));
-                pr.setEmailRecensore(rs.getString(2));
-                pr.setDescrizione(rs.getString(3));
-                pr.setVotoRecensione(rs.getInt(4));
-                pr.setDataRecensione(rs.getDate(5));
-                pr.setCodicePrenotazione(rs.getInt(6));
-                pr.setNumeroAlloggio(rs.getInt(7));
-                pr.setIdStrutturaAlloggio(rs.getInt(8));
+
+                StrutturaDAO strutturaDAO = new StrutturaDAO();
+                Utente user = new Utente(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password_"), rs.getString("citta"), rs.getString("numero_civico"), rs.getString("via"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"), rs.getBoolean("isAdmin"));
+                Prenotazione prenotazione = new Prenotazione(rs.getInt("codice_prenotazione"), rs.getDate("check_in").toLocalDate(), rs.getDate("check_out").toLocalDate(), user, rs.getInt("numero_persone"));
+                Alloggio alloggio = new Alloggio(rs.getInt("numero_alloggio"), strutturaDAO.doRetrieveById(rs.getInt("fk_struttura")), rs.getDouble("prezzo_notte"), rs.getInt("numero_posti_letto"), rs.getString("tipo_alloggio"), rs.getString("alloggio.descrizione"), rs.getString("url_immagine"));
+
+                pr.setIdRecensione(rs.getInt("idRecensione"));
+                pr.setUtente(user);
+                pr.setDescrizione(rs.getString("recensione.descrizione"));
+                pr.setVotoRecensione(rs.getInt("votorecensione"));
+                pr.setDataRecensione(rs.getDate("data_recensione").toLocalDate());
+                pr.setPrenotazione(prenotazione);
+                pr.setAlloggio(alloggio);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -35,102 +42,97 @@ public class RecensioneDAO {
     }
 
     public List<Recensione> doRetrieveByEmail(String email) {
-        List<Recensione> recensioneList = new ArrayList<>();
+        List<Recensione> recensioniList = new ArrayList<>();
         try (Connection con = Connessione.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT * FROM recensioni WHERE fk_utente=?");
+                    con.prepareStatement("SELECT * FROM ((recensioni JOIN utente ON recensioni.fk_utente = utente.email)" +
+                            " JOIN alloggio ON recensioni.fk_numeroalloggio = alloggio.numero_alloggio AND recensioni.fk_codicestruttura = alloggio.fk_struttura) JOIN prenotazione ON recensioni.fk_codiceprenotazione = prenotazione.codice_prenotazione WHERE recensioni.fk_utente =?");
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
+
                 Recensione pr = new Recensione();
-                pr.setIdRecensione(rs.getInt(1));
-                pr.setEmailRecensore(rs.getString(2));
-                pr.setDescrizione(rs.getString(3));
-                pr.setVotoRecensione(rs.getInt(4));
-                pr.setDataRecensione(rs.getDate(5));
-                pr.setCodicePrenotazione(rs.getInt(6));
-                pr.setNumeroAlloggio(rs.getInt(7));
-                pr.setIdStrutturaAlloggio(rs.getInt(8));
-                recensioneList.add(pr);
+                StrutturaDAO strutturaDAO = new StrutturaDAO();
+                Utente user = new Utente(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password_"), rs.getString("citta"), rs.getString("numero_civico"), rs.getString("via"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"), rs.getBoolean("isAdmin"));
+                Prenotazione prenotazione = new Prenotazione(rs.getInt("codice_prenotazione"), rs.getDate("check_in").toLocalDate(), rs.getDate("check_out").toLocalDate(), user, rs.getInt("numero_persone"));
+                Alloggio alloggio = new Alloggio(rs.getInt("numero_alloggio"), strutturaDAO.doRetrieveById(rs.getInt("fk_struttura")), rs.getDouble("prezzo_notte"), rs.getInt("numero_posti_letto"), rs.getString("tipo_alloggio"), rs.getString("alloggio.descrizione"), rs.getString("url_immagine"));
+
+                pr.setIdRecensione(rs.getInt("idRecensione"));
+                pr.setUtente(user);
+                pr.setDescrizione(rs.getString("recensione.descrizione"));
+                pr.setVotoRecensione(rs.getInt("votorecensione"));
+                pr.setDataRecensione(rs.getDate("data_recensione").toLocalDate());
+                pr.setPrenotazione(prenotazione);
+                pr.setAlloggio(alloggio);
+
+                recensioniList.add(pr);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return recensioneList;
+        return recensioniList;
     }
 
     public List<Recensione> doRetrieveByStruttura(int idStruttura)
     {
-        List<Recensione> recensioneList = new ArrayList<>();
-        try(Connection con = Connessione.getConnection()){
-            PreparedStatement ps =
-                    con.prepareStatement("SELECT * FROM recensioni WHERE fk_codicestruttura = ?");
-            ps.setInt(1, idStruttura);
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                Recensione pr = new Recensione();
-                pr.setIdRecensione(rs.getInt(1));
-                pr.setEmailRecensore(rs.getString(2));
-                pr.setDescrizione(rs.getString(3));
-                pr.setVotoRecensione(rs.getInt(4));
-                pr.setDataRecensione(rs.getDate(5));
-                pr.setCodicePrenotazione(rs.getInt(6));
-                pr.setNumeroAlloggio(rs.getInt(7));
-                pr.setIdStrutturaAlloggio(rs.getInt(8));
-                recensioneList.add(pr);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return recensioneList;
-    }
-
-    /*public List<Recensione> doRetrieveByAlloggio(int numeroAlloggio, int fkStruttura)
-    {
-        List<Recensione> recensioneList = new ArrayList<>();
-        try(Connection con = Connessione.getConnection()){
-            PreparedStatement ps =
-                    con.prepareStatement("SELECT * FROM recensioni WHERE fk_numeroalloggio = ? and fk_codicestruttura = ?");
-            ps.setInt(1, numeroAlloggio);
-            ps.setInt(2, fkStruttura);
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                Recensione pr = new Recensione();
-                pr.setEmailRecensore(rs.getString(1));
-                pr.setDescrizione(rs.getString(2));
-                pr.setVotoRecensione(rs.getInt(3));
-                pr.setDataRecensione(rs.getDate(4));
-                pr.setCodicePrenotazione(rs.getString(5));
-                pr.setNumeroAlloggio(rs.getInt(6));
-                recensioneList.add(pr);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return recensioneList;
-    }*/
-
-    public Recensione doRetrieveByCodicePrenotazione(int codicePrenotazione) {
+        List<Recensione> recensioniList = new ArrayList<>();
         try (Connection con = Connessione.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT * FROM recensioni WHERE fk_codiceprenotazione=?");
+                    con.prepareStatement("SELECT * FROM ((recensioni JOIN utente ON recensioni.fk_utente = utente.email)" +
+                            " JOIN alloggio ON recensioni.fk_numeroalloggio = alloggio.numero_alloggio AND recensioni.fk_codicestruttura = alloggio.fk_struttura) JOIN prenotazione ON recensioni.fk_codiceprenotazione = prenotazione.codice_prenotazione WHERE recensioni.fk_codicestruttura =?");
+            ps.setInt(1, idStruttura);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                Recensione pr = new Recensione();
+                StrutturaDAO strutturaDAO = new StrutturaDAO();
+                Utente user = new Utente(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password_"), rs.getString("citta"), rs.getString("numero_civico"), rs.getString("via"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"), rs.getBoolean("isAdmin"));
+                Prenotazione prenotazione = new Prenotazione(rs.getInt("codice_prenotazione"), rs.getDate("check_in").toLocalDate(), rs.getDate("check_out").toLocalDate(), user, rs.getInt("numero_persone"));
+                Alloggio alloggio = new Alloggio(rs.getInt("numero_alloggio"), strutturaDAO.doRetrieveById(rs.getInt("fk_struttura")), rs.getDouble("prezzo_notte"), rs.getInt("numero_posti_letto"), rs.getString("tipo_alloggio"), rs.getString("alloggio.descrizione"), rs.getString("url_immagine"));
+
+                pr.setIdRecensione(rs.getInt("idRecensione"));
+                pr.setUtente(user);
+                pr.setDescrizione(rs.getString("recensione.descrizione"));
+                pr.setVotoRecensione(rs.getInt("votorecensione"));
+                pr.setDataRecensione(rs.getDate("data_recensione").toLocalDate());
+                pr.setPrenotazione(prenotazione);
+                pr.setAlloggio(alloggio);
+
+                recensioniList.add(pr);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return recensioniList;
+    }
+
+    public Recensione doRetrieveByCodicePrenotazione(int codicePrenotazione) {
+        Recensione pr = new Recensione();
+        try (Connection con = Connessione.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("SELECT * FROM ((recensioni JOIN utente ON recensioni.fk_utente = utente.email)" +
+                            " JOIN alloggio ON recensioni.fk_numeroalloggio = alloggio.numero_alloggio AND recensioni.fk_codicestruttura = alloggio.fk_struttura) JOIN prenotazione ON recensioni.fk_codiceprenotazione = prenotazione.codice_prenotazione WHERE recensioni.fk_codiceprenotazione =?");
             ps.setInt(1, codicePrenotazione);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                Recensione pr = new Recensione();
-                pr.setIdRecensione(rs.getInt(1));
-                pr.setEmailRecensore(rs.getString(2));
-                pr.setDescrizione(rs.getString(3));
-                pr.setVotoRecensione(rs.getInt(4));
-                pr.setDataRecensione(rs.getDate(5));
-                pr.setCodicePrenotazione(rs.getInt(6));
-                pr.setNumeroAlloggio(rs.getInt(7));
-                pr.setIdStrutturaAlloggio(rs.getInt(8));
+
+                StrutturaDAO strutturaDAO = new StrutturaDAO();
+                Utente user = new Utente(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password_"), rs.getString("citta"), rs.getString("numero_civico"), rs.getString("via"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"), rs.getBoolean("isAdmin"));
+                Prenotazione prenotazione = new Prenotazione(rs.getInt("codice_prenotazione"), rs.getDate("check_in").toLocalDate(), rs.getDate("check_out").toLocalDate(), user, rs.getInt("numero_persone"));
+                Alloggio alloggio = new Alloggio(rs.getInt("numero_alloggio"), strutturaDAO.doRetrieveById(rs.getInt("fk_struttura")), rs.getDouble("prezzo_notte"), rs.getInt("numero_posti_letto"), rs.getString("tipo_alloggio"), rs.getString("alloggio.descrizione"), rs.getString("url_immagine"));
+
+                pr.setIdRecensione(rs.getInt("idRecensione"));
+                pr.setUtente(user);
+                pr.setDescrizione(rs.getString("recensione.descrizione"));
+                pr.setVotoRecensione(rs.getInt("votorecensione"));
+                pr.setDataRecensione(rs.getDate("data_recensione").toLocalDate());
+                pr.setPrenotazione(prenotazione);
+                pr.setAlloggio(alloggio);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return null;
+        return pr;
     }
 
     public void doSave(Recensione recensione) {
@@ -139,22 +141,17 @@ public class RecensioneDAO {
                     "INSERT INTO recensioni (fk_utente, descrizione, votorecensione, datarecensione, fk_codiceprenotazione, fk_numeroalloggio, fk_codicestruttura) VALUES(?,?,?,?,?,?,?)",
                     Statement.RETURN_GENERATED_KEYS);
 
-            ps.setString(1, recensione.getEmailRecensore());
+            ps.setString(1, recensione.getUtente().getEmail());
             ps.setString(2, recensione.getDescrizione());
             ps.setInt(3, recensione.getVotoRecensione());
-            ps.setDate(4, recensione.getDataRecensione());
-            ps.setInt(5, recensione.getCodicePrenotazione());
-            ps.setInt(6, recensione.getNumeroAlloggio());
-            ps.setInt(7, recensione.getIdStrutturaAlloggio());
+            ps.setDate(4, Date.valueOf(recensione.getDataRecensione()));
+            ps.setInt(5, recensione.getPrenotazione().getCodicePrenotazione());
+            ps.setInt(6, recensione.getAlloggio().getNumeroAlloggio());
+            ps.setInt(7, recensione.getAlloggio().getFkStruttura());
 
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
             }
-            /*ResultSet rs = ps.getGeneratedKeys();
-            rs.next();
-            String email = rs.getString(1);
-            recensione.setEmailRecensore(email);*/
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -163,27 +160,29 @@ public class RecensioneDAO {
     public List<Recensione> doRetrieveAll() {
         List<Recensione> list = new ArrayList<>();
         try (Connection con = Connessione.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("select * from recensioni");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM ((recensioni JOIN utente ON recensioni.fk_utente = utente.email) JOIN alloggio ON recensioni.fk_numeroalloggio = alloggio.numero_alloggio AND recensioni.fk_codicestruttura = alloggio.fk_struttura) JOIN prenotazione ON recensioni.fk_codiceprenotazione = prenotazione.codice_prenotazione");
             ResultSet rs = ps.executeQuery();
 
             while(rs.next()) {
-                Recensione product = new Recensione();
-                product.setIdRecensione(rs.getInt(1));
-                product.setEmailRecensore(rs.getString(2));
-                product.setDescrizione(rs.getString(3));
-                product.setVotoRecensione(rs.getInt(4));
-                product.setDataRecensione(rs.getDate(5));
-                product.setCodicePrenotazione(rs.getInt(6));
-                product.setNumeroAlloggio(rs.getInt(7));
-                product.setIdStrutturaAlloggio(rs.getInt(8));
-                list.add(product);
-            }
+                Recensione r = new Recensione();
+                StrutturaDAO strutturaDAO = new StrutturaDAO();
+                Utente user = new Utente(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password_"), rs.getString("citta"), rs.getString("numero_civico"), rs.getString("via"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"), rs.getBoolean("isAdmin"));
+                Prenotazione prenotazione = new Prenotazione(rs.getInt("codice_prenotazione"), rs.getDate("check_in").toLocalDate(), rs.getDate("check_out").toLocalDate(), user, rs.getInt("numero_persone"));
+                Alloggio alloggio = new Alloggio(rs.getInt("numero_alloggio"), strutturaDAO.doRetrieveById(rs.getInt("fk_struttura")), rs.getDouble("prezzo_notte"), rs.getInt("numero_posti_letto"), rs.getString("tipo_alloggio"), rs.getString("alloggio.descrizione"), rs.getString("url_immagine"));
 
-            con.close();
-            return list;
+                r.setIdRecensione(rs.getInt("idRecensione"));
+                r.setUtente(user);
+                r.setDescrizione(rs.getString("recensione.descrizione"));
+                r.setVotoRecensione(rs.getInt("votorecensione"));
+                r.setDataRecensione(rs.getDate("data_recensione").toLocalDate());
+                r.setPrenotazione(prenotazione);
+                r.setAlloggio(alloggio);
+                list.add(r);
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return list;
     }
 
     public void doDelete(int idRecensione) {
@@ -203,13 +202,13 @@ public class RecensioneDAO {
             PreparedStatement ps = con.prepareStatement(
                     "UPDATE recensioni SET fk_utente = ?, descrizione = ?, votorecensione = ?, datarecensione = ?, fk_codiceprenotazione = ?, fk_numeroalloggio =?, fk_codicestruttura =? WHERE idRecensione=? ");
 
-            ps.setString(1, recensione.getEmailRecensore());
+            ps.setString(1, recensione.getUtente().getEmail());
             ps.setString(2, recensione.getDescrizione());
             ps.setInt(3, recensione.getVotoRecensione());
-            ps.setDate(4, recensione.getDataRecensione());
-            ps.setInt(5, recensione.getCodicePrenotazione());
-            ps.setInt(6, recensione.getNumeroAlloggio());
-            ps.setInt(7, recensione.getIdStrutturaAlloggio());
+            ps.setDate(4, Date.valueOf(recensione.getDataRecensione()));
+            ps.setInt(5, recensione.getPrenotazione().getCodicePrenotazione());
+            ps.setInt(6, recensione.getAlloggio().getNumeroAlloggio());
+            ps.setInt(7, recensione.getAlloggio().getFkStruttura());
             ps.setInt(8, idRecensione);
 
             if (ps.executeUpdate() != 1) {

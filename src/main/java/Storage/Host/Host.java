@@ -10,10 +10,37 @@ public class Host {
     private String nome;
     private String cognome;
     private String password;
+    private String citta;
+    private String numCivico;
+    private String via;
     private Date dataNascita;
     private String recapitoTelefonico;
 
     public Host() {
+    }
+
+    public String getCitta() {
+        return citta;
+    }
+
+    public void setCitta(String citta) {
+        this.citta = citta;
+    }
+
+    public String getNumCivico() {
+        return numCivico;
+    }
+
+    public void setNumCivico(String numCivico) {
+        this.numCivico = numCivico;
+    }
+
+    public String getVia() {
+        return via;
+    }
+
+    public void setVia(String via) {
+        this.via = via;
     }
 
     public Host(String email, String nome, String cognome, String password, Date dataNascita, String recapitoTelefonico) {
