@@ -1,5 +1,6 @@
 package Application.PrenotazioneAlloggio;
 
+import Storage.Occupa.Occupa;
 import Storage.Prenotazione.Prenotazione;
 import Storage.Utente.Utente;
 import jakarta.servlet.RequestDispatcher;
@@ -22,7 +23,7 @@ public class VisualizzaPrenotazioniServlet extends HttpServlet {
 
         PrenotazioneAlloggioFacade prenotazioneAlloggioFacade = new PrenotazioneAlloggioFacade();
 
-        List<Prenotazione> prenotazioni = prenotazioneAlloggioFacade.visualizzaPrenotazioni(u.getEmail());
+        List<Occupa> prenotazioni = prenotazioneAlloggioFacade.visualizzaPrenotazioni(u.getEmail());
 
         if(!prenotazioni.isEmpty()) {
             req.setAttribute("prenotazioni", prenotazioni);

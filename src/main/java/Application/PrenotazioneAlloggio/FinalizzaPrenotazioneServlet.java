@@ -24,11 +24,14 @@ public class FinalizzaPrenotazioneServlet extends HttpServlet {
         String numAlloggio = req.getParameter("numAlloggio");
         String codStruttura = req.getParameter("codStruttura");
         String costoPrenotazione = req.getParameter("costoPrenotazione");
+        String numeroCarta = req.getParameter("numeroCarta");
+        String dataScadenza = req.getParameter("dataScadenza");
+        String cviCarta = req.getParameter("cviCarta");
 
         Utente u = (Utente) req.getSession().getAttribute("utente");
 
         PrenotazioneAlloggioFacade prenotazioneAlloggioFacade = new PrenotazioneAlloggioFacade();
-        prenotazioneAlloggioFacade.finalizzaPrenotazione(LocalDate.parse(dataCheckIn), LocalDate.parse(dataCheckOut), Integer.parseInt(numPostiLetto), u.getEmail(), Integer.parseInt(numAlloggio), Integer.parseInt(codStruttura), Double.parseDouble(costoPrenotazione));
+        prenotazioneAlloggioFacade.finalizzaPrenotazione(u, LocalDate.parse(dataCheckIn), LocalDate.parse(dataCheckOut), Integer.parseInt(numPostiLetto), u.getEmail(), Integer.parseInt(numAlloggio), Integer.parseInt(codStruttura), Double.parseDouble(costoPrenotazione), numeroCarta, LocalDate.parse(dataScadenza), cviCarta);
 
         String address = "";
 

@@ -1,5 +1,7 @@
 package Storage.Prenotazione;
 
+import Storage.Utente.Utente;
+
 import java.sql.Date;
 import java.time.LocalDate;
 
@@ -9,18 +11,23 @@ public class Prenotazione {
     private int codicePrenotazione;
     private LocalDate checkIn;
     private LocalDate checkOut;
-    private String fkUtente;
+    private Utente utente;
     private int numeroPersone;
+    private String numeroCartaCredito;
+    private LocalDate dataScadenzaCarta;
+    private String cviCarta;
 
     public Prenotazione() {
-
     }
 
-    public Prenotazione(LocalDate checkIn, LocalDate checkOut, String fkUtente, int numeroPersone) {
+    public Prenotazione(LocalDate checkIn, LocalDate checkOut, Utente utente, int numeroPersone, String numeroCartaCredito, LocalDate dataScadenzaCarta, String cviCarta) {
         this.checkIn = checkIn;
         this.checkOut = checkOut;
-        this.fkUtente = fkUtente;
+        this.utente = utente;
         this.numeroPersone = numeroPersone;
+        this.numeroCartaCredito = numeroCartaCredito;
+        this.dataScadenzaCarta = dataScadenzaCarta;
+        this.cviCarta = cviCarta;
     }
 
     public int getCodicePrenotazione() {
@@ -47,12 +54,12 @@ public class Prenotazione {
         this.checkOut = checkOut;
     }
 
-    public String getFkUtente() {
-        return fkUtente;
+    public Utente getUtente() {
+        return utente;
     }
 
-    public void setFkUtente(String fkUtente) {
-        this.fkUtente = fkUtente;
+    public void setUtente(Utente utente) {
+        this.utente = utente;
     }
 
     public int getNumeroPersone() {
@@ -61,5 +68,29 @@ public class Prenotazione {
 
     public void setNumeroPersone(int numeroPersone) {
         this.numeroPersone = numeroPersone;
+    }
+
+    public String getNumeroCartaCredito() {
+        return numeroCartaCredito;
+    }
+
+    public void setNumeroCartaCredito(String numeroCartaCredito) {
+        this.numeroCartaCredito = numeroCartaCredito;
+    }
+
+    public LocalDate getDataScadenzaCarta() {
+        return dataScadenzaCarta;
+    }
+
+    public void setDataScadenzaCarta(LocalDate dataScadenzaCarta) {
+        this.dataScadenzaCarta = dataScadenzaCarta;
+    }
+
+    public String getCviCarta() {
+        return cviCarta;
+    }
+
+    public void setCviCarta(String cviCarta) {
+        this.cviCarta = cviCarta;
     }
 }

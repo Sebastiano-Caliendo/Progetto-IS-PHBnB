@@ -35,6 +35,32 @@ public class HostDAO {
         return list;
     }
 
+    public Host doRetrieveById(String email) {
+        try (Connection con = Connessione.getConnection()) {
+
+            Host h = null;
+            PreparedStatement ps = con.prepareStatement("select * from host where email=?");
+
+            ps.setString(1, email);
+
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()) {
+                h.setEmail(rs.getString(1));
+                h.setNome(rs.getString(2));
+                h.setCognome(rs.getString(3));
+                h.setPassword(rs.getString(4));
+                h.setDataNascita(rs.getDate(5));
+                h.setRecapitoTelefonico(rs.getString(6));
+            }
+
+            return h;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public Host doRetrieveByEmailAndPassword(String email, String password) {
         try (Connection con = Connessione.getConnection()) {
 

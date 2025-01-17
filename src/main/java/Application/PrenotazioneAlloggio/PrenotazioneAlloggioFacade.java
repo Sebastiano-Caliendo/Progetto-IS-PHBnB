@@ -6,6 +6,7 @@ import Storage.Occupa.Occupa;
 import Storage.Occupa.OccupaDAO;
 import Storage.Prenotazione.Prenotazione;
 import Storage.Prenotazione.PrenotazioneDAO;
+import Storage.Utente.Utente;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -34,14 +35,16 @@ public class PrenotazioneAlloggioFacade {
         return alloggio;
     }
 
-    public int finalizzaPrenotazione(LocalDate checkIn, LocalDate checkOut, int numPostiLetto, String fkUtente, int numAlloggio, int codStruttura, double costoPrenotazione) {
+    public int finalizzaPrenotazione(Utente utente, LocalDate checkIn, LocalDate checkOut, int numPostiLetto, String fkUtente, int numAlloggio, int codStruttura, double costoPrenotazione, String numeroCarta, LocalDate dataScadenza, String cviCarta) {
 
         PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
-        Prenotazione p = new Prenotazione(checkIn, checkOut, fkUtente, numPostiLetto);
-        int fkPrenotazione = prenotazioneDAO.doSave(p);
+        Prenotazione p = new Prenotazione(checkIn, checkOut, utente, numPostiLetto, numeroCarta, dataScadenza, cviCarta);
+        prenotazioneDAO.doSave(p);
+
+        AlloggioDAO alloggioDAO = new AlloggioDAO();
 
         OccupaDAO occupaDAO = new OccupaDAO();
-        Occupa o = new Occupa(fkPrenotazione, numAlloggio, codStruttura, costoPrenotazione);
+        Occupa o = new Occupa(p, alloggioDAO.doRetrieveById(numAlloggio, codStruttura), costoPrenotazione);
         return occupaDAO.doSave(o);
     }
 
@@ -69,11 +72,11 @@ public class PrenotazioneAlloggioFacade {
         }
     }
 
-    public List<Prenotazione> visualizzaPrenotazioni(String codUtente) {
+    public List<Occupa> visualizzaPrenotazioni(String codUtente) {
 
-        PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
+        OccupaDAO occupaDAO = new OccupaDAO();
 
-        List<Prenotazione> prenotazioni = prenotazioneDAO.doRetrieveByUtente(codUtente);
+        List<Occupa> prenotazioni = occupaDAO.doRetrieveByUtente(codUtente);
 
         return prenotazioni;
     }

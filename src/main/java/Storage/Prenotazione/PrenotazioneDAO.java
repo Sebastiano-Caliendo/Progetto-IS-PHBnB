@@ -3,6 +3,7 @@ package Storage.Prenotazione;
 import Storage.Alloggio.Alloggio;
 import Storage.Connessione;
 import Storage.Struttura.Struttura;
+import Storage.Utente.Utente;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -15,21 +16,25 @@ public class PrenotazioneDAO {
         List<Prenotazione> list = new ArrayList<>();
 
         try (Connection con = Connessione.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("select * from prenotazione");
+            PreparedStatement ps = con.prepareStatement("select * from prenotazione join utente on prenotazione.fk_utente = utente.email");
             ResultSet rs = ps.executeQuery();
 
             while(rs.next()) {
-                Prenotazione prenotazione = new Prenotazione();
+                Prenotazione p = new Prenotazione();
+                Utente utente = new Utente(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password_"), rs.getString("citta"), rs.getString("numero_civico"), rs.getString("via"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"), rs.getBoolean("isAdmin"));
 
-                prenotazione.setCheckIn(rs.getDate("check_in").toLocalDate());
-                prenotazione.setCheckOut(rs.getDate("check_out").toLocalDate());
-                prenotazione.setFkUtente(rs.getString("fk_utente"));
-                prenotazione.setNumeroPersone(rs.getInt("numero_persone"));
+                p.setCheckIn(rs.getDate("check_in").toLocalDate());
+                p.setCheckOut(rs.getDate("check_out").toLocalDate());
+                p.setUtente(utente);
+                p.setNumeroPersone(rs.getInt("numero_persone"));
+                p.setNumeroCartaCredito(rs.getString("numero_carta"));
+                p.setDataScadenzaCarta(rs.getDate("data_scadenza_carta").toLocalDate());
+                p.setCviCarta(rs.getString("cvi_carta"));
 
-                list.add(prenotazione);
+                list.add(p);
             }
 
-            copyResultIntoList(rs, list);
+
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -40,18 +45,22 @@ public class PrenotazioneDAO {
     public Prenotazione doRetrieveById(int codPrenotazione) {
         try (Connection con = Connessione.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("select * from prenotazione where numero_alloggio = ?");
+                    con.prepareStatement("select * from prenotazione join utente on prenotazione.fk_utente = utente.email where prenotazione.codice_prenotazione = ?");
             ps.setInt(1, codPrenotazione);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
                 Prenotazione p = new Prenotazione();
+                Utente utente = new Utente(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password_"), rs.getString("citta"), rs.getString("numero_civico"), rs.getString("via"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"), rs.getBoolean("isAdmin"));
 
-                p.setCodicePrenotazione(rs.getInt(1));
-                p.setFkUtente(rs.getString(2));
-                p.setCheckIn(rs.getDate(3).toLocalDate());
-                p.setCheckOut(rs.getDate(4).toLocalDate());
-                p.setNumeroPersone(rs.getInt(5));
+                p.setCodicePrenotazione(rs.getInt("codice_prenotazione"));
+                p.setUtente(utente);
+                p.setCheckIn(rs.getDate("check_in").toLocalDate());
+                p.setCheckOut(rs.getDate("check_out").toLocalDate());
+                p.setNumeroPersone(rs.getInt("numero_persone"));
+                p.setNumeroCartaCredito(rs.getString("numero_carta"));
+                p.setDataScadenzaCarta(rs.getDate("data_scadenza_carta").toLocalDate());
+                p.setCviCarta(rs.getString("cvi_carta"));
 
                 return p;
             }
@@ -61,63 +70,18 @@ public class PrenotazioneDAO {
         }
     }
 
-    public List<Prenotazione> doRetrieveByUtente(String fkUtente) {
-        List<Prenotazione> list = new ArrayList<>();
-
-        try (Connection con = Connessione.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("select * from prenotazione where fk_utente = ?");
-            ps.setString(1, fkUtente);
-
-            ResultSet rs = ps.executeQuery();
-
-            while(rs.next()) {
-                Prenotazione prenotazione = new Prenotazione();
-
-                prenotazione.setCheckIn(rs.getDate("check_in").toLocalDate());
-                prenotazione.setCheckOut(rs.getDate("check_out").toLocalDate());
-                prenotazione.setFkUtente(rs.getString("fk_utente"));
-                prenotazione.setNumeroPersone(rs.getInt("numero_persone"));
-
-                list.add(prenotazione);
-            }
-
-            copyResultIntoList(rs, list);
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return list;
-    }
-
-    public List<Prenotazione> doRetrievePrenotazioniByAlloggio(Alloggio alloggio) {
-        try (Connection con = Connessione.getConnection()) {
-            List<Prenotazione> prenotazioniAlloggio = new ArrayList<>();
-            PreparedStatement ps = con.prepareStatement(
-                    "select distinct prenotazione.* from prenotazione " +
-                            "join occupa on prenotazione.codice_prenotazione = occupa.fk_prenotazione " +
-                            "join alloggio on occupa.fk_strutturaAlloggio = ? " +
-                            "AND occupa.fk_alloggio = ?");
-            ps.setInt(1, alloggio.getFkStruttura());
-            ps.setInt(2, alloggio.getNumeroAlloggio());
-
-
-            this.copyResultIntoList(ps.executeQuery(), prenotazioniAlloggio);
-
-            return prenotazioniAlloggio;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public int doSave(Prenotazione prenotazione) {
         try (Connection con = Connessione.getConnection()) {
 
-            PreparedStatement ps = con.prepareStatement("insert into prenotazione (check_in, check_out, fk_utente, numero_persone) values (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement("insert into prenotazione (check_in, check_out, fk_utente, numero_persone, numero_carta, data_scadenza_carta, cvi_carta) values (?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 
             ps.setDate(1, Date.valueOf(prenotazione.getCheckIn()));
             ps.setDate(2, Date.valueOf(prenotazione.getCheckOut()));
-            ps.setString(3, prenotazione.getFkUtente());
+            ps.setString(3, prenotazione.getUtente().getEmail());
             ps.setInt(4, prenotazione.getNumeroPersone());
+            ps.setString(5, prenotazione.getNumeroCartaCredito());
+            ps.setDate(6, Date.valueOf(prenotazione.getDataScadenzaCarta()));
+            ps.setString(7, prenotazione.getCviCarta());
 
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
@@ -159,22 +123,6 @@ public class PrenotazioneDAO {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }
-    }
-
-
-
-    private void copyResultIntoList(ResultSet rs, List<Prenotazione> list) throws SQLException {
-        while (rs.next()) {
-            Prenotazione p = new Prenotazione();
-
-            p.setCodicePrenotazione(rs.getInt(1));
-            p.setCheckIn(rs.getDate(2).toLocalDate());
-            p.setCheckOut(rs.getDate(3).toLocalDate());
-            p.setFkUtente(rs.getString(4));
-            p.setNumeroPersone(rs.getInt(5));
-
-            list.add(p);
         }
     }
 }

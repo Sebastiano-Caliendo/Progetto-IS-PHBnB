@@ -24,6 +24,36 @@ public class UtenteDAO {
         }
     }
 
+    public Utente doRetrieveById(String email) {
+        try (Connection con = Connessione.getConnection()) {
+
+            Utente u = null;
+            PreparedStatement ps = con.prepareStatement("select * from utente where email=?");
+
+            ps.setString(1, email);
+
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()) {
+                u.setEmail(rs.getString(1));
+                u.setNome(rs.getString(2));
+                u.setCognome(rs.getString(3));
+                u.setPassword(rs.getString(4));
+                u.setCitta(rs.getString(5));
+                u.setNumeroCivico(rs.getString(6));
+                u.setVia(rs.getString(7));
+                u.setDataNascita(rs.getDate(8).toLocalDate());
+                u.setRecapitoTelefonico(rs.getString(9));
+                u.setAdmin(false);
+            }
+
+            return u;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public Utente doRetrieveByEmailAndPassword(String email, String password) {
         try (Connection con = Connessione.getConnection()) {
 

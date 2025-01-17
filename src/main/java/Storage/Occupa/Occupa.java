@@ -1,41 +1,37 @@
 package Storage.Occupa;
 
+import Storage.Alloggio.Alloggio;
+import Storage.Prenotazione.Prenotazione;
+
 public class Occupa {
 
-    private int fkPrenotazione;
-    private int fkAlloggio;
-    private int fkStrutturaAlloggio;
+    private Prenotazione prenotazione;
+    private Alloggio alloggio;
     private double costoPrenotazione;
 
-    public Occupa(int fkPrenotazione, int fkAlloggio, int fkStrutturaAlloggio, double costoPrenotazione) {
-        this.fkPrenotazione = fkPrenotazione;
-        this.fkAlloggio = fkAlloggio;
-        this.fkStrutturaAlloggio = fkStrutturaAlloggio;
+    public Occupa() {
+    }
+
+    public Occupa(Prenotazione prenotazione, Alloggio alloggio, double costoPrenotazione) {
+        this.prenotazione = prenotazione;
+        this.alloggio = alloggio;
         this.costoPrenotazione = costoPrenotazione;
     }
 
-    public int getFkPrenotazione() {
-        return fkPrenotazione;
+    public Prenotazione getPrenotazione() {
+        return prenotazione;
     }
 
-    public void setFkPrenotazione(int fkPrenotazione) {
-        this.fkPrenotazione = fkPrenotazione;
+    public void setPrenotazione(Prenotazione prenotazione) {
+        this.prenotazione = prenotazione;
     }
 
-    public int getFkAlloggio() {
-        return fkAlloggio;
+    public Alloggio getAlloggio() {
+        return alloggio;
     }
 
-    public void setFkAlloggio(int fkAlloggio) {
-        this.fkAlloggio = fkAlloggio;
-    }
-
-    public int getFkStrutturaAlloggio() {
-        return fkStrutturaAlloggio;
-    }
-
-    public void setFkStrutturaAlloggio(int fkStrutturaAlloggio) {
-        this.fkStrutturaAlloggio = fkStrutturaAlloggio;
+    public void setAlloggio(Alloggio alloggio) {
+        this.alloggio = alloggio;
     }
 
     public double getCostoPrenotazione() {
