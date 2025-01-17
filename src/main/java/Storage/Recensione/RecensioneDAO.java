@@ -147,7 +147,7 @@ public class RecensioneDAO {
             ps.setDate(4, Date.valueOf(recensione.getDataRecensione()));
             ps.setInt(5, recensione.getPrenotazione().getCodicePrenotazione());
             ps.setInt(6, recensione.getAlloggio().getNumeroAlloggio());
-            ps.setInt(7, recensione.getAlloggio().getFkStruttura());
+            ps.setInt(7, recensione.getAlloggio().getStruttura().getIdStruttura());
 
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
@@ -208,7 +208,7 @@ public class RecensioneDAO {
             ps.setDate(4, Date.valueOf(recensione.getDataRecensione()));
             ps.setInt(5, recensione.getPrenotazione().getCodicePrenotazione());
             ps.setInt(6, recensione.getAlloggio().getNumeroAlloggio());
-            ps.setInt(7, recensione.getAlloggio().getFkStruttura());
+            ps.setInt(7, recensione.getAlloggio().getStruttura().getIdStruttura());
             ps.setInt(8, idRecensione);
 
             if (ps.executeUpdate() != 1) {

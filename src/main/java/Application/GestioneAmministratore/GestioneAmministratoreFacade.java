@@ -1,5 +1,6 @@
 package Application.GestioneAmministratore;
 
+import Application.GestioneStrutture.gestioneStrutturaFacade;
 import Storage.Alloggio.Alloggio;
 import Storage.Alloggio.AlloggioDAO;
 import Storage.Host.Host;
@@ -129,7 +130,18 @@ public class GestioneAmministratoreFacade {
         return null;
     }
 
-    public void modificaDatiSistemaAlloggio(Alloggio a, int numAlloggio, int fkStruttura, HttpSession session){
+    public void modificaDatiSistemaAlloggio(int numeroAlloggio, double prezzoNotte, int postiLetto, String tipoAlloggio , String descrizione, int oldNumAlloggio, int fkStruttura, HttpSession session){
+
+        gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
+        Alloggio alloggio = new Alloggio();
+
+        alloggio.setNumeroAlloggio(numeroAlloggio);
+        alloggio.setStruttura(strutturaFacade.returnStruttura(fkStruttura));
+        alloggio.setTipoAlloggio(tipoAlloggio);
+        alloggio.setDescrizione(descrizione);
+        alloggio.setPostiletto(postiLetto);
+        alloggio.setPrezzoNotte(prezzoNotte);
+
         boolean successo = false;
 
         if(proxy.isAutenticato(session)){
@@ -139,7 +151,7 @@ public class GestioneAmministratoreFacade {
         }
         if(successo){
             AlloggioDAO alloggioDAO = new AlloggioDAO();
-            alloggioDAO.doUpdate(a, numAlloggio, fkStruttura);
+            alloggioDAO.doUpdate(alloggio, oldNumAlloggio, fkStruttura);
         }
     }
 
@@ -186,8 +198,19 @@ public class GestioneAmministratoreFacade {
         }
     }
 
-    public void modificaDatiSistemaStruttura(int idStruttura, Struttura struttura, HttpSession session){
+    public void modificaDatiSistemaStruttura(Host host, String nomeStruttura, String via, String citta, int numAlloggi, String numCivico, String descrizione, String urlImmagine, int idStruttura, HttpSession session){
         boolean successo = false;
+
+        Struttura struttura = new Struttura();
+        struttura.setNomeStruttura(nomeStruttura);
+        struttura.setDescrizione(descrizione);
+        struttura.setIdStruttura(idStruttura);
+        struttura.setCitta(citta);
+        struttura.setVia(via);
+        struttura.setHost(host);
+        struttura.setNumCivico(numCivico);
+        struttura.setNumAlloggi(numAlloggi);
+
 
         if(proxy.isAutenticato(session)){
             successo = true;

@@ -27,19 +27,9 @@ public class AggiungiStrutturaServlet extends HttpServlet {
         String descrizione = req.getParameter("descrizione");
         String urlImmagine = req.getParameter("urlImmagine");
 
-        // creiamo la struttura
-        Struttura struttura = new Struttura();
-        struttura.setFkHost(host.getEmail());
-        struttura.setDescrizione(descrizione);
-        struttura.setNumAlloggi(numAlloggi);
-        struttura.setNomeStruttura(nomeStruttura);
-        struttura.setCitta(citta);
-        struttura.setVia(via);
-        struttura.setUrlImmagine(urlImmagine);
-
         // inseriamo la struttura nel DB
         gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
-        strutturaFacade.aggiungiStruttura(struttura);
+        strutturaFacade.aggiungiStruttura(host, nomeStruttura, via, citta, numAlloggi, descrizione, urlImmagine);
 
         // passo il controllo alla jsp che mostrerà il riepilogo delle strutture
         RequestDispatcher dispatcher = req.getRequestDispatcher("RiepilogoStruttureGUI.jsp");

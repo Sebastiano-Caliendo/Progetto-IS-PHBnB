@@ -7,6 +7,7 @@ import Storage.Prenotazione.Prenotazione;
 import Storage.Prenotazione.PrenotazioneDAO;
 import Storage.Struttura.Struttura;
 import Storage.Struttura.StrutturaDAO;
+import jakarta.servlet.http.HttpSession;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,18 +19,31 @@ public class gestioneStrutturaFacade {
         return strutturaDAO.doRetrieveByCriteria("fk_host", host.getEmail());
     }
 
-    public int aggiungiStruttura(Struttura struttura) {
+    public int aggiungiStruttura(Host host, String nomeStruttura, String via, String citta, int numAlloggi, String descrizione, String urlImmagine) {
+        // creiamo la struttura
+
+        Struttura struttura = new Struttura();
+        struttura.setHost(host);
+        struttura.setDescrizione(descrizione);
+        struttura.setNumAlloggi(numAlloggi);
+        struttura.setNomeStruttura(nomeStruttura);
+        struttura.setCitta(citta);
+        struttura.setVia(via);
+        struttura.setUrlImmagine(urlImmagine);
+
         StrutturaDAO strutturaDAO = new StrutturaDAO();
+
         int idStruttura = strutturaDAO.doSave(struttura);
+
         if(idStruttura == struttura.getIdStruttura())
             return 1;
         return 0;
     }
 
-    public int modificaStruttura(Struttura struttura, int idStruttura) {
+    public int modificaStruttura(Host host, String nomeStruttura, String via, String citta, int numAlloggi, String descrizione, String urlImmagine, int idStruttura) {
         StrutturaDAO strutturaDAO = new StrutturaDAO();
         strutturaDAO.doDelete(idStruttura);
-        return aggiungiStruttura(struttura);
+        return aggiungiStruttura(host, nomeStruttura, via, citta, numAlloggi, descrizione, urlImmagine);
     }
 
     public int eliminaStruttura(int idStruttura) {
@@ -56,4 +70,5 @@ public class gestioneStrutturaFacade {
         StrutturaDAO strutturaDAO = new StrutturaDAO();
         return strutturaDAO.doRetrieveById(idStruttura);
     }
+
 }

@@ -1,5 +1,6 @@
 package Application.GestioneAlloggi;
 
+import Application.GestioneStrutture.gestioneStrutturaFacade;
 import Storage.Alloggio.Alloggio;
 import Storage.Alloggio.AlloggioDAO;
 import Storage.Struttura.Struttura;
@@ -21,30 +22,35 @@ public class gestioneAlloggioFacade {
         return alloggi;
     }
 
-    public Alloggio returnAlloggio(int numeroAlloggio, int fkStruttura) {
-        AlloggioDAO alloggioDAO = new AlloggioDAO();
-        return alloggioDAO.doRetrieveById(numeroAlloggio, fkStruttura);
-    }
-
-    public int aggiungiAlloggio(Alloggio alloggio) {
+    public int aggiungiAlloggio(int numeroAlloggio, int idStruttura, double prezzoNotte, int numPostiLetto, String tipoAlloggio, String descrizione, String urlImmagine) {
+        gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
+        // creo l'alloggio che voglio inserire
+        Alloggio alloggio = new Alloggio(numeroAlloggio, strutturaFacade.returnStruttura(idStruttura), prezzoNotte, numPostiLetto, tipoAlloggio, descrizione, urlImmagine);
         AlloggioDAO alloggioDAO = new AlloggioDAO();
         List<Integer> verifica = alloggioDAO.doSave(alloggio);
         if(verifica.get(1) == alloggio.getNumeroAlloggio()){
-            if(verifica.get(2) == alloggio.getFkStruttura())
+            if(verifica.get(2) == alloggio.getStruttura().getIdStruttura())
                 return 1;
         }
         return 0;
     }
 
-    public int modificaAlloggio(Alloggio alloggio, int numeroAlloggio, int fkStruttura) {
+    public int modificaAlloggio(int numeroAlloggio, int idStruttura, double prezzoNotte, int numPostiLetto, String tipoAlloggio, String descrizione, String urlImmagine, int oldNumeroAlloggio, int fkStruttura) {
+        gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
+        Alloggio alloggio = new Alloggio(numeroAlloggio, strutturaFacade.returnStruttura(idStruttura), prezzoNotte, numPostiLetto, tipoAlloggio, descrizione, urlImmagine);
         AlloggioDAO alloggioDAO = new AlloggioDAO();
-        alloggioDAO.doDelete(numeroAlloggio, fkStruttura);
-        return aggiungiAlloggio(alloggio);
+        alloggioDAO.doDelete(oldNumeroAlloggio, fkStruttura);
+        return aggiungiAlloggio(numeroAlloggio, idStruttura, prezzoNotte, numPostiLetto, tipoAlloggio, descrizione, urlImmagine);
     }
 
     public List<Integer> eliminaAlloggio(int numeroAlloggio, int fkStruttura) {
         AlloggioDAO alloggioDAO = new AlloggioDAO();
         return alloggioDAO.doDelete(numeroAlloggio, fkStruttura);
+    }
+
+    public Alloggio returnAlloggio(int numeroAlloggio, int fkStruttura) {
+        AlloggioDAO alloggioDAO = new AlloggioDAO();
+        return alloggioDAO.doRetrieveById(numeroAlloggio, fkStruttura);
     }
 
 }

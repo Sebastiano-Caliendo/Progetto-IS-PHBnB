@@ -1,8 +1,10 @@
 package Storage.Alloggio;
 
+import Storage.Struttura.Struttura;
+
 public class Alloggio {
     private int numeroAlloggio;
-    private int fkStruttura;
+    private Struttura struttura;
     private double prezzoNotte;
     private int postiletto;
     private String tipoAlloggio;
@@ -12,9 +14,9 @@ public class Alloggio {
     public Alloggio() {
     }
 
-    public Alloggio(int numeroAlloggio, int fkStruttura, double prezzoNotte, int postiletto, String tipoAlloggio, String descrizione, String urlImmagine) {
+    public Alloggio(int numeroAlloggio, Struttura struttura, double prezzoNotte, int postiletto, String tipoAlloggio, String descrizione, String urlImmagine) {
         this.numeroAlloggio = numeroAlloggio;
-        this.fkStruttura = fkStruttura;
+        this.struttura = struttura;
         this.prezzoNotte = prezzoNotte;
         this.postiletto = postiletto;
         this.tipoAlloggio = tipoAlloggio;
@@ -30,12 +32,12 @@ public class Alloggio {
         this.numeroAlloggio = numeroAlloggio;
     }
 
-    public int getFkStruttura() {
-        return fkStruttura;
+    public Struttura getStruttura() {
+        return struttura;
     }
 
-    public void setFkStruttura(int fkStruttura) {
-        this.fkStruttura = fkStruttura;
+    public void setStruttura(Struttura struttura) {
+        this.struttura = struttura;
     }
 
     public double getPrezzoNotte() {
@@ -46,9 +48,13 @@ public class Alloggio {
         this.prezzoNotte = prezzoNotte;
     }
 
-    public int getPostiletto() { return this.postiletto; }
+    public int getPostiletto() {
+        return postiletto;
+    }
 
-    public void setPostiletto(int postiletto) { this.postiletto = postiletto; }
+    public void setPostiletto(int postiletto) {
+        this.postiletto = postiletto;
+    }
 
     public String getTipoAlloggio() {
         return tipoAlloggio;
@@ -62,13 +68,16 @@ public class Alloggio {
         return descrizione;
     }
 
-    public String getUrlImmagine() { return urlImmagine; }
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
+
+    public String getUrlImmagine() {
+        return urlImmagine;
+    }
 
     public void setUrlImmagine(String urlImmagine) {
         this.urlImmagine = urlImmagine;
     }
 
-    public void setDescrizione(String descrizione) {
-        this.descrizione = descrizione;
-    }
 }

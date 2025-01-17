@@ -26,8 +26,8 @@ public class RedirectToModificaAlloggioServlet extends HttpServlet {
         int fkStruttura = Integer.parseInt(req.getParameter("idStruttura"));
 
         //prendiamo i dati dell'alloggio che vogliamo modificare
-        AlloggioDAO alloggioDAO = new AlloggioDAO();
-        Alloggio alloggio = alloggioDAO.doRetrieveById(numeroAlloggio, fkStruttura);
+        gestioneAlloggioFacade alloggioFacade = new gestioneAlloggioFacade();
+        Alloggio alloggio = alloggioFacade.returnAlloggio(numeroAlloggio, fkStruttura);
 
         //aggiungiamo l'alloggio nella richiesta
         req.setAttribute("alloggio", alloggio);

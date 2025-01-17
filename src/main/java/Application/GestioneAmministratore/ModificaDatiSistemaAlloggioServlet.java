@@ -14,6 +14,7 @@ import java.io.IOException;
 public class ModificaDatiSistemaAlloggioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int oldNumeroAlloggio = Integer.parseInt("oldNumAlloggio");
         int numeroAlloggio = Integer.parseInt(req.getParameter("numAlloggio"));
         int fkStruttura = Integer.parseInt(req.getParameter("fkStruttura"));
         double prezzoNotte = Double.parseDouble(req.getParameter("prezzoNotte"));
@@ -29,7 +30,7 @@ public class ModificaDatiSistemaAlloggioServlet extends HttpServlet {
         alloggio.setPrezzoNotte(prezzoNotte);
 
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
-        gestioneAmministratoreFacade.modificaDatiSistemaAlloggio(alloggio, numeroAlloggio, fkStruttura, req.getSession());
+        gestioneAmministratoreFacade.modificaDatiSistemaAlloggio(numeroAlloggio, prezzoNotte, postiLetto, tipoAlloggio, descrizione, oldNumeroAlloggio, fkStruttura, req.getSession());
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("VisDatiSistemaGUI.jsp");
         dispatcher.forward(req, resp);

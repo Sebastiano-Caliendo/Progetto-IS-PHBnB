@@ -29,12 +29,9 @@ public class AggiungiAlloggioServlet extends HttpServlet {
         String descrizione = req.getParameter("descrizione");
         String urlImmagine = req.getParameter("urlImmagine");
 
-        // creo l'alloggio che voglio inserire
-        Alloggio alloggio = new Alloggio(numeroAlloggio, idStruttura, prezzoNotte, numPostiLetto, tipoAlloggio, descrizione, urlImmagine);
-
         // inserisco l'alloggio nel DB
         gestioneAlloggioFacade alloggioFacade = new gestioneAlloggioFacade();
-        alloggioFacade.aggiungiAlloggio(alloggio);
+        alloggioFacade.aggiungiAlloggio(numeroAlloggio, idStruttura, prezzoNotte, numPostiLetto, tipoAlloggio, descrizione, urlImmagine);
 
         // prendiamo la struttura che servirà alla jsp VisAlloggiStruttureGUI.jsp
         gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();

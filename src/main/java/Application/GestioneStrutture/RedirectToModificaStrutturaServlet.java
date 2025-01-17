@@ -24,8 +24,8 @@ public class RedirectToModificaStrutturaServlet extends HttpServlet {
         int idStruttura = Integer.parseInt(req.getParameter("idStruttura"));
 
         //prendiamo i dati della struttura che vogliamo modificare
-        StrutturaDAO strutturaDAO = new StrutturaDAO();
-        Struttura struttura = strutturaDAO.doRetrieveById(idStruttura);
+        gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
+        Struttura struttura = strutturaFacade.returnStruttura(idStruttura);
 
         //aggiungiamo la struttura nella richiesta
         req.setAttribute("struttura", struttura);

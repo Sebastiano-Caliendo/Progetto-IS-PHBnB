@@ -3,6 +3,7 @@ package Storage.Struttura;
 import Storage.Alloggio.Alloggio;
 import Storage.Alloggio.AlloggioDAO;
 import Storage.Connessione;
+import Storage.Host.Host;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,16 +14,17 @@ public class StrutturaDAO {
     public void copyResultIntoList(ResultSet rs, List<Struttura> list) throws SQLException {
         while (rs.next()) {
             Struttura s = new Struttura();
+            Host host = new Host(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"));
 
-            s.setIdStruttura(rs.getInt(1));
-            s.setFkHost(rs.getString(2));
-            s.setNomeStruttura(rs.getString(3));
-            s.setVia(rs.getString(4));
-            s.setNumCivico(Integer.parseInt(rs.getString(5)));
-            s.setCitta(rs.getString(6));
-            s.setNumAlloggi(rs.getInt(7));
-            s.setDescrizione(rs.getString(8));
-            s.setUrlImmagine(rs.getString(9));
+            s.setIdStruttura(rs.getInt("id_struttura"));
+            s.setHost(host);
+            s.setNomeStruttura(rs.getString("nome_struttura"));
+            s.setVia(rs.getString("struttura.via"));
+            s.setNumCivico(rs.getString("struttura.numero_civico"));
+            s.setCitta(rs.getString("struttura.citta"));
+            s.setNumAlloggi(rs.getInt("struttura.numero_alloggi"));
+            s.setDescrizione(rs.getString("struttura.descrizione"));
+            s.setUrlImmagine(rs.getString("struttura.url_immagine"));
 
             list.add(s);
         }
@@ -34,7 +36,7 @@ public class StrutturaDAO {
             List<Alloggio> list = new ArrayList<>();
 
             PreparedStatement ps = con.prepareStatement(
-                    "select distinct alloggio.* from alloggio join struttura on alloggio.fk_struttura = ?" );
+                    "select distinct * from ((alloggio join struttura on alloggio.fk_struttura = ? ) join host on fk_host = email )" );
 
             ps.setInt(1, struttura.getIdStruttura());
             ResultSet rs = ps.executeQuery();
@@ -50,16 +52,18 @@ public class StrutturaDAO {
     public List<Struttura> doRetrieveAll() {
         List<Struttura> list = new ArrayList<>();
         try (Connection con = Connessione.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("select * from struttura");
+            PreparedStatement ps = con.prepareStatement("select * from struttura join host on fk_host = email");
             ResultSet rs = ps.executeQuery();
 
             while(rs.next()){
                 Struttura struttura = new Struttura();
 
-                struttura.setFkHost(rs.getString("fk_host"));
+                Host host = new Host(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"));
+
+                struttura.setHost(host);
                 struttura.setNomeStruttura(rs.getString("nome_struttura"));
                 struttura.setVia(rs.getString("via"));
-                struttura.setNumCivico(rs.getInt("numero_civico"));
+                struttura.setNumCivico(rs.getString("numero_civico"));
                 struttura.setCitta(rs.getString("citta"));
                 struttura.setNumAlloggi(rs.getInt("numero_alloggi"));
                 struttura.setDescrizione(rs.getString("descrizione"));
@@ -77,23 +81,24 @@ public class StrutturaDAO {
         try (Connection con = Connessione.getConnection()) {
             PreparedStatement ps =
                     con.prepareStatement("select * from\n" +
-                            "struttura where id_struttura = ?");
+                            "struttura join host on fk_host = email where id_struttura = ?");
             ps.setInt(1, idStruttura);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                Struttura s = new Struttura();
+                Struttura struttura = new Struttura();
 
-                s.setIdStruttura(rs.getInt(1));
-                s.setFkHost(rs.getString(2));
-                s.setNomeStruttura(rs.getString(3));
-                s.setVia(rs.getString(4));
-                s.setNumCivico(Integer.parseInt(rs.getString(5)));
-                s.setCitta(rs.getString(6));
-                s.setNumAlloggi(rs.getInt(7));
-                s.setDescrizione(rs.getString(8));
-                s.setUrlImmagine(rs.getString(9));
+                Host host = new Host(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"));
 
-                return s;
+                struttura.setIdStruttura(rs.getInt("id_struttura"));
+                struttura.setHost(host);
+                struttura.setNomeStruttura(rs.getString("nome_struttura"));
+                struttura.setVia(rs.getString("via"));
+                struttura.setNumCivico(rs.getString("numero_civico"));
+                struttura.setCitta(rs.getString("citta"));
+                struttura.setNumAlloggi(rs.getInt("numero_alloggi"));
+                struttura.setDescrizione(rs.getString("descrizione"));
+
+                return struttura;
             }
             return null;
         } catch (SQLException e) {
@@ -123,7 +128,7 @@ public class StrutturaDAO {
                     "insert into struttura (fk_host, nome_struttura, via, numero_civico, citta, numero_alloggi, descrizione, url_immagine) " +
                             "values (?, ?, ?, ?, ?, ?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, struttura.getFkHost());
+            ps.setString(1, struttura.getHost().getEmail());
             ps.setString(2, struttura.getNomeStruttura());
             ps.setString(3, struttura.getVia());
             ps.setString(4, String.valueOf(struttura.getNumCivico()));
@@ -148,7 +153,7 @@ public class StrutturaDAO {
             PreparedStatement ps = con.prepareStatement(
                     "UPDATE prodotti SET fk_host=?, nome_struttura=?, via=?, numero_civico=?, citta=?, numero_alloggi=?, descrizione=?, url_immagine=? WHERE id_struttura=?");
 
-            ps.setString(1, struttura.getFkHost());
+            ps.setString(1, struttura.getHost().getEmail());
             ps.setString(2, struttura.getNomeStruttura());
             ps.setString(3, struttura.getVia());
             ps.setString(4, String.valueOf(struttura.getNumCivico()));

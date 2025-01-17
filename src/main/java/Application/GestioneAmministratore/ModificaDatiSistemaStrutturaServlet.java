@@ -1,5 +1,6 @@
 package Application.GestioneAmministratore;
 
+import Storage.Host.Host;
 import Storage.Struttura.Struttura;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -15,27 +16,18 @@ public class ModificaDatiSistemaStrutturaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int idStruttura = Integer.parseInt(req.getParameter("idStruttura"));
-        String fkHost = req.getParameter("fkHost");
+        //String fkHost = req.getParameter("fkHost");
         String nomeStruttura = req.getParameter("nomeStruttura");
         String via = req.getParameter("viaStruttura");
-        int numCivico = Integer.parseInt(req.getParameter("numCivicoStruttura"));
+        String numCivico = req.getParameter("numCivicoStruttura");
         String citta = req.getParameter("cittaStruttura");
         int numAlloggi = Integer.parseInt(req.getParameter("numAlloggiStruttura"));
         String descrizione = req.getParameter("descrizioneStruttura");
-
-        Struttura struttura = new Struttura();
-        struttura.setNomeStruttura(nomeStruttura);
-        struttura.setDescrizione(descrizione);
-        struttura.setIdStruttura(idStruttura);
-        struttura.setCitta(citta);
-        struttura.setVia(via);
-        struttura.setFkHost(fkHost);
-        struttura.setNumCivico(numCivico);
-        struttura.setNumAlloggi(numAlloggi);
+        String urlImmagine = req.getParameter("urlImmagine");
 
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
 
-        gestioneAmministratoreFacade.modificaDatiSistemaStruttura(idStruttura, struttura, req.getSession());
+        gestioneAmministratoreFacade.modificaDatiSistemaStruttura((Host) req.getSession().getAttribute("host"), nomeStruttura, via, citta, numAlloggi ,numCivico, descrizione, urlImmagine, idStruttura, req.getSession());
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("VisDatiSistemaGUI.jsp");
         dispatcher.forward(req, resp);

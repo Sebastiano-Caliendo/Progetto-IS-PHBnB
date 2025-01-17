@@ -34,12 +34,10 @@ public class ModificaAlloggioServlet extends HttpServlet {
         String descrizione = req.getParameter("descrizione");
         String urlImmagine = req.getParameter("urlImmagine");
 
-        // creo l'alloggio che voglio inserire
-        Alloggio alloggio = new Alloggio(numeroAlloggio, idStruttura, prezzoNotte, numPostiLetto, tipoAlloggio, descrizione, urlImmagine);
 
         // elimino il vecchio alloggio dal DB ed inserisco l'alloggio modificato
         gestioneAlloggioFacade alloggioFacade = new gestioneAlloggioFacade();
-        alloggioFacade.modificaAlloggio(alloggio, oldNumeroAlloggio, idStruttura);
+        alloggioFacade.modificaAlloggio(numeroAlloggio, idStruttura, prezzoNotte, numPostiLetto, tipoAlloggio, descrizione, urlImmagine, oldNumeroAlloggio, idStruttura);
 
         // prendiamo la struttura che servirà alla jsp VisAlloggiStruttureGUI.jsp
         gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
