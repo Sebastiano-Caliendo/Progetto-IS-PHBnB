@@ -24,7 +24,8 @@ public class RecensioneDAO {
 
                 StrutturaDAO strutturaDAO = new StrutturaDAO();
                 Utente user = new Utente(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password_"), rs.getString("citta"), rs.getString("numero_civico"), rs.getString("via"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"), rs.getBoolean("isAdmin"));
-                Prenotazione prenotazione = new Prenotazione(rs.getInt("codice_prenotazione"), rs.getDate("check_in").toLocalDate(), rs.getDate("check_out").toLocalDate(), user, rs.getInt("numero_persone"));
+                Prenotazione prenotazione = new Prenotazione(rs.getDate("check_in").toLocalDate(), rs.getDate("check_out").toLocalDate(), user, rs.getInt("numero_persone"), rs.getString("numero_carta"), rs.getDate("data_scadenza_carta").toLocalDate(), rs.getString("cvi_carta"));
+                prenotazione.setCodicePrenotazione(rs.getInt("codice_prenotazione"));
                 Alloggio alloggio = new Alloggio(rs.getInt("numero_alloggio"), strutturaDAO.doRetrieveById(rs.getInt("fk_struttura")), rs.getDouble("prezzo_notte"), rs.getInt("numero_posti_letto"), rs.getString("tipo_alloggio"), rs.getString("alloggio.descrizione"), rs.getString("url_immagine"));
 
                 pr.setIdRecensione(rs.getInt("idRecensione"));
@@ -54,7 +55,8 @@ public class RecensioneDAO {
                 Recensione pr = new Recensione();
                 StrutturaDAO strutturaDAO = new StrutturaDAO();
                 Utente user = new Utente(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password_"), rs.getString("citta"), rs.getString("numero_civico"), rs.getString("via"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"), rs.getBoolean("isAdmin"));
-                Prenotazione prenotazione = new Prenotazione(rs.getInt("codice_prenotazione"), rs.getDate("check_in").toLocalDate(), rs.getDate("check_out").toLocalDate(), user, rs.getInt("numero_persone"));
+                Prenotazione prenotazione = new Prenotazione(rs.getDate("check_in").toLocalDate(), rs.getDate("check_out").toLocalDate(), user, rs.getInt("numero_persone"), rs.getString("numero_carta"), rs.getDate("data_scadenza_carta").toLocalDate(), rs.getString("cvi_carta"));
+                prenotazione.setCodicePrenotazione(rs.getInt("codice_prenotazione"));
                 Alloggio alloggio = new Alloggio(rs.getInt("numero_alloggio"), strutturaDAO.doRetrieveById(rs.getInt("fk_struttura")), rs.getDouble("prezzo_notte"), rs.getInt("numero_posti_letto"), rs.getString("tipo_alloggio"), rs.getString("alloggio.descrizione"), rs.getString("url_immagine"));
 
                 pr.setIdRecensione(rs.getInt("idRecensione"));
@@ -87,7 +89,8 @@ public class RecensioneDAO {
                 Recensione pr = new Recensione();
                 StrutturaDAO strutturaDAO = new StrutturaDAO();
                 Utente user = new Utente(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password_"), rs.getString("citta"), rs.getString("numero_civico"), rs.getString("via"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"), rs.getBoolean("isAdmin"));
-                Prenotazione prenotazione = new Prenotazione(rs.getInt("codice_prenotazione"), rs.getDate("check_in").toLocalDate(), rs.getDate("check_out").toLocalDate(), user, rs.getInt("numero_persone"));
+                Prenotazione prenotazione = new Prenotazione(rs.getDate("check_in").toLocalDate(), rs.getDate("check_out").toLocalDate(), user, rs.getInt("numero_persone"), rs.getString("numero_carta"), rs.getDate("data_scadenza_carta").toLocalDate(), rs.getString("cvi_carta"));
+                prenotazione.setCodicePrenotazione(rs.getInt("codice_prenotazione"));
                 Alloggio alloggio = new Alloggio(rs.getInt("numero_alloggio"), strutturaDAO.doRetrieveById(rs.getInt("fk_struttura")), rs.getDouble("prezzo_notte"), rs.getInt("numero_posti_letto"), rs.getString("tipo_alloggio"), rs.getString("alloggio.descrizione"), rs.getString("url_immagine"));
 
                 pr.setIdRecensione(rs.getInt("idRecensione"));
@@ -118,7 +121,8 @@ public class RecensioneDAO {
 
                 StrutturaDAO strutturaDAO = new StrutturaDAO();
                 Utente user = new Utente(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password_"), rs.getString("citta"), rs.getString("numero_civico"), rs.getString("via"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"), rs.getBoolean("isAdmin"));
-                Prenotazione prenotazione = new Prenotazione(rs.getInt("codice_prenotazione"), rs.getDate("check_in").toLocalDate(), rs.getDate("check_out").toLocalDate(), user, rs.getInt("numero_persone"));
+                Prenotazione prenotazione = new Prenotazione(rs.getDate("check_in").toLocalDate(), rs.getDate("check_out").toLocalDate(), user, rs.getInt("numero_persone") , rs.getString("numero_carta"), rs.getDate("data_scadenza_carta").toLocalDate(), rs.getString("cvi_carta"));
+                prenotazione.setCodicePrenotazione(rs.getInt("codice_prenotazione"));
                 Alloggio alloggio = new Alloggio(rs.getInt("numero_alloggio"), strutturaDAO.doRetrieveById(rs.getInt("fk_struttura")), rs.getDouble("prezzo_notte"), rs.getInt("numero_posti_letto"), rs.getString("tipo_alloggio"), rs.getString("alloggio.descrizione"), rs.getString("url_immagine"));
 
                 pr.setIdRecensione(rs.getInt("idRecensione"));
@@ -167,7 +171,8 @@ public class RecensioneDAO {
                 Recensione r = new Recensione();
                 StrutturaDAO strutturaDAO = new StrutturaDAO();
                 Utente user = new Utente(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password_"), rs.getString("citta"), rs.getString("numero_civico"), rs.getString("via"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"), rs.getBoolean("isAdmin"));
-                Prenotazione prenotazione = new Prenotazione(rs.getInt("codice_prenotazione"), rs.getDate("check_in").toLocalDate(), rs.getDate("check_out").toLocalDate(), user, rs.getInt("numero_persone"));
+                Prenotazione prenotazione = new Prenotazione(rs.getDate("check_in").toLocalDate(), rs.getDate("check_out").toLocalDate(), user, rs.getInt("numero_persone"), rs.getString("numero_carta"), rs.getDate("data_scadenza_carta").toLocalDate(), rs.getString("cvi_carta"));
+                prenotazione.setCodicePrenotazione(rs.getInt("codice_prenotazione"));
                 Alloggio alloggio = new Alloggio(rs.getInt("numero_alloggio"), strutturaDAO.doRetrieveById(rs.getInt("fk_struttura")), rs.getDouble("prezzo_notte"), rs.getInt("numero_posti_letto"), rs.getString("tipo_alloggio"), rs.getString("alloggio.descrizione"), rs.getString("url_immagine"));
 
                 r.setIdRecensione(rs.getInt("idRecensione"));

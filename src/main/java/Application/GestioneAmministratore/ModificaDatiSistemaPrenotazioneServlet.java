@@ -40,7 +40,7 @@ public class ModificaDatiSistemaPrenotazioneServlet extends HttpServlet {
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
 
         Prenotazione p = new Prenotazione();
-        p.setFkUtente(fkUtente);
+        //p.setFkUtente(fkUtente);
         p.setCodicePrenotazione(codicePrenotazione);
         gestioneAmministratoreFacade.modificaDatiSistemaPrenotazione(p, LocalDate.parse(checkIn), LocalDate.parse(checkOut), numeroPersone, req.getSession());
 
