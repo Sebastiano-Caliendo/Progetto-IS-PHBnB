@@ -37,6 +37,8 @@ public class AggiungiAlloggioServlet extends HttpServlet {
         gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
         Struttura struttura = strutturaFacade.returnStruttura(idStruttura);
 
+        // aggiorno il numero di alloggi della struttura
+        struttura.setNumAlloggi(struttura.getNumAlloggi()+1);
         req.setAttribute("struttura", struttura);
 
         // prendo tutti gli alloggi della struttura

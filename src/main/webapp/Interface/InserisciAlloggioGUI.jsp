@@ -99,8 +99,8 @@
             </div>
 
             <div class="input">
-                <!-- <panel for="urlImmagine"> Url Immagine : </panel> -->
-                <input id="urlImmagine" type="text" name="urlImmagine" required  placeholder="Url immagine">
+                <!--<label for="file-upload">Carica un'immagine:</label> -->
+                <input type="file" id="file-upload" name="file-upload" accept="image/*">
             </div>
 
             <div class="input">

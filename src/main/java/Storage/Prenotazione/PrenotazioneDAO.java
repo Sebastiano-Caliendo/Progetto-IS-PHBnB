@@ -75,7 +75,7 @@ public class PrenotazioneDAO {
 
         try (Connection con = Connessione.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("select * from (prenotazione join utente on prenotazione.fk_utente = utente.email) join " +
+                    con.prepareStatement("select distinct * from (prenotazione join utente on prenotazione.fk_utente = utente.email) join " +
                                                 "occupa on prenotazione.codice_prenotazione = occupa.fk_prenotazione where occupa.fk_alloggio = ? and occupa.fk_strutturaAlloggio = ?");
 
             ps.setInt(1, alloggio.getNumeroAlloggio());

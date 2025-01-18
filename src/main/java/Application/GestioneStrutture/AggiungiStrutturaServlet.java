@@ -23,13 +23,13 @@ public class AggiungiStrutturaServlet extends HttpServlet {
         String nomeStruttura = req.getParameter("nomeStruttura");
         String via = req.getParameter("via");
         String citta = req.getParameter("citta");
-        int numAlloggi = Integer.parseInt(req.getParameter("numAlloggi"));
+        String numCivico = req.getParameter("numCivico");
         String descrizione = req.getParameter("descrizione");
         String urlImmagine = req.getParameter("urlImmagine");
 
         // inseriamo la struttura nel DB
         gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
-        strutturaFacade.aggiungiStruttura(host, nomeStruttura, via, citta, numAlloggi, descrizione, urlImmagine);
+        strutturaFacade.aggiungiStruttura(host, nomeStruttura, via, citta, numCivico, descrizione, urlImmagine);
 
         // passo il controllo alla jsp che mostrerà il riepilogo delle strutture
         RequestDispatcher dispatcher = req.getRequestDispatcher("RiepilogoStruttureGUI.jsp");

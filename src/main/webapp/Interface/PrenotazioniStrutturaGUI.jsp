@@ -5,7 +5,10 @@
 <%@ page import="Storage.Alloggio.Alloggio" %>
 <%@ page import="Storage.Alloggio.AlloggioDAO" %>
 <%@ page import="Application.GestioneStrutture.gestioneStrutturaFacade" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="Storage.Occupa.Occupa" %>
+<%@ page import="java.util.Map" %><%--
   Created by IntelliJ IDEA.
   User: ciril
   Date: 06/01/2025
@@ -41,13 +44,11 @@
 <body>
     <%@ include file="../WEB-INF/moduli/header.jsp"%>
     <%
-        List<Prenotazione> prenotazioni = (List<Prenotazione>) request.getAttribute("listaPrenotazioni");
+        /* questo hasmap mi consente di ottenere sia le informazioni che ci sono nel bean prenotazione
+           di un alloggio e sia le informazioni che ci sono nel bean occupa di un determinato alloggio
+           connesso con quella prenotazione */
+        HashMap<Prenotazione, Occupa> prenotazioneOccupa = (HashMap<Prenotazione, Occupa>) request.getAttribute("prenotazioneOccupa");
         Struttura struttura = (Struttura) request.getAttribute("struttura");
-        /*PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
-        gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
-        Struttura struttura = strutturaFacade.returnStruttura(1);
-        List<Prenotazione> prenotazioni = new ArrayList<>();
-        prenotazioni = strutturaFacade.visualizzaPrenotazioni(struttura);*/
     %>
 
     <div class="title mid-text">
@@ -59,19 +60,22 @@
         <div class="campo"><b>Check-In</b></div>
         <div class="campo"><b>Check-Out</b></div>
         <div class="campo"><b>Nome Registrato</b></div>
+        <div class="campo"><b>Numero Persone</b></div>
         <div class="campo"><b>Prezzo</b></div>
     </div>
 
     <hr class="prenotazione">
 
-    <% for(int i=0; i < prenotazioni.size(); i++) {
-        Prenotazione prenotazione = prenotazioni.get(i); %>
-        <div class="rigaPrenotazione normal-small-text">
-            <div class="valore"> 111 </div> <!-- creare una query in prenotazione che mi prende l'alloggio di riferimento -->
-            <div class="valore"> 20-12-2009 </div> <!-- modo per ricevere una stringa da un date -->
-            <div class="valore"> 20-12-2009 </div>
-            <div class="valore"> Domenico Cirillo </div> <!-- creare una query in prenotazione che mi prende il nome di chi ha fatto una prenotazione -->
-            <div class="valore"> 345.00 </div> <!-- creare una query che mi permette di ricevere il prezzo di una prenotazione -->
+    <% for (Map.Entry<Prenotazione, Occupa> entry : prenotazioneOccupa.entrySet()) {
+        Prenotazione prenotazione = entry.getKey();
+        Occupa occupa = entry.getValue(); %>
+        <div class="rigaPrenotazione small-text">
+            <div class="valore"> <%= occupa.getAlloggio().getNumeroAlloggio() %> </div>
+            <div class="valore"> <%= prenotazione.getCheckIn() %> </div>
+            <div class="valore"> <%= prenotazione.getCheckOut() %></div>
+            <div class="valore"> <%= prenotazione.getUtente().getNome() + " " + prenotazione.getUtente().getCognome() %> </div>
+            <div class="valore"> <%= prenotazione.getNumeroPersone() %></div>
+            <div class="valore"> <%= occupa.getCostoPrenotazione() %> </div>
         </div>
         <hr class="prenotazione">
     <% } %>

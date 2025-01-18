@@ -78,6 +78,36 @@ public class OccupaDAO {
         return list;
     }
 
+    public Occupa doRetrieveOccupaByPrenotazione(int codicePrenotazione) {
+        Occupa occupa = new Occupa();
+
+        try (Connection con = Connessione.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("select * from ((prenotazione join occupa on prenotazione.codice_prenotazione = occupa.fk_prenotazione) join " +
+                    "alloggio on occupa.fk_alloggio = alloggio.numero_alloggio and occupa.fk_strutturaAlloggio = alloggio.fk_struttura) where occupa.fk_prenotazione = ?");
+
+            ps.setInt(1, codicePrenotazione);
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()) {
+
+                //Utente utente = new UtenteDAO().doRetrieveById(rs.getString("fk_utente"));
+                Prenotazione prenotazione = new PrenotazioneDAO().doRetrieveById(rs.getInt("codice_prenotazione"));
+                Alloggio alloggio = new AlloggioDAO().doRetrieveById(rs.getInt("numero_alloggio"), rs.getInt("fk_strutturaAlloggio"));
+
+                occupa.setAlloggio(alloggio);
+                occupa.setPrenotazione(prenotazione);
+                occupa.setCostoPrenotazione(rs.getDouble("costo_prenotazione"));
+
+                //list.add(occupa);
+            }
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return occupa;
+    }
+
     public int doSave(Occupa occupa) {
         try (Connection con = Connessione.getConnection()) {
 

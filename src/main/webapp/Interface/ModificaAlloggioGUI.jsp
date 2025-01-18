@@ -73,8 +73,8 @@
             </div>
 
             <div class="input">
-                <panel for="urlImmagine"> <b>urlImmagine : </b></panel>
-                <input id="urlImmagine" value="<%= alloggio.getUrlImmagine() %>" type="text" name="urlImmagine" required>
+                <label for="file-upload">Carica un'immagine:</label>
+                <input type="file" value="<%= alloggio.getUrlImmagine() %>" id="file-upload" name="file-upload" accept="image/*">
             </div>
 
             <div class="input">

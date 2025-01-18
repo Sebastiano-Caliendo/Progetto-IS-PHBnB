@@ -67,13 +67,13 @@
             </div>
 
             <div class="input">
-                <panel for="numAlloggi"> <b>Numero alloggi : </b></panel>
-                <input id="numAlloggi" value="<%= struttura.getNumAlloggi() %>" type="number" name="numAlloggi" required  placeholder="Numero alloggi">
+                <panel for="numCivico"> <b>Numero Civico :</b> </panel>
+                <input id="numCivico" value="<%= struttura.getNumCivico() %>" type="text" name="numCivico" required  placeholder="numero civico">
             </div>
 
             <div class="input">
-                <panel for="urlImmagine"> <b>urlImmagine : </b></panel>
-                <input id="urlImmagine" value="<%= struttura.getUrlImmagine() %>" type="text" name="urlImmagine" required  placeholder="Url immagine">
+                <label for="file-upload">Carica un'immagine:</label>
+                <input type="file" value="<%= struttura.getUrlImmagine() %>" id="file-upload" name="file-upload" accept="image/*">
             </div>
 
             <div class="input">

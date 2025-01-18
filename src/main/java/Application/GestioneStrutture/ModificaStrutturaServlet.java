@@ -33,14 +33,14 @@ public class ModificaStrutturaServlet extends HttpServlet {
         String nomeStruttura = req.getParameter("nomeStruttura");
         String via = req.getParameter("via");
         String citta = req.getParameter("citta");
-        int numAlloggi = Integer.parseInt(req.getParameter("numAlloggi"));
+        String numCivico = req.getParameter("numAlloggi");
         String descrizione = req.getParameter("descrizione");
         String urlImmagine = req.getParameter("urlImmagine");
 
 
         // elimino la vecchia struttura dal DB ed inserisco la struttura modificata
         gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
-        strutturaFacade.modificaStruttura(host, nomeStruttura, via, citta, numAlloggi, descrizione, urlImmagine, oldIdStruttura);
+        strutturaFacade.modificaStruttura(host, nomeStruttura, via, citta, numCivico, descrizione, urlImmagine, oldIdStruttura);
 
         // ritorno alla jsp che mi fa vedere tutti gli alloggi della struttura
         RequestDispatcher dispatcher = req.getRequestDispatcher("Interface/RiepilogoStruttureGUI.jsp");

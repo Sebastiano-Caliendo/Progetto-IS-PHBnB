@@ -84,13 +84,14 @@
                 </div>
 
                 <div class="input">
-                    <!-- <panel for="numAlloggi"> Numero alloggi : </panel> -->
-                    <input id="numAlloggi" type="number" name="numAlloggi" required  placeholder="Numero alloggi">
+                    <!-- <panel for="citta"> Citta : </panel> -->
+                    <input id="numCivico" type="text" name="numCivico" required  placeholder="numero civico">
                 </div>
 
                 <div class="input">
                     <!-- <panel for="numAlloggi"> Numero alloggi : </panel> -->
-                    <input id="urlImmagine" type="text" name="urlImmagine" required  placeholder="Url immagine">
+                    <!--<label for="file-upload">Carica un'immagine:</label> -->
+                    <input type="file" id="file-upload" name="file-upload" accept="image/*">
                 </div>
 
                 <div class="input">

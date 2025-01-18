@@ -70,7 +70,7 @@
             <div style="border: 1px solid var(--color-primary);"> </div>
             <div class="valoriRecensione">
                 <div class="valoreNormale"> <span class="mid-text"> <%= recensioni.get(i).getAlloggio().getNumeroAlloggio() %> </span> </div>
-                <div class="valoreNormale"> <span class="small-text">DATA (convertire in string) </span> </div>
+                <div class="valoreNormale"> <span class="normal-small-text"> <%= recensioni.get(i).getDataRecensione() %> </span> </div>
                 <div class="valoreDescrizione"> <span class="small-text"> <%= recensioni.get(i).getDescrizione() %> </span> </div>
                 <div class="valoreNormale"> <span class="small-text"><%= recensioni.get(i).getUtente().getEmail() %> </span> </div>
                 <div class="valoreNormale"> <span class="big-text" style="color: var(--color-primary);"> <%= recensioni.get(i).getVotoRecensione() %> </span> </div>

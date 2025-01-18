@@ -1,6 +1,7 @@
 package Application.GestioneStrutture;
 
 import Application.GestioneAlloggi.gestioneAlloggioFacade;
+import Storage.Struttura.Struttura;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

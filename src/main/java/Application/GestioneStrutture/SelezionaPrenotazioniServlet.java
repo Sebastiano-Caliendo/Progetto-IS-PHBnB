@@ -1,5 +1,6 @@
 package Application.GestioneStrutture;
 
+import Storage.Occupa.Occupa;
 import Storage.Prenotazione.Prenotazione;
 import Storage.Struttura.Struttura;
 import jakarta.servlet.RequestDispatcher;
@@ -11,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @WebServlet(value = "/selezionaPrenotazioniServlet")
@@ -27,12 +29,12 @@ public class SelezionaPrenotazioniServlet extends HttpServlet {
         Struttura struttura = strutturaFacade.returnStruttura(idStruttura);
 
         // prendo la lista delle prenotazioni di quella struttura
-        List<Prenotazione> prenotazioniStruttura = new ArrayList<>();
-        prenotazioniStruttura = strutturaFacade.visualizzaPrenotazioni(struttura);
+        HashMap<Prenotazione, Occupa> prenotazioneOccupa = new HashMap<>();
+        prenotazioneOccupa = strutturaFacade.visualizzaPrenotazioni(struttura);
 
         // inserisco la lista delle prenotazioni nella richiesta in modo che la prossima JSP possa stampare
         // tutte le prenotazioni di questa struttura
-        req.setAttribute("listaPrenotazioni", prenotazioniStruttura);
+        req.setAttribute("prenotazioneOccupa", prenotazioneOccupa);
 
         // inserisco la struttura che servirà alla jsp : per avere il nome
         req.setAttribute("struttura", struttura);

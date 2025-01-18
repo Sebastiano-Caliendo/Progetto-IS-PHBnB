@@ -36,7 +36,7 @@ public class StrutturaDAO {
             List<Alloggio> list = new ArrayList<>();
 
             PreparedStatement ps = con.prepareStatement(
-                    "select distinct * from ((alloggio join struttura on alloggio.fk_struttura = ? ) join host on fk_host = email )" );
+                    "select distinct * from ((alloggio join struttura on alloggio.fk_struttura = struttura.id_struttura ) join host on fk_host = email ) where alloggio.fk_struttura = ?" );
 
             ps.setInt(1, struttura.getIdStruttura());
             ResultSet rs = ps.executeQuery();
