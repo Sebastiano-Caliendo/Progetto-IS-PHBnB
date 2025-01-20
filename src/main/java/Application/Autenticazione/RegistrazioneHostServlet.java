@@ -28,15 +28,19 @@ public class RegistrazioneHostServlet extends HttpServlet {
         String dataNascita = req.getParameter("dataNascita");
         String recapitoTelefonico = req.getParameter("recapitoTelefonico");
 
-        String address = "areaHost.jsp";
-
-        //Host h = new Host(email, nome, cognome, password, (Date) dataNascita, recapitoTelefonico);
+        Host h = new Host(email, nome, cognome, password, LocalDate.parse(dataNascita), recapitoTelefonico);
 
         AutenticazioneFacade autenticazioneFacade = new AutenticazioneFacade(req.getSession());
-        //autenticazioneFacade.registrazioneHost(h);
 
-        RequestDispatcher rd = req.getRequestDispatcher(address);
-        rd.forward(req, resp);
+        String address;
+
+        if(autenticazioneFacade.registrazioneHost(h)) {
+            address = "Interface/index.jsp";
+        } else {
+            address = "Interface/registrazioneHostGUI.jsp?error=1";
+        }
+
+        resp.sendRedirect(address);
     }
 
     @Override

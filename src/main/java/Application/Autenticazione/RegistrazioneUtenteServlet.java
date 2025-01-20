@@ -24,7 +24,7 @@ public class RegistrazioneUtenteServlet extends HttpServlet {
         String cognome = req.getParameter("cognome");
         String password = req.getParameter("password");
         String citta = req.getParameter("citta");
-        String numeroCivico = req.getParameter("numeroCivico");
+        String numeroCivico = req.getParameter("numCivico");
         String via = req.getParameter("via");
         String dataNascita = req.getParameter("dataNascita");
         String recapitoTelefonico = req.getParameter("recapitoTelefonico");
@@ -34,12 +34,15 @@ public class RegistrazioneUtenteServlet extends HttpServlet {
 
         AutenticazioneFacade autenticazioneFacade = new AutenticazioneFacade(req.getSession());
 
-        autenticazioneFacade.registrazioneUtente(u);
+        String address;
 
-        String address = "index.jsp";
+        if(autenticazioneFacade.registrazioneUtente(u)) {
+            address = "Interface/index.jsp";
+        } else {
+            address = "Interface/registrazioneUtenteGUI.jsp?error=1";
+        }
 
-        RequestDispatcher rd = req.getRequestDispatcher(address);
-        rd.forward(req, resp);
+        resp.sendRedirect(address);
     }
 
     @Override

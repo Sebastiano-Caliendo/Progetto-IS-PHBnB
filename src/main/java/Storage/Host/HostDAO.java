@@ -35,7 +35,6 @@ public class HostDAO {
     public Host doRetrieveById(String email) {
         try (Connection con = Connessione.getConnection()) {
 
-            Host h = null;
             PreparedStatement ps = con.prepareStatement("select * from host where email=?");
 
             ps.setString(1, email);
@@ -43,15 +42,19 @@ public class HostDAO {
             ResultSet rs = ps.executeQuery();
 
             if(rs.next()) {
+                Host h = new Host();
+
                 h.setEmail(rs.getString(1));
                 h.setNome(rs.getString(2));
                 h.setCognome(rs.getString(3));
                 h.setPassword(rs.getString(4));
                 h.setDataNascita(rs.getDate(5).toLocalDate());
                 h.setRecapitoTelefonico(rs.getString(6));
+
+                return h;
             }
 
-            return h;
+            return null;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -88,7 +91,7 @@ public class HostDAO {
     }
 
 
-    public int doSave(Host host) {
+    public void doSave(Host host) {
         try (Connection con = Connessione.getConnection()) {
 
             PreparedStatement ps = con.prepareStatement("insert into host (email, nome, cognome, password_, data_nascita, recapito_telefonico) values (?, ?, ?, SHA1(?), ?, ?)", Statement.RETURN_GENERATED_KEYS);
@@ -103,11 +106,6 @@ public class HostDAO {
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
             }
-
-            //controllare
-            ResultSet rs = ps.getGeneratedKeys();
-            rs.next();
-            return rs.getInt(1);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

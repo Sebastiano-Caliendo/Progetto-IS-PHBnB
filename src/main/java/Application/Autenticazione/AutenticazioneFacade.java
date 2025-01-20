@@ -14,20 +14,34 @@ public class AutenticazioneFacade {
         this.session = session;
     }
 
-    public void registrazioneUtente(Utente u) {
+    public boolean registrazioneUtente(Utente u) {
 
         UtenteDAO utenteDAO = new UtenteDAO();
+
+        if(utenteDAO.doRetrieveById(u.getEmail()) != null) {
+            return false;
+        }
+
         utenteDAO.doSave(u);
 
         session.setAttribute("utente", u);
+
+        return true;
     }
 
-    public void registrazioneHost(Host h) {
+    public boolean registrazioneHost(Host h) {
 
         HostDAO hostDAO = new HostDAO();
+
+        if(hostDAO.doRetrieveById(h.getEmail()) != null) {
+            return false;
+        }
+
         hostDAO.doSave(h);
 
         session.setAttribute("host", h);
+
+        return true;
     }
 
     public boolean login(String email, String password, String tipo) {

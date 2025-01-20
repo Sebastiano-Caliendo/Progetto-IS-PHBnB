@@ -1,0 +1,104 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#mainContainer {
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    background-image: url("../img/login.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#divLogin {
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 400px;
+    height: 450px;
+    border: 1px solid black;
+    border-radius: 25px;
+    align-content: center;
+    margin: auto 200px auto auto;
+}
+
+#divRegistrazione {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 400px;
+    height: 750px;
+    border: 1px solid black;
+    border-radius: 25px;
+    margin: auto 200px auto auto;
+}
+
+#divRegistrazioneHost {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 400px;
+    height: 550px;
+    border: 1px solid black;
+    border-radius: 25px;
+    margin: auto 200px auto auto;
+}
+
+#formLogin, #parAccesso, #parBentonato, #parRegistrazione {
+    text-align: center;
+}
+
+
+#emailLabel, #pwdLabel, #parBentonato, #parRegistrazione, #nomeLabel, #cognomeLabel, #cittaLabel, #numCivicoLabel, #viaLabel, #dataNascitaLabel, #recapitoTelefonicoLabel {
+    font-weight: bold;
+    font-size: 16pt;
+}
+
+#email, #password, #nome, #cognome, #citta, #numCivico, #via, #dataNascita, #recapitoTelefonico {
+    text-align: center;
+    width: 150px;
+    height: 35px;
+}
+
+#submitButtom {
+    width: 150px;
+    height: 35px;
+    background-color: darkgoldenrod;
+    font-weight: bold;
+    color: white;
+    font-size: 16pt;
+    border-radius: 5px;
+}
+
+#parAccesso {
+    font-size: 16pt;
+}
+
+#parErrore {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+
+#divForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.formElements {
+    width: 350px;
+    margin: 10px auto 10px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#submitButtom {
+    margin-top: 10px;
+}
+
+#linkRegHost {
+    color: black;
+    text-decoration: none;
+}
+

@@ -18,5 +18,6 @@
   <a href = "VisDatiSistemaGUI.jsp">Visualizza dati sistema</a>
   <a href = "loginUtenteGUI.jsp">Login utente</a>
   <a href = "loginHostGUI.jsp">Login host</a>
+  <a href = "registrazioneUtenteGUI.jsp">Registrazione utente</a>
 </body>
 </html>
