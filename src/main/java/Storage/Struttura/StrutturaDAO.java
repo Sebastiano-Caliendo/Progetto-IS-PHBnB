@@ -148,10 +148,27 @@ public class StrutturaDAO {
         }
     }
 
+    public void doUpdateNumeroAlloggi(int numAlloggi, int idStruttura) {
+        try (Connection con = Connessione.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(
+                    "UPDATE struttura SET numero_alloggi=? WHERE id_struttura=?");
+
+
+            ps.setInt(1, numAlloggi);
+            ps.setInt(2, idStruttura); // id da passare come parametro
+
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("UPDATE error.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void doUpdate(Struttura struttura, int idStruttura) {
         try (Connection con = Connessione.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "UPDATE prodotti SET fk_host=?, nome_struttura=?, via=?, numero_civico=?, citta=?, numero_alloggi=?, descrizione=?, url_immagine=? WHERE id_struttura=?");
+                    "UPDATE struttura SET fk_host=?, nome_struttura=?, via=?, numero_civico=?, citta=?, numero_alloggi=?, descrizione=?, url_immagine=? WHERE id_struttura=?");
 
             ps.setString(1, struttura.getHost().getEmail());
             ps.setString(2, struttura.getNomeStruttura());

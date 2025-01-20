@@ -27,6 +27,12 @@ public class gestioneAlloggioFacade {
         // creo l'alloggio che voglio inserire
         Alloggio alloggio = new Alloggio(numeroAlloggio, strutturaFacade.returnStruttura(idStruttura), prezzoNotte, numPostiLetto, tipoAlloggio, descrizione, urlImmagine);
         AlloggioDAO alloggioDAO = new AlloggioDAO();
+
+        Struttura struttura = strutturaFacade.returnStruttura(idStruttura);
+        StrutturaDAO strutturaDAO = new StrutturaDAO();
+        strutturaDAO.doUpdateNumeroAlloggi((struttura.getNumAlloggi()+1), idStruttura);
+
+
         List<Integer> verifica = alloggioDAO.doSave(alloggio);
         if(verifica.get(1) == alloggio.getNumeroAlloggio()){
             if(verifica.get(2) == alloggio.getStruttura().getIdStruttura())
@@ -45,6 +51,13 @@ public class gestioneAlloggioFacade {
 
     public List<Integer> eliminaAlloggio(int numeroAlloggio, int fkStruttura) {
         AlloggioDAO alloggioDAO = new AlloggioDAO();
+
+        gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
+        Struttura struttura = strutturaFacade.returnStruttura(fkStruttura);
+        StrutturaDAO strutturaDAO = new StrutturaDAO();
+        strutturaDAO.doUpdateNumeroAlloggi((struttura.getNumAlloggi()-1), fkStruttura);
+
+
         return alloggioDAO.doDelete(numeroAlloggio, fkStruttura);
     }
 

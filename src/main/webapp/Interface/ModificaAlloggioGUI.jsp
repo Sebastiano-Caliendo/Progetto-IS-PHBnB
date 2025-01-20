@@ -49,7 +49,7 @@
             if(callByServlet == 0)
                 servlet = "../";
         %>
-        <form action="<%= servlet %>modificaAlloggioServlet" method="post">
+        <form action="<%= servlet %>modificaAlloggioServlet" method="post" enctype="multipart/form-data">
             <input type="hidden" value="<%= alloggio.getNumeroAlloggio() %>" name="oldNumeroAlloggio">
             <input type="hidden" value="<%= alloggio.getStruttura().getIdStruttura() %>" name="idStruttura">
             <div class="input">
@@ -74,7 +74,7 @@
 
             <div class="input">
                 <label for="file-upload">Carica un'immagine:</label>
-                <input type="file" value="<%= alloggio.getUrlImmagine() %>" id="file-upload" name="file-upload" accept="image/*">
+                <input type="file" value="<%= alloggio.getUrlImmagine() %>" id="file-upload" name="urlImmagine" accept="image/*" required>
             </div>
 
             <div class="input">
@@ -96,7 +96,7 @@
                 <% if(callByServlet == 1) { %>
                 <img src="Interface/img/alloggio3.jpg">
                 <% } else {%>
-                <img src="img/alloggio3.jpg">
+                <img src="img/alloggi/alloggio3.jpg">
                 <% } %>
             </div>
         </div>
