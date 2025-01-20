@@ -19,21 +19,30 @@ public class LoginServlet extends HttpServlet {
 
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        boolean isUser = Boolean.parseBoolean(req.getParameter("isUser"));
+        String tipo = req.getParameter("tipo");
 
         String address;
 
-        if(isUser) {
-            address = "index.jsp";
+        AutenticazioneFacade autenticazioneFacade = new AutenticazioneFacade(req.getSession());
+        boolean flag;
+
+        if(tipo.equals("user")) {
+            flag = autenticazioneFacade.login(email, password, tipo);
+
+            if(flag)
+                address = "Interface/index.jsp";
+            else
+                address = "Interface/loginUtenteGUI.jsp?error=1";
         } else {
-            address = "areaHost.jsp";
+            flag = autenticazioneFacade.login(email, password, tipo);
+
+            if(flag)
+                address = "Interface/index.jsp";
+            else
+                address = "Interface/loginHostGUI.jsp?error=1";
         }
 
-        AutenticazioneFacade autenticazioneFacade = new AutenticazioneFacade(req.getSession());
-        autenticazioneFacade.login(email, password, isUser);
-
-        RequestDispatcher rd = req.getRequestDispatcher(address);
-        rd.forward(req, resp);
+        resp.sendRedirect(address);
     }
 
 }

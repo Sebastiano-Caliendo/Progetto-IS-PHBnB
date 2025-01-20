@@ -30,23 +30,31 @@ public class AutenticazioneFacade {
         session.setAttribute("host", h);
     }
 
-    public void login(String email, String password, boolean isUser) {
+    public boolean login(String email, String password, String tipo) {
 
-        if(isUser) {
+        if(tipo.equals("user")) {
             Utente u;
 
             UtenteDAO utenteDAO = new UtenteDAO();
             u = utenteDAO.doRetrieveByEmailAndPassword(email, password);
 
-            session.setAttribute("utente", u);
-        } else {
+            if(u != null)
+                session.setAttribute("utente", u);
+            else
+                return false;
+        } else if(tipo.equals("host")){
             Host h;
 
             HostDAO hostDAO = new HostDAO();
             h = hostDAO.doRetrieveByEmailAndPassword(email, password);
 
-            session.setAttribute("host", h);
+            if(h != null)
+                session.setAttribute("host", h);
+            else
+                return false;
         }
+
+        return true;
     }
 
     public void logout() {

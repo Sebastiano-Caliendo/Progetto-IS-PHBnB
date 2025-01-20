@@ -56,8 +56,6 @@ public class UtenteDAO {
 
     public Utente doRetrieveByEmailAndPassword(String email, String password) {
         try (Connection con = Connessione.getConnection()) {
-
-            Utente u = null;
             PreparedStatement ps = con.prepareStatement("select * from utente where email=? and password_=SHA1(?)");
 
             ps.setString(1, email);
@@ -66,6 +64,8 @@ public class UtenteDAO {
             ResultSet rs = ps.executeQuery();
 
             if(rs.next()) {
+                Utente u = new Utente();
+
                 u.setEmail(rs.getString(1));
                 u.setNome(rs.getString(2));
                 u.setCognome(rs.getString(3));
@@ -76,10 +76,11 @@ public class UtenteDAO {
                 u.setDataNascita(rs.getDate(8).toLocalDate());
                 u.setRecapitoTelefonico(rs.getString(9));
                 u.setAdmin(false);
+
+                return u;
             }
 
-            return u;
-
+            return null;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

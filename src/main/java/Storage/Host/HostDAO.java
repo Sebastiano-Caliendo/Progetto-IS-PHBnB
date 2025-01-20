@@ -60,8 +60,6 @@ public class HostDAO {
 
     public Host doRetrieveByEmailAndPassword(String email, String password) {
         try (Connection con = Connessione.getConnection()) {
-
-            Host h = null;
             PreparedStatement ps = con.prepareStatement("select * from host where email=? and password_=SHA1(?)");
 
             ps.setString(1, email);
@@ -70,15 +68,19 @@ public class HostDAO {
             ResultSet rs = ps.executeQuery();
 
             if(rs.next()) {
+                Host h = new Host();
+
                 h.setEmail(rs.getString(1));
                 h.setNome(rs.getString(2));
                 h.setCognome(rs.getString(3));
                 h.setPassword(rs.getString(4));
                 h.setDataNascita(rs.getDate(5).toLocalDate());
                 h.setRecapitoTelefonico(rs.getString(6));
+
+                return h;
             }
 
-            return h;
+            return null;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
