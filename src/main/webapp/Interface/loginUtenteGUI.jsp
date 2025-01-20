@@ -13,20 +13,20 @@
 
     <div id="mainContainer">
         <div id="divLogin">
-            <p id="parBentonato" class="formElements">BENTORNATO!<p/>
-            <p id="parAccesso" class="formElements">Accedi a PHB&B</p>
+            <p id="parBentonato" class="loginElements">BENTORNATO!<p/>
+            <p id="parAccesso" class="loginElements">Accedi a PHB&B</p>
 
             <%if(error != null && error.equals("1")) {%>
-                <p id="parErrore">Credenziali errate</p>
+                <p id="parErrore" class="loginElements">Credenziali errate</p>
             <%}%>
 
             <form id="formLogin" action="../login" method="POST">
-                <label for="email" id="emailLabel" class="formElements">Email</label><br>
-                <input type="text" id="email" name="email" class="formElements"><br>
-                <label for="password" id="pwdLabel" class="formElements">Password</label><br>
-                <input type="password" id="password" name="password" class="formElements"><br>
+                <label for="email" id="emailLabel" class="loginElements">Email</label><br>
+                <input type="text" id="email" name="email" class="loginElements"><br>
+                <label for="password" id="pwdLabel" class="loginElements">Password</label><br>
+                <input type="password" id="password" name="password" class="loginElements"><br>
                 <input type="hidden" value="user" name="tipo">
-                <input type="submit" id="submitButtom" value="Accedi" class="formElements">
+                <input type="submit" id="submitButtom" value="Accedi" class="loginElements">
             </form>
         </div>
     </div>
