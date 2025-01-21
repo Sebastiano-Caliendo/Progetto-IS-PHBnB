@@ -32,8 +32,7 @@ public class EliminaAlloggioServlet extends HttpServlet {
         gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
         Struttura struttura = strutturaFacade.returnStruttura(idStruttura);
 
-        // decremento il numero di alloggi della struttura
-        struttura.setNumAlloggi(struttura.getNumAlloggi()-1);
+        // inserisco la struttura nella richiesta
 
         req.setAttribute("struttura", struttura);
 

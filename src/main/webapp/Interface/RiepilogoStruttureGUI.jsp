@@ -81,7 +81,17 @@
                         <div class="containerRigaStruttura">
                             <div class="rigaStruttura">
                                 <div class="elementiStruttura" onclick="submitForm(<%= i %>)">
-                                    <div class="immagine"><img src="img/struttura1.jpg"></div>
+                                    <%
+                                        String urlImmagine = strutture.get(i).getUrlImmagine();
+                                        String replace = "Interface/";
+                                        if(callByServlet == 0) { // chiamata da jsp
+                                            urlImmagine = urlImmagine.replace(replace, "");
+                                        }
+                                        else  {  // chiamata da servlet
+
+                                        }
+                                    %>
+                                    <div class="immagine"><img src="<%= urlImmagine %>"></div>
                                     <div class="title normal-text"><%= strutture.get(i).getNomeStruttura() %></div>
                                     <div class="numAlloggi small-text"> <b>Numero Alloggi</b> : <%= strutture.get(i).getNumAlloggi() %></div>
 

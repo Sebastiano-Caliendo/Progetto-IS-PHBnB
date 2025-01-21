@@ -4,4 +4,64 @@
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
          version="6.0">
 
+<servlet>
+    <servlet-name>AggiungiStrutturaServlet</servlet-name>
+    <servlet-class>Application.GestioneStrutture.AggiungiStrutturaServlet</servlet-class>
+    <multipart-config>
+        <max-file-size>10485760</max-file-size> <!-- Limite di 10 MB -->
+        <max-request-size>20971520</max-request-size> <!-- Limite di 20 MB -->
+        <file-size-threshold>0</file-size-threshold>
+    </multipart-config>
+</servlet>
+
+    <servlet>
+        <servlet-name>AggiungiAlloggioServlet</servlet-name>
+        <servlet-class>Application.GestioneAlloggi.AggiungiAlloggioServlet</servlet-class>
+        <multipart-config>
+            <max-file-size>10485760</max-file-size> <!-- Limite di 10 MB -->
+            <max-request-size>20971520</max-request-size> <!-- Limite di 20 MB -->
+            <file-size-threshold>0</file-size-threshold>
+        </multipart-config>
+    </servlet>
+
+    <servlet>
+        <servlet-name>ModificaAlloggioServlet</servlet-name>
+        <servlet-class>Application.GestioneAlloggi.ModificaAlloggioServlet</servlet-class>
+        <multipart-config>
+            <max-file-size>10485760</max-file-size> <!-- Limite di 10 MB -->
+            <max-request-size>20971520</max-request-size> <!-- Limite di 20 MB -->
+            <file-size-threshold>0</file-size-threshold>
+        </multipart-config>
+    </servlet>
+
+    <servlet>
+        <servlet-name>ModificaStrutturaServlet</servlet-name>
+        <servlet-class>Application.GestioneStrutture.ModificaStrutturaServlet</servlet-class>
+        <multipart-config>
+            <max-file-size>10485760</max-file-size> <!-- Limite di 10 MB -->
+            <max-request-size>20971520</max-request-size> <!-- Limite di 20 MB -->
+            <file-size-threshold>0</file-size-threshold>
+        </multipart-config>
+    </servlet>
+
+<servlet-mapping>
+    <servlet-name>AggiungiStrutturaServlet</servlet-name>
+    <url-pattern>/aggiungiStrutturaServlet</url-pattern>
+</servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ModificaStrutturaServlet</servlet-name>
+        <url-pattern>/modificaStrutturaServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>AggiungiAlloggioServlet</servlet-name>
+        <url-pattern>/aggiungiAlloggioServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ModificaAlloggioServlet</servlet-name>
+        <url-pattern>/modificaAlloggioServlet</url-pattern>
+    </servlet-mapping>
+
 </web-app>

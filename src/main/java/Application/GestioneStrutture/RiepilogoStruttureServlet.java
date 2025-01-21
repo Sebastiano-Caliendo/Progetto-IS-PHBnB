@@ -1,6 +1,7 @@
 package Application.GestioneStrutture;
 
 import Storage.Host.Host;
+import Storage.Host.HostDAO;
 import Storage.Struttura.Struttura;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -22,6 +23,8 @@ public class RiepilogoStruttureServlet extends HttpServlet {
         // quando l'host accede, lo salviamo nella sessione,
         // quindi prendiamo le info dell'host dalla sessione
         Host host = (Host) req.getSession().getAttribute("host");
+        /*HostDAO hostDAO = new HostDAO();
+        Host host = hostDAO.doRetrieveById("pintocarlo09@gmail.com");*/
 
         // cerco tutte le strutture associate all'host
         gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();

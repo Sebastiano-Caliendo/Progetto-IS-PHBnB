@@ -49,8 +49,9 @@
             if(callByServlet == 0)
                 servlet = "../";
         %>
-        <form action="<%= servlet %>modificaStrutturaServlet" method="post">
-            <input type="hidden" value="<%= struttura.getIdStruttura() %>" name="oldIdStruttura">
+        <form action="<%= servlet %>modificaStrutturaServlet" method="post" enctype="multipart/form-data">
+            <% System.out.println("id struttura numero = " + struttura.getIdStruttura());%>
+            <input type="hidden" value="<%= struttura.getIdStruttura() %>" name="idStruttura">
             <div class="input">
                 <panel for="nomeStruttura"> <b>Nome Struttura :</b> </panel>
                 <input id="nomeStruttura" value="<%= struttura.getNomeStruttura() %>" type="text" name="nomeStruttura" required placeholder="Nome struttura">
@@ -73,7 +74,7 @@
 
             <div class="input">
                 <label for="file-upload">Carica un'immagine:</label>
-                <input type="file" value="<%= struttura.getUrlImmagine() %>" id="file-upload" name="file-upload" accept="image/*">
+                <input type="file" value="<%= struttura.getUrlImmagine() %>" id="file-upload" name="urlImmagine" accept="image/*" required>
             </div>
 
             <div class="input">
@@ -95,7 +96,7 @@
                 <% if(callByServlet == 1) { %>
                 <img src="Interface/img/struttura1.jpg">
                 <% } else {%>
-                <img src="img/struttura1.jpg">
+                <img src="img/strutture/struttura1.jpg">
                 <% } %>
             </div>
         </div>
@@ -104,7 +105,7 @@
                 <% if(callByServlet == 1) { %>
                 <img src="Interface/img/struttura4.jpg">
                 <% } else {%>
-                <img src="img/struttura4.jpg">
+                <img src="img/strutture/struttura4.jpg">
                 <% } %>
             </div>
             <div class="ele1" style="padding: 5%; display: flex; align-items: center;"> Un aspetto distintivo di PHB&B è la funzionalità "modifica struttura", che permette agli utenti di modificare facilmente le prenotazioni in caso di imprevisti, adattando la scelta all’ultimo minuto. Con conferme istantanee e recensioni verificate, PHB&B garantisce un'esperienza di viaggio senza stress, rendendo ogni soggiorno ancora più personalizzabile e conveniente.

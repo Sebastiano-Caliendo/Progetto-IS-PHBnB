@@ -3,6 +3,7 @@ package Application.GestioneStrutture;
 import Application.GestioneAlloggi.gestioneAlloggioFacade;
 import Storage.Alloggio.Alloggio;
 import Storage.Host.Host;
+import Storage.Host.HostDAO;
 import Storage.Struttura.Struttura;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -10,6 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -19,12 +21,20 @@ public class ModificaStrutturaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("callByServlet", "yes");
+
+        // Debug per stampare tutti i parametri della richiesta
+        for (String param : req.getParameterMap().keySet()) {
+            System.out.println(param + " = " + req.getParameter(param));
+        }
+
         // prendiamo l'oggetto host dalla sessione perchè ci serve l'fkHost da associare alla struttura
         // L'host nella pagina modifica.jsp non inserirà il campo fk_host
-        Host host = (Host) req.getSession().getAttribute("host");
+        //Host host = (Host) req.getSession().getAttribute("host");
+        HostDAO hostDAO = new HostDAO();
+        Host host = hostDAO.doRetrieveById("pintocarlo09@gmail.com");
 
         // prende il vecchio id della struttura che sarà sicuramente cambiato perchè id_struttura è auto_increment
-        int oldIdStruttura = Integer.parseInt(req.getParameter("oldIdStruttura"));
+        int oldIdStruttura = Integer.parseInt(req.getParameter("idStruttura"));
 
         // prendiamo tutti i valori della struttura che si vuole inserire
 
@@ -35,7 +45,38 @@ public class ModificaStrutturaServlet extends HttpServlet {
         String citta = req.getParameter("citta");
         String numCivico = req.getParameter("numAlloggi");
         String descrizione = req.getParameter("descrizione");
-        String urlImmagine = req.getParameter("urlImmagine");
+        //String urlImmagine = req.getParameter("urlImmagine");
+
+        //prende il type file
+        Part filePart = req.getPart("urlImmagine");
+
+        // prendi nome del file caricato (serve solo per catturare l'estensione)
+        String fileName = filePart.getSubmittedFileName();
+
+        // prendi estensione del file caricato
+        String fileExtension = fileName.substring(fileName.lastIndexOf(".") + 1);
+
+        //dove dev'essere inserita l'immagine
+        String directory = "Interface/img/strutture";
+
+        //percorso
+        String filePath =
+                getServletContext().getRealPath("/" + directory) + "\\" + nomeStruttura + "." + fileExtension;
+
+        // salva file (inserirlo nel percorso passato [cartella])
+
+        filePart.write(filePath);
+        /*File savedFile = new File(filePath);
+        if (savedFile.exists()) {
+            System.out.println("File salvato correttamente in: " + filePath);
+        } else {
+            System.out.println("Errore: il file non è stato salvato!");
+        }*/
+
+
+        // setta url nel prodotto inserito
+        //p.setUrlImmagine(directory + p.getId_Prodotto() + "." + fileExtension);
+        String urlImmagine = directory + "/" + nomeStruttura + "." + fileExtension;
 
 
         // elimino la vecchia struttura dal DB ed inserisco la struttura modificata

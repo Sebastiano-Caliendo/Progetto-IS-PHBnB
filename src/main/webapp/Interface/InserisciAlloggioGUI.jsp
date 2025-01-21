@@ -50,7 +50,7 @@
                 <% if(callByServlet == 1) { %>
                     <img src="Interface/img/alloggio1.jpg">
                 <% } else {%>
-                    <img src="img/alloggio1.jpg">
+                    <img src="img/alloggi/alloggio1.jpg">
                 <% } %>
             </div>
             <div class="ele2" style="padding: 5%; display: flex; align-items: center;">
@@ -64,7 +64,7 @@
                 <% if(callByServlet == 1) { %>
                     <img src="Interface/img/alloggio2.jpg">
                 <% } else {%>
-                    <img src="img/alloggio2.jpg">
+                    <img src="img/alloggi/alloggio2.jpg">
                 <% } %>
             </div>
         </div>
@@ -76,7 +76,7 @@
             if(callByServlet == 0)
                 servlet = "../";
         %>
-        <form action="<%= servlet %>aggiungiAlloggioServlet" method="post">
+        <form action="<%= servlet %>aggiungiAlloggioServlet" method="post" enctype="multipart/form-data">
             <input type="hidden" value="<%= idStruttura %>" name="idStruttura">
             <div class="input">
                 <!-- <panel for="numeroAlloggio"> Numero Alloggio : </panel> -->
@@ -100,7 +100,7 @@
 
             <div class="input">
                 <!--<label for="file-upload">Carica un'immagine:</label> -->
-                <input type="file" id="file-upload" name="file-upload" accept="image/*">
+                <input type="file" id="file-upload" name="urlImmagine" accept="image/*" required>
             </div>
 
             <div class="input">
