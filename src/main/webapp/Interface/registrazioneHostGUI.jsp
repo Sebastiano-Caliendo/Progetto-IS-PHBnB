@@ -52,6 +52,9 @@
                 </div>
 
                 <input type="submit" id="submitButtom" value="Registrati">
+                <br>
+                <br>
+                <a href = "loginHostGUI.jsp" style = "text-decoration: none; font-family: 'Montserrat', sans-serif; color: black;">Hai già un'account? Accedi qui!</a>
             </form>
         </div>
     </div>

@@ -26,11 +26,9 @@ public class ModificaDatiSistemaStrutturaServlet extends HttpServlet {
         String urlImmagine = req.getParameter("urlImmagine");
 
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
-
         gestioneAmministratoreFacade.modificaDatiSistemaStruttura((Host) req.getSession().getAttribute("host"), nomeStruttura, via, citta, numAlloggi ,numCivico, descrizione, urlImmagine, idStruttura, req.getSession());
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("VisDatiSistemaGUI.jsp");
-        dispatcher.forward(req, resp);
+        resp.sendRedirect(req.getContextPath() + "/Interface/VisDatiSistemaGUI.jsp");
     }
 
     @Override

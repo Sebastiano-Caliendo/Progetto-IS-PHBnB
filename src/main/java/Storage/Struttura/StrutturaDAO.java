@@ -60,6 +60,7 @@ public class StrutturaDAO {
 
                 Host host = new Host(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password_"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"));
 
+                struttura.setIdStruttura(rs.getInt("id_struttura"));
                 struttura.setHost(host);
                 struttura.setNomeStruttura(rs.getString("nome_struttura"));
                 struttura.setVia(rs.getString("via"));
@@ -151,7 +152,7 @@ public class StrutturaDAO {
     public void doUpdate(Struttura struttura, int idStruttura) {
         try (Connection con = Connessione.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "UPDATE prodotti SET fk_host=?, nome_struttura=?, via=?, numero_civico=?, citta=?, numero_alloggi=?, descrizione=?, url_immagine=? WHERE id_struttura=?");
+                    "UPDATE struttura SET fk_host=?, nome_struttura=?, via=?, numero_civico=?, citta=?, numero_alloggi=?, descrizione=?, url_immagine=? WHERE id_struttura=?");
 
             ps.setString(1, struttura.getHost().getEmail());
             ps.setString(2, struttura.getNomeStruttura());

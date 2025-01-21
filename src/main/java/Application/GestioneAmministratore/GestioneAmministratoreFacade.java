@@ -17,6 +17,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GestioneAmministratoreFacade {
@@ -165,7 +166,8 @@ public class GestioneAmministratoreFacade {
         }
         if(successo){
             HostDAO hostDAO = new HostDAO();
-            hostDAO.doUpdate(h, email, nome, cognome, password, recapitoTelefonico);
+            Host host = hostDAO.doRetrieveById(h.getEmail());
+            hostDAO.doUpdate(host, email, nome, cognome, password, recapitoTelefonico);
         }
     }
 
@@ -183,7 +185,7 @@ public class GestioneAmministratoreFacade {
         }
     }
 
-    public void modificaDatiSistemaRecensione(int idRecensione, int codicePrenotazione, HttpSession session){
+   /* public void modificaDatiSistemaRecensione(int idRecensione, int codicePrenotazione, HttpSession session){
         boolean successo = false;
 
         if(proxy.isAutenticato(session)){
@@ -196,7 +198,7 @@ public class GestioneAmministratoreFacade {
             Recensione recensione = recensioneDAO.doRetrieveByCodicePrenotazione(codicePrenotazione);
             recensioneDAO.doUpdate(recensione, idRecensione);
         }
-    }
+    }*/
 
     public void modificaDatiSistemaStruttura(Host host, String nomeStruttura, String via, String citta, int numAlloggi, String numCivico, String descrizione, String urlImmagine, int idStruttura, HttpSession session){
         boolean successo = false;
@@ -266,7 +268,7 @@ public class GestioneAmministratoreFacade {
             recensioneDAO.doDelete(idRecensione);
         }
     }
-    public void cancellazioneDatiSitemaStruttura(int idStruttura, int numAlloggio, HttpSession session){
+    public void cancellazioneDatiSistemaStruttura(int idStruttura, HttpSession session){
         boolean successo = false;
 
         if(proxy.isAutenticato(session)){
@@ -275,10 +277,16 @@ public class GestioneAmministratoreFacade {
             System.out.println("Operazione non permessa.");
         }
         if(successo){
-            AlloggioDAO alloggioDAO = new AlloggioDAO();
             StrutturaDAO strutturaDAO = new StrutturaDAO();
+            AlloggioDAO alloggioDAO = new AlloggioDAO();
+            List<Alloggio> alloggi;
+            alloggi = alloggioDAO.doRetrieveAll();
+            for(Alloggio a: alloggi){
+                if(a.getStruttura().getIdStruttura() == idStruttura){
+                    alloggioDAO.doDelete(a.getNumeroAlloggio(), a.getStruttura().getIdStruttura());
+                }
+            }
             strutturaDAO.doDelete(idStruttura);
-            alloggioDAO.doDelete(numAlloggio, idStruttura);
         }
     }
 }

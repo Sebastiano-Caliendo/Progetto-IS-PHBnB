@@ -23,6 +23,7 @@ public class PrenotazioneDAO {
                 Prenotazione p = new Prenotazione();
                 Utente utente = new Utente(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password_"), rs.getString("citta"), rs.getString("numero_civico"), rs.getString("via"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"), rs.getBoolean("isAdmin"));
 
+                p.setCodicePrenotazione(rs.getInt("codice_prenotazione"));
                 p.setCheckIn(rs.getDate("check_in").toLocalDate());
                 p.setCheckOut(rs.getDate("check_out").toLocalDate());
                 p.setUtente(utente);

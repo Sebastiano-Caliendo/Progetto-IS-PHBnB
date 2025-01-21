@@ -1,6 +1,8 @@
 package Application.GestioneAmministratore;
 
 import Storage.Prenotazione.Prenotazione;
+import Storage.Utente.Utente;
+import Storage.Utente.UtenteDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -23,29 +25,30 @@ public class ModificaDatiSistemaPrenotazioneServlet extends HttpServlet {
         String checkOut = req.getParameter("checkOutPrenotazione");
         String fkUtente = req.getParameter("idUtenteFk");
         int numeroPersone = Integer.parseInt(req.getParameter("numeroPersonePrenotazione"));
-        int numeroAlloggio = Integer.parseInt(req.getParameter("numeroAlloggioPrenotazione"));
-        int fkStruttura = Integer.parseInt(req.getParameter("fkStrutturaPrenotazione"));
-
-        /*SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        LocalDate checkInDate;
-        LocalDate checkOutDate;
-
-        try{
-            checkInDate = (Date) formatter.parse(checkIn);
-            checkOutDate = (Date) formatter.parse(checkOut);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }*/
+        String numeroCarta = req.getParameter("numeroCartaPrenotazione");
+        LocalDate dataScadenzaCarta = LocalDate.parse(req.getParameter("dataScadenzaCartaPrenotazione"));
+        String cviCarta = req.getParameter("cviCartaPrenotazione");
 
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
 
         Prenotazione p = new Prenotazione();
-        //p.setFkUtente(fkUtente);
         p.setCodicePrenotazione(codicePrenotazione);
+        p.setCheckIn(LocalDate.parse(checkIn));
+        p.setCheckOut(LocalDate.parse(checkOut));
+        p.setNumeroPersone(numeroPersone);
+        p.setCviCarta(cviCarta);
+        p.setDataScadenzaCarta(dataScadenzaCarta);
+
+        UtenteDAO utenteDAO = new UtenteDAO();
+        Utente utente = utenteDAO.doRetrieveById(fkUtente);
+
+        p.setUtente(utente);
+        p.setNumeroCartaCredito(numeroCarta);
+
         gestioneAmministratoreFacade.modificaDatiSistemaPrenotazione(p, LocalDate.parse(checkIn), LocalDate.parse(checkOut), numeroPersone, req.getSession());
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("VisDatiSistemaGUI.jsp");
-        dispatcher.forward(req, resp);
+        resp.sendRedirect(req.getContextPath() + "/Interface/VisDatiSistemaGUI.jsp");
+
     }
 
     @Override

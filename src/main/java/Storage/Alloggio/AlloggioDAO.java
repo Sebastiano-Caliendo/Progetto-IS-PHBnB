@@ -151,7 +151,7 @@ public class AlloggioDAO  {
     public void doUpdate(Alloggio alloggio, int numeroAlloggio, int fkStruttura) {
         try (Connection con = Connessione.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "UPDATE alloggio SET numero_alloggio =?, fk_struttura =?, prezzo_notte =?, numero_posti_letto =?, tipo_alloggio =?, descrizione=?, url_immagine=? WHERE numero_alloggio=? and id_struttura =?");
+                    "UPDATE alloggio SET numero_alloggio =?, fk_struttura =?, prezzo_notte =?, numero_posti_letto =?, tipo_alloggio =?, descrizione=?, url_immagine=? WHERE numero_alloggio=? and fk_struttura =?");
 
             ps.setInt(1, alloggio.getNumeroAlloggio());
             ps.setInt(2, alloggio.getStruttura().getIdStruttura());
