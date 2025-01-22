@@ -21,21 +21,22 @@ public class ModificaDatiPersonaliUtenteServlet extends HttpServlet {
         String email = req.getParameter("email");
         String nome = req.getParameter("nome");
         String cognome = req.getParameter("cognome");
-        String password = req.getParameter("password");
+        String vecchiaPassword = req.getParameter("vecchiaPassword");
+        String nuovaPassword = req.getParameter("nuovaPassword");
+        String confermaPassword = req.getParameter("confermaPassword");
         String citta = req.getParameter("citta");
-        String numeroCivico = req.getParameter("numeroCivico");
+        String numeroCivico = req.getParameter("numCivico");
         String via = req.getParameter("via");
         String recapitoTelefonico = req.getParameter("recapitoTelefonico");
 
-        Utente u = (Utente) req.getSession().getAttribute("Utente");
+        Utente u = (Utente) req.getSession().getAttribute("utente");
 
-        String address = "areaUtente.jsp";
+        String address = "Interface/areaUtenteGUI.jsp";
 
         AutenticazioneFacade autenticazioneFacade = new AutenticazioneFacade(req.getSession());
-        autenticazioneFacade.modificaDatiPersonaliUtente(u, email, nome, cognome, password, citta, numeroCivico, via, recapitoTelefonico);
+        autenticazioneFacade.modificaDatiPersonaliUtente(u, email, nome, cognome, nuovaPassword, citta, numeroCivico, via, recapitoTelefonico);
 
-        RequestDispatcher rd = req.getRequestDispatcher(address);
-        rd.forward(req, resp);
+        resp.sendRedirect(address);
     }
 
     @Override

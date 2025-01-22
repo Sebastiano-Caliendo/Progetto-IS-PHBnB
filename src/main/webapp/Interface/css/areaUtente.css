@@ -1,0 +1,100 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#mainContainer {
+    height: 90vh;
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    border-top: 1px solid darkgoldenrod;
+}
+
+#leftContainer {
+    height: inherit;
+    width: 15%;
+    border-right: 2px solid darkgoldenrod;
+}
+
+#rightContainer {
+    display: flex;
+    flex-direction: column;
+    height: inherit;
+    width: 85%;
+    text-align: center;
+}
+
+#divAreaAccount, #divPrenotazioni {
+    font-family: Arial, serif;
+    font-size: 16pt;
+    height: 10%;
+    text-align: center;
+    align-content: center;
+    border-bottom: 1px solid darkgoldenrod;
+}
+
+#linkAreaAccount, #linkPrenotazioni {
+    text-decoration: none;
+    color: black;
+}
+
+#linkAreaAccount:hover, #linkPrenotazioni:hover {
+    color: goldenrod;
+}
+
+#topContainer {
+    text-align: center;
+    height: 10%;
+    padding: 50px;
+}
+
+
+#parAreaUtente {
+    color: darkgoldenrod;
+    font-family: Arial, serif;
+    font-size: 26pt;
+    font-weight: bold;
+}
+
+#midContainer {
+    text-align: center;
+    height: 80%;
+}
+
+#divDatiUtente {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 75%;
+    margin: auto;
+    border: 1px solid darkgoldenrod;
+    border-radius: 25px;
+}
+
+.divDati {
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid darkgoldenrod;
+}
+
+#bottomContainer {
+    height: 10%;
+    text-align: right;
+    padding-right: 50px;
+}
+
+#linkModificaDati {
+    font-size: 16pt;
+    font-weight: bold;
+    color: darkgoldenrod;
+    text-decoration: underline;
+}
+
+.parDati {
+    font-weight: bold;
+}
