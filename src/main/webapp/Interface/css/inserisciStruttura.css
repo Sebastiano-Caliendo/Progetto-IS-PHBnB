@@ -4,7 +4,9 @@
 
 body {
     margin-top: 20vh;
-    background-color: var(--color-primary);
+    background-color: var(--rosa-bianchissimo);
+    /*background-image: url("../img/alloggio4.jpg");
+    background-repeat: no-repeat;*/
 }
 
 /* contiene le immagini ed il form, contenitore */
@@ -24,6 +26,7 @@ form input[type="submit"] {
 
 /* contiene le immagini e le descrizioni */
 .immagini {
+    align-content: center;
     text-align: center;
     width: 50%;
 }
@@ -49,7 +52,7 @@ form {
     justify-content: center;
     flex-direction: column;
     display: flex;
-    background-color: var(--color-primary);
+    /*background-color: var(--color-primary);*/
     margin: 0 auto;
     margin-top: 3%;
     height: 100%;
@@ -67,12 +70,35 @@ form {
 }
 
 /* la seconda riga che contiene 1 descrizione ed 1 immagine ma con ordine inverso rispetto alla prima */
-.riga2 {
+/*.riga2 {
     text-align: center;
     flex-direction: row;
     display: flex;
     height: 50%;
     width: 100%;
+}*/
+.riga2 {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    display: flex;
+    height: 80%;
+    width : 100%;
+}
+
+.title-img {
+    overflow: hidden;
+    width: 100%;
+}
+
+.img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    /*width : 50%;*/
+    overflow: hidden;
 }
 
 /* gli elementi della riga1 e della riga2 */
@@ -97,6 +123,7 @@ img {
 
 /* contiene l'input ed anche il panel per le pagine che effettuano modifiche */
 .input {
+    font-style: italic;
     align-items: center;
     width: 100%;
     column-gap: 20px;
@@ -112,7 +139,7 @@ panel {
 input {
     height : 30px;
     border-radius: 20px;
-    border : 1px solid black;
+    border : 2px solid var(--color-primary);
     width: 100%;
     align-content: center;
     text-align: center;
@@ -123,5 +150,5 @@ textarea {
     align-content: center;
     text-align: center;
     border-radius: 20px;
-    border : 1px solid black;
+    border : 2px solid var(--color-primary);
 }

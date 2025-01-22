@@ -67,6 +67,7 @@ public class StrutturaDAO {
                 struttura.setCitta(rs.getString("citta"));
                 struttura.setNumAlloggi(rs.getInt("numero_alloggi"));
                 struttura.setDescrizione(rs.getString("descrizione"));
+                struttura.setUrlImmagine(rs.getString("url_immagine"));
                 list.add(struttura);
             }
 
@@ -97,6 +98,7 @@ public class StrutturaDAO {
                 struttura.setCitta(rs.getString("citta"));
                 struttura.setNumAlloggi(rs.getInt("numero_alloggi"));
                 struttura.setDescrizione(rs.getString("descrizione"));
+                struttura.setUrlImmagine(rs.getString("url_immagine"));
 
                 return struttura;
             }
