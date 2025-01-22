@@ -27,6 +27,8 @@ public class RedirectToModificaStrutturaServlet extends HttpServlet {
         gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
         Struttura struttura = strutturaFacade.returnStruttura(idStruttura);
 
+        System.out.println("url Immagine in redirect : " + struttura.getUrlImmagine());
+
         //aggiungiamo la struttura nella richiesta
         req.setAttribute("struttura", struttura);
 
