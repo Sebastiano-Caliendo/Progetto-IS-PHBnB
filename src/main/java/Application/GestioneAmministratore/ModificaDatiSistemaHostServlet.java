@@ -24,8 +24,10 @@ public class ModificaDatiSistemaHostServlet extends HttpServlet {
         String recapitoTelefonico = req.getParameter("recapitoTelHost");
 
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
+
         Host host = new Host();
 
+        host.setEmail(email);
         host.setNome(nome);
         host.setCognome(cognome);
         host.setPassword(password);
@@ -33,8 +35,8 @@ public class ModificaDatiSistemaHostServlet extends HttpServlet {
 
         gestioneAmministratoreFacade.modificaDatiSistemaHost(host, email, nome, cognome, password, recapitoTelefonico, req.getSession());
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("VisDatiSistemaGUI.jsp");
-        dispatcher.forward(req, resp);
+        resp.sendRedirect(req.getContextPath() + "/Interface/VisDatiSistemaGUI.jsp");
+
     }
 
     @Override

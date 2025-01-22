@@ -10,6 +10,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -28,7 +31,9 @@ public class RegistrazioneHostServlet extends HttpServlet {
         String dataNascita = req.getParameter("dataNascita");
         String recapitoTelefonico = req.getParameter("recapitoTelefonico");
 
-        Host h = new Host(email, nome, cognome, password, LocalDate.parse(dataNascita), recapitoTelefonico);
+        String psw = sha1Function(password);
+
+        Host h = new Host(email, nome, cognome, psw, LocalDate.parse(dataNascita), recapitoTelefonico);
 
         AutenticazioneFacade autenticazioneFacade = new AutenticazioneFacade(req.getSession());
 
@@ -41,6 +46,19 @@ public class RegistrazioneHostServlet extends HttpServlet {
         }
 
         resp.sendRedirect(address);
+    }
+
+    private static String sha1Function(String password){
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-1");
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : md.digest(password.getBytes(StandardCharsets.UTF_8))) {
+                hexString.append(String.format("%02x", b));
+            }
+            return hexString.toString();
+        }catch(NoSuchAlgorithmException e){
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

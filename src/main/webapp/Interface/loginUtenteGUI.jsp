@@ -27,6 +27,8 @@
                 <input type="password" id="password" name="password" class="loginElements"><br>
                 <input type="hidden" value="user" name="tipo">
                 <input type="submit" id="submitButtom" value="Accedi" class="loginElements">
+                <br>
+                <a href = "registrazioneUtenteGUI.jsp" style = "text-decoration: none; font-family: 'Montserrat', sans-serif; color: black;">Non hai un'account? Registrati qui!</a>
             </form>
         </div>
     </div>

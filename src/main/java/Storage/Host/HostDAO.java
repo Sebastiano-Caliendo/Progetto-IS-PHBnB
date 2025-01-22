@@ -21,8 +21,8 @@ public class HostDAO {
                 host.setNome(rs.getString(2));
                 host.setCognome(rs.getString(3));
                 host.setPassword(rs.getString(4));
-                host.setDataNascita(rs.getDate(8).toLocalDate());
-                host.setRecapitoTelefonico(rs.getString(9));
+                host.setDataNascita(rs.getDate(5).toLocalDate());
+                host.setRecapitoTelefonico(rs.getString(6));
                 list.add(host);
             }
             copyResultIntoList(rs, list);
@@ -115,7 +115,7 @@ public class HostDAO {
     public void doUpdate(Host host, String email, String nome, String cognome, String password, String recapitoTelefonico) {
         try (Connection con = Connessione.getConnection()) {
 
-            PreparedStatement ps = con.prepareStatement("UPDATE utente SET email=?, nome=?, cognome=?, password_=SHA1(?), recapito_telefonico=? WHERE email=?");
+            PreparedStatement ps = con.prepareStatement("UPDATE host SET email=?, nome=?, cognome=?, password_=SHA1(?), recapito_telefonico=? WHERE email=?");
 
             ps.setString(1, email);
             ps.setString(2, nome);

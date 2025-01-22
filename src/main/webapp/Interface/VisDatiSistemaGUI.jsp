@@ -1,7 +1,6 @@
 <%@ page import="Storage.Alloggio.AlloggioDAO" %>
 <%@ page import="java.util.List" %>
 <%@ page import="Storage.Alloggio.Alloggio" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="Storage.Recensione.RecensioneDAO" %>
 <%@ page import="Storage.Recensione.Recensione" %>
 <%@ page import="Storage.Host.HostDAO" %>
@@ -11,17 +10,13 @@
 <%@ page import="Storage.Struttura.StrutturaDAO" %>
 <%@ page import="Storage.Struttura.Struttura" %>
 <%@ page import="Storage.Utente.UtenteDAO" %>
-<%@ page import="Storage.Utente.Utente" %><%--
-  Created by IntelliJ IDEA.
-  User: NicoTanc
-  Date: 09/01/2025
-  Time: 16:47
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="Storage.Utente.Utente" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <%
+        session.setAttribute("admin", 1);
         int callByServlet = 0;
         String isCallByServlet = (String) request.getAttribute("callByServlet");
         if(isCallByServlet != null && isCallByServlet.equalsIgnoreCase("yes"))
@@ -29,48 +24,82 @@
     %>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <% if(callByServlet == 1) { %>
+    <link rel="stylesheet" href="Interface/css/riepilogoStrutture.css">
+    <link rel="stylesheet" href="Interface/css/footer.css">
+    <link rel="stylesheet" href="Interface/css/header.css">
+    <link rel="stylesheet" href="Interface/css/style.css">
+    <link rel="stylesheet" href="Interface/css/visDatiSistema.css">
+    <%
+    }
+    else { %>
+    <link rel="stylesheet" href="css/riepilogoStrutture.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/visDatiSistema.css">
+    <% } %>
+
     <title>Visualizza Dati Sistema</title>
 </head>
 <body>
-    <%@ include file ="../WEB-INF/moduli/header.jsp" %>
+<%@ include file ="../WEB-INF/moduli/header.jsp"%>
+<br>
+    <div class = "big-text" id = "areaAdmin" style = "text-align: center">AREA AMMINISTRATORE</div>
 
-<p>Dati del sistema</p>
-
-
-    <h1 style = "margin-right: auto; margin-left: auto;">Users</h1>
-<table style="margin-left: auto; margin-right: auto;">
-<tr>
-    <th>Email</th>
-    <th>Nome</th>
-    <th>Cognome</th>
-    <th>Password</th>
-    <th>Città</th>
-    <th>Numero Civico</th>
-    <th>Via</th>
-    <th>Data di Nascita</th>
-    <th>Recapito Telefonico</th>
-</tr>
+    <%
+        String servlet = "";
+        String jsp = "";
+        if(callByServlet == 0) { // chiamata da jsp
+            servlet = "../";
+            jsp = "";
+        }
+        else  {  // chiamata da servlet
+            servlet = "";
+            jsp = "Interface/";
+        }
+    %>
+<div class = "rigaStruttura">
+<h1 style = "margin-right: auto; margin-left: auto;">Users</h1>
+    <table style="margin-left: auto; margin-right: auto;">
+    <tr>
+        <th>Email</th>
+        <th>Nome</th>
+        <th>Cognome</th>
+        <th>Password</th>
+        <th>Città</th>
+        <th>Numero Civico</th>
+        <th>Via</th>
+        <th>Data di Nascita</th>
+        <th>Recapito Telefonico</th>
+    </tr>
     <%
         UtenteDAO utenteDAO = new UtenteDAO();
         List<Utente> utenti = utenteDAO.doRetrieveAll();
 
-        for(Utente r: utenti){
+        for(Utente u: utenti){
     %>
+        <form method = "post">
     <tr>
-        <td><%=r.getEmail()%></td>
-        <td><%=r.getNome()%></td>
-        <td><%=r.getCognome()%></td>
-        <td><%=r.getPassword()%></td>
-        <td><%=r.getCitta()%></td>
-        <td><%=r.getNumeroCivico()%></td>
-        <td><%=r.getVia()%></td>
-        <td><%=r.getDataNascita()%></td>
-        <td><%=r.getRecapitoTelefonico()%></td>
+        <td><input type = "text" value = "<%=u.getEmail()%>" name = "emailUtente"></td>
+        <td><input type = "text" value = "<%=u.getNome()%>" name = "nomeUtente"></td>
+        <td><input type = "text" value = "<%=u.getCognome()%>" name = "cognomeUtente"></td>
+        <td><input type = "text" value = "<%=u.getPassword()%>" name = "passwordUtente"></td>
+        <td><input type = "text" value = "<%=u.getCitta()%>" name = "cittaUtente"></td>
+        <td><input type = "text" value = "<%=u.getNumeroCivico()%>" name = "numeroCivicoUtente"></td>
+        <td><input type = "text" value = "<%=u.getVia()%>" name = "viaUtente"></td>
+        <td><%=u.getDataNascita()%></td>
+        <td><input type = "text" value = "<%=u.getRecapitoTelefonico()%>" name = "recapitoTelefonicoUtente"></td>
     </tr>
     <%}%>
 </table>
+    <div style = "margin-left: auto; margin-right: auto;">
+    <input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" formaction="<%=servlet%>modificaDatiSistemaUtenteServlet"></form>
+    </div>
+</div>
 <br>
 <br>
+<div class = "rigaStruttura">
     <h1 style = "margin-right: auto; margin-left: auto;">Alloggi</h1>
 <table style = "margin-right: auto; margin-left: auto;">
     <tr>
@@ -87,18 +116,26 @@
 
         for(Alloggio a: alloggi){
     %>
+    <form method="post">
     <tr>
-        <td><%=a.getNumeroAlloggio()%></td>
-        <td><%=a.getFkStruttura()%></td>
-        <td><%=a.getPrezzoNotte()%></td>
-        <td><%=a.getPostiletto()%></td>
-        <td><%=a.getTipoAlloggio()%></td>
-        <td><%=a.getDescrizione()%></td>
+        <input type = "hidden" value = "<%=a.getNumeroAlloggio()%>" name = "oldNumAlloggio">
+        <td><input type = "text" value = "<%=a.getNumeroAlloggio()%>" name = "numAlloggio"></td>
+        <td><input type = "text" value = "<%=a.getStruttura().getIdStruttura()%>" name = "fkStruttura"></td>
+        <td><input type = "text" value = "<%=a.getPrezzoNotte()%>" name = "prezzoNotte"></td>
+        <td><input type = "text" value = "<%=a.getPostiletto()%>" name = "postiLetto"></td>
+        <td><input type = "text" value = "<%=a.getTipoAlloggio()%>" name = "tipoAlloggio"></td>
+        <td><input type = "text" value = "<%=a.getDescrizione()%>" name = "descAlloggio"></td>
     </tr>
     <%}%>
 </table>
+    <div class = "buttonRigaStruttura1">
+        <input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" formaction = "<%=servlet%>modificaDatiSistemaAlloggioServlet">
+        <input type = "submit" value = "Cancella" class = "buttonDati" style = "width: 75px;" formaction = "<%=servlet%>cancellazioneDatiSistemaAlloggioServlet"></form>
+    </div>
+</div>
 <br>
 <br>
+<div class = "rigaStruttura">
     <h1 style = "margin-right: auto; margin-left: auto;">Strutture</h1>
     <table style = "margin-right: auto; margin-left: auto;">
     <tr>
@@ -116,19 +153,31 @@
 
         for(Struttura s: strutture){
     %>
+        <form method="post">
     <tr>
-        <td><%=s.getFkHost()%></td>
-        <td><%=s.getNomeStruttura()%></td>
-        <td><%=s.getVia()%></td>
-        <td><%=s.getNumCivico()%></td>
-        <td><%=s.getCitta()%></td>
-        <td><%=s.getNumAlloggi()%></td>
-        <td><%=s.getDescrizione()%></td>
+        <input type = "hidden" value = "<%=s.getIdStruttura()%>" name = "idStruttura">
+        <td><%=s.getHost().getEmail()%></td>
+        <td><input type = "text" value = "<%=s.getNomeStruttura()%>" name = "nomeStruttura"></td>
+        <td><input type = "text" value = "<%=s.getVia()%>" name = "viaStruttura"></td>
+        <td><input type = "text" value = "<%=s.getNumCivico()%>" name = "numCivicoStruttura"></td>
+        <td><input type = "text" value = "<%=s.getCitta()%>" name = "cittaStruttura"></td>
+        <td><input type = "text" value = "<%=s.getNumAlloggi()%>" name = "numAlloggiStruttura"></td>
+        <td><input type = "text" value = "<%=s.getDescrizione()%>" name = "descrizioneStruttura"></td>
     </tr>
-    <%}%>
+    <%
+        HostDAO hostDAO = new HostDAO();
+        Host h = hostDAO.doRetrieveById(s.getHost().getEmail());
+        session.setAttribute("host", h);
+        }%>
 </table>
+    <div class = "buttonRigaStruttura1">
+        <input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" formaction = "<%=servlet%>modificaDatiSistemaStrutturaServlet">
+        <input type = "submit" value = "Cancella" class = "buttonDati" style = "width: 75px" formaction="<%=servlet%>cancellazioneDatiSistemaStrutturaServlet"></form>
+    </div>
+</div>
     <br>
     <br>
+<div class = "rigaStruttura">
     <h1 style = "margin-right: auto; margin-left: auto;">Recensioni</h1>
     <table style = "margin-right: auto; margin-left: auto;">
         <tr>
@@ -146,19 +195,26 @@
 
             for(Recensione r: recensioni){
         %>
+        <form method = "post">
         <tr>
-            <td><%=r.getEmailRecensore()%></td>
+            <input type = "hidden" value = "<%=r.getIdRecensione()%>" name = "idRecensione">
+            <td><%=r.getUtente().getEmail()%></td>
             <td><%=r.getDescrizione()%></td>
             <td><%=r.getVotoRecensione()%></td>
             <td><%=r.getDataRecensione()%></td>
-            <td><%=r.getCodicePrenotazione()%></td>
-            <td><%=r.getNumeroAlloggio()%></td>
-            <td><%=r.getIdStrutturaAlloggio()%></td>
+            <td><%=r.getPrenotazione().getCodicePrenotazione()%></td>
+            <td><%=r.getAlloggio().getNumeroAlloggio()%></td>
+            <td><%=r.getAlloggio().getStruttura().getIdStruttura()%></td>
         </tr>
         <%}%>
     </table>
+    <div class = "buttonRigaStruttura1">
+        <input type = "submit" value = "Cancella" class = "buttonDati" style = "width: 75px;" formaction = "<%=servlet%>cancellazioneDatiSistemaRecensioneServlet"></form>
+    </div>
+</div>
 <br>
 <br>
+<div class = "rigaStruttura">
     <h1 style = "margin-right: auto; margin-left: auto;">Hosts</h1>
     <table style = "margin-left: auto; margin-right: auto;">
     <tr>
@@ -166,9 +222,6 @@
         <th>Nome</th>
         <th>Cognome</th>
         <th>Password</th>
-        <th>Città</th>
-        <th>Numero Civico</th>
-        <th>Via</th>
         <th>Data di Nascita</th>
         <th>Recapito Telefonico</th>
     </tr>
@@ -178,21 +231,24 @@
 
         for(Host h: hosts){
     %>
+        <form method = "post">
     <tr>
-        <td><%=h.getEmail()%></td>
-        <td><%=h.getNome()%></td>
-        <td><%=h.getCognome()%></td>
-        <td><%=h.getPassword()%></td>
-        <td><%=h.getCitta()%></td>
-        <td><%=h.getNumCivico()%></td>
-        <td><%=h.getVia()%></td>
+        <td><input type = "text" value = "<%=h.getEmail()%>" name = "emailHost"></td>
+        <td><input type = "text" value = "<%=h.getNome()%>" name = "nomeHost"></td>
+        <td><input type = "text" value = "<%=h.getCognome()%>" name = "cognomeHost"></td>
+        <td><input type = "text" value = "<%=h.getPassword()%>" name = "passwordHost"></td>
         <td><%=h.getDataNascita()%></td>
-        <td><%=h.getRecapitoTelefonico()%></td>
+        <td><input type = "text" value = "<%=h.getRecapitoTelefonico()%>" name = "recapitoTelHost"></td>
     </tr>
     <%}%>
 </table>
+    <div class = "buttonRigaStruttura1">
+        <input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" formaction = "<%=servlet%>modificaDatiSistemaHostServlet"></form>
+    </div>
+</div>
 <br>
 <br>
+<div class = "rigaStruttura">
     <h1 style = "margin-right: auto; margin-left: auto;">Prenotazioni</h1>
     <table style = "margin-left: auto; margin-right: auto;">
         <tr>
@@ -207,13 +263,25 @@
 
             for(Prenotazione p: prenotazioni){
         %>
+        <form method = "post">
         <tr>
-            <td><%=p.getCheckIn()%></td>
-            <td><%=p.getCheckOut()%></td>
-            <td><%=p.getFkUtente()%></td>
-            <td><%=p.getNumeroPersone()%></td>
+            <input type = "hidden" value = "<%=p.getCodicePrenotazione()%>" name = "codicePrenotazione">
+            <td><input type = "date" value = "<%=p.getCheckIn()%>" name = "checkInPrenotazione"></td>
+            <td><input type = "date" value = "<%=p.getCheckOut()%>" name = "checkOutPrenotazione"></td>
+            <td><input type = "text" value = "<%=p.getUtente().getEmail()%>" name = "idUtenteFk" readonly></td>
+            <td><input type = "text" value = "<%=p.getNumeroPersone()%>" name = "numeroPersonePrenotazione"></td>
+            <input type = "hidden" value = "<%=p.getNumeroCartaCredito()%>" name = "numeroCartaPrenotazione">
+            <input type = "hidden" value = "<%=p.getDataScadenzaCarta()%>" name = "dataScadenzaCartaPrenotazione">
+            <input type = "hidden" value = "<%=p.getCviCarta()%>" name = "cviCartaPrenotazione">
         </tr>
         <%}%>
     </table>
+    <div class = "buttonRigaStruttura1">
+        <input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px" formaction = "<%=servlet%>modificaDatiSistemaPrenotazioneServlet">
+    </div>
+    </form>
+</div>
+    <%@ include file="../WEB-INF/moduli/footer.jsp"%>
+
 </body>
 </html>
