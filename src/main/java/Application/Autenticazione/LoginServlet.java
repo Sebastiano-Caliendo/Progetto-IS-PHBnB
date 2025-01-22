@@ -25,20 +25,19 @@ public class LoginServlet extends HttpServlet {
         String tipo = req.getParameter("tipo");
 
         String address;
-        String psw = sha1Function(password);
 
         AutenticazioneFacade autenticazioneFacade = new AutenticazioneFacade(req.getSession());
         boolean flag;
 
         if(tipo.equals("user")) {
-            flag = autenticazioneFacade.login(email, psw, tipo);
+            flag = autenticazioneFacade.login(email, password, tipo);
 
             if(flag)
                 address = "Interface/index.jsp";
             else
                 address = "Interface/loginUtenteGUI.jsp?error=1";
         } else {
-            flag = autenticazioneFacade.login(email, psw, tipo);
+            flag = autenticazioneFacade.login(email, password, tipo);
 
             if(flag)
                 address = "Interface/index.jsp";
@@ -49,7 +48,7 @@ public class LoginServlet extends HttpServlet {
         resp.sendRedirect(address);
     }
 
-    private static String sha1Function(String password){
+    /*private static String sha1Function(String password){
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-1");
             StringBuilder hexString = new StringBuilder();
@@ -60,5 +59,5 @@ public class LoginServlet extends HttpServlet {
         }catch(NoSuchAlgorithmException e){
             throw new RuntimeException(e);
         }
-    }
+    }*/
 }
