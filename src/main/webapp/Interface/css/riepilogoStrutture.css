@@ -7,7 +7,7 @@
 #areaHost{
     width : 93%;
     text-align: center;
-    margin-top: 16vh;
+    margin-top: 5vh;
     color : var(--color-primary);
 }
 
@@ -248,4 +248,30 @@ body {
     width: 100%;
     flex-direction: row;
     display: flex;
+}
+
+/* MEDIA QUERY */
+
+@media only screen and (max-width: 1350px) {
+
+    /* button andranno sotto la riga e non a destra */
+
+    .container {
+        row-gap: 80px;
+    }
+
+    .buttonRigaStruttura {
+        column-gap: 20px;
+        margin-top: 250px;
+        margin-left: 0;
+        width: 90%;
+        flex-direction: row;
+
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .sezione-aggiungi {
+        margin-top: 5% !important;
+    }
 }

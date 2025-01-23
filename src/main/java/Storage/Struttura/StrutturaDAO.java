@@ -152,6 +152,7 @@ public class StrutturaDAO {
     }
 
     public void doUpdateNumeroAlloggi(int numAlloggi, int idStruttura) {
+        System.out.println("num alloggi in strutturaDAO" + numAlloggi);
         try (Connection con = Connessione.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
                     "UPDATE struttura SET numero_alloggi=? WHERE id_struttura=?");
