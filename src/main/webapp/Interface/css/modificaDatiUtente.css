@@ -1,0 +1,69 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#mainContainer {
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    background-image: url("../img/login.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#divModificaDati {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 25%;
+    height: 75%;
+    border: 1px solid black;
+    border-radius: 25px;
+    margin: auto;
+}
+
+#emailLabel, #pwdLabel, #vecchiaPasswordLabel, #nuovaPasswordLabel, #confermaPasswordLabel, #nomeLabel, #cognomeLabel, #cittaLabel, #numCivicoLabel, #viaLabel, #dataNascitaLabel, #recapitoTelefonicoLabel, #parModificaDati {
+    font-weight: bold;
+    font-size: 16pt;
+}
+
+#email, #vecchiaPassword, #nuovaPassword, #confermaPassword, #nome, #cognome, #citta, #numCivico, #via, #dataNascita, #recapitoTelefonico {
+    text-align: center;
+    width: 150px;
+    height: 35px;
+}
+
+#submitButtom {
+    width: 150px;
+    height: 35px;
+    background-color: darkgoldenrod;
+    font-weight: bold;
+    color: white;
+    font-size: 16pt;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+#parErrore {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+
+#divForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.formElements {
+    width: 400px;
+    margin: 10px auto 10px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#parModificaDati, #formModificaDati {
+    text-align: center;
+}

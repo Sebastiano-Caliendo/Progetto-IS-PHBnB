@@ -68,6 +68,7 @@ body {
     color: white;
     font-size: 16pt;
     border-radius: 5px;
+    margin-top: 10px;
 }
 
 #parAccesso {
@@ -93,9 +94,6 @@ body {
     justify-content: space-between;
 }
 
-#submitButtom {
-    margin-top: 10px;
-}
 
 #linkRegHost {
     color: black;

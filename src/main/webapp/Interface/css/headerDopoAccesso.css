@@ -1,0 +1,65 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+#header {
+    width: 100vw;
+    height: 10vh;
+    background-color: #fff4f6;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    border-bottom: 1px solid darkgoldenrod;
+}
+
+#divLogo {
+    text-align: center;
+    align-content: center;
+}
+
+#parLogo {
+    color: darkgoldenrod;
+    font-size: 26pt;
+    padding-left: 20px;
+    font-style: italic;
+}
+
+#divImg {
+    text-align: center;
+    align-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+#container {
+    position: relative;
+}
+
+#dropdown {
+    display: none; /* Nasconde il div a tendina di default */
+    background-color: #fff4f6;
+    padding: 10px;
+    position: absolute;
+    top: 100%; /* Posiziona il dropdown subito sotto il divImg */
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    border: 1px solid;
+    text-align: center;
+}
+
+#container:hover #dropdown {
+    display: block; /* Mostra il div quando il cursore è sopra il container */
+}
+
+#linkLogout {
+    text-decoration: none;
+    color: black;
+    font-family: Arial, serif;
+}
+
+#dropdown:hover {
+    background-color: lightgray;
+}
+

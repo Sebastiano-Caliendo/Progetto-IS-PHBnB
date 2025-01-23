@@ -64,7 +64,7 @@
         <div class="mid-text" id="sezione"> Visualizza le tue strutture </div>
         <div class="aggiungiStruttura">
             <form action="<%= jsp %>InserisciStrutturaGUI.jsp" method="post">
-                <input type="submit" value="Aggiungi Struttura" class="button" style="width: 140px;">
+                <input type="submit" value="Aggiungi" class="button" style="width: 140px;">
             </form>
         </div>
     </div>
