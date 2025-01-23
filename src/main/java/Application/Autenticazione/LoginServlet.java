@@ -25,20 +25,19 @@ public class LoginServlet extends HttpServlet {
         String tipo = req.getParameter("tipo");
 
         String address;
-        String psw = sha1Function(password);
 
         AutenticazioneFacade autenticazioneFacade = new AutenticazioneFacade(req.getSession());
         boolean flag;
 
         if(tipo.equals("user")) {
-            flag = autenticazioneFacade.login(email, psw, tipo);
+            flag = autenticazioneFacade.login(email, password, tipo);
 
             if(flag)
                 address = "Interface/index.jsp";
             else
                 address = "Interface/loginUtenteGUI.jsp?error=1";
         } else {
-            flag = autenticazioneFacade.login(email, psw, tipo);
+            flag = autenticazioneFacade.login(email, password, tipo);
 
             if(flag)
                 address = "Interface/index.jsp";

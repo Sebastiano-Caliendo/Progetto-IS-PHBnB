@@ -19,5 +19,6 @@
   <a href = "loginUtenteGUI.jsp">Login utente</a>
   <a href = "loginHostGUI.jsp">Login host</a>
   <a href = "registrazioneUtenteGUI.jsp">Registrazione utente</a>
+  <a href = "areaUtenteGUI.jsp">Area utente</a>
 </body>
 </html>
