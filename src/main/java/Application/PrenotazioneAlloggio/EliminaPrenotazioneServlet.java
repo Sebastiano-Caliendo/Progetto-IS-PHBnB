@@ -1,5 +1,7 @@
 package Application.PrenotazioneAlloggio;
 
+import Storage.Occupa.Occupa;
+import Storage.Utente.Utente;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -8,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/eliminaPrenotazione")
 public class EliminaPrenotazioneServlet extends HttpServlet {
@@ -15,12 +18,22 @@ public class EliminaPrenotazioneServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        req.setAttribute("callByServlet", "yes");
+
         String codPrenotazione = req.getParameter("codPrenotazione");
+
+        Utente u = (Utente) req.getSession().getAttribute("utente");
 
         PrenotazioneAlloggioFacade prenotazioneAlloggioFacade = new PrenotazioneAlloggioFacade();
         prenotazioneAlloggioFacade.eliminaPrenotazione(Integer.parseInt(codPrenotazione));
 
-        String address = "";
+        List<Occupa> prenotazioni = prenotazioneAlloggioFacade.visualizzaPrenotazioni(u.getEmail());
+
+        if(!prenotazioni.isEmpty()) {
+            req.setAttribute("prenotazioni", prenotazioni);
+        }
+
+        String address = "Interface/visualizzaStoricoPrenotazioniGUI.jsp";
 
         RequestDispatcher rd = req.getRequestDispatcher(address);
         rd.forward(req, resp);

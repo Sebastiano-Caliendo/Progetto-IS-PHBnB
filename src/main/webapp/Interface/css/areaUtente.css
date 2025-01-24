@@ -9,13 +9,13 @@ html, body {
     display: flex;
     flex-direction: row;
     width: 100vw;
-    border-top: 1px solid darkgoldenrod;
+    border-top: 1px solid var(--color-primary);
 }
 
 #leftContainer {
     height: inherit;
     width: 15%;
-    border-right: 2px solid darkgoldenrod;
+    border-right: 2px solid var(--color-primary);
 }
 
 #rightContainer {
@@ -27,12 +27,10 @@ html, body {
 }
 
 #divAreaAccount, #divPrenotazioni {
-    font-family: Arial, serif;
-    font-size: 16pt;
     height: 10%;
     text-align: center;
     align-content: center;
-    border-bottom: 1px solid darkgoldenrod;
+    border-bottom: 1px solid var(--color-primary);
 }
 
 #linkAreaAccount, #linkPrenotazioni {
@@ -41,24 +39,22 @@ html, body {
 }
 
 #linkAreaAccount:hover, #linkPrenotazioni:hover {
-    color: goldenrod;
+    color: var(--color-primary);
 }
 
 #topContainer {
+    align-content: center;
     text-align: center;
-    height: 10%;
-    padding: 50px;
+    height: 15%;
 }
 
 
 #parAreaUtente {
-    color: darkgoldenrod;
-    font-family: Arial, serif;
-    font-size: 26pt;
-    font-weight: bold;
+    color: var(--color-primary);
 }
 
 #midContainer {
+    align-content: center;
     text-align: center;
     height: 80%;
 }
@@ -68,18 +64,18 @@ html, body {
     display: flex;
     flex-direction: column;
     width: 30%;
-    height: 75%;
+    height: 80%;
     margin: auto;
-    border: 1px solid darkgoldenrod;
+    border: 1px solid var(--color-primary);
     border-radius: 25px;
 }
 
 .divDati {
-    padding: 20px;
+    height: 12.5%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border-bottom: 1px solid darkgoldenrod;
+    border-bottom: 1px solid var(--color-primary);
 }
 
 #bottomContainer {
@@ -89,12 +85,96 @@ html, body {
 }
 
 #linkModificaDati {
-    font-size: 16pt;
-    font-weight: bold;
-    color: darkgoldenrod;
+    color: var(--color-primary);
     text-decoration: underline;
 }
 
 .parDati {
-    font-weight: bold;
+    align-content: center;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+#ultimo {
+    border-bottom: none;
+}
+
+.divPrenotazione {
+    margin: 30px;
+    display: flex;
+    flex-direction: row;
+    width: 60%;
+    height: 20%;
+    border: 1px solid var(--color-primary);
+    border-radius: 25px;
+}
+
+#prContainer {
+    align-items: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.divInfoPrenotazione {
+    padding-left: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 100%;
+    width: 60%;
+}
+
+.divImg {
+    border-left: 1px solid var(--color-primary);
+    height: 100%;
+    width: 20%;
+}
+
+.parDatiPr {
+    margin: auto 0 auto 25px;
+}
+
+.divButtons {
+    border-left: 1px solid var(--color-primary);
+    height: 100%;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    text-align: center;
+}
+
+.buttons {
+    margin: auto;
+    border: 1px solid black;
+    height : 20px;
+    width : 120px;
+    border-radius: 20px;
+    background-color: var(--color-primary);
+    color : white;
+    font-weight: 700;
+}
+
+.parAlert {
+    margin-top: 20px;
+    color: red;
+}
+
+.imgStruttura {
+    height: 100%;
+    width: 100%;
+}
+
+#formModificaPrenotazione {
+    display: flex;
+    flex-direction: column;
+}
+
+.divModPrenotazione {
+    margin: 2px;
+}
+
+input {
+    width: 60%;
 }

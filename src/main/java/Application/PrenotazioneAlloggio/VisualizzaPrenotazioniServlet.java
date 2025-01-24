@@ -19,6 +19,8 @@ public class VisualizzaPrenotazioniServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        req.setAttribute("callByServlet", "yes");
+
         Utente u = (Utente) req.getSession().getAttribute("utente");
 
         PrenotazioneAlloggioFacade prenotazioneAlloggioFacade = new PrenotazioneAlloggioFacade();
@@ -29,7 +31,7 @@ public class VisualizzaPrenotazioniServlet extends HttpServlet {
             req.setAttribute("prenotazioni", prenotazioni);
         }
 
-        String address = "listaPrenotazioniGUI.jsp";
+        String address = "Interface/visualizzaStoricoPrenotazioniGUI.jsp";
 
         RequestDispatcher rd = req.getRequestDispatcher(address);
         rd.forward(req, resp);

@@ -153,7 +153,7 @@ public class PrenotazioneDAO {
     public void doDelete(int codPrenotazione) {
         try (Connection con = Connessione.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("delete from prenotazione where numero_alloggio = ?");
+                    con.prepareStatement("delete from prenotazione where codice_prenotazione = ?");
             ps.setInt(1, codPrenotazione);
             ps.executeUpdate();
 

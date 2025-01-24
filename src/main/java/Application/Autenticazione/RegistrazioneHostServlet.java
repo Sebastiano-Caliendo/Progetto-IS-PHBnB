@@ -31,9 +31,7 @@ public class RegistrazioneHostServlet extends HttpServlet {
         String dataNascita = req.getParameter("dataNascita");
         String recapitoTelefonico = req.getParameter("recapitoTelefonico");
 
-        String psw = sha1Function(password);
-
-        Host h = new Host(email, nome, cognome, psw, LocalDate.parse(dataNascita), recapitoTelefonico);
+        Host h = new Host(email, nome, cognome, password, LocalDate.parse(dataNascita), recapitoTelefonico);
 
         AutenticazioneFacade autenticazioneFacade = new AutenticazioneFacade(req.getSession());
 
@@ -48,18 +46,6 @@ public class RegistrazioneHostServlet extends HttpServlet {
         resp.sendRedirect(address);
     }
 
-    private static String sha1Function(String password){
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-1");
-            StringBuilder hexString = new StringBuilder();
-            for (byte b : md.digest(password.getBytes(StandardCharsets.UTF_8))) {
-                hexString.append(String.format("%02x", b));
-            }
-            return hexString.toString();
-        }catch(NoSuchAlgorithmException e){
-            throw new RuntimeException(e);
-        }
-    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
