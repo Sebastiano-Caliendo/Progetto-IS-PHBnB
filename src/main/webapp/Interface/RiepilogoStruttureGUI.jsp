@@ -80,7 +80,7 @@
 
                         <div class="containerRigaStruttura">
                             <div class="rigaStruttura">
-                                <div class="elementiStruttura" onclick="submitForm(<%= i %>)">
+                                <div class="elementiStruttura" id="riepStrutture" onclick="submitForm(<%= i %>)">
                                     <%
                                         String urlImmagine = strutture.get(i).getUrlImmagine();
                                         String replace = "Interface/";

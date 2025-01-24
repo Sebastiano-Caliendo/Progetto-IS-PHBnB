@@ -57,15 +57,15 @@
     <div class="nessuno normal-text">Non hai nessuna recensione :( </div>
     <%  }
     else { %>
-    <div class="container" id="containerStrutture">
+    <div class="container" id="containerRecensioni">
         <% for(int i=0; i<recensioni.size(); i++) { %>
         <div class="rigaStruttura" id="rigaRecensioni">
             <div class="titoliRecensione">
-                <div class="colonnaNormale"> <b>Numero Alloggio</b> </div>
-                <div class="colonnaNormale"> <b>Data Recensione</b> </div>
-                <div class="colonnaDescrizione"> <b>Descrizione</b> </div>
-                <div class="colonnaNormale"> <b>E-mail recensore</b> </div>
-                <div class="colonnaNormale"> <b>Voto Recensione</b> </div>
+                <div class="colonnaNormale normal-small-text"> <b>Numero Alloggio</b> </div>
+                <div class="colonnaNormale normal-small-text"> <b>Data Recensione</b> </div>
+                <div class="colonnaDescrizione normal-small-text"> <b>Descrizione</b> </div>
+                <div class="colonnaNormale normal-small-text"> <b>E-mail recensore</b> </div>
+                <div class="colonnaNormale normal-small-text"> <b>Voto Recensione</b> </div>
             </div>
             <div style="border: 1px solid var(--color-primary);"> </div>
             <div class="valoriRecensione">

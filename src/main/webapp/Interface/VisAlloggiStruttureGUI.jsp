@@ -56,25 +56,25 @@
         }
     %>
 
-    <div class="sezione-aggiungi">
-        <div class="mid-text" id="sezione"><%= struttura.getNomeStruttura() %></div>
-        <div class="button-sezione-aggiungi">
+    <div class="sezione-aggiungi" id="sezione-aggiungi-alloggi">
+        <div class="mid-text" id="sezioneAlloggio"><%= struttura.getNomeStruttura() %></div>
+        <div class="button-sezione-aggiungi" id="button-sezione-aggiungi-alloggi">
             <div class="visualizzaPrenotazioni">
                 <form action="<%= servlet %>selezionaPrenotazioniServlet" method="post">
                     <input type="hidden" name="idStruttura" value="<%= struttura.getIdStruttura() %>" >
-                    <input type="submit" value="Visualizza Prenotazioni" class="button" style="width:160px;" >
+                    <input type="submit" value="Prenotazioni" class="button" style="width:160px;" >
                 </form>
             </div>
             <div class="visualizzaRecensioni">
                 <form action="<%= servlet %>visualizzaRecensioneRicevuteServlet" method="post">
                     <input type="hidden" name="idStruttura" value="<%= struttura.getIdStruttura() %>" >
-                    <input type="submit" value="Visualizza Recensioni" class="button" style="width:160px;" >
+                    <input type="submit" value="Recensioni" class="button" style="width:160px;" >
                 </form>
             </div>
             <div class="aggiungiStruttura">
                 <form action="<%= servlet %>redirectToAggiungiAlloggioServlet" method="post">
                     <input type="hidden" value="<%= struttura.getIdStruttura() %>" name="idStruttura">
-                    <input type="submit" value="Aggiungi Alloggio" class="button">
+                    <input type="submit" value="Aggiungi" class="button">
                 </form>
             </div>
         </div>
@@ -84,7 +84,7 @@
     <div class="nessuno normal-text">Non hai nessun'alloggio :( </div>
     <%  }
     else { %>
-    <div class="container" id="containerStrutture">
+    <div class="container" id="containerAlloggi">
         <% for(int i=0; i<alloggi.size(); i++) { %>
         <div class="rigaStruttura" id="rigaAlloggio" style="flex-direction: row;
     justify-content: space-between;">
@@ -99,7 +99,7 @@
                     </div>
                 </div>
             </div>
-            <div class="secondaColonna">
+            <div class="secondaColonna small-text">
                 <div class="prezzoNotte"><b>
                     Prezzo/notte : <%= alloggi.get(i).getPrezzoNotte() %>
                 </b>
@@ -113,12 +113,12 @@
                     <form action="<%= servlet %>redirectToModificaAlloggioServlet" method="post">
                         <input type="hidden" value="<%= alloggi.get(i).getNumeroAlloggio() %>" name="numeroAlloggio">
                         <input type="hidden" value="<%= struttura.getIdStruttura() %>" name="idStruttura">
-                        <input type="submit" value="Modifica Alloggio" class="button">
+                        <input type="submit" value="Modifica" class="button">
                     </form>
                     <form action="<%= servlet %>eliminaAlloggioServlet" method="post">
                         <input type="hidden" value="<%= alloggi.get(i).getNumeroAlloggio() %>" name="numeroAlloggio">
                         <input type="hidden" value="<%= struttura.getIdStruttura() %>" name="idStruttura">
-                        <input type="submit" value="Elimina Alloggio" class="button">
+                        <input type="submit" value="Elimina" class="button">
                     </form>
                 </div>
             </div>
