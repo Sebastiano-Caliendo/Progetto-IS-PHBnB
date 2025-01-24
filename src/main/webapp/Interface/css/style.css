@@ -23,7 +23,8 @@
 }
 
 body {
-    overflow-x: hidden;  /* nascondi tutto ciò che supera il 100vw */
+    margin-bottom: 10vh;
+    overflow-x: hidden ;  /* nascondi tutto ciò che supera il 100vw */
 }
 
 form input[type = submit] {
@@ -44,4 +45,99 @@ form input[type = submit] {
     height: 50%;
     text-align: center;
     align-items: center;
+}
+
+@media only screen and (max-width: 1250px) {
+    .big-text { font-size: 42px; font-weight: 850; }
+    .mid-text { font-size: 29px; font-weight: 750; }
+    .normal-text { font-size: 24px; font-weight: 550; }
+    .normal-small-text { font-size: 18px; font-weight: 450; }
+    .small-text { font-size: 12px; font-weight: 350; }
+    form input[type = submit] {
+        width: 120px !important;
+    }
+}
+
+@media only screen and (max-width: 1125px) {
+    .big-text { font-size: 40px; font-weight: 850; }
+    .mid-text { font-size: 27px; font-weight: 750; }
+    .normal-text { font-size: 23px; font-weight: 550; }
+    .normal-small-text { font-size: 18px; font-weight: 450; }
+    .small-text { font-size: 12px; font-weight: 350; }
+    form input[type = submit] { width: 120px !important;}
+}
+
+@media only screen and (max-width: 1000px) {
+    .big-text { font-size: 39px; font-weight: 850; }
+    .mid-text { font-size: 26px; font-weight: 750; }
+    .normal-text { font-size: 21px; font-weight: 550; }
+    .normal-small-text { font-size: 17px; font-weight: 450; }
+    .small-text { font-size: 12px; font-weight: 350; }
+    form input[type = submit] { width: 120px !important;}
+}
+
+@media only screen and (max-width: 875px) {
+    .big-text { font-size: 36px; font-weight: 850; }
+    .mid-text { font-size: 23px; font-weight: 750; }
+    .normal-text { font-size: 20px; font-weight: 550; }
+    .normal-small-text { font-size: 16px; font-weight: 450; }
+    .small-text { font-size: 12px; font-weight: 350; }
+    form input[type = submit] { width: 100px !important;}
+}
+
+@media only screen and (max-width: 750px) {
+    .big-text { font-size: 33px; font-weight: 850; }
+    .mid-text { font-size: 20px; font-weight: 750; }
+    .normal-text { font-size: 18px; font-weight: 550; }
+    .normal-small-text { font-size: 15px; font-weight: 450; }
+    .small-text { font-size: 12px; font-weight: 350; }
+    form input[type = submit] { width: 100px !important;}
+}
+
+@media only screen and (max-width: 650px) {
+    .big-text { font-size: 32px; font-weight: 850; }
+    .mid-text { font-size: 18px; font-weight: 750; }
+    .normal-text { font-size: 16px; font-weight: 550; }
+    .normal-small-text { font-size: 14px; font-weight: 450; }
+    .small-text { font-size: 11px; font-weight: 350; }
+    form input[type = submit] { width: 80px !important;}
+}
+
+@media only screen and (max-width: 570px) {
+    .big-text { font-size: 30px; font-weight: 850; }
+    .mid-text { font-size: 17px; font-weight: 750; }
+    .normal-text { font-size: 15px; font-weight: 550; }
+    .normal-small-text { font-size: 12px; font-weight: 450; }
+    .small-text { font-size: 10px; font-weight: 350; }
+    form input[type = submit] {
+        width: 80px !important;
+        height: 15px !important;
+        font-size: 10px !important;
+    }
+}
+
+@media only screen and (max-width: 475px) {
+    .big-text { font-size: 29px; font-weight: 850; }
+    .mid-text { font-size: 16px; font-weight: 750; }
+    .normal-text { font-size: 14px; font-weight: 550; }
+    .normal-small-text { font-size: 12px; font-weight: 450; }
+    .small-text { font-size: 10px; font-weight: 350; }
+    form input[type = submit] {
+        width: 60px !important;
+        height: 15px !important;
+        font-size: 10px !important;
+    }
+}
+
+@media only screen and (max-width: 380px) {
+    .big-text { font-size: 28px; font-weight: 850; }
+    .mid-text { font-size: 15px; font-weight: 750; }
+    .normal-text { font-size: 13px; font-weight: 550; }
+    .normal-small-text { font-size: 11px; font-weight: 450; }
+    .small-text { font-size: 9px; font-weight: 350; }
+    form input[type = submit] {
+        width: 60px !important;
+        height: 15px !important;
+        font-size: 10px !important;
+    }
 }

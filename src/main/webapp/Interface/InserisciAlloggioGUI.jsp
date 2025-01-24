@@ -112,7 +112,7 @@
                 <textarea id="descrizione" name="descrizione" rows="10" cols="50" placeholder="Scrivi qui la tua descrizione dettagliata..." required></textarea>
             </div>
 
-            <input type="submit" value="Aggiungi Alloggio" style="border : 2px solid var(--color-primary); width : 50%; height : 30px; color: black; background-color: var(--rosa-bianchissimo);">
+            <input type="submit" value="Aggiungi" style="border : 2px solid var(--color-primary); width : 50%; height : 30px; color: black; background-color: var(--rosa-bianchissimo);">
         </form>
     </div>
 </div>

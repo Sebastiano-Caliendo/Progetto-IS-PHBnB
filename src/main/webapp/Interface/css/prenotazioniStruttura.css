@@ -2,12 +2,13 @@
 /* utilizzato solamente da prenotazioniStrutturaGUI.jsp */
 
 body {
-    margin-top: 20vh;
+    /*margin-top: 20vh;*/
     background-color: var(--rosa-bianchissimo);
 }
 
 /* contiene il nome della struttura */
 .title {
+    margin-top: 5%;
     text-align: center;
     margin-bottom: 2%;
     width : 90%;
@@ -58,4 +59,10 @@ body {
     border: 1px solid var(--color-primary);
     height: 1px; /* Spessore della linea */
     background-color: #b8860b; /* Colore gold scuro */
+}
+
+@media only screen and (max-width: 550px){
+    .title {
+        margin-top: 10%;
+    }
 }

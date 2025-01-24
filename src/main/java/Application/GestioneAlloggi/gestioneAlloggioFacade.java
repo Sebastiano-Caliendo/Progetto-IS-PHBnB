@@ -45,8 +45,17 @@ public class gestioneAlloggioFacade {
         gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
         Alloggio alloggio = new Alloggio(numeroAlloggio, strutturaFacade.returnStruttura(idStruttura), prezzoNotte, numPostiLetto, tipoAlloggio, descrizione, urlImmagine);
         AlloggioDAO alloggioDAO = new AlloggioDAO();
+
         alloggioDAO.doDelete(oldNumeroAlloggio, fkStruttura);
-        return aggiungiAlloggio(numeroAlloggio, idStruttura, prezzoNotte, numPostiLetto, tipoAlloggio, descrizione, urlImmagine);
+
+        List<Integer> verifica = alloggioDAO.doSave(alloggio);
+        if(verifica.get(1) == alloggio.getNumeroAlloggio()){
+            if(verifica.get(2) == alloggio.getStruttura().getIdStruttura())
+                return 1;
+        }
+        return 0;
+        // incrementava il numero di alloggi
+        //return aggiungiAlloggio(numeroAlloggio, idStruttura, prezzoNotte, numPostiLetto, tipoAlloggio, descrizione, urlImmagine);
     }
 
     public List<Integer> eliminaAlloggio(int numeroAlloggio, int fkStruttura) {
@@ -55,7 +64,7 @@ public class gestioneAlloggioFacade {
         gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
         Struttura struttura = strutturaFacade.returnStruttura(fkStruttura);
         StrutturaDAO strutturaDAO = new StrutturaDAO();
-        strutturaDAO.doUpdateNumeroAlloggi((struttura.getNumAlloggi()-1), fkStruttura);
+        strutturaDAO.doUpdateNumeroAlloggi((((struttura.getNumAlloggi())-1)), fkStruttura);
 
 
         return alloggioDAO.doDelete(numeroAlloggio, fkStruttura);
