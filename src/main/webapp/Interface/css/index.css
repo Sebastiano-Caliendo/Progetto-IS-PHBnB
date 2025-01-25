@@ -1,0 +1,145 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+#topContainer {
+    width: 100vw;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid lightgray;
+}
+
+#divRegStruttura, #divReg, #divAccedi {
+    text-align: center;
+    align-content: center;
+}
+
+#divLogo {
+    text-align: left;
+    align-content: center;
+    height: 100%;
+    width: 60%;
+}
+
+#divRegStruttura {
+    height: 100%;
+    width: 20%;
+}
+
+#divReg, #divAccedi {
+    height: 100%;
+    width: 10%;
+}
+
+#parLogo {
+    color: var(--color-primary);
+    padding-left: 20px;
+    font-style: italic;
+}
+
+#linkRegStruttura {
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+
+#linkReg, #linkAccedi {
+    border: 1px solid black;
+    height : 20px;
+    width : 120px;
+    border-radius: 5px;
+    background-color: var(--color-primary);
+    color : white;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 5px;
+}
+
+#midContainer {
+    align-content: center;
+    width: 100vw;
+    height: 15vh;
+}
+
+#containerFiltri {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    height: 90%;
+    width: 75%;
+    background-color: var(--color-primary);
+    border: 1px solid;
+    border-radius: 15px;
+}
+
+#bottomContainer {
+    margin: auto;
+    align-items: center;
+    width: 80vw;
+    height: 75vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.imgHome {
+    margin: auto;
+    height: 85%;
+    width: 25%;
+    border-radius: 15px;
+}
+
+#divFiltroLuogo, #divFiltroDate {
+    text-align: center;
+    align-content: center;
+    height: 60%;
+    width: 20%;
+    background-color: white;
+    border: 1px solid;
+    border-radius: 5px;
+    margin: auto;
+}
+
+#divFiltroOspiti {
+    text-align: center;
+    align-content: center;
+    height: 60%;
+    width: 15%;
+    background-color: white;
+    border: 1px solid;
+    border-radius: 5px;
+    margin: auto 10px auto auto;
+}
+
+#divCerca {
+    align-content: center;
+    text-align: center;
+    height: 60%;
+    width: 10%;
+    background-color: #2C2C2C;
+    border-radius: 5px;
+    margin: auto auto auto 10px;
+}
+
+#buttonCerca {
+    border: none;
+    background-color: #2C2C2C;
+    color: white;
+}
+
+#divFiltroDate {
+    display: flex;
+    flex-direction: row;
+}
+
+#divCheckIn {
+    border-right: 1px solid lightgray;
+}
+
+#divCheckIn, #divCheckOut {
+    height: 100%;
+    width: 50%;
+    text-align: center;
+    align-content: center;
+}
