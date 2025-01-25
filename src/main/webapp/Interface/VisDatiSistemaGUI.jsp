@@ -16,7 +16,6 @@
 <html>
 <head>
     <%
-        session.setAttribute("admin", 1);
         int callByServlet = 0;
         String isCallByServlet = (String) request.getAttribute("callByServlet");
         if(isCallByServlet != null && isCallByServlet.equalsIgnoreCase("yes"))
@@ -74,8 +73,8 @@
         <th>Recapito Telefonico</th>
     </tr>
     <%
-        UtenteDAO utenteDAO = new UtenteDAO();
-        List<Utente> utenti = utenteDAO.doRetrieveAll();
+        //UtenteDAO utenteDAO = new UtenteDAO();
+        List<Utente> utenti = (List<Utente>) request.getAttribute("utenti");
 
         for(Utente u: utenti){
     %>
@@ -111,8 +110,8 @@
         <th>Descrizione</th>
     </tr>
     <%
-        AlloggioDAO alloggioDAO = new AlloggioDAO();
-        List<Alloggio> alloggi = alloggioDAO.doRetrieveAll();
+        //AlloggioDAO alloggioDAO = new AlloggioDAO();
+        List<Alloggio> alloggi = (List<Alloggio>) request.getAttribute("alloggi");
 
         for(Alloggio a: alloggi){
     %>
@@ -148,8 +147,8 @@
         <th>Descrizione</th>
     </tr>
     <%
-        StrutturaDAO strutturaDAO = new StrutturaDAO();
-        List<Struttura> strutture = strutturaDAO.doRetrieveAll();
+        //StrutturaDAO strutturaDAO = new StrutturaDAO();
+        List<Struttura> strutture = (List<Struttura>) request.getAttribute("strutture");
 
         for(Struttura s: strutture){
     %>
@@ -190,8 +189,8 @@
             <th>Codice Struttura</th>
         </tr>
         <%
-            RecensioneDAO recensioneDAO = new RecensioneDAO();
-            List<Recensione> recensioni = recensioneDAO.doRetrieveAll();
+            //RecensioneDAO recensioneDAO = new RecensioneDAO();
+            List<Recensione> recensioni = (List<Recensione>) request.getAttribute("recensioni");
 
             for(Recensione r: recensioni){
         %>
@@ -226,8 +225,8 @@
         <th>Recapito Telefonico</th>
     </tr>
     <%
-        HostDAO hostDAO = new HostDAO();
-        List<Host> hosts = hostDAO.doRetrieveAll();
+        //HostDAO hostDAO = new HostDAO();
+        List<Host> hosts = (List<Host>) request.getAttribute("hosts");
 
         for(Host h: hosts){
     %>

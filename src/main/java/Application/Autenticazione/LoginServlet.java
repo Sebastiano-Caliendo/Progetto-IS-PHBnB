@@ -24,7 +24,7 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
         String tipo = req.getParameter("tipo");
 
-        String address;
+        String address = "";
 
         AutenticazioneFacade autenticazioneFacade = new AutenticazioneFacade(req.getSession());
         boolean flag;
@@ -33,19 +33,27 @@ public class LoginServlet extends HttpServlet {
             flag = autenticazioneFacade.login(email, password, tipo);
 
             if(flag)
-                address = "Interface/index.jsp";
+                address = "/Interface/index.jsp";
             else
-                address = "Interface/loginUtenteGUI.jsp?error=1";
-        } else {
+                address = "/Interface/loginUtenteGUI.jsp?error=1";
+        } else if(tipo.equals("host")){
             flag = autenticazioneFacade.login(email, password, tipo);
 
             if(flag)
-                address = "Interface/index.jsp";
+                address = "/Interface/index.jsp";
             else
-                address = "Interface/loginHostGUI.jsp?error=1";
+                address = "/Interface/loginHostGUI.jsp?error=1";
+        } else if(tipo.equals("admin")){
+            flag = autenticazioneFacade.login(email, password, tipo);
+
+            if(flag)
+                address = "/Interface/indexAdmin.jsp";
+            else
+                address = "/Interface/loginHostGUI.jsp?error=1";
         }
 
-        resp.sendRedirect(address);
+        RequestDispatcher dispatcher = req.getRequestDispatcher(req.getContextPath() + address);
+        dispatcher.forward(req, resp);
     }
 
     /*private static String sha1Function(String password){

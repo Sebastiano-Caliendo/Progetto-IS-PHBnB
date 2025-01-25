@@ -66,6 +66,16 @@ public class AutenticazioneFacade {
                 session.setAttribute("host", h);
             else
                 return false;
+        } else if(tipo.equals("admin")){
+            Utente u;
+
+            UtenteDAO utenteDAO = new UtenteDAO();
+            u = utenteDAO.doRetrieveByEmailAndPassword(email, password);
+
+            if(u != null)
+                session.setAttribute("admin", u);
+            else
+                return false;
         }
 
         return true;

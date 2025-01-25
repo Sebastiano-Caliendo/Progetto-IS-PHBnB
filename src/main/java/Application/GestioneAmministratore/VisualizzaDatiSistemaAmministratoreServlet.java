@@ -22,6 +22,7 @@ public class VisualizzaDatiSistemaAmministratoreServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         GestioneAmministratoreFacade facade = new GestioneAmministratoreFacade();
 
+        req.getSession().setAttribute("admin", 1);
         List<Alloggio> alloggi = facade.visualizzaDatiSistemaAlloggio(req.getSession());
         List<Host> hosts = facade.visualizzaDatiSistemaHost(req.getSession());
         List<Prenotazione> prenotazioni = facade.visualizzaDatiSistemaPrenotazione(req.getSession());
@@ -29,14 +30,15 @@ public class VisualizzaDatiSistemaAmministratoreServlet extends HttpServlet {
         List<Struttura> strutture = facade.visualizzaDatiSistemaStruttura(req.getSession());
         List<Utente> utenti = facade.visualizzaDatiSistemaUtente(req.getSession());
 
-        req.setAttribute("alloggio", alloggi);
+        req.setAttribute("alloggi", alloggi);
         req.setAttribute("hosts", hosts);
         req.setAttribute("prenotazioni", prenotazioni);
         req.setAttribute("recensioni", recensioni);
         req.setAttribute("strutture", strutture);
         req.setAttribute("utenti", utenti);
 
-        resp.sendRedirect(req.getContextPath() + "/Interface/VisDatiSistemaGUI.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/Interface/VisDatiSistemaGUI.jsp");
+        dispatcher.forward(req, resp);
     }
 
     @Override
