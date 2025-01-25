@@ -37,7 +37,7 @@ body {
 .buttonRigaStruttura {
     row-gap: 20px;
     align-items: center;
-    height: 200px;
+    /*height: 200px;*/
     flex-direction: column;
     margin-left: 91%;
     position: absolute;
@@ -168,6 +168,8 @@ body {
 }
 
 .prezzoNotte {
+    align-content: center;
+    height : 20%;
     font-style: italic;
 }
 
@@ -180,7 +182,7 @@ body {
 }
 
 /* nome della struttura in VisAllogi */
-#sezione {
+#sezioneAlloggio {
     width : 75%;
     /*text-transform: uppercase;*/
 }
@@ -195,6 +197,8 @@ body {
 }
 
 .nomeAlloggio {
+    align-content: center;
+    height : 20%;
     font-family: cursive;
 }
 
@@ -256,8 +260,16 @@ body {
 
     /* button andranno sotto la riga e non a destra */
 
-    .container {
+    #containerStrutture {
         row-gap: 80px;
+    }
+
+    #containerAlloggi {
+        row-gap: 40px;
+    }
+
+    #containerRecensioni {
+        row-gap: 40px;
     }
 
     .buttonRigaStruttura {
@@ -273,5 +285,33 @@ body {
 @media only screen and (max-width: 900px) {
     .sezione-aggiungi {
         margin-top: 5% !important;
+    }
+}
+
+/* visAlloggi i 3 bottoni vanno sotto */
+@media only screen and (max-width: 750px) {
+    #sezione-aggiungi-alloggi {
+        row-gap : 20px;
+        align-items: center;
+        width : 90%;
+        margin : 2% 3% 4% 2%;
+        flex-direction: column;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #sezioneAlloggio{
+        text-align: center;
+        width : 100%;
+    }
+}
+
+@media only screen and (max-width: 670px) {
+    #riepStrutture {
+        width: 70%;
+    }
+
+    .immagine {
+        width: 30%;
     }
 }

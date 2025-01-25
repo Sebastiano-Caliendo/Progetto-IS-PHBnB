@@ -4,7 +4,31 @@
 <head>
     <title>Area utente</title>
 
+    <%
+        int callByServlet = 0;
+        String isCallByServlet = (String) request.getAttribute("callByServlet");
+        if(isCallByServlet != null && isCallByServlet.equalsIgnoreCase("yes"))
+            callByServlet = 1;
+    %>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <% if(callByServlet == 1) { %>
+    <link rel="stylesheet" href="Interface/css/areaUtente.css">
+    <link rel="stylesheet" href="Interface/css/headerDopoAccesso.css">
+    <link rel="stylesheet" href="Interface/css/footer.css">
+    <link rel="stylesheet" href="Interface/css/header.css">
+    <link rel="stylesheet" href="Interface/css/style.css">
+    <%
+    }
+    else { %>
     <link rel="stylesheet" href="css/areaUtente.css">
+    <link rel="stylesheet" href="css/headerDopoAccesso.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/style.css">
+    <% } %>
+
 </head>
 <body>
     <%@ include file="../WEB-INF/moduli/headerDopoAccesso.jsp"%>
@@ -15,8 +39,8 @@
 
     <div id="mainContainer">
         <div id="leftContainer">
-            <div id="divAreaAccount"><a href="" id="linkAreaAccount">Area account</a></div>
-            <div id="divPrenotazioni"><a href="" id="linkPrenotazioni">Storico prenotazioni</a></div>
+            <div id="divAreaAccount"><a href="" id="linkAreaAccount" class="normal-small-text">Area account</a></div>
+            <div id="divPrenotazioni"><a href="../visualizzaPrenotazioni" id="linkPrenotazioni" class="normal-small-text">Storico prenotazioni</a></div>
         </div>
         <div id="rightContainer">
             <div id="topContainer">
@@ -30,36 +54,36 @@
                     %>
 
                             <div class="divDati">
-                                <p class="parDati">Email</p>
-                                <p><%=u.getEmail()%></p>
+                                <p class="parDati"><b>Email</b></p>
+                                <p class="parDati"><%=u.getEmail()%></p>
                             </div>
                             <div class="divDati">
-                                <p class="parDati">Nome</p>
-                                <p><%=u.getNome()%></p>
+                                <p class="parDati"><b>Nome</b></p>
+                                <p class="parDati"><%=u.getNome()%></p>
                             </div>
                             <div class="divDati">
-                                <p class="parDati">Cognome</p>
-                                <p><%=u.getCognome()%></p>
+                                <p class="parDati"><b>Cognome</b></p>
+                                <p class="parDati"><%=u.getCognome()%></p>
                             </div>
                             <div class="divDati">
-                                <p class="parDati">Città</p>
-                                <p><%=u.getCitta()%></p>
+                                <p class="parDati"><b>Città</b></p>
+                                <p class="parDati"><%=u.getCitta()%></p>
                             </div>
                             <div class="divDati">
-                                <p class="parDati">Numero civico</p>
-                                <p><%=u.getNumeroCivico()%></p>
+                                <p class="parDati"><b>Numero civico</b></p>
+                                <p class="parDati"><%=u.getNumeroCivico()%></p>
                             </div>
                             <div class="divDati">
-                                <p class="parDati">Via</p>
-                                <p><%=u.getVia()%></p>
+                                <p class="parDati"><b>Via</b></p>
+                                <p class="parDati"><%=u.getVia()%></p>
                             </div>
                             <div class="divDati">
-                                <p class="parDati">Data nascita</p>
-                                <p><%=u.getDataNascita()%></p>
+                                <p class="parDati"><b>Data nascita</b></p>
+                                <p class="parDati"><%=u.getDataNascita()%></p>
                             </div>
-                            <div class="divDati">
-                                <p class="parDati">Recapito telefonico</p>
-                                <p><%=u.getRecapitoTelefonico()%></p>
+                            <div class="divDati" id="ultimo">
+                                <p class="parDati"><b>Recapito telefonico</b></p>
+                                <p class="parDati"><%=u.getRecapitoTelefonico()%></p>
                             </div>
 
                     <%
@@ -69,7 +93,7 @@
             </div>
 
             <div id="bottomContainer">
-                <a href="modificaDatiUtenteGUI.jsp" id="linkModificaDati">Modifica dati account ></a>
+                <a href="modificaDatiUtenteGUI.jsp" id="linkModificaDati" class="normal-text"><b>Modifica dati account ></b></a>
             </div>
         </div>
     </div>

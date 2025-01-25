@@ -23,7 +23,8 @@
 }
 
 body {
-    overflow-x: hidden;  /* nascondi tutto ciò che supera il 100vw */
+    margin-bottom: 10vh;
+    overflow-x: hidden ;  /* nascondi tutto ciò che supera il 100vw */
 }
 
 form input[type = submit] {
@@ -128,7 +129,7 @@ form input[type = submit] {
     }
 }
 
-@media only screen and (max-width: 350px) {
+@media only screen and (max-width: 380px) {
     .big-text { font-size: 28px; font-weight: 850; }
     .mid-text { font-size: 15px; font-weight: 750; }
     .normal-text { font-size: 13px; font-weight: 550; }

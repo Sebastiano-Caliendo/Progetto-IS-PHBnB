@@ -50,12 +50,16 @@ public class PrenotazioneAlloggioFacade {
 
     public void modificaPrenotazione(LocalDate checkIn, LocalDate checkOut, int numPostiLetto, int codPrenotazione) {
         PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
-        Prenotazione p = new Prenotazione();
-        p.setCodicePrenotazione(codPrenotazione);
-        prenotazioneDAO.doUpdate(p, checkIn, checkOut, numPostiLetto);
+        Prenotazione p = prenotazioneDAO.doRetrieveById(codPrenotazione);
+
+        LocalDate dataAttuale = LocalDate.now();
+
+        if(dataAttuale.isBefore(p.getCheckIn().minusDays(7))) {
+            prenotazioneDAO.doUpdate(p, checkIn, checkOut, numPostiLetto);
+        }
     }
 
-    public boolean eliminaPrenotazione(int codPrenotazione) {
+    public void eliminaPrenotazione(int codPrenotazione) {
 
         PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
 
@@ -64,11 +68,8 @@ public class PrenotazioneAlloggioFacade {
 
         LocalDate dataAttuale = LocalDate.now();
 
-        if(dataAttuale.isBefore(dataCheckIn)) {
+        if(dataAttuale.plusDays(7).isBefore(dataCheckIn)) {
             prenotazioneDAO.doDelete(codPrenotazione);
-            return true;
-        } else {
-            return false;
         }
     }
 

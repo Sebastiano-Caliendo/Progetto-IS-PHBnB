@@ -84,7 +84,7 @@
                 </textarea>
             </div>
 
-            <input type="submit" value="Modifica Struttura" style="border : 2px solid var(--color-primary); width : 50%; height : 30px; color: black; background-color: var(--rosa-bianchissimo);">
+            <input type="submit" value="Modifica" style="border : 2px solid var(--color-primary); width : 50%; height : 30px; color: black; background-color: var(--rosa-bianchissimo);">
         </form>
     </div>
     <div class="immagini">
