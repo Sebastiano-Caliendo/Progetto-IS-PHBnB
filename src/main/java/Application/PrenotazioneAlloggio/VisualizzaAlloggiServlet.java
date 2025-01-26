@@ -18,10 +18,12 @@ public class VisualizzaAlloggiServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String destinazione = req.getParameter("destinazione");
+        req.setAttribute("callByServlet", "yes");
+
+        String destinazione = req.getParameter("luogo");
         String dataCheckIn = req.getParameter("dataCheckIn");
         String dataCheckOut = req.getParameter("dataCheckOut");
-        String numPostiLetto = req.getParameter("numPostiLetto");
+        String numPostiLetto = req.getParameter("numOspiti");
 
         PrenotazioneAlloggioFacade prenotazioneAlloggioFacade = new PrenotazioneAlloggioFacade();
 
@@ -31,7 +33,7 @@ public class VisualizzaAlloggiServlet extends HttpServlet {
             req.setAttribute("alloggiPrenotabili", alloggi);
         }
 
-        String address = "alloggiPrenotabiliGUI.jsp";
+        String address = "Interface/alloggiPrenotabiliGUI.jsp";
 
         RequestDispatcher rd = req.getRequestDispatcher(address);
         rd.forward(req, resp);

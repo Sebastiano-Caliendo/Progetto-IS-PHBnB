@@ -1,4 +1,3 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
 </head>
@@ -12,14 +11,19 @@
 
     <div id="header">
         <div id="divLogo">
-            <p id="parLogo" class="mid-text">PHB&B</p>
+            <a href="<%=header%>index.jsp" id="parLogo" class="mid-text">PHB&B</a>
         </div>
         <div id="container">
             <div id="divImg">
                 <img src="<%=header%>img/user.png" alt="immagine utente" id="userImg">
             </div>
-            <div id="dropdown">
-                <a href="#" onclick="openWindow()" id="linkLogout" class="normal-small-text">Logout</a>
+            <div class="dropdown">
+                <div class="dropdownElem">
+                    <a href="<%=header%>areaUtenteGUI.jsp" id="linkAreaUtente" class="normal-small-text">Area utente</a>
+                </div>
+                <div class="dropdownElem">
+                    <a href="#" onclick="openWindow()" id="linkLogout" class="normal-small-text">Logout</a>
+                </div>
             </div>
         </div>
     </div>
@@ -64,7 +68,7 @@
             buttonSi.style.width = "20%";
             //associa al button il percorso della pagine jsp da raggiungere dopo il click
             buttonSi.addEventListener("click", function() {
-                window.location.href = "logout";
+                window.location.href = "../logout";
             });
 
             buttonNo.textContent = "No";

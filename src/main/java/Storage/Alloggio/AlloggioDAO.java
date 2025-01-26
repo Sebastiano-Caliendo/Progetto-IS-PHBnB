@@ -36,7 +36,7 @@ public class AlloggioDAO  {
             PreparedStatement ps =
                     con.prepareStatement("SELECT * FROM ((alloggio JOIN struttura ON alloggio.fk_struttura = struttura.id_struttura) " +
                                 "JOIN host ON struttura.fk_host = host.email)\n" +
-                                "WHERE struttura.citta = ? AND alloggio.numero_posti_letto = ? AND (numero_alloggio, fk_struttura) NOT IN \n" +
+                                "WHERE struttura.citta = ? AND alloggio.numero_posti_letto >= ? AND (numero_alloggio, fk_struttura) NOT IN \n" +
                                 "(SELECT occupa.fk_alloggio, occupa.fk_strutturaAlloggio FROM occupa JOIN prenotazione ON occupa.fk_prenotazione = prenotazione.codice_prenotazione\n" +
                                 "WHERE (prenotazione.check_in BETWEEN ? AND ? OR prenotazione.check_out BETWEEN ? AND ?));" );
 

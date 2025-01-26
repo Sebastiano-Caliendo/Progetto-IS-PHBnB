@@ -33,39 +33,25 @@ public class LoginServlet extends HttpServlet {
             flag = autenticazioneFacade.login(email, password, tipo);
 
             if(flag)
-                address = "/Interface/index.jsp";
+                address = "Interface/index.jsp";
             else
-                address = "/Interface/loginUtenteGUI.jsp?error=1";
+                address = "Interface/loginUtenteGUI.jsp?error=1";
         } else if(tipo.equals("host")){
             flag = autenticazioneFacade.login(email, password, tipo);
 
             if(flag)
-                address = "/Interface/index.jsp";
+                address = "Interface/index.jsp";
             else
-                address = "/Interface/loginHostGUI.jsp?error=1";
+                address = "Interface/loginHostGUI.jsp?error=1";
         } else if(tipo.equals("admin")){
             flag = autenticazioneFacade.login(email, password, tipo);
 
             if(flag)
-                address = "/Interface/indexAdmin.jsp";
+                address = "Interface/indexAdmin.jsp";
             else
-                address = "/Interface/loginHostGUI.jsp?error=1";
+                address = "Interface/loginHostGUI.jsp?error=1";
         }
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher(req.getContextPath() + address);
-        dispatcher.forward(req, resp);
+        resp.sendRedirect(address);
     }
-
-    /*private static String sha1Function(String password){
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-1");
-            StringBuilder hexString = new StringBuilder();
-            for (byte b : md.digest(password.getBytes(StandardCharsets.UTF_8))) {
-                hexString.append(String.format("%02x", b));
-            }
-            return hexString.toString();
-        }catch(NoSuchAlgorithmException e){
-            throw new RuntimeException(e);
-        }
-    }*/
 }
