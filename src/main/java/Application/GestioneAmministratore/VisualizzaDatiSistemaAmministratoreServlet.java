@@ -22,6 +22,7 @@ public class VisualizzaDatiSistemaAmministratoreServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         GestioneAmministratoreFacade facade = new GestioneAmministratoreFacade();
 
+        req.setAttribute("callByServlet", "yes");
         req.getSession().setAttribute("admin", 1);
         List<Alloggio> alloggi = facade.visualizzaDatiSistemaAlloggio(req.getSession());
         List<Host> hosts = facade.visualizzaDatiSistemaHost(req.getSession());

@@ -13,8 +13,12 @@ import Storage.Struttura.Struttura;
 import Storage.Struttura.StrutturaDAO;
 import Storage.Utente.Utente;
 import Storage.Utente.UtenteDAO;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -225,7 +229,7 @@ public class GestioneAmministratoreFacade {
         }
     }
 
-    public void modificaDatiSistemaUtente(Utente utente, String email, String nome, String cognome, String password, String citta, String numeroCivico, String via, String recapitoTelefonico, HttpSession session){
+    public void modificaDatiSistemaUtente(Utente utente, String email, String nome, String cognome, String password, String citta, String numeroCivico, String via, String recapitoTelefonico, HttpSession session) throws ServletException, IOException {
         boolean successo = false;
 
         if(proxy.isAutenticato(session)){

@@ -35,7 +35,7 @@ public class ModificaDatiSistemaHostServlet extends HttpServlet {
 
         gestioneAmministratoreFacade.modificaDatiSistemaHost(host, email, nome, cognome, password, recapitoTelefonico, req.getSession());
 
-        resp.sendRedirect(req.getContextPath() + "/Interface/VisDatiSistemaGUI.jsp");
+        resp.sendRedirect(req.getContextPath() + "/Interface/indexAdmin.jsp");
 
     }
 

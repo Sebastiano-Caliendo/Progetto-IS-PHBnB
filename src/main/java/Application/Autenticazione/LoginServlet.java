@@ -54,4 +54,17 @@ public class LoginServlet extends HttpServlet {
 
         resp.sendRedirect(address);
     }
+
+    /*private static String sha1Function(String password){
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-1");
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : md.digest(password.getBytes(StandardCharsets.UTF_8))) {
+                hexString.append(String.format("%02x", b));
+            }
+            return hexString.toString();
+        }catch(NoSuchAlgorithmException e){
+            throw new RuntimeException(e);
+        }
+    }*/
 }

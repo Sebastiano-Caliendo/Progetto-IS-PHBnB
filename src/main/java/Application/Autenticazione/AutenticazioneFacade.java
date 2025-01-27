@@ -70,7 +70,7 @@ public class AutenticazioneFacade {
             Utente u;
 
             UtenteDAO utenteDAO = new UtenteDAO();
-            u = utenteDAO.doRetrieveByEmailAndPassword(email, password);
+            u = utenteDAO.doRetrieveById(email);
 
             if(u != null)
                 session.setAttribute("admin", u);

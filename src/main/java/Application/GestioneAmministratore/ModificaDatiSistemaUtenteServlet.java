@@ -42,7 +42,7 @@ public class ModificaDatiSistemaUtenteServlet extends HttpServlet {
         gestioneAmministratoreFacade.modificaDatiSistemaUtente(utente, email, nome, cognome, password, citta, numeroCivico, via, recapitoTelefonico, req.getSession());
 
 
-        resp.sendRedirect(req.getContextPath() + "/Interface/VisDatiSistemaGUI.jsp");
+        resp.sendRedirect(req.getContextPath() + "/Interface/indexAdmin.jsp");
     }
 
     @Override
