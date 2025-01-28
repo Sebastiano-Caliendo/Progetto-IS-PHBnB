@@ -17,7 +17,7 @@ public class EliminaStrutturaServlet extends HttpServlet {
         req.setAttribute("callByServlet", "yes");
         // prendiamo l'id della struttura che vogliamo eliminare
 
-        int idStruttura = Integer.parseInt(req.getParameter("idStruttura"));
+        String idStruttura = req.getParameter("idStruttura");
 
         // elimino la struttura dal DB
         gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();

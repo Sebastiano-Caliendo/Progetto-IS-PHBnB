@@ -92,4 +92,57 @@ public class Validator {
         else
             throw new RuntimeException();
     }
+
+    public int validateInt(String integerValue) {
+        String regex = "^\\d+$";
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(integerValue);
+
+        if(matcher.matches()){
+            return Integer.parseInt(integerValue);
+        }
+        else
+            throw new RuntimeException();
+    }
+
+    public double validateDouble(String doubleValue) {
+        String regex = "^\\d+(\\.\\d+)?$";
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(doubleValue);
+
+        if(matcher.matches()){
+            return Double.parseDouble(doubleValue);
+        }
+        else
+            throw new RuntimeException();
+    }
+
+    public String validateTipoAlloggio(String tipoAlloggio) {
+
+        if(tipoAlloggio != null && !tipoAlloggio.isEmpty() && tipoAlloggio.length() <= 30) {
+            return tipoAlloggio;
+        } else {
+            throw new RuntimeException();
+        }
+    }
+
+    public String validateDescrizione(String descrizione) {
+
+        if(descrizione != null && !descrizione.isEmpty()) {
+            return descrizione;
+        } else {
+            throw new RuntimeException();
+        }
+    }
+
+    public String validateNomeStruttura(String nomeStruttura) {
+
+        if(nomeStruttura != null && !nomeStruttura.isEmpty() && nomeStruttura.length() <= 30) {
+            return nomeStruttura;
+        } else {
+            throw new RuntimeException();
+        }
+    }
 }

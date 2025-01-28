@@ -22,15 +22,15 @@ public class ModificaAlloggioServlet extends HttpServlet {
         req.setAttribute("callByServlet", "yes");
 
         // prende il vecchio numero alloggio che potrebbe essere modificato
-        int oldNumeroAlloggio = Integer.parseInt(req.getParameter("oldNumeroAlloggio"));
+        String oldNumeroAlloggio = req.getParameter("oldNumeroAlloggio");
 
         // prendiamo tutti i valori dell'alloggio che si vuole inserire
-        int numeroAlloggio = Integer.parseInt(req.getParameter("numeroAlloggio"));
+        String numeroAlloggio = req.getParameter("numeroAlloggio");
         // l'idStruttura non potrà essere modificato, quindi sarà uguale al valore passato
         // dalla recente jsp.
-        int idStruttura = Integer.parseInt(req.getParameter("idStruttura"));
-        double prezzoNotte = Double.parseDouble(req.getParameter("prezzoNotte"));
-        int numPostiLetto = Integer.parseInt(req.getParameter("numPostiLetto"));
+        String idStruttura = req.getParameter("idStruttura");
+        String prezzoNotte = req.getParameter("prezzoNotte");
+        String numPostiLetto = req.getParameter("numPostiLetto");
         String tipoAlloggio = req.getParameter("tipoAlloggio");
         String descrizione = req.getParameter("descrizione");
         //String urlImmagine = req.getParameter("urlImmagine");

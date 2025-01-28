@@ -21,7 +21,7 @@ public class SelezionaPrenotazioniServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("callByServlet", "yes");
         // prendo l'id della struttura, in modo da poter prendere tutte le prenotazioni associate a quella struttura
-        int idStruttura = Integer.parseInt(req.getParameter("idStruttura"));
+        String idStruttura = req.getParameter("idStruttura");
 
         gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
 

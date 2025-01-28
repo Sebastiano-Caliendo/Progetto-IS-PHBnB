@@ -20,14 +20,15 @@ public class AggiungiStrutturaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("callByServlet", "yes");
         // prendiamo l'host dalla sessione (il campo fk_host non verrà inserito)
-        //Host host = (Host) req.getSession().getAttribute("host");
-        // Debug per stampare tutti i parametri della richiesta
+        Host host = (Host) req.getSession().getAttribute("host");
+
+        /* Debug per stampare tutti i parametri della richiesta
         for (String param : req.getParameterMap().keySet()) {
             System.out.println(param + " = " + req.getParameter(param));
         }
         
-        HostDAO hostDAO = new HostDAO();
-        Host host = hostDAO.doRetrieveById("pintocarlo09@gmail.com");
+        /*HostDAO hostDAO = new HostDAO();
+        Host host = hostDAO.doRetrieveById("pintocarlo09@gmail.com");*/
 
         // prendiamo tutti i campi insriti dall'host
         String nomeStruttura = req.getParameter("nomeStruttura");

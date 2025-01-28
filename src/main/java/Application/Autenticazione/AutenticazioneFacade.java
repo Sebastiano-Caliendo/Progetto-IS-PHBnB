@@ -105,7 +105,7 @@ public class AutenticazioneFacade {
                 return false;
         }
 
-        return false;
+        return true;
     }
 
     public void logout() {

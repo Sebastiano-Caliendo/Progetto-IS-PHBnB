@@ -22,19 +22,19 @@ public class ModificaStrutturaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("callByServlet", "yes");
 
-        // Debug per stampare tutti i parametri della richiesta
+        /* Debug per stampare tutti i parametri della richiesta
         for (String param : req.getParameterMap().keySet()) {
             System.out.println(param + " = " + req.getParameter(param));
-        }
+        }*/
 
         // prendiamo l'oggetto host dalla sessione perchè ci serve l'fkHost da associare alla struttura
         // L'host nella pagina modifica.jsp non inserirà il campo fk_host
-        //Host host = (Host) req.getSession().getAttribute("host");
-        HostDAO hostDAO = new HostDAO();
-        Host host = hostDAO.doRetrieveById("pintocarlo09@gmail.com");
+        Host host = (Host) req.getSession().getAttribute("host");
+        /*HostDAO hostDAO = new HostDAO();
+        Host host = hostDAO.doRetrieveById("pintocarlo09@gmail.com");*/
 
         // prende il vecchio id della struttura che sarà sicuramente cambiato perchè id_struttura è auto_increment
-        int oldIdStruttura = Integer.parseInt(req.getParameter("idStruttura"));
+        String oldIdStruttura = req.getParameter("idStruttura");
 
         // prendiamo tutti i valori della struttura che si vuole inserire
 
