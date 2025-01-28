@@ -32,7 +32,7 @@ public class ModificaDatiSistemaAlloggioServlet extends HttpServlet {
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
         gestioneAmministratoreFacade.modificaDatiSistemaAlloggio(numeroAlloggio, prezzoNotte, postiLetto, tipoAlloggio, descrizione, oldNumeroAlloggio, fkStruttura, req.getSession());
 
-        resp.sendRedirect(req.getContextPath() + "/Interface/VisDatiSistemaGUI.jsp");
+        resp.sendRedirect(req.getContextPath() + "/Interface/indexAdmin.jsp");
     }
 
     @Override

@@ -1,15 +1,10 @@
-<%@ page import="Storage.Alloggio.AlloggioDAO" %>
 <%@ page import="java.util.List" %>
 <%@ page import="Storage.Alloggio.Alloggio" %>
-<%@ page import="Storage.Recensione.RecensioneDAO" %>
 <%@ page import="Storage.Recensione.Recensione" %>
 <%@ page import="Storage.Host.HostDAO" %>
 <%@ page import="Storage.Host.Host" %>
-<%@ page import="Storage.Prenotazione.PrenotazioneDAO" %>
 <%@ page import="Storage.Prenotazione.Prenotazione" %>
-<%@ page import="Storage.Struttura.StrutturaDAO" %>
 <%@ page import="Storage.Struttura.Struttura" %>
-<%@ page import="Storage.Utente.UtenteDAO" %>
 <%@ page import="Storage.Utente.Utente" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -73,7 +68,6 @@
         <th>Recapito Telefonico</th>
     </tr>
     <%
-        //UtenteDAO utenteDAO = new UtenteDAO();
         List<Utente> utenti = (List<Utente>) request.getAttribute("utenti");
 
         for(Utente u: utenti){
@@ -89,12 +83,14 @@
         <td><input type = "text" value = "<%=u.getVia()%>" name = "viaUtente"></td>
         <td><%=u.getDataNascita()%></td>
         <td><input type = "text" value = "<%=u.getRecapitoTelefonico()%>" name = "recapitoTelefonicoUtente"></td>
+        <input type = "hidden" value = "<%=u.isAdmin()%>" name = "isAdminUtente">
+        <td><input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" formaction="modificaDatiSistemaUtenteServlet"></form></td>
     </tr>
     <%}%>
 </table>
-    <div style = "margin-left: auto; margin-right: auto;">
-    <input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" formaction="<%=servlet%>modificaDatiSistemaUtenteServlet"></form>
-    </div>
+    <!--<div style = "margin-left: auto; margin-right: auto;">
+    <input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" formaction="modificaDatiSistemaUtenteServlet"></form>
+    </div>!-->
 </div>
 <br>
 <br>
@@ -110,7 +106,6 @@
         <th>Descrizione</th>
     </tr>
     <%
-        //AlloggioDAO alloggioDAO = new AlloggioDAO();
         List<Alloggio> alloggi = (List<Alloggio>) request.getAttribute("alloggi");
 
         for(Alloggio a: alloggi){
@@ -124,13 +119,11 @@
         <td><input type = "text" value = "<%=a.getPostiletto()%>" name = "postiLetto"></td>
         <td><input type = "text" value = "<%=a.getTipoAlloggio()%>" name = "tipoAlloggio"></td>
         <td><input type = "text" value = "<%=a.getDescrizione()%>" name = "descAlloggio"></td>
+        <td><input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" formaction = "modificaDatiSistemaAlloggioServlet"></td>
+        <td><input type = "submit" value = "Cancella" class = "buttonDati" style = "width: 75px;" formaction = "cancellazioneDatiSistemaAlloggioServlet"></form></td>
     </tr>
     <%}%>
 </table>
-    <div class = "buttonRigaStruttura1">
-        <input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" formaction = "<%=servlet%>modificaDatiSistemaAlloggioServlet">
-        <input type = "submit" value = "Cancella" class = "buttonDati" style = "width: 75px;" formaction = "<%=servlet%>cancellazioneDatiSistemaAlloggioServlet"></form>
-    </div>
 </div>
 <br>
 <br>
@@ -147,7 +140,6 @@
         <th>Descrizione</th>
     </tr>
     <%
-        //StrutturaDAO strutturaDAO = new StrutturaDAO();
         List<Struttura> strutture = (List<Struttura>) request.getAttribute("strutture");
 
         for(Struttura s: strutture){
@@ -162,6 +154,8 @@
         <td><input type = "text" value = "<%=s.getCitta()%>" name = "cittaStruttura"></td>
         <td><input type = "text" value = "<%=s.getNumAlloggi()%>" name = "numAlloggiStruttura"></td>
         <td><input type = "text" value = "<%=s.getDescrizione()%>" name = "descrizioneStruttura"></td>
+        <td><input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" formaction = "modificaDatiSistemaStrutturaServlet"></td>
+        <td><input type = "submit" value = "Cancella" class = "buttonDati" style = "width: 75px" formaction = "cancellazioneDatiSistemaStrutturaServlet"></form></td>
     </tr>
     <%
         HostDAO hostDAO = new HostDAO();
@@ -169,10 +163,6 @@
         session.setAttribute("host", h);
         }%>
 </table>
-    <div class = "buttonRigaStruttura1">
-        <input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" formaction = "<%=servlet%>modificaDatiSistemaStrutturaServlet">
-        <input type = "submit" value = "Cancella" class = "buttonDati" style = "width: 75px" formaction="<%=servlet%>cancellazioneDatiSistemaStrutturaServlet"></form>
-    </div>
 </div>
     <br>
     <br>
@@ -189,7 +179,6 @@
             <th>Codice Struttura</th>
         </tr>
         <%
-            //RecensioneDAO recensioneDAO = new RecensioneDAO();
             List<Recensione> recensioni = (List<Recensione>) request.getAttribute("recensioni");
 
             for(Recensione r: recensioni){
@@ -204,12 +193,10 @@
             <td><%=r.getPrenotazione().getCodicePrenotazione()%></td>
             <td><%=r.getAlloggio().getNumeroAlloggio()%></td>
             <td><%=r.getAlloggio().getStruttura().getIdStruttura()%></td>
+            <td><input type = "submit" value = "Cancella" class = "buttonDati" style = "width: 75px;" formaction = "cancellazioneDatiSistemaRecensioneServlet"></form></td>
         </tr>
         <%}%>
     </table>
-    <div class = "buttonRigaStruttura1">
-        <input type = "submit" value = "Cancella" class = "buttonDati" style = "width: 75px;" formaction = "<%=servlet%>cancellazioneDatiSistemaRecensioneServlet"></form>
-    </div>
 </div>
 <br>
 <br>
@@ -225,7 +212,6 @@
         <th>Recapito Telefonico</th>
     </tr>
     <%
-        //HostDAO hostDAO = new HostDAO();
         List<Host> hosts = (List<Host>) request.getAttribute("hosts");
 
         for(Host h: hosts){
@@ -238,12 +224,10 @@
         <td><input type = "text" value = "<%=h.getPassword()%>" name = "passwordHost"></td>
         <td><%=h.getDataNascita()%></td>
         <td><input type = "text" value = "<%=h.getRecapitoTelefonico()%>" name = "recapitoTelHost"></td>
+        <td><input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" formaction = "modificaDatiSistemaHostServlet"></form></td>
     </tr>
     <%}%>
 </table>
-    <div class = "buttonRigaStruttura1">
-        <input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" formaction = "<%=servlet%>modificaDatiSistemaHostServlet"></form>
-    </div>
 </div>
 <br>
 <br>
@@ -257,8 +241,7 @@
             <th>Numero Persone</th>
         </tr>
         <%
-            PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
-            List<Prenotazione> prenotazioni = prenotazioneDAO.doRetrieveAll();
+            List<Prenotazione> prenotazioni = (List<Prenotazione>) request.getAttribute("prenotazioni");
 
             for(Prenotazione p: prenotazioni){
         %>
@@ -272,12 +255,10 @@
             <input type = "hidden" value = "<%=p.getNumeroCartaCredito()%>" name = "numeroCartaPrenotazione">
             <input type = "hidden" value = "<%=p.getDataScadenzaCarta()%>" name = "dataScadenzaCartaPrenotazione">
             <input type = "hidden" value = "<%=p.getCviCarta()%>" name = "cviCartaPrenotazione">
+            <td><input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px" formaction = "modificaDatiSistemaPrenotazioneServlet"></td>
         </tr>
         <%}%>
     </table>
-    <div class = "buttonRigaStruttura1">
-        <input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px" formaction = "<%=servlet%>modificaDatiSistemaPrenotazioneServlet">
-    </div>
     </form>
 </div>
     <%@ include file="../WEB-INF/moduli/footer.jsp"%>

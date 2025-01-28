@@ -28,7 +28,7 @@ public class ModificaDatiSistemaStrutturaServlet extends HttpServlet {
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
         gestioneAmministratoreFacade.modificaDatiSistemaStruttura((Host) req.getSession().getAttribute("host"), nomeStruttura, via, citta, numAlloggi ,numCivico, descrizione, urlImmagine, idStruttura, req.getSession());
 
-        resp.sendRedirect(req.getContextPath() + "/Interface/VisDatiSistemaGUI.jsp");
+        resp.sendRedirect(req.getContextPath() + "/Interface/indexAdmin.jsp");
     }
 
     @Override

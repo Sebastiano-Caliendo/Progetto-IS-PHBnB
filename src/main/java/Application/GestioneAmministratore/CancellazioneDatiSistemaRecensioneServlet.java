@@ -19,7 +19,7 @@ public class CancellazioneDatiSistemaRecensioneServlet extends HttpServlet {
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
         gestioneAmministratoreFacade.cancellazioneDatiSitemaRecensione(idRecensione, req.getSession());
 
-        resp.sendRedirect(req.getContextPath() + "/Interface/VisDatiSistemaGUI.jsp");
+        resp.sendRedirect(req.getContextPath() + "/Interface/indexAdmin.jsp");
 
     }
 

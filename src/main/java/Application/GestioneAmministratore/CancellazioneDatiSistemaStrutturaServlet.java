@@ -18,8 +18,7 @@ public class CancellazioneDatiSistemaStrutturaServlet extends HttpServlet {
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
         gestioneAmministratoreFacade.cancellazioneDatiSistemaStruttura(idStruttura, req.getSession());
 
-        resp.sendRedirect(req.getContextPath() + "/Interface/VisDatiSistemaGUI.jsp");
-
+        resp.sendRedirect(req.getContextPath() + "/Interface/indexAdmin.jsp");
     }
 
     @Override

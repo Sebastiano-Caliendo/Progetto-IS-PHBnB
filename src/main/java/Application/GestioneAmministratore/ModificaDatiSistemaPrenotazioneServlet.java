@@ -47,7 +47,7 @@ public class ModificaDatiSistemaPrenotazioneServlet extends HttpServlet {
 
         gestioneAmministratoreFacade.modificaDatiSistemaPrenotazione(p, LocalDate.parse(checkIn), LocalDate.parse(checkOut), numeroPersone, req.getSession());
 
-        resp.sendRedirect(req.getContextPath() + "/Interface/VisDatiSistemaGUI.jsp");
+        resp.sendRedirect(req.getContextPath() + "/Interface/indexAdmin.jsp");
 
     }
 

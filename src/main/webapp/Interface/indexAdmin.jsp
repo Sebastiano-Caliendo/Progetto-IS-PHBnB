@@ -9,10 +9,22 @@
 <html>
   <head>
     <title>Gestione Admin</title>
+
+    <link rel = "stylesheet" href = "css/index.css">
+    <link rel = "stylesheet" href = "css/style.css">
   </head>
   <body>
+  <div id="topContainer">
+    <div id="divLogo">
+      <p id="parLogo" class="mid-text">PHB&B</p>
+    </div>
+  </div>
   <form method = "post">
+    <div id = "bottomContainerConferma">
+      <p class = "small-text, parScrittaAdmin">Premi il pulsante per visualizzare i dati</p>
+    <br>
     <input type = "submit" formaction="../visualizzaDatiSistemaAmministratoreServlet" value = "Conferma">
+    </div>
   </form>
   </body>
 </html>

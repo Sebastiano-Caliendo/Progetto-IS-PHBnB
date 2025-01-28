@@ -28,6 +28,9 @@
                 <input type="submit" id="submitButtom" value="Accedi" class="loginElements">
                 <br>
                 <a href = "registrazioneHostGUI.jsp" style = "text-decoration: none; font-family: 'Montserrat', sans-serif; color: black;">Non hai un'account? Registrati qui!</a>
+                <br>
+                <br>
+                <a href = "loginAdmin.jsp" style = "text-decoration: none; font-family: 'Montserrat', sans-serif; color: black;">Sei un admin? Accedi qui!</a>
             </form>
         </div>
     </div>

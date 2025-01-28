@@ -28,7 +28,7 @@ body, html {
     width: 20%;
 }
 
-#divReg, #divAccedi {
+#divReg, #divAccedi, #divAccediAdmin {
     height: 100%;
     width: 10%;
 }
@@ -44,7 +44,7 @@ body, html {
     text-decoration: underline;
 }
 
-#linkReg, #linkAccedi {
+#linkReg, #linkAccedi, #linkAccediAdmin {
     border: 1px solid black;
     height : 20px;
     width : 120px;
@@ -83,6 +83,19 @@ body, html {
     flex-direction: row;
 }
 
+#bottomContainerConferma {
+    margin: auto;
+    align-items: center;
+    width: 100px;
+    height: 75vh;
+    display: inherit;
+    flex-direction: row;
+}
+
+.parScrittaAdmin{
+    text-align: center;
+}
+
 .imgHome {
     margin: 25px;
     height: 85%;
@@ -90,7 +103,7 @@ body, html {
     border-radius: 15px;
 }
 
-#divFiltroLuogo, #divFiltroDate {
+#divFiltroLuogo {
     text-align: center;
     align-content: center;
     height: 60%;
@@ -101,11 +114,22 @@ body, html {
     margin: auto;
 }
 
+#divFiltroDate{
+    text-align: center;
+    align-content: center;
+    height: 60%;
+    width: 25%;
+    background-color: white;
+    border: 1px solid;
+    border-radius: 5px;
+    margin: auto;
+}
+
 #divFiltroOspiti {
     text-align: center;
     align-content: center;
     height: 60%;
-    width: 15%;
+    width: 20%;
     background-color: white;
     border: 1px solid;
     border-radius: 5px;
@@ -116,7 +140,7 @@ body, html {
     align-content: center;
     text-align: center;
     height: 60%;
-    width: 10%;
+    width: 15%;
     background-color: #2C2C2C;
     border-radius: 5px;
     margin: auto auto auto 10px;
