@@ -30,18 +30,8 @@
                         </div>
 
                         <div class="formElements">
-                            <label for="vecchiaPassword" id="vecchiaPasswordLabel">Vecchia password</label>
-                            <input type="password" id="vecchiaPassword" name="vecchiaPassword">
-                        </div>
-
-                        <div class="formElements">
                             <label for="nuovaPassword" id="nuovaPasswordLabel">Nuova password</label>
-                            <input type="password" id="nuovaPassword" name="nuovaPassword" >
-                        </div>
-
-                        <div class="formElements">
-                            <label for="confermaPassword" id="confermaPasswordLabel">Conferma password</label>
-                            <input type="password" id="confermaPassword" name="confermaPassword" >
+                            <input type="password" id="nuovaPassword" name="nuovaPassword">
                         </div>
 
                         <div class="formElements">

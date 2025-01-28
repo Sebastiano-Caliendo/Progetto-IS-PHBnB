@@ -21,13 +21,13 @@ public class RedirectToModificaStrutturaServlet extends HttpServlet {
 
         // prendiamo l'identificatore della struttura che vogliamo modificare
 
-        int idStruttura = Integer.parseInt(req.getParameter("idStruttura"));
+        String idStruttura = req.getParameter("idStruttura");
 
         //prendiamo i dati della struttura che vogliamo modificare
         gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
         Struttura struttura = strutturaFacade.returnStruttura(idStruttura);
 
-        System.out.println("url Immagine in redirect : " + struttura.getUrlImmagine());
+        //System.out.println("url Immagine in redirect : " + struttura.getUrlImmagine());
 
         //aggiungiamo la struttura nella richiesta
         req.setAttribute("struttura", struttura);

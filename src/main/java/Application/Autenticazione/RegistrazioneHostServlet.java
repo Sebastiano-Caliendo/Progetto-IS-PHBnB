@@ -31,13 +31,11 @@ public class RegistrazioneHostServlet extends HttpServlet {
         String dataNascita = req.getParameter("dataNascita");
         String recapitoTelefonico = req.getParameter("recapitoTelefonico");
 
-        Host h = new Host(email, nome, cognome, password, LocalDate.parse(dataNascita), recapitoTelefonico);
-
         AutenticazioneFacade autenticazioneFacade = new AutenticazioneFacade(req.getSession());
 
         String address;
 
-        if(autenticazioneFacade.registrazioneHost(h)) {
+        if(autenticazioneFacade.registrazioneHost(email, nome, cognome, password, dataNascita, recapitoTelefonico)) {
             address = "Interface/index.jsp";
         } else {
             address = "Interface/registrazioneHostGUI.jsp?error=1";

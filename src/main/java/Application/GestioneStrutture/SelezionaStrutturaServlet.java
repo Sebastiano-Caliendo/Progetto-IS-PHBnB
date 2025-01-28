@@ -22,7 +22,7 @@ public class SelezionaStrutturaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("callByServlet", "yes");
         // prendo l'id della struttura che voglio selezionare (voglio visualizzare i suoi alloggi)
-        int idStruttura = Integer.parseInt(req.getParameter("idStruttura"));
+        String idStruttura = req.getParameter("idStruttura");
 
         gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
         gestioneAlloggioFacade alloggioFacade = new gestioneAlloggioFacade();
@@ -31,7 +31,7 @@ public class SelezionaStrutturaServlet extends HttpServlet {
         Struttura struttura = strutturaFacade.returnStruttura(idStruttura);
 
         // prendo tutti gli alloggi della struttura
-        List<Alloggio> alloggi = new ArrayList<>();
+        List<Alloggio> alloggi;
         alloggi = alloggioFacade.visualizzaAlloggi(struttura);
 
         // inserisco la lista degli alloggi di una struttura nella richiesta

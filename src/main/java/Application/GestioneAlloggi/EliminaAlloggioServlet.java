@@ -21,8 +21,8 @@ public class EliminaAlloggioServlet extends HttpServlet {
         req.setAttribute("callByServlet", "yes");
         // prendiamo gli identificatori dell'alloggio che vogliamo eliminare
 
-        int numeroAlloggio = Integer.parseInt(req.getParameter("numeroAlloggio"));
-        int idStruttura = Integer.parseInt(req.getParameter("idStruttura"));
+        String numeroAlloggio = req.getParameter("numeroAlloggio");
+        String idStruttura = req.getParameter("idStruttura");
 
         // elimino l'alloggio dal DB
         gestioneAlloggioFacade alloggioFacade = new gestioneAlloggioFacade();
