@@ -16,6 +16,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <% if(callByServlet == 1) { %>
+    <link rel="stylesheet" href="Interface/css/alloggiPrenotabili.css">
     <link rel="stylesheet" href="Interface/css/index.css">
     <link rel="stylesheet" href="Interface/css/headerDopoAccesso.css">
     <link rel="stylesheet" href="Interface/css/footer.css">
@@ -23,6 +24,7 @@
     <%
     }
     else { %>
+    <link rel="stylesheet" href="css/alloggiPrenotabili.css">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/headerDopoAccesso.css">
     <link rel="stylesheet" href="css/footer.css">
@@ -97,7 +99,7 @@
                         </div>
                         <div class="divInfoAlloggio">
                             <div class="divNomeStruttura">
-                                <a href="" class="linkDettagliAlloggio"><b><%=a.getStruttura().getNomeStruttura()%> ></b></a>
+                                <a href="visualizzaDettagliAlloggio?numAlloggio=<%=a.getNumeroAlloggio()%>&codStruttura=<%=a.getStruttura().getIdStruttura()%>&check-in=<%=request.getAttribute("dataCheckIn")%>&check-out=<%=request.getAttribute("dataCheckOut")%>&numOspiti=<%=request.getAttribute("numOspiti")%>" class="linkDettagliAlloggio"><b><%=a.getStruttura().getNomeStruttura()%> ></b></a>
                             </div>
                             <div class="divDescrizione">
                                 <p><%=a.getDescrizione()%></p>

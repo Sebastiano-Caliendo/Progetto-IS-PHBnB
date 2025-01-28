@@ -47,6 +47,17 @@ form input[type = submit] {
     align-items: center;
 }
 
+.buttons {
+    margin: auto;
+    border: 1px solid black;
+    height : 20px;
+    width : 120px;
+    border-radius: 20px;
+    background-color: var(--color-primary);
+    color : white;
+    font-weight: 700;
+}
+
 @media only screen and (max-width: 1250px) {
     .big-text { font-size: 42px; font-weight: 850; }
     .mid-text { font-size: 29px; font-weight: 750; }

@@ -23,13 +23,16 @@ public class VisualizzaAlloggiServlet extends HttpServlet {
         String destinazione = req.getParameter("luogo");
         String dataCheckIn = req.getParameter("dataCheckIn");
         String dataCheckOut = req.getParameter("dataCheckOut");
-        String numPostiLetto = req.getParameter("numOspiti");
+        String numOspiti = req.getParameter("numOspiti");
 
         PrenotazioneAlloggioFacade prenotazioneAlloggioFacade = new PrenotazioneAlloggioFacade();
 
-        List<Alloggio> alloggi = prenotazioneAlloggioFacade.visualizzaListaAlloggi(LocalDate.parse(dataCheckIn), LocalDate.parse(dataCheckOut), destinazione, Integer.parseInt(numPostiLetto));
+        List<Alloggio> alloggi = prenotazioneAlloggioFacade.visualizzaListaAlloggi(LocalDate.parse(dataCheckIn), LocalDate.parse(dataCheckOut), destinazione, Integer.parseInt(numOspiti));
 
         if(!alloggi.isEmpty()) {
+            req.setAttribute("dataCheckIn", dataCheckIn);
+            req.setAttribute("dataCheckOut", dataCheckOut);
+            req.setAttribute("numOspiti", numOspiti);
             req.setAttribute("alloggiPrenotabili", alloggi);
         }
 

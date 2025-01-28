@@ -16,6 +16,8 @@ public class VisualizzaDettagliAlloggioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        req.setAttribute("callByServlet", "yes");
+
         String numAlloggio = req.getParameter("numAlloggio");
         String codStruttura = req.getParameter("codStruttura");
 
@@ -23,13 +25,12 @@ public class VisualizzaDettagliAlloggioServlet extends HttpServlet {
 
         Alloggio a = prenotazioneAlloggioFacade.visualizzaDettagliAlloggio(Integer.parseInt(numAlloggio), Integer.parseInt(codStruttura));
 
-        req.setAttribute("alloggio", a);
+        req.setAttribute("alloggioSelezionato", a);
 
-        String address = "dettagliAlloggioGUI.jsp";
+        String address = "Interface/dettagliAlloggioGUI.jsp";
 
         RequestDispatcher rd = req.getRequestDispatcher(address);
         rd.forward(req, resp);
-
     }
 
     @Override

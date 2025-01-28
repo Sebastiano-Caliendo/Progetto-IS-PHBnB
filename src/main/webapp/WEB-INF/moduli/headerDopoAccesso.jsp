@@ -67,8 +67,16 @@
             buttonSi.style.height = "40%";
             buttonSi.style.width = "20%";
             //associa al button il percorso della pagine jsp da raggiungere dopo il click
+
+            let address = "logout";
+
+            <%
+                if(callByServlet == 0) {%>
+                    address = "../logout";
+            <%}%>
+
             buttonSi.addEventListener("click", function() {
-                window.location.href = "../logout";
+                window.location.href = address;
             });
 
             buttonNo.textContent = "No";

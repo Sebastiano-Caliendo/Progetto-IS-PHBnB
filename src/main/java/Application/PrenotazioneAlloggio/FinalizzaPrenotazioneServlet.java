@@ -18,22 +18,24 @@ public class FinalizzaPrenotazioneServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        String nome = req.getParameter("nome");
+        String cognome = req.getParameter("cognome");
         String dataCheckIn = req.getParameter("dataCheckIn");
         String dataCheckOut = req.getParameter("dataCheckOut");
-        String numPostiLetto = req.getParameter("numPostiLetto");
+        String numOspiti = req.getParameter("numOspiti");
         String numAlloggio = req.getParameter("numAlloggio");
         String codStruttura = req.getParameter("codStruttura");
         String costoPrenotazione = req.getParameter("costoPrenotazione");
         String numeroCarta = req.getParameter("numeroCarta");
-        String dataScadenza = req.getParameter("dataScadenza");
-        String cviCarta = req.getParameter("cviCarta");
+        String dataScadenza = req.getParameter("dataScadenzaCarta");
+        String cvvCarta = req.getParameter("cvvCarta");
 
         Utente u = (Utente) req.getSession().getAttribute("utente");
 
         PrenotazioneAlloggioFacade prenotazioneAlloggioFacade = new PrenotazioneAlloggioFacade();
-        prenotazioneAlloggioFacade.finalizzaPrenotazione(u, LocalDate.parse(dataCheckIn), LocalDate.parse(dataCheckOut), Integer.parseInt(numPostiLetto), u.getEmail(), Integer.parseInt(numAlloggio), Integer.parseInt(codStruttura), Double.parseDouble(costoPrenotazione), numeroCarta, LocalDate.parse(dataScadenza), cviCarta);
+        prenotazioneAlloggioFacade.finalizzaPrenotazione(u, LocalDate.parse(dataCheckIn), LocalDate.parse(dataCheckOut), Integer.parseInt(numOspiti), u.getEmail(), Integer.parseInt(numAlloggio), Integer.parseInt(codStruttura), 100, numeroCarta, LocalDate.parse(dataScadenza), cvvCarta);
 
-        String address = "";
+        String address = "Interface/visualizzaStoricoPrenotazioniGUI.jsp";
 
         RequestDispatcher rd = req.getRequestDispatcher(address);
         rd.forward(req, resp);

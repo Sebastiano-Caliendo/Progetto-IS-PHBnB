@@ -84,7 +84,7 @@ body, html {
 }
 
 .imgHome {
-    margin: auto;
+    margin: 25px;
     height: 85%;
     width: 25%;
     border-radius: 15px;
@@ -123,8 +123,7 @@ body, html {
 }
 
 #buttonCerca {
-    border: none;
-    background-color: #2C2C2C;
+    all: unset;
     color: white;
 }
 

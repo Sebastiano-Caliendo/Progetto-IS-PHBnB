@@ -1,0 +1,140 @@
+#alloggioSelezionatoContainer {
+    margin: 25px auto;
+    height: 75vh;
+    width: 75vw;
+    border: 1px solid var(--color-primary);
+    display: flex;
+    flex-direction: row;
+    border-radius: 25px;
+    align-items: center;
+}
+
+#leftContainer {
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+    width: 70%;
+}
+
+#rightContainer {
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+    width: 30%;
+}
+
+#divNomeStruttura {
+    padding-left: 50px;
+    height: 15%;
+    width: 100%;
+}
+
+#divImgAlloggio {
+    padding: 50px;
+    height: 85%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+#imgAlloggio, #imgStruttura {
+    border-radius: 10px;
+    border: 1px solid;
+}
+
+#imgStruttura {
+    margin-left: 25px;
+    height: 50%;
+    width: 35%;
+}
+
+#imgAlloggio {
+    height: 90%;
+    width: 60%;
+}
+
+
+#divDescrizione {
+    padding: 25px;
+    height: 60%;
+    width: 90%;
+}
+
+#parDescrizione {
+    text-align: center;
+}
+
+#parTesto {
+    margin-top: 20px;
+}
+
+#divPrenotazione {
+    border: 1px solid;
+    height: 40%;
+    width: 90%;
+    background-color: var(--color-primary);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.parDatiPrenotazione {
+    color: white;
+    text-align: center;
+    align-content: center;
+    width: 80%;
+    height: 20%;
+    margin: auto;
+}
+
+#divTastoPrenota {
+    width: 80%;
+    height: 20%;
+    margin: auto;
+    text-align: center;
+    align-content: center;
+}
+
+#linkPrenota {
+    color: white;
+    text-decoration: none;
+    background-color: #2C2C2C;
+    border-radius: 5px;
+    padding: 10px 40px;
+}
+
+#divConfermaPrenotazione {
+    position: fixed;
+    height: 40%;
+    width: 20%;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid var(--color-primary);
+    border-radius: 25px;
+}
+
+#formConfermaPrenotazione {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    width: 90%;
+}
+
+.divDatiPrenotazione {
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    height: 20%;
+}
+
+.datiPrenotazione {
+    text-align: center;
+    width: 50%;
+    height: 60%;
+}

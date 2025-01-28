@@ -145,17 +145,6 @@ html, body {
     text-align: center;
 }
 
-.buttons {
-    margin: auto;
-    border: 1px solid black;
-    height : 20px;
-    width : 120px;
-    border-radius: 20px;
-    background-color: var(--color-primary);
-    color : white;
-    font-weight: 700;
-}
-
 
 .imgStruttura {
     height: 100%;

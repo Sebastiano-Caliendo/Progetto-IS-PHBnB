@@ -15,6 +15,8 @@ public class LogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        req.setAttribute("callByServlet", "yes");
+
         resp.setContentType("text/html");
 
         String address = "Interface/index.jsp";
