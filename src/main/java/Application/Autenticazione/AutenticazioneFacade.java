@@ -4,44 +4,71 @@ import Storage.Host.Host;
 import Storage.Host.HostDAO;
 import Storage.Utente.Utente;
 import Storage.Utente.UtenteDAO;
+import Utility.Validator;
 import jakarta.servlet.http.HttpSession;
 
 public class AutenticazioneFacade {
 
     private HttpSession session;
+    private Validator validator;
 
     public AutenticazioneFacade(HttpSession session) {
         this.session = session;
+        this.validator = new Validator();
     }
 
-    public boolean registrazioneUtente(Utente u) {
+    public boolean registrazioneUtente(String email, String nome, String cognome, String password, String citta, String numeroCivico, String via, String dataNascita, String recapitoTelefonico) {
 
         UtenteDAO utenteDAO = new UtenteDAO();
 
-        if(utenteDAO.doRetrieveById(u.getEmail()) != null) {
+        if(utenteDAO.doRetrieveById(email) != null) {
             return false;
         }
 
-        utenteDAO.doSave(u);
+        try {
+            Utente u = new Utente(
+                    validator.validateEmail(email),
+                    validator.validateNomeCognome(nome),
+                    validator.validateNomeCognome(cognome),
+                    validator.validatePassword(password),
+                    validator.validateCittaVia(citta),
+                    validator.validateNumeroCivico(numeroCivico),
+                    validator.validateCittaVia(via),
+                    validator.validateData(dataNascita),
+                    validator.validateRecapitoTelefonico(recapitoTelefonico),
+                    false);
 
-        session.setAttribute("utente", u);
-
-        return true;
+            utenteDAO.doSave(u);
+            session.setAttribute("utente", u);
+            return true;
+        } catch (RuntimeException e) {
+            return false;
+        }
     }
 
-    public boolean registrazioneHost(Host h) {
+    public boolean registrazioneHost(String email, String nome, String cognome, String password, String dataNascita, String recapitoTelefonico) {
 
         HostDAO hostDAO = new HostDAO();
 
-        if(hostDAO.doRetrieveById(h.getEmail()) != null) {
+        if(hostDAO.doRetrieveById(email) != null) {
             return false;
         }
 
-        hostDAO.doSave(h);
+        try {
+            Host h = new Host(
+                    validator.validateEmail(email),
+                    validator.validateNomeCognome(nome),
+                    validator.validateNomeCognome(cognome),
+                    validator.validatePassword(password),
+                    validator.validateData(dataNascita),
+                    validator.validateRecapitoTelefonico(recapitoTelefonico));
 
-        session.setAttribute("host", h);
-
-        return true;
+            hostDAO.doSave(h);
+            session.setAttribute("host", h);
+            return true;
+        } catch (RuntimeException e) {
+            return false;
+        }
     }
 
     public boolean login(String email, String password, String tipo) {
@@ -78,34 +105,63 @@ public class AutenticazioneFacade {
                 return false;
         }
 
-        return true;
+        return false;
     }
 
     public void logout() {
         session.invalidate();
     }
 
-    public void visualizzaAreaPersonale() {
-
-    }
-
-    public void modificaDatiPersonaliUtente(Utente u, String email, String nome, String cognome, String pwd, String citta, String nCivico, String via, String recTel) {
+    public boolean modificaDatiPersonaliUtente(Utente u, String email, String nome, String cognome, String newPwd, String citta, String nCivico, String via, String recTel) {
 
         UtenteDAO utenteDAO = new UtenteDAO();
-        utenteDAO.doUpdate(u, email, nome, cognome, pwd, citta, nCivico, via, recTel);
 
-        Utente utenteMod = utenteDAO.doRetrieveByEmailAndPassword(email, pwd);
-        session.setAttribute("utente", utenteMod);
+        if(u == null) return false;
+
+        try {
+            utenteDAO.doUpdate(u,
+                            validator.validateEmail(email),
+                            validator.validateNomeCognome(nome),
+                            validator.validateNomeCognome(cognome),
+                            validator.validatePassword(newPwd),
+                            validator.validateCittaVia(citta),
+                            validator.validateNumeroCivico(nCivico),
+                            validator.validateCittaVia(via),
+                            validator.validateRecapitoTelefonico(recTel));
+
+            Utente utenteMod = utenteDAO.doRetrieveByEmailAndPassword(email, newPwd);
+            session.setAttribute("utente", utenteMod);
+
+            return true;
+        } catch (RuntimeException e) {
+            return false;
+        }
     }
 
-    public void modificaDatiPersonaliHost(Host h, String email, String nome, String cognome, String pwd, String recTel) {
+    public boolean modificaDatiPersonaliHost(Host h, String email, String nome, String cognome, String pwd, String recTel) {
 
         HostDAO hostDAO = new HostDAO();
-        hostDAO.doUpdate(h, email, nome, cognome, pwd, recTel);
 
-        Host hostMod = hostDAO.doRetrieveByEmailAndPassword(email, pwd);
-        session.setAttribute("host", hostMod);
+        if(h == null) return false;
+
+        try {
+            hostDAO.doUpdate(h,
+                            validator.validateEmail(email),
+                            validator.validateNomeCognome(nome),
+                            validator.validateNomeCognome(cognome),
+                            validator.validatePassword(pwd),
+                            validator.validateRecapitoTelefonico(recTel));
+
+            Host hostMod = hostDAO.doRetrieveByEmailAndPassword(email, pwd);
+            session.setAttribute("host", hostMod);
+
+            return true;
+        } catch (RuntimeException e) {
+            return false;
+        }
     }
+
+
     public void eliminaAccount(){
 
         Utente u = (Utente) session.getAttribute("utente");

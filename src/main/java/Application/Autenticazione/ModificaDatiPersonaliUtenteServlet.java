@@ -21,9 +21,7 @@ public class ModificaDatiPersonaliUtenteServlet extends HttpServlet {
         String email = req.getParameter("email");
         String nome = req.getParameter("nome");
         String cognome = req.getParameter("cognome");
-        String vecchiaPassword = req.getParameter("vecchiaPassword");
         String nuovaPassword = req.getParameter("nuovaPassword");
-        String confermaPassword = req.getParameter("confermaPassword");
         String citta = req.getParameter("citta");
         String numeroCivico = req.getParameter("numCivico");
         String via = req.getParameter("via");
@@ -31,10 +29,15 @@ public class ModificaDatiPersonaliUtenteServlet extends HttpServlet {
 
         Utente u = (Utente) req.getSession().getAttribute("utente");
 
-        String address = "Interface/areaUtenteGUI.jsp";
+        String address;
 
         AutenticazioneFacade autenticazioneFacade = new AutenticazioneFacade(req.getSession());
-        autenticazioneFacade.modificaDatiPersonaliUtente(u, email, nome, cognome, nuovaPassword, citta, numeroCivico, via, recapitoTelefonico);
+
+        if(autenticazioneFacade.modificaDatiPersonaliUtente(u, email, nome, cognome, nuovaPassword, citta, numeroCivico, via, recapitoTelefonico)) {
+            address = "Interface/areaUtenteGUI.jsp";
+        } else {
+            address = "Interface/areaUtenteGUI.jsp?error=1";
+        }
 
         resp.sendRedirect(address);
     }

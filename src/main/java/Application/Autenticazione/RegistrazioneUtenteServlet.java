@@ -33,13 +33,11 @@ public class RegistrazioneUtenteServlet extends HttpServlet {
         String recapitoTelefonico = req.getParameter("recapitoTelefonico");
 
 
-        Utente u = new Utente(email, nome, cognome, password, citta, numeroCivico, via, LocalDate.parse(dataNascita), recapitoTelefonico, false);
-
         AutenticazioneFacade autenticazioneFacade = new AutenticazioneFacade(req.getSession());
 
         String address;
 
-        if(autenticazioneFacade.registrazioneUtente(u)) {
+        if(autenticazioneFacade.registrazioneUtente(email, nome, cognome, password, citta, numeroCivico, via, dataNascita, recapitoTelefonico)) {
             address = "Interface/index.jsp";
         } else {
             address = "Interface/registrazioneUtenteGUI.jsp?error=1";

@@ -27,13 +27,17 @@ public class ModificaDatiPersonaliHostServlet extends HttpServlet {
 
         Host h = (Host) req.getSession().getAttribute("Utente");
 
-        String address = "areaHost.jsp";
+        String address;
 
         AutenticazioneFacade autenticazioneFacade = new AutenticazioneFacade(req.getSession());
-        autenticazioneFacade.modificaDatiPersonaliHost(h, email, nome, cognome, password, recapitoTelefonico);
 
-        RequestDispatcher rd = req.getRequestDispatcher(address);
-        rd.forward(req, resp);
+        if(autenticazioneFacade.modificaDatiPersonaliHost(h, email, nome, cognome, password, recapitoTelefonico)) {
+            address = "Interface/areaHostGUI.jsp";
+        } else {
+            address = "Interface/areaHostGUI.jsp?error=1";
+        }
+
+        resp.sendRedirect(address);
     }
 
     @Override

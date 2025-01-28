@@ -5,7 +5,7 @@ html, body {
 
 #header {
     width: 100vw;
-    height: 10vh;
+    height: 15vh;
     background-color: #fff4f6;
     display: flex;
     justify-content: space-between;
@@ -38,7 +38,7 @@ html, body {
 
 .dropdown {
     display: none; /* Nasconde il div a tendina di default */
-    background-color: #fff4f6;
+    background-color: white;
     position: absolute;
     top: 100%; /* Posiziona il dropdown subito sotto il divImg */
     right: 0;
