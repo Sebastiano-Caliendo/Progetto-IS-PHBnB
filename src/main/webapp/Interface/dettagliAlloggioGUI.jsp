@@ -54,10 +54,10 @@
             <a id="linkRegStruttura" href="Interface/registrazioneHostGUI.jsp" class="normal-small-text">Registra la tua struttura</a>
         </div>
         <div id="divReg">
-            <a id="linkReg" href="Interface/registrazioneUtenteGUI.jsp" class="small-text">Registrati</a>
+            <button id="linkReg" onclick="window.location.href='Interface/registrazioneUtenteGUI.jsp';" class="small-text buttons">Registrati</button>
         </div>
         <div id="divAccedi">
-            <a id="linkAccedi" href="Interface/loginUtenteGUI.jsp" class="small-text">Accedi</a>
+            <button id="linkAccedi" onclick="window.location.href='Interface/loginUtenteGUI.jsp';" class="small-text buttons">Accedi</button>
         </div>
 
         <%

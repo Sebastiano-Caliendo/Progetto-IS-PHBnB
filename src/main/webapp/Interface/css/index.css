@@ -1,14 +1,33 @@
 body, html {
+    background-color: beige;
     margin: 0;
     padding: 0;
 }
 
 #topContainer {
-    width: 100vw;
-    height: 10vh;
+    background-color: white;
+    width: 100%;
+    height: 15vh;
     display: flex;
     flex-direction: row;
     border-bottom: 1px solid lightgray;
+}
+
+.descrizioneIndex {
+    margin-left: 2%;
+    align-content: center;
+    height: 100%;
+    width: 35%;
+    font-style: italic;
+}
+
+.mediaDescrizione {
+    text-align: center;
+}
+
+.piccolaDescrizione {
+    margin-top: 5%;
+    text-align: center;
 }
 
 #divRegStruttura, #divReg, #divAccedi {
@@ -28,7 +47,7 @@ body, html {
     width: 20%;
 }
 
-#divReg, #divAccedi, #divAccediAdmin {
+#divReg, #divAccedi {
     height: 100%;
     width: 10%;
 }
@@ -40,26 +59,32 @@ body, html {
 }
 
 #linkRegStruttura {
+    font-style: italic;
     color: var(--color-primary);
     text-decoration: underline;
 }
 
-#linkReg, #linkAccedi, #linkAccediAdmin {
-    border: 1px solid black;
-    height : 20px;
+#linkReg, #linkAccedi {
+    height : 30px;
     width : 120px;
     border-radius: 5px;
     background-color: var(--color-primary);
     color : white;
     font-weight: 700;
     text-decoration: none;
-    padding: 5px;
 }
 
 #midContainer {
+    font-style: italic;
+    margin-top: 3%;
     align-content: center;
-    width: 100vw;
+    width: 100%;
     height: 15vh;
+}
+
+input {
+    text-align: center;
+    font-size: small !important;
 }
 
 #containerFiltri {
@@ -68,61 +93,49 @@ body, html {
     flex-direction: row;
     margin: auto;
     height: 90%;
-    width: 75%;
+    width: 85%;
     background-color: var(--color-primary);
     border: 1px solid;
     border-radius: 15px;
 }
 
 #bottomContainer {
+    border-left: 1px solid var(--color-primary);
+    border-right: 1px solid var(--color-primary);
+    background-color: white;
     margin: auto;
     align-items: center;
-    width: 80vw;
+    width: 85%;
     height: 75vh;
     display: flex;
     flex-direction: row;
 }
 
-#bottomContainerConferma {
-    margin: auto;
-    align-items: center;
-    width: 100px;
-    height: 75vh;
-    display: inherit;
-    flex-direction: row;
-}
-
-.parScrittaAdmin{
-    text-align: center;
-}
-
 .imgHome {
-    margin: 25px;
+    border: 1px solid black;
+    margin: auto;
     height: 85%;
     width: 25%;
     border-radius: 15px;
 }
 
-#divFiltroLuogo {
+#divFiltroLuogo, #divFiltroDate {
     text-align: center;
     align-content: center;
     height: 60%;
-    width: 20%;
+    width: 22.5%;
     background-color: white;
     border: 1px solid;
     border-radius: 5px;
     margin: auto;
 }
 
-#divFiltroDate{
-    text-align: center;
-    align-content: center;
-    height: 60%;
+#divFiltroDate {
     width: 25%;
-    background-color: white;
-    border: 1px solid;
-    border-radius: 5px;
-    margin: auto;
+}
+
+#divFiltroLuogo {
+    width: 20%;
 }
 
 #divFiltroOspiti {
@@ -133,21 +146,24 @@ body, html {
     background-color: white;
     border: 1px solid;
     border-radius: 5px;
-    margin: auto 10px auto auto;
+    /*margin: auto 10px auto auto;*/
+    margin : 0 auto;
 }
 
 #divCerca {
     align-content: center;
     text-align: center;
     height: 60%;
-    width: 15%;
+    width: 10%;
     background-color: #2C2C2C;
     border-radius: 5px;
     margin: auto auto auto 10px;
 }
 
 #buttonCerca {
-    all: unset;
+    width: 100% !important;
+    border: none;
+    background-color: #2C2C2C;
     color: white;
 }
 
