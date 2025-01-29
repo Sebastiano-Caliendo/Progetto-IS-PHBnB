@@ -20,18 +20,14 @@ import java.time.LocalDate;
 public class ModificaDatiSistemaPrenotazioneServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int codicePrenotazione = Integer.parseInt(req.getParameter("codicePrenotazione"));
+        String codicePrenotazione = req.getParameter("codicePrenotazione");
         String checkIn = req.getParameter("checkInPrenotazione");
         String checkOut = req.getParameter("checkOutPrenotazione");
-        String fkUtente = req.getParameter("idUtenteFk");
-        int numeroPersone = Integer.parseInt(req.getParameter("numeroPersonePrenotazione"));
-        String numeroCarta = req.getParameter("numeroCartaPrenotazione");
-        LocalDate dataScadenzaCarta = LocalDate.parse(req.getParameter("dataScadenzaCartaPrenotazione"));
-        String cviCarta = req.getParameter("cviCartaPrenotazione");
+        String numeroPersone = req.getParameter("numeroPersonePrenotazione");
 
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
 
-        Prenotazione p = new Prenotazione();
+        /*Prenotazione p = new Prenotazione();
         p.setCodicePrenotazione(codicePrenotazione);
         p.setCheckIn(LocalDate.parse(checkIn));
         p.setCheckOut(LocalDate.parse(checkOut));
@@ -43,9 +39,9 @@ public class ModificaDatiSistemaPrenotazioneServlet extends HttpServlet {
         Utente utente = utenteDAO.doRetrieveById(fkUtente);
 
         p.setUtente(utente);
-        p.setNumeroCartaCredito(numeroCarta);
+        p.setNumeroCartaCredito(numeroCarta);*/
 
-        gestioneAmministratoreFacade.modificaDatiSistemaPrenotazione(p, LocalDate.parse(checkIn), LocalDate.parse(checkOut), numeroPersone, req.getSession());
+        gestioneAmministratoreFacade.modificaDatiSistemaPrenotazione(codicePrenotazione, checkIn, checkOut, numeroPersone);
 
         resp.sendRedirect(req.getContextPath() + "/Interface/indexAdmin.jsp");
 

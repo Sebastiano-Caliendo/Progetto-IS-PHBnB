@@ -15,7 +15,7 @@ public class EliminaRecensioneServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        int idRecensione = Integer.parseInt(req.getParameter("idRecensione")); // type = "hidden" nella jsp
+        String idRecensione = req.getParameter("idRecensione"); // type = "hidden" nella jsp
 
         InserimentoRecensioneFacade inserimentoRecensioneFacade = new InserimentoRecensioneFacade();
         inserimentoRecensioneFacade.eliminaRecensione(req.getSession(), idRecensione);

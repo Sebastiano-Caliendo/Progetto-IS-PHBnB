@@ -14,23 +14,23 @@ import java.io.IOException;
 public class ModificaDatiSistemaAlloggioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int oldNumeroAlloggio = Integer.parseInt(req.getParameter("oldNumAlloggio"));
-        int numeroAlloggio = Integer.parseInt(req.getParameter("numAlloggio"));
-        int fkStruttura = Integer.parseInt(req.getParameter("fkStruttura"));
-        double prezzoNotte = Double.parseDouble(req.getParameter("prezzoNotte"));
-        int postiLetto = Integer.parseInt(req.getParameter("postiLetto"));
+        String oldNumeroAlloggio = req.getParameter("oldNumAlloggio");
+        String numeroAlloggio = req.getParameter("numAlloggio");
+        String fkStruttura = req.getParameter("fkStruttura");
+        String prezzoNotte = req.getParameter("prezzoNotte");
+        String postiLetto = req.getParameter("postiLetto");
         String tipoAlloggio = req.getParameter("tipoAlloggio");
         String descrizione = req.getParameter("descAlloggio");
 
-        Alloggio alloggio = new Alloggio();
+        /*Alloggio alloggio = new Alloggio();
 
         alloggio.setTipoAlloggio(tipoAlloggio);
         alloggio.setDescrizione(descrizione);
         alloggio.setPostiletto(postiLetto);
-        alloggio.setPrezzoNotte(prezzoNotte);
+        alloggio.setPrezzoNotte(prezzoNotte);*/
 
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
-        gestioneAmministratoreFacade.modificaDatiSistemaAlloggio(numeroAlloggio, prezzoNotte, postiLetto, tipoAlloggio, descrizione, oldNumeroAlloggio, fkStruttura, req.getSession());
+        gestioneAmministratoreFacade.modificaDatiSistemaAlloggio(numeroAlloggio, prezzoNotte, postiLetto, tipoAlloggio, descrizione, oldNumeroAlloggio, fkStruttura);
 
         resp.sendRedirect(req.getContextPath() + "/Interface/indexAdmin.jsp");
     }

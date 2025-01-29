@@ -13,11 +13,11 @@ import java.io.IOException;
 public class CancellazioneDatiSistemaAlloggioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int numAlloggio = Integer.parseInt(req.getParameter("numAlloggio"));
-        int fkStruttura = Integer.parseInt(req.getParameter("fkStruttura"));
+        String numAlloggio = req.getParameter("numAlloggio");
+        String fkStruttura = req.getParameter("fkStruttura");
 
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
-        gestioneAmministratoreFacade.cancellazioneDatiSitemaAlloggio(numAlloggio, fkStruttura, req.getSession());
+        gestioneAmministratoreFacade.cancellazioneDatiSitemaAlloggio(numAlloggio, fkStruttura);
 
         resp.sendRedirect(req.getContextPath() + "/Interface/indexAdmin.jsp");
     }

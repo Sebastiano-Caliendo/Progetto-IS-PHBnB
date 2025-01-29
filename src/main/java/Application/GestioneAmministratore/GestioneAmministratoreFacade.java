@@ -13,6 +13,7 @@ import Storage.Struttura.Struttura;
 import Storage.Struttura.StrutturaDAO;
 import Storage.Utente.Utente;
 import Storage.Utente.UtenteDAO;
+import Utility.Validator;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -26,166 +27,115 @@ import java.util.List;
 
 public class GestioneAmministratoreFacade {
 
-    private GestioneAmministratoreProxy proxy;
+    private Validator validator;
 
     public GestioneAmministratoreFacade(){
-        this.proxy = new GestioneAmministratoreProxy();
+        this.validator = new Validator();
     }
 
-    public List<Alloggio> visualizzaDatiSistemaAlloggio(HttpSession session){
-        boolean successo = false;
+    public List<Alloggio> visualizzaDatiSistemaAlloggio(){
 
-        if(proxy.isAutenticato(session)){
-            successo = true;
-        }else{
-            System.out.println("Operazione non permessa.");
-        }
-        if(successo){
+        AlloggioDAO alloggioDAO = new AlloggioDAO();
+        List<Alloggio> alloggi;
+        alloggi = alloggioDAO.doRetrieveAll();
+        return alloggi;
+    }
+
+    public List<Host> visualizzaDatiSistemaHost(){
+
+        HostDAO hostDAO = new HostDAO();
+        List<Host> hosts;
+        hosts = hostDAO.doRetrieveAll();
+        return hosts;
+    }
+
+    public List<Prenotazione> visualizzaDatiSistemaPrenotazione(){
+
+        PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
+        List<Prenotazione> prenotazioni;
+        prenotazioni = prenotazioneDAO.doRetrieveAll();
+        return prenotazioni;
+    }
+
+
+    public List<Recensione> visualizzaDatiSistemaRecensione(){
+
+        RecensioneDAO recensioneDAO = new RecensioneDAO();
+        List<Recensione> recensioni;
+        recensioni = recensioneDAO.doRetrieveAll();
+        return recensioni;
+    }
+
+    public List<Struttura> visualizzaDatiSistemaStruttura(){
+
+        StrutturaDAO strutturaDAO = new StrutturaDAO();
+        List<Struttura> strutture;
+        strutture = strutturaDAO.doRetrieveAll();
+        return strutture;
+    }
+
+    public List<Utente> visualizzaDatiSistemaUtente(){
+
+        UtenteDAO utenteDAO = new UtenteDAO();
+        List<Utente> utenti;
+        utenti = utenteDAO.doRetrieveAll();
+        return utenti;
+    }
+
+    public boolean modificaDatiSistemaAlloggio(String numeroAlloggio, String prezzoNotte, String postiLetto, String tipoAlloggio , String descrizione, String oldNumAlloggio, String fkStruttura){
+
+        try {
+            gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
+            Alloggio alloggio = new Alloggio();
+
+            alloggio.setNumeroAlloggio(validator.validateInt(numeroAlloggio));
+            alloggio.setStruttura(strutturaFacade.returnStruttura(fkStruttura));
+            alloggio.setTipoAlloggio(tipoAlloggio);
+            alloggio.setDescrizione(descrizione);
+            alloggio.setPostiletto(validator.validateInt(postiLetto));
+            alloggio.setPrezzoNotte(validator.validateDouble(prezzoNotte));
+
             AlloggioDAO alloggioDAO = new AlloggioDAO();
-            List<Alloggio> alloggi;
-            alloggi = alloggioDAO.doRetrieveAll();
-            return alloggi;
+            alloggioDAO.doUpdate(alloggio, validator.validateInt(oldNumAlloggio), validator.validateInt(fkStruttura));
+
+            return true;
+        } catch (RuntimeException e) {
+            return false;
         }
-        return null;
     }
 
-    public List<Host> visualizzaDatiSistemaHost(HttpSession session){
-        boolean successo = false;
+    public boolean modificaDatiSistemaHost(String oldEmailHost, String email, String nome, String cognome, String password, String recapitoTelefonico){
 
-        if(proxy.isAutenticato(session)){
-            successo = true;
-        }else{
-            System.out.println("Operazione non permessa.");
-        }
-        if(successo){
+        try {
             HostDAO hostDAO = new HostDAO();
-            List<Host> hosts;
-            hosts = hostDAO.doRetrieveAll();
-            return hosts;
+            Host host = hostDAO.doRetrieveById(validator.validateEmail(oldEmailHost));
+            hostDAO.doUpdate(host,
+                            validator.validateEmail(email),
+                            validator.validateNomeCognome(nome),
+                            validator.validateNomeCognome(cognome),
+                            validator.validatePassword(password),
+                            validator.validateRecapitoTelefonico(recapitoTelefonico));
+
+            return true;
+        } catch (RuntimeException e) {
+            return false;
         }
-        return null;
     }
 
-    public List<Prenotazione> visualizzaDatiSistemaPrenotazione(HttpSession session){
-        boolean successo = false;
+    public boolean modificaDatiSistemaPrenotazione(String codPrenotazione, String checkIn, String checkOut, String numPersone){
 
-        if(proxy.isAutenticato(session)){
-            successo = true;
-        }else{
-            System.out.println("Operazione non permessa.");
-        }
-        if(successo){
+        try {
             PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
-            List<Prenotazione> prenotazioni;
-            prenotazioni = prenotazioneDAO.doRetrieveAll();
-            return prenotazioni;
-        }
-        return null;
-    }
+            Prenotazione p = prenotazioneDAO.doRetrieveById(validator.validateInt(codPrenotazione));
 
+            prenotazioneDAO.doUpdate(p,
+                                    validator.validateData(checkIn),
+                                    validator.validateData(checkOut),
+                                    validator.validateInt(numPersone));
 
-    public List<Recensione> visualizzaDatiSistemaRecensione(HttpSession session){
-        boolean successo = false;
-
-        if(proxy.isAutenticato(session)){
-            successo = true;
-        }else{
-            System.out.println("Operazione non permessa.");
-        }
-        if(successo){
-            RecensioneDAO recensioneDAO = new RecensioneDAO();
-            List<Recensione> recensioni;
-            recensioni = recensioneDAO.doRetrieveAll();
-            return recensioni;
-        }
-        return null;
-    }
-
-    public List<Struttura> visualizzaDatiSistemaStruttura(HttpSession session){
-        boolean successo = false;
-
-        if(proxy.isAutenticato(session)){
-            successo = true;
-        }else{
-            System.out.println("Operazione non permessa.");
-        }
-        if(successo){
-            StrutturaDAO strutturaDAO = new StrutturaDAO();
-            List<Struttura> strutture;
-            strutture = strutturaDAO.doRetrieveAll();
-            return strutture;
-        }
-        return null;
-    }
-
-    public List<Utente> visualizzaDatiSistemaUtente(HttpSession session){
-        boolean successo = false;
-
-        if(proxy.isAutenticato(session)){
-            successo = true;
-        }else{
-            System.out.println("Operazione non permessa.");
-        }
-        if(successo){
-            UtenteDAO utenteDAO = new UtenteDAO();
-            List<Utente> utenti;
-            utenti = utenteDAO.doRetrieveAll();
-            return utenti;
-        }
-        return null;
-    }
-
-    public void modificaDatiSistemaAlloggio(int numeroAlloggio, double prezzoNotte, int postiLetto, String tipoAlloggio , String descrizione, int oldNumAlloggio, int fkStruttura, HttpSession session){
-
-        gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
-        Alloggio alloggio = new Alloggio();
-
-        alloggio.setNumeroAlloggio(numeroAlloggio);
-        alloggio.setStruttura(strutturaFacade.returnStruttura(fkStruttura));
-        alloggio.setTipoAlloggio(tipoAlloggio);
-        alloggio.setDescrizione(descrizione);
-        alloggio.setPostiletto(postiLetto);
-        alloggio.setPrezzoNotte(prezzoNotte);
-
-        boolean successo = false;
-
-        if(proxy.isAutenticato(session)){
-            successo = true;
-        }else{
-            System.out.println("Operazione non permessa.");
-        }
-        if(successo){
-            AlloggioDAO alloggioDAO = new AlloggioDAO();
-            alloggioDAO.doUpdate(alloggio, oldNumAlloggio, fkStruttura);
-        }
-    }
-
-    public void modificaDatiSistemaHost(Host h, String email, String nome, String cognome, String password, String recapitoTelefonico, HttpSession session){
-        boolean successo = false;
-
-        if(proxy.isAutenticato(session)){
-            successo = true;
-        }else{
-            System.out.println("Operazione non permessa.");
-        }
-        if(successo){
-            HostDAO hostDAO = new HostDAO();
-            Host host = hostDAO.doRetrieveById(h.getEmail());
-            hostDAO.doUpdate(host, email, nome, cognome, password, recapitoTelefonico);
-        }
-    }
-
-    public void modificaDatiSistemaPrenotazione(Prenotazione p, LocalDate checkIn, LocalDate checkOut, int numPersone, HttpSession session){
-        boolean successo = false;
-
-        if(proxy.isAutenticato(session)){
-            successo = true;
-        }else{
-            System.out.println("Operazione non permessa.");
-        }
-        if(successo){
-            PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
-            prenotazioneDAO.doUpdate(p, checkIn, checkOut, numPersone);
+            return true;
+        } catch (RuntimeException e) {
+            return false;
         }
     }
 
@@ -204,93 +154,97 @@ public class GestioneAmministratoreFacade {
         }
     }*/
 
-    public void modificaDatiSistemaStruttura(Host host, String nomeStruttura, String via, String citta, int numAlloggi, String numCivico, String descrizione, String urlImmagine, int idStruttura, HttpSession session){
-        boolean successo = false;
+    public boolean modificaDatiSistemaStruttura(String fkHost, String nomeStruttura, String via, String citta, String numAlloggi, String numCivico, String descrizione, String urlImmagine, String idStruttura){
 
-        Struttura struttura = new Struttura();
-        struttura.setNomeStruttura(nomeStruttura);
-        struttura.setDescrizione(descrizione);
-        struttura.setIdStruttura(idStruttura);
-        struttura.setCitta(citta);
-        struttura.setVia(via);
-        struttura.setHost(host);
-        struttura.setNumCivico(numCivico);
-        struttura.setNumAlloggi(numAlloggi);
+        try {
+            HostDAO hostDAO = new HostDAO();
+            Host host = hostDAO.doRetrieveById(validator.validateEmail(fkHost));
+
+            Struttura struttura = new Struttura();
+            struttura.setNomeStruttura(validator.validateNomeStruttura(nomeStruttura));
+            struttura.setDescrizione(validator.validateDescrizione(descrizione));
+            struttura.setIdStruttura(validator.validateInt(idStruttura));
+            struttura.setCitta(validator.validateCittaVia(citta));
+            struttura.setVia(validator.validateCittaVia(via));
+            struttura.setHost(host);
+            struttura.setNumCivico(validator.validateNumeroCivico(numCivico));
+            struttura.setNumAlloggi(validator.validateInt(numAlloggi));
 
 
-        if(proxy.isAutenticato(session)){
-            successo = true;
-        }else{
-            System.out.println("Operazione non permessa.");
-        }
-        if(successo){
+
             StrutturaDAO strutturaDAO = new StrutturaDAO();
-            strutturaDAO.doUpdate(struttura, idStruttura);
+            strutturaDAO.doUpdate(struttura, validator.validateInt(idStruttura));
+
+            return true;
+        } catch (RuntimeException e) {
+            return false;
         }
     }
 
-    public void modificaDatiSistemaUtente(Utente utente, String email, String nome, String cognome, String password, String citta, String numeroCivico, String via, String recapitoTelefonico, HttpSession session) throws ServletException, IOException {
-        boolean successo = false;
+    public boolean modificaDatiSistemaUtente(String oldEmailUtente, String email, String nome, String cognome, String password, String citta, String numeroCivico, String via, String recapitoTelefonico) {
 
-        if(proxy.isAutenticato(session)){
-            successo = true;
-        }else{
-            System.out.println("Operazione non permessa.");
-        }
-        if(successo){
+        try {
             UtenteDAO utenteDAO = new UtenteDAO();
-            utenteDAO.doUpdate(utente, email, nome, cognome, password, citta, numeroCivico, via, recapitoTelefonico);
+            Utente utente = utenteDAO.doRetrieveById(oldEmailUtente);
+
+            utenteDAO.doUpdate(utente,
+                            validator.validateEmail(email),
+                            validator.validateNomeCognome(nome),
+                            validator.validateNomeCognome(cognome),
+                            validator.validatePassword(password),
+                            validator.validateCittaVia(citta),
+                            validator.validateNumeroCivico(numeroCivico),
+                            validator.validateCittaVia(via),
+                            validator.validateRecapitoTelefonico(recapitoTelefonico));
+
+            return true;
+        } catch (RuntimeException e) {
+            return false;
         }
     }
 
 
 
-    public void cancellazioneDatiSitemaAlloggio(int numAlloggio, int fkStruttura, HttpSession session){
-        boolean successo = false;
+    public boolean cancellazioneDatiSitemaAlloggio(String numAlloggio, String fkStruttura){
 
-        if(proxy.isAutenticato(session)){
-            successo = true;
-        }else{
-            System.out.println("Operazione non permessa.");
-        }
-        if(successo){
+        try {
             AlloggioDAO alloggioDAO = new AlloggioDAO();
-            alloggioDAO.doDelete(numAlloggio, fkStruttura);
+            alloggioDAO.doDelete(validator.validateInt(numAlloggio), validator.validateInt(fkStruttura));
+
+            return true;
+        } catch (RuntimeException e) {
+            return false;
         }
     }
 
-    public void cancellazioneDatiSitemaRecensione(int idRecensione, HttpSession session){
-        boolean successo = false;
+    public boolean cancellazioneDatiSitemaRecensione(String idRecensione){
 
-        if(proxy.isAutenticato(session)){
-            successo = true;
-        }else{
-            System.out.println("Operazione non permessa.");
-        }
-        if(successo){
+        try {
             RecensioneDAO recensioneDAO = new RecensioneDAO();
-            recensioneDAO.doDelete(idRecensione);
+            recensioneDAO.doDelete(validator.validateInt(idRecensione));
+
+            return true;
+        } catch (RuntimeException e) {
+            return false;
         }
     }
-    public void cancellazioneDatiSistemaStruttura(int idStruttura, HttpSession session){
-        boolean successo = false;
+    public boolean cancellazioneDatiSistemaStruttura(String idStruttura){
 
-        if(proxy.isAutenticato(session)){
-            successo = true;
-        }else{
-            System.out.println("Operazione non permessa.");
-        }
-        if(successo){
+        try {
             StrutturaDAO strutturaDAO = new StrutturaDAO();
             AlloggioDAO alloggioDAO = new AlloggioDAO();
             List<Alloggio> alloggi;
             alloggi = alloggioDAO.doRetrieveAll();
             for(Alloggio a: alloggi){
-                if(a.getStruttura().getIdStruttura() == idStruttura){
+                if(a.getStruttura().getIdStruttura() == validator.validateInt(idStruttura)){
                     alloggioDAO.doDelete(a.getNumeroAlloggio(), a.getStruttura().getIdStruttura());
                 }
             }
-            strutturaDAO.doDelete(idStruttura);
+            strutturaDAO.doDelete(validator.validateInt(idStruttura));
+
+            return true;
+        } catch (RuntimeException e) {
+            return false;
         }
     }
 }

@@ -14,10 +14,10 @@ public class CancellazioneDatiSistemaRecensioneServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        int idRecensione = Integer.parseInt(req.getParameter("idRecensione"));
+        String idRecensione = req.getParameter("idRecensione");
 
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
-        gestioneAmministratoreFacade.cancellazioneDatiSitemaRecensione(idRecensione, req.getSession());
+        gestioneAmministratoreFacade.cancellazioneDatiSitemaRecensione(idRecensione);
 
         resp.sendRedirect(req.getContextPath() + "/Interface/indexAdmin.jsp");
 
