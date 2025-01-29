@@ -23,7 +23,7 @@ public class VisualizzaDettagliAlloggioServlet extends HttpServlet {
 
         PrenotazioneAlloggioFacade prenotazioneAlloggioFacade = new PrenotazioneAlloggioFacade();
 
-        Alloggio a = prenotazioneAlloggioFacade.visualizzaDettagliAlloggio(Integer.parseInt(numAlloggio), Integer.parseInt(codStruttura));
+        Alloggio a = prenotazioneAlloggioFacade.visualizzaDettagliAlloggio(numAlloggio, codStruttura);
 
         req.setAttribute("alloggioSelezionato", a);
 
