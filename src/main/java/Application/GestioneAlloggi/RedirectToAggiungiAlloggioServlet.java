@@ -18,7 +18,7 @@ public class RedirectToAggiungiAlloggioServlet extends HttpServlet {
         req.setAttribute("callByServlet", "yes");
         // prendiamo l'id della struttura
 
-        int idStruttura = Integer.parseInt(req.getParameter("idStruttura"));
+        String idStruttura = req.getParameter("idStruttura");
 
         //aggiungiamo l'id della struttura nella richiesta
         req.setAttribute("idStruttura", idStruttura);

@@ -221,3 +221,57 @@ input {
     text-align: center;
     align-content: center;
 }
+
+a.logoHref {text-decoration: none; color: var(--color-primary);}
+p {overflow-wrap : normal;}
+
+@media only screen and (max-width: 1250px) {
+    #linkReg, #linkAccedi {
+        height: 30px;
+        width: 110px;
+    }
+}
+
+@media only screen and (max-width: 1125px) {
+    #linkReg, #linkAccedi { width: 100px !important; font-size: 11px !important;}
+}
+
+@media only screen and (max-width: 1000px) {
+    #linkReg, #linkAccedi { width: 80px !important; font-size: 11px !important;}
+}
+
+@media only screen and (max-width: 875px) {
+    #linkReg, #linkAccedi { width: 65px !important; font-size: 10px !important;}
+}
+
+@media only screen and (max-width: 750px) {
+    #linkReg, #linkAccedi { width: 60px !important; font-size: 10px !important;}
+}
+
+@media only screen and (max-width: 650px) {
+    #linkReg, #linkAccedi { width: 50px !important; font-size: 9px !important;}
+}
+
+@media only screen and (max-width: 570px) {
+    #linkReg, #linkAccedi {
+        width: 40px !important;
+        height: 15px !important;
+        font-size: 8px !important;
+    }
+}
+
+@media only screen and (max-width: 475px) {
+    #linkReg, #linkAccedi {
+        width: 30px !important;
+        height: 15px !important;
+        font-size: 6px !important;
+    }
+}
+
+@media only screen and (max-width: 380px) {
+    #linkReg, #linkAccedi {
+        width: 20px !important;
+        height: 15px !important;
+        font-size: 6px !important;
+    }
+}

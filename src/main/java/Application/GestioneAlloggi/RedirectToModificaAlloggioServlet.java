@@ -22,8 +22,8 @@ public class RedirectToModificaAlloggioServlet extends HttpServlet {
         req.setAttribute("callByServlet", "yes");
         // prendiamo gli identificatori dell'alloggio che vogliamo modificare
 
-        int numeroAlloggio = Integer.parseInt(req.getParameter("numeroAlloggio"));
-        int fkStruttura = Integer.parseInt(req.getParameter("idStruttura"));
+        String numeroAlloggio = req.getParameter("numeroAlloggio");
+        String fkStruttura = req.getParameter("idStruttura");
 
         //prendiamo i dati dell'alloggio che vogliamo modificare
         gestioneAlloggioFacade alloggioFacade = new gestioneAlloggioFacade();

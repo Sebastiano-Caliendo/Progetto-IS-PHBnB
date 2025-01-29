@@ -22,10 +22,10 @@ public class AggiungiAlloggioServlet extends HttpServlet {
         req.setAttribute("callByServlet", "yes");
         // prendiamo tutti i valori dell'alloggio che si vuole inserire
 
-        int numeroAlloggio = Integer.parseInt(req.getParameter("numeroAlloggio"));
-        int idStruttura = Integer.parseInt(req.getParameter("idStruttura"));
-        double prezzoNotte = Double.parseDouble(req.getParameter("prezzoNotte"));
-        int numPostiLetto = Integer.parseInt(req.getParameter("numPostiLetto"));
+        String numeroAlloggio = req.getParameter("numeroAlloggio");
+        String idStruttura = req.getParameter("idStruttura");
+        String prezzoNotte = req.getParameter("prezzoNotte");
+        String numPostiLetto = req.getParameter("numPostiLetto");
         String tipoAlloggio = req.getParameter("tipoAlloggio");
         String descrizione = req.getParameter("descrizione");
         //String urlImmagine = req.getParameter("urlImmagine");
