@@ -111,6 +111,10 @@ input {
     flex-direction: row;
 }
 
+#bottomContainerConferma{
+    text-align: center;
+}
+
 .imgHome {
     border: 1px solid black;
     margin: auto;
@@ -128,6 +132,41 @@ input {
     border: 1px solid;
     border-radius: 5px;
     margin: auto;
+}
+
+#divSceltaLogin {
+    position: fixed;
+    height: 15%;
+    width: 40%;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid var(--color-primary);
+    border-radius: 25px;
+}
+
+#divSceltaLogin p{
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#formSceltaLogin {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    width: 90%;
+}
+
+.divSceltaLogin {
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    height: 20%;
 }
 
 #divFiltroDate {

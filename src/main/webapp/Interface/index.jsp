@@ -1,3 +1,5 @@
+<%@ page import="Storage.Utente.Utente" %>
+<%@ page import="Storage.Host.Host" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -20,7 +22,7 @@
         <button id="linkReg" onclick="window.location.href='registrazioneUtenteGUI.jsp';" class="small-text buttons">Registrati</button>
       </div>
       <div id="divAccedi">
-        <button id="linkAccedi" onclick="window.location.href='loginUtenteGUI.jsp';" class="small-text buttons">Accedi</button>
+        <button id="linkAccedi" onclick="apriSceltaLogin()" class="small-text buttons">Accedi</button>
       </div>
     </div>
     <div id="midContainer">
@@ -62,6 +64,39 @@
       <img class="imgHome" src="img/imgHome3.jpg">
     </div>
 
+    <div id="divSceltaLogin" style="display: none">
+      <div id = "formSceltaLogin">
+        <div class="divSceltaLogin">
+          <p><b>Seleziona la tipologia di accesso</b></p>
+        </div>
+        <div class="divSceltaLogin">
+          <input type="submit" onclick="reindirizzaUtente()" class="buttons" value = "Utente">
+          <input type="submit" onclick="reindirizzaHost()" class="buttons" value = "Host">
+          <input type="submit" onclick="reindirizzaAdmin()" class="buttons" value = "Admin">
+        </div>
+        <!--<div class="divDatiPrenotazione">
+          <p><b>Check-in</b></p>
+          <input type="date" name="dataCheckIn" class="datiPrenotazione">
+        </div>
+        <div class="divDatiPrenotazione">
+          <p><b>Check-out</b></p>
+          <input type="date" name="dataCheckOut" class="datiPrenotazione">
+        </div>
+        <div class="divDatiPrenotazione">
+          <p><b>Numero carta</b></p>
+          <input type="text" name="numeroCarta" class="datiPrenotazione">
+        </div>
+        <div class="divDatiPrenotazione">
+          <p><b>Data scadenza</b></p>
+          <input type="date" name="dataScadenzaCarta" class="datiPrenotazione">
+        </div>
+        <div class="divDatiPrenotazione">
+          <p><b>CVV</b></p>
+          <input type="text" name="cvvCarta" class="datiPrenotazione">
+        </div>-->
+      </div>
+    </div>
+
 <!--index momentanea, dal riepilogo strutture possiamo accedere a tutta la parte relativa a : GESTIONE STRUTTURE e ALLOGGI
 <a href="RiepilogoStruttureGUI.jsp">riepilogoStruttre</a>
  <a href="Interface/VisAlloggiStruttureGUI.jsp">riepilogoAlloggiStruttura</a>
@@ -75,5 +110,43 @@
 <a href = "loginHostGUI.jsp">Login host</a>
 <a href = "registrazioneUtenteGUI.jsp">Registrazione utente</a>
 <a href = "areaUtenteGUI.jsp">Area utente</a>-->
+
+<script>
+  function apriSceltaLogin(){
+
+    let flag = false;
+
+    <%
+      Utente u = (Utente)session.getAttribute("utente");
+      Host h = (Host) session.getAttribute("host");
+
+      if(u == null && h == null){
+    %>
+    flag = true;
+    <%}%>
+
+    if(flag){
+      document.getElementById("divSceltaLogin").style.display = "block";
+    }
+  }
+
+  document.addEventListener("keydown", function (event){
+    if(event.key === "Escape"){
+      document.getElementById("divSceltaLogin").style.display = "none";
+    }
+  });
+
+  function reindirizzaUtente(){
+    window.location.href = 'loginUtenteGUI.jsp';
+  }
+
+  function reindirizzaHost(){
+    window.location.href = 'loginHostGUI.jsp';
+  }
+
+  function reindirizzaAdmin(){
+    window.location.href = 'loginAdmin.jsp';
+  }
+</script>
 </body>
 </html>

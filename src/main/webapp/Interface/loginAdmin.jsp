@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Login utente</title>
+    <title>Login admin</title>
 
     <link rel="stylesheet" href="css/loginRegistrazione.css">
 </head>
