@@ -33,7 +33,7 @@ public class FinalizzaPrenotazioneServlet extends HttpServlet {
         Utente u = (Utente) req.getSession().getAttribute("utente");
 
         PrenotazioneAlloggioFacade prenotazioneAlloggioFacade = new PrenotazioneAlloggioFacade();
-        prenotazioneAlloggioFacade.finalizzaPrenotazione(u, LocalDate.parse(dataCheckIn), LocalDate.parse(dataCheckOut), Integer.parseInt(numOspiti), u.getEmail(), Integer.parseInt(numAlloggio), Integer.parseInt(codStruttura), 100, numeroCarta, LocalDate.parse(dataScadenza), cvvCarta);
+        prenotazioneAlloggioFacade.finalizzaPrenotazione(u, dataCheckIn, dataCheckOut, numOspiti, u.getEmail(), numAlloggio, codStruttura, costoPrenotazione, numeroCarta, dataScadenza, cvvCarta);
 
         String address = "Interface/visualizzaStoricoPrenotazioniGUI.jsp";
 

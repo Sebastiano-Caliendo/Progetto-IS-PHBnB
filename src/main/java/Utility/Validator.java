@@ -128,6 +128,32 @@ public class Validator {
         }
     }
 
+    public String validateNumeroCarta(String numeroCarta) {
+        String regex = "^\\d{16}$";
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(numeroCarta);
+
+        if(matcher.matches()){
+            return numeroCarta;
+        }
+        else
+            throw new RuntimeException();
+    }
+
+    public String validateCVICarta(String cviCart) {
+        String regex = "^\\d{3}$";
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(cviCart);
+
+        if(matcher.matches()){
+            return cviCart;
+        }
+        else
+            throw new RuntimeException();
+    }
+
     public String validateDescrizione(String descrizione) {
 
         if(descrizione != null && !descrizione.isEmpty()) {

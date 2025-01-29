@@ -7,6 +7,7 @@ import Storage.Occupa.OccupaDAO;
 import Storage.Prenotazione.Prenotazione;
 import Storage.Prenotazione.PrenotazioneDAO;
 import Storage.Utente.Utente;
+import Utility.Validator;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,70 +15,71 @@ import java.util.List;
 
 public class PrenotazioneAlloggioFacade {
 
+    private Validator validator;
+
     public PrenotazioneAlloggioFacade() {
     }
 
-    public List<Alloggio> visualizzaListaAlloggi(LocalDate checkIn, LocalDate checkOut, String destinazione, int numPostiLetto) {
+    public List<Alloggio> visualizzaListaAlloggi(String checkIn, String checkOut, String destinazione, String numPostiLetto) {
 
         AlloggioDAO alloggioDAO = new AlloggioDAO();
-
-        List<Alloggio> alloggi = alloggioDAO.doRetrieveAlloggiDisponibili(checkIn, checkOut, destinazione, numPostiLetto);
+        List<Alloggio> alloggi = alloggioDAO.doRetrieveAlloggiDisponibili(validator.validateData(checkIn), validator.validateData(checkOut), validator.validateDescrizione(destinazione), validator.validateInt(numPostiLetto));
 
         return alloggi;
     }
 
-    public Alloggio visualizzaDettagliAlloggio(int numAlloggio, int fkStruttura) {
+    public Alloggio visualizzaDettagliAlloggio(String numAlloggio, String fkStruttura) {
 
         AlloggioDAO alloggioDAO = new AlloggioDAO();
 
-        Alloggio alloggio = alloggioDAO.doRetrieveById(numAlloggio, fkStruttura);
+        Alloggio alloggio = alloggioDAO.doRetrieveById(validator.validateInt(numAlloggio), validator.validateInt(fkStruttura));
 
         return alloggio;
     }
 
-    public int finalizzaPrenotazione(Utente utente, LocalDate checkIn, LocalDate checkOut, int numPostiLetto, String fkUtente, int numAlloggio, int codStruttura, double costoPrenotazione, String numeroCarta, LocalDate dataScadenza, String cviCarta) {
+    public int finalizzaPrenotazione(Utente utente, String checkIn, String checkOut, String numPostiLetto, String fkUtente, String numAlloggio, String codStruttura, String costoPrenotazione, String numeroCarta, String dataScadenza, String cviCarta) {
 
         PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
-        Prenotazione p = new Prenotazione(checkIn, checkOut, utente, numPostiLetto, numeroCarta, dataScadenza, cviCarta);
+        Prenotazione p = new Prenotazione(validator.validateData(checkIn), validator.validateData(checkOut), utente, validator.validateInt(numPostiLetto), validator.validateNumeroCarta(numeroCarta), validator.validateData(dataScadenza), validator.validateCVICarta(cviCarta));
         prenotazioneDAO.doSave(p);
 
         AlloggioDAO alloggioDAO = new AlloggioDAO();
 
         OccupaDAO occupaDAO = new OccupaDAO();
-        Occupa o = new Occupa(p, alloggioDAO.doRetrieveById(numAlloggio, codStruttura), costoPrenotazione);
+        Occupa o = new Occupa(p, alloggioDAO.doRetrieveById(validator.validateInt(numAlloggio), validator.validateInt(codStruttura)), validator.validateDouble(costoPrenotazione));
         return occupaDAO.doSave(o);
     }
 
-    public void modificaPrenotazione(LocalDate checkIn, LocalDate checkOut, int numPostiLetto, int codPrenotazione) {
+    public void modificaPrenotazione(String checkIn, String checkOut, String numPostiLetto, String codPrenotazione) {
         PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
-        Prenotazione p = prenotazioneDAO.doRetrieveById(codPrenotazione);
+        Prenotazione p = prenotazioneDAO.doRetrieveById(validator.validateInt(codPrenotazione));
 
         LocalDate dataAttuale = LocalDate.now();
 
         if(dataAttuale.isBefore(p.getCheckIn().minusDays(7))) {
-            prenotazioneDAO.doUpdate(p, checkIn, checkOut, numPostiLetto);
+            prenotazioneDAO.doUpdate(p, validator.validateData(checkIn), validator.validateData(checkOut), validator.validateInt(numPostiLetto));
         }
     }
 
-    public void eliminaPrenotazione(int codPrenotazione) {
+    public void eliminaPrenotazione(String codPrenotazione) {
 
         PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
 
-        Prenotazione p = prenotazioneDAO.doRetrieveById(codPrenotazione);
+        Prenotazione p = prenotazioneDAO.doRetrieveById(validator.validateInt(codPrenotazione));
         LocalDate dataCheckIn = p.getCheckIn();
 
         LocalDate dataAttuale = LocalDate.now();
 
         if(dataAttuale.plusDays(7).isBefore(dataCheckIn)) {
-            prenotazioneDAO.doDelete(codPrenotazione);
+            prenotazioneDAO.doDelete(validator.validateInt(codPrenotazione));
         }
     }
 
-    public List<Occupa> visualizzaPrenotazioni(String codUtente) {
+    public List<Occupa> visualizzaPrenotazioni(String emailUtente) {
 
         OccupaDAO occupaDAO = new OccupaDAO();
 
-        List<Occupa> prenotazioni = occupaDAO.doRetrieveByUtente(codUtente);
+        List<Occupa> prenotazioni = occupaDAO.doRetrieveByUtente(validator.validateEmail(emailUtente));
 
         return prenotazioni;
     }

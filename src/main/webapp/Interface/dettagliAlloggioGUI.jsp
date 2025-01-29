@@ -69,21 +69,21 @@
         <div id="containerFiltri">
             <div id="divFiltroLuogo">
                 <p class="small-text"><b>Dove vuoi andare?</b></p>
-                <input form="formRicerca" type="text" name="luogo" placeholder="Cerca destinazioni" class="small-text">
+                <input form="formRicerca" type="text" name="luogo" placeholder="Cerca destinazioni" class="small-text" style="width: 80%;">
             </div>
             <div id="divFiltroDate">
                 <div id="divCheckIn">
                     <p class="small-text"><b>Check-in</b></p>
-                    <input form="formRicerca" type="date" name="dataCheckIn">
+                    <input form="formRicerca" type="date" name="dataCheckIn" style="width: 98%;">
                 </div>
                 <div id="divCheckOut">
                     <p class="small-text"><b>Check-out</b></p>
-                    <input form="formRicerca" type="date" name="dataCheckOut">
+                    <input form="formRicerca" type="date" name="dataCheckOut" style="width: 98%;">
                 </div>
             </div>
             <div id="divFiltroOspiti">
                 <p class="small-text"><b>Chi?</b></p>
-                <input form="formRicerca" type="text" name="numOspiti" placeholder="Aggiungi ospiti" class="small-text">
+                <input form="formRicerca" type="text" name="numOspiti" placeholder="Aggiungi ospiti" class="small-text" style="width: 90%;">
             </div>
             <div id="divCerca" class="normal-small-text">
                 <form id="formRicerca" action="visualizzaAlloggi">
@@ -113,10 +113,16 @@
                         <p id="parTesto" class="normal-small-text"><%=alloggio.getDescrizione()%></p>
                     </div>
                     <div id="divPrenotazione">
-                        <p class="normal-small-text parDatiPrenotazione"><b>Numero persone: <%=request.getParameter("numOspiti")%></b></p>
-                        <p class="normal-small-text parDatiPrenotazione"><b>Check-in: <%=request.getParameter("check-in")%></b></p>
-                        <p class="normal-small-text parDatiPrenotazione"><b>Check-out: <%=request.getParameter("check-out")%></b></p>
-                        <p class="normal-text parDatiPrenotazione"><b><%=alloggio.getPrezzoNotte()%></b></p>
+                        <div class="testoPrenotazione">
+                            <div class="parteUno">
+                                <p class="small-text parDatiPrenotazione"><b>Check-in: <%=request.getParameter("check-in")%></b></p>
+                                <p class="small-text parDatiPrenotazione"><b>Check-out: <%=request.getParameter("check-out")%></b></p>
+                            </div>
+                            <div class="parteDue">
+                                <p class="small-text parDatiPrenotazione"><b>Numero persone: <%=request.getParameter("numOspiti")%></b></p>
+                                <p class="normal-text parDatiPrenotazione"><b><%=alloggio.getPrezzoNotte()%></b></p>
+                            </div>
+                        </div>
                         <div id="divTastoPrenota">
                             <a href="#" id="linkPrenota" class="normal-small-text" onclick="apriConferma()">Prenota</a>
                         </div>

@@ -27,7 +27,7 @@ public class VisualizzaAlloggiServlet extends HttpServlet {
 
         PrenotazioneAlloggioFacade prenotazioneAlloggioFacade = new PrenotazioneAlloggioFacade();
 
-        List<Alloggio> alloggi = prenotazioneAlloggioFacade.visualizzaListaAlloggi(LocalDate.parse(dataCheckIn), LocalDate.parse(dataCheckOut), destinazione, Integer.parseInt(numOspiti));
+        List<Alloggio> alloggi = prenotazioneAlloggioFacade.visualizzaListaAlloggi(dataCheckIn, dataCheckOut, destinazione, numOspiti);
 
         if(!alloggi.isEmpty()) {
             req.setAttribute("dataCheckIn", dataCheckIn);

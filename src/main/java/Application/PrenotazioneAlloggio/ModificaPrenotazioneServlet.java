@@ -30,7 +30,7 @@ public class ModificaPrenotazioneServlet extends HttpServlet {
         Utente u = (Utente) req.getSession().getAttribute("utente");
 
         PrenotazioneAlloggioFacade prenotazioneAlloggioFacade = new PrenotazioneAlloggioFacade();
-        prenotazioneAlloggioFacade.modificaPrenotazione(LocalDate.parse(dataCheckIn), LocalDate.parse(dataCheckOut), Integer.parseInt(numPostiLetto), Integer.parseInt(codPrenotazione));
+        prenotazioneAlloggioFacade.modificaPrenotazione(dataCheckIn, dataCheckOut, numPostiLetto, codPrenotazione);
 
         List<Occupa> prenotazioni = prenotazioneAlloggioFacade.visualizzaPrenotazioni(u.getEmail());
 

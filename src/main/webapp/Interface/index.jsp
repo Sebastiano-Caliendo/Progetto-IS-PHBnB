@@ -4,23 +4,73 @@
 <head>
   <title>PHB&B</title>
 
+  <%
+    int callByServlet = 0;
+    String isCallByServlet = (String) request.getAttribute("callByServlet");
+    if(isCallByServlet != null && isCallByServlet.equalsIgnoreCase("yes"))
+      callByServlet = 1;
+  %>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <% if(callByServlet == 1) { %>
+  <link rel="stylesheet" href="Interface/css/index.css">
+  <!--<link rel="stylesheet" href="Interface/css/headerDopoAccesso.css">
+  <link rel="stylesheet" href="Interface/css/footer.css">-->
+  <link rel="stylesheet" href="Interface/css/style.css">
+  <%
+  }
+  else { %>
   <link rel="stylesheet" href="css/index.css">
+  <!--<link rel="stylesheet" href="css/headerDopoAccesso.css">
+  <link rel="stylesheet" href="css/footer.css"> -->
   <link rel="stylesheet" href="css/style.css">
+  <% } %>
+
 </head>
 <body>
 
+  <%
+    String servlet = "";
+    String jsp = "";
+    if(callByServlet == 0) { // chiamata da jsp
+      servlet = "../";
+      jsp = "";
+    }
+    else  {  // chiamata da servlet
+      servlet = "";
+      jsp = "Interface/";
+    }
+  %>
+
     <div id="topContainer">
       <div id="divLogo">
-        <p id="parLogo" class="mid-text">PHB&B</p>
+        <% if(callByServlet == 0) { %>
+        <p id="parLogo" class="mid-text"><a href="<%= jsp %>index.jsp" class="logoHref">PHB&B</a></p>
+        <% } else { %>
+        <p id="parLogo" class="mid-text"><a href="<%= jsp %>index.jsp" class="logoHref">PHB&B</a></p>
+        <% } %>
       </div>
       <div id="divRegStruttura">
-        <a id="linkRegStruttura" href="registrazioneHostGUI.jsp" class="normal-small-text">Registra la tua struttura</a>
+        <% if(callByServlet == 0) { %>
+        <a id="linkRegStruttura" href="<%= jsp %>registrazioneHostGUI.jsp" class="normal-small-text">Registra la tua struttura</a>
+        <% } else { %>
+        <a id="linkRegStruttura" href="<%= jsp %>registrazioneHostGUI.jsp" class="normal-small-text">Registra la tua struttura</a>
+        <% } %>
       </div>
       <div id="divReg">
-        <button id="linkReg" onclick="window.location.href='registrazioneUtenteGUI.jsp';" class="small-text buttons">Registrati</button>
+        <% if(callByServlet == 0) { %>
+        <button id="linkReg" onclick="window.location.href='<%= jsp %>registrazioneUtenteGUI.jsp';" class="small-text buttons">Registrati</button>
+        <% } else { %>
+        <button id="linkReg" onclick="window.location.href='<%= jsp %>registrazioneUtenteGUI.jsp';" class="small-text buttons">Registrati</button>
+        <% } %>
       </div>
       <div id="divAccedi">
-        <button id="linkAccedi" onclick="window.location.href='loginUtenteGUI.jsp';" class="small-text buttons">Accedi</button>
+        <% if(callByServlet == 0) { %>
+        <button id="linkAccedi" onclick="window.location.href='<%= jsp %>loginUtenteGUI.jsp';" class="small-text buttons">Accedi</button>
+        <% } else { %>
+        <button id="linkAccedi" onclick="window.location.href='<%= jsp %>loginUtenteGUI.jsp';" class="small-text buttons">Accedi</button>
+        <% } %>
       </div>
     </div>
     <div id="midContainer">
@@ -44,7 +94,7 @@
           <input form="formRicerca" type="text" name="numOspiti" placeholder="Aggiungi ospiti" class="small-text" style="width: 90%;">
         </div>
         <div id="divCerca">
-          <form id="formRicerca" action="../visualizzaAlloggi">
+          <form id="formRicerca" action="<%= servlet %>visualizzaAlloggi">
             <input type="submit" value="Cerca" id="buttonCerca" class="normal-small-text">
           </form>
         </div>

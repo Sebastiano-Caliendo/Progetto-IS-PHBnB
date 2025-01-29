@@ -34,6 +34,19 @@
 </head>
 <body>
 
+    <%
+        String servlet = "";
+        String jsp = "";
+        if(callByServlet == 0) { // chiamata da jsp
+            servlet = "../";
+            jsp = "";
+        }
+        else  {  // chiamata da servlet
+            servlet = "";
+            jsp = "Interface/";
+        }
+    %>
+
     <div id="topContainer">
         <%
             List<Alloggio> alloggi = (List<Alloggio>) request.getAttribute("alloggiPrenotabili");
@@ -45,16 +58,16 @@
         <%} else { %>
 
         <div id="divLogo">
-            <p id="parLogo" class="mid-text">PHB&B</p>
+            <p id="parLogo" class="mid-text"><a href="<%= jsp %>index.jsp" class="logoHref">PHB&B</a></p>
         </div>
         <div id="divRegStruttura">
-            <a id="linkRegStruttura" href="Interface/registrazioneHostGUI.jsp" class="normal-small-text">Registra la tua struttura</a>
+            <a id="linkRegStruttura" href="<%= jsp %>registrazioneHostGUI.jsp" class="normal-small-text">Registra la tua struttura</a>
         </div>
         <div id="divReg">
-            <button id="linkReg" onclick="window.location.href='Interface/registrazioneUtenteGUI.jsp';" class="small-text buttons">Registrati</button>
+            <button id="linkReg" onclick="window.location.href='<%= jsp %>registrazioneUtenteGUI.jsp';" class="small-text buttons">Registrati</button>
         </div>
         <div id="divAccedi">
-            <button id="linkAccedi" onclick="window.location.href='Interface/loginUtenteGUI.jsp';" class="small-text buttons">Accedi</button>
+            <button id="linkAccedi" onclick="window.location.href='<%= jsp %>loginUtenteGUI.jsp';" class="small-text buttons">Accedi</button>
         </div>
 
         <%
@@ -65,24 +78,24 @@
         <div id="containerFiltri">
             <div id="divFiltroLuogo">
                 <p class="small-text"><b>Dove vuoi andare?</b></p>
-                <input form="formRicerca" type="text" name="luogo" placeholder="Cerca destinazioni" class="small-text">
+                <input form="formRicerca" type="text" name="luogo" placeholder="Cerca destinazioni" class="small-text" style="width: 80%;">
             </div>
             <div id="divFiltroDate">
                 <div id="divCheckIn">
                     <p class="small-text"><b>Check-in</b></p>
-                    <input form="formRicerca" type="date" name="dataCheckIn">
+                    <input form="formRicerca" type="date" name="dataCheckIn" style="width:98%;">
                 </div>
                 <div id="divCheckOut">
                     <p class="small-text"><b>Check-out</b></p>
-                    <input form="formRicerca" type="date" name="dataCheckOut">
+                    <input form="formRicerca" type="date" name="dataCheckOut" style="width:98%;">
                 </div>
             </div>
             <div id="divFiltroOspiti">
                 <p class="small-text"><b>Chi?</b></p>
-                <input form="formRicerca" type="text" name="numOspiti" placeholder="Aggiungi ospiti" class="small-text">
+                <input form="formRicerca" type="text" name="numOspiti" placeholder="Aggiungi ospiti" class="small-text" style="width: 90%;">
             </div>
             <div id="divCerca" class="normal-small-text">
-                <form id="formRicerca" action="visualizzaAlloggi">
+                <form id="formRicerca" action="<%= servlet %>visualizzaAlloggi">
                     <input type="submit" value="Cerca" id="buttonCerca">
                 </form>
             </div>
@@ -99,10 +112,10 @@
                         </div>
                         <div class="divInfoAlloggio">
                             <div class="divNomeStruttura">
-                                <a href="visualizzaDettagliAlloggio?numAlloggio=<%=a.getNumeroAlloggio()%>&codStruttura=<%=a.getStruttura().getIdStruttura()%>&check-in=<%=request.getAttribute("dataCheckIn")%>&check-out=<%=request.getAttribute("dataCheckOut")%>&numOspiti=<%=request.getAttribute("numOspiti")%>" class="linkDettagliAlloggio"><b><%=a.getStruttura().getNomeStruttura()%> ></b></a>
+                                <a href="<%= servlet %>visualizzaDettagliAlloggio?numAlloggio=<%=a.getNumeroAlloggio()%>&codStruttura=<%=a.getStruttura().getIdStruttura()%>&check-in=<%=request.getAttribute("dataCheckIn")%>&check-out=<%=request.getAttribute("dataCheckOut")%>&numOspiti=<%=request.getAttribute("numOspiti")%>" class="linkDettagliAlloggio"><b><%=a.getStruttura().getNomeStruttura()%> ></b></a>
                             </div>
                             <div class="divDescrizione">
-                                <p><%=a.getDescrizione()%></p>
+                                <p class="small-text"><%=a.getDescrizione()%></p>
                             </div>
                         </div>
                     </div>
