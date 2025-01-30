@@ -38,11 +38,11 @@
     <%@ include file="../WEB-INF/moduli/header.jsp"%>
 
     <%
-        //List<Struttura> strutture = (List<Struttura>) request.getAttribute("listaStrutture");
+        List<Struttura> strutture = (List<Struttura>) request.getAttribute("listaStrutture");
         // questo codice andrà omesso, ma lo utilizzo per vedere come la pagina si comporta quando l'host
         // ha delle strutture..
-        StrutturaDAO strutturaDAO = new StrutturaDAO();
-        List<Struttura> strutture = strutturaDAO.doRetrieveByCriteria("fk_host", "pintocarlo09@gmail.com");
+        /*StrutturaDAO strutturaDAO = new StrutturaDAO();
+        List<Struttura> strutture = strutturaDAO.doRetrieveByCriteria("fk_host", "pintocarlo09@gmail.com");*/
     %>
 
     <div class="big-text" id="areaHost"> AREA HOST</div>

@@ -115,7 +115,7 @@ input {
     border: 1px solid black;
     margin: auto;
     height: 85%;
-    width: 25%;
+    width: 40%;
     border-radius: 15px;
 }
 
@@ -183,8 +183,50 @@ input {
     align-content: center;
 }
 
+.imgIndex {
+    display: flex;
+    height: 100%;
+    width: 65%;
+}
+
 a.logoHref {text-decoration: none; color: var(--color-primary);}
 p {overflow-wrap : normal;}
+
+@media only screen and (max-width: 850px) {
+    .imgIndex {
+        display: flex;
+        height: 100%;
+        width: 80%;
+    }
+
+    #bottomContainer {
+        border-left: 1px solid var(--color-primary);
+        border-right: 1px solid var(--color-primary);
+        background-color: white;
+        margin: auto;
+        align-items: center;
+        width: 85%;
+        height: 75vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .descrizioneIndex {
+        margin-left: 2%;
+        align-content: center;
+        height: 65%;
+        width: 70%;
+        font-style: italic;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .imgIndex {
+        display: flex;
+        height: 100%;
+        width: 100%;
+    }
+}
 
 @media only screen and (max-width: 1250px) {
     #linkReg, #linkAccedi {

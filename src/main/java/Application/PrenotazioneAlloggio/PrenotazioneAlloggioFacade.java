@@ -18,6 +18,7 @@ public class PrenotazioneAlloggioFacade {
     private Validator validator;
 
     public PrenotazioneAlloggioFacade() {
+        this.validator = new Validator();
     }
 
     public List<Alloggio> visualizzaListaAlloggi(String checkIn, String checkOut, String destinazione, String numPostiLetto) {

@@ -1,5 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="Storage.Alloggio.Alloggio" %>
+<%@ page import="Storage.Utente.Utente" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -49,11 +50,21 @@
 
     <div id="topContainer">
         <%
+            Utente utente = (Utente) session.getAttribute("utente");
+            Host host = (Host) session.getAttribute("host");
+            Utente admin = (Utente) session.getAttribute("admin");
+
+            boolean loggato = false;
+            if(utente == null && host == null && admin == null)
+                loggato = false;
+            else
+                loggato = true;
+
             List<Alloggio> alloggi = (List<Alloggio>) request.getAttribute("alloggiPrenotabili");
 
-            if(request.getSession().getAttribute("utente") != null) { %>
+            if(loggato) { %>
 
-        <%@ include file="../WEB-INF/moduli/headerDopoAccesso.jsp"%>
+                <%@ include file="../WEB-INF/moduli/headerDopoAccesso.jsp"%>
 
         <%} else { %>
 
@@ -104,18 +115,18 @@
     <div id="alloggiContainer">
         <%
             if(alloggi != null) {
-                for(Alloggio a : alloggi) { %>
+                for(Alloggio alloggio : alloggi) { %>
 
                     <div class="divAlloggio">
                         <div class="divImg">
-                            <img class="imgAlloggio" src="<%=a.getUrlImmagine()%>">
+                            <img class="imgAlloggio" src="<%=alloggio.getUrlImmagine()%>">
                         </div>
                         <div class="divInfoAlloggio">
                             <div class="divNomeStruttura">
-                                <a href="<%= servlet %>visualizzaDettagliAlloggio?numAlloggio=<%=a.getNumeroAlloggio()%>&codStruttura=<%=a.getStruttura().getIdStruttura()%>&check-in=<%=request.getAttribute("dataCheckIn")%>&check-out=<%=request.getAttribute("dataCheckOut")%>&numOspiti=<%=request.getAttribute("numOspiti")%>" class="linkDettagliAlloggio"><b><%=a.getStruttura().getNomeStruttura()%> ></b></a>
+                                <a href="<%= servlet %>visualizzaDettagliAlloggio?numAlloggio=<%=alloggio.getNumeroAlloggio()%>&codStruttura=<%=alloggio.getStruttura().getIdStruttura()%>&check-in=<%=request.getAttribute("dataCheckIn")%>&check-out=<%=request.getAttribute("dataCheckOut")%>&numOspiti=<%=request.getAttribute("numOspiti")%>" class="linkDettagliAlloggio"><b><%=alloggio.getStruttura().getNomeStruttura()%> ></b></a>
                             </div>
                             <div class="divDescrizione">
-                                <p class="small-text"><%=a.getDescrizione()%></p>
+                                <p class="small-text"><%=alloggio.getDescrizione()%></p>
                             </div>
                         </div>
                     </div>

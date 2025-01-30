@@ -37,7 +37,7 @@
 <%@ include file="../WEB-INF/moduli/header.jsp"%>
 
 <%
-    int idStruttura = (Integer) request.getAttribute("idStruttura");
+    String idStruttura = (String) request.getAttribute("idStruttura");
     /*StrutturaDAO strutturaDAO = new StrutturaDAO();
     Struttura struttura = strutturaDAO.doRetrieveById(1);
     int idStruttura = struttura.getIdStruttura();*/

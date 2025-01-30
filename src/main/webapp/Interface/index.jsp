@@ -1,3 +1,5 @@
+<%@ page import="Storage.Utente.Utente" %>
+<%@ page import="Storage.Host.Host" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -9,12 +11,23 @@
     String isCallByServlet = (String) request.getAttribute("callByServlet");
     if(isCallByServlet != null && isCallByServlet.equalsIgnoreCase("yes"))
       callByServlet = 1;
+
+    Utente utente = (Utente) session.getAttribute("utente");
+    Host host = (Host) session.getAttribute("host");
+    Utente admin = (Utente) session.getAttribute("admin");
+
+    boolean loggato = false;
+    if(utente == null && host == null && admin == null)
+      loggato = false;
+    else
+      loggato = true;
   %>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <% if(callByServlet == 1) { %>
   <link rel="stylesheet" href="Interface/css/index.css">
+  <link rel="stylesheet" href="Interface/css/headerDopoAccesso.css">
   <!--<link rel="stylesheet" href="Interface/css/headerDopoAccesso.css">
   <link rel="stylesheet" href="Interface/css/footer.css">-->
   <link rel="stylesheet" href="Interface/css/style.css">
@@ -22,6 +35,7 @@
   }
   else { %>
   <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/headerDopoAccesso.css">
   <!--<link rel="stylesheet" href="css/headerDopoAccesso.css">
   <link rel="stylesheet" href="css/footer.css"> -->
   <link rel="stylesheet" href="css/style.css">
@@ -43,6 +57,7 @@
     }
   %>
 
+  <% if(!loggato) {%>
     <div id="topContainer">
       <div id="divLogo">
         <% if(callByServlet == 0) { %>
@@ -73,6 +88,9 @@
         <% } %>
       </div>
     </div>
+    <% } else { %>
+            <%@ include file="../WEB-INF/moduli/headerDopoAccesso.jsp"%>
+      <% } %>
     <div id="midContainer">
       <div id="containerFiltri">
         <div id="divFiltroLuogo">
@@ -108,8 +126,10 @@
         <div class="piccolaDescrizione small-text"> PHB&B è un sito web intuitivo e facile da usare, progettato per prenotare alloggi in diverse destinazioni. Con una vasta gamma di opzioni, dai bed and breakfast alle case vacanza, permette agli utenti di trovare rapidamente la sistemazione ideale in base alle proprie preferenze e budget. La piattaforma offre una ricerca semplice, filtri avanzati e recensioni di altri viaggiatori per garantire una scelta informata. Inoltre,
           la prenotazione è sicura e veloce, rendendo il processo di organizzazione del viaggio molto più comodo.</div>
       </div>
-      <img class="imgHome" src="img/imgHome2.jpg">
-      <img class="imgHome" src="img/imgHome3.jpg">
+      <div class="imgIndex">
+        <img class="imgHome" src="img/imgHome2.jpg">
+        <img class="imgHome" src="img/imgHome3.jpg">
+      </div>
     </div>
 
 <!--index momentanea, dal riepilogo strutture possiamo accedere a tutta la parte relativa a : GESTIONE STRUTTURE e ALLOGGI

@@ -33,14 +33,14 @@ public class LoginServlet extends HttpServlet {
             flag = autenticazioneFacade.login(email, password, tipo);
 
             if(flag)
-                address = "Interface/index.jsp";
+                address = "Interface/areaUtenteGUI.jsp";
             else
                 address = "Interface/loginUtenteGUI.jsp?error=1";
         } else if(tipo.equals("host")){
             flag = autenticazioneFacade.login(email, password, tipo);
 
-            if(flag)
-                address = "Interface/index.jsp";
+            if(flag) //URL DA CAMBIARE
+                address = "riepilogoStruttureServlet";
             else
                 address = "Interface/loginHostGUI.jsp?error=1";
         } else if(tipo.equals("admin")){

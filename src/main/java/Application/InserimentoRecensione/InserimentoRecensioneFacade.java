@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class InserimentoRecensioneFacade {
-    private Validator validator;
+    private Validator validator = new Validator();
 
     public InserimentoRecensioneFacade() {
         this.validator = new Validator();

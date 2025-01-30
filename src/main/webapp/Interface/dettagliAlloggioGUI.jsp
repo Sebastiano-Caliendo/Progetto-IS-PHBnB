@@ -37,13 +37,21 @@
 
     <div id="topContainer">
         <%
-            Utente u = (Utente) request.getSession().getAttribute("utente");
+            Utente utente = (Utente) session.getAttribute("utente");
+            Host host = (Host) session.getAttribute("host");
+            Utente admin = (Utente) session.getAttribute("admin");
+
+            boolean loggato = false;
+            if(utente == null && host == null && admin == null)
+                loggato = false;
+            else
+                loggato = true;
 
             Alloggio alloggio = (Alloggio) request.getAttribute("alloggioSelezionato");
 
-            if(request.getSession().getAttribute("utente") != null) { %>
+            if(loggato) { %>
 
-        <%@ include file="../WEB-INF/moduli/headerDopoAccesso.jsp"%>
+                <%@ include file="../WEB-INF/moduli/headerDopoAccesso.jsp"%>
 
         <%} else { %>
 
@@ -114,17 +122,32 @@
                     </div>
                     <div id="divPrenotazione">
                         <div class="testoPrenotazione">
-                            <div class="parteUno">
-                                <p class="small-text parDatiPrenotazione"><b>Check-in: <%=request.getParameter("check-in")%></b></p>
-                                <p class="small-text parDatiPrenotazione"><b>Check-out: <%=request.getParameter("check-out")%></b></p>
-                            </div>
-                            <div class="parteDue">
-                                <p class="small-text parDatiPrenotazione"><b>Numero persone: <%=request.getParameter("numOspiti")%></b></p>
-                                <p class="normal-text parDatiPrenotazione"><b><%=alloggio.getPrezzoNotte()%></b></p>
-                            </div>
+                            <!--<div class="parteUno">-->
+                                <div class="checkIn">
+                                    <p class="small-text parDatiPrenotazione titleTestoPrenotazione"><b>Check-in: </b></p>
+                                    <p class="small-text parDatiPrenotazione"><b><%=request.getParameter("check-in")%></b></p>
+                                </div>
+                                <div class="checkOut">
+                                    <p class="small-text parDatiPrenotazione titleTestoPrenotazione"><b>Check-out: </b></p>
+                                    <p class="small-text parDatiPrenotazione"><b><%=request.getParameter("check-out")%></b></p>
+                                </div>
+                            <!--</div>-->
+                            <!--<div class="parteDue">-->
+                                <div class="numeroPersone">
+                                    <p class="small-text parDatiPrenotazione titleTestoPrenotazione"><b>Numero persone: </b></p>
+                                    <p class="small-text parDatiPrenotazione"><b><%=request.getParameter("numOspiti")%></b></p>
+                                </div>
+                                <div class="prezzo">
+                                    <!--<p class="normal-text parDatiPrenotazione"></p>-->
+                                    <p><b><%=alloggio.getPrezzoNotte()%></b></p>
+                                </div>
+                            <!--</div>-->
                         </div>
                         <div id="divTastoPrenota">
-                            <a href="#" id="linkPrenota" class="normal-small-text" onclick="apriConferma()">Prenota</a>
+                            <form action="#" method="post">
+                                <input type="submit" id="linkPrenota" class="normal-small-text" onclick="apriConferma()" value="Prenota">
+                            </form>
+                            <!--<a href="#" id="linkPrenota" class="normal-small-text" onclick="apriConferma()">Prenota</a>-->
                         </div>
                     </div>
                 </div>
@@ -180,7 +203,7 @@
             let flag = false;
 
             <%
-                if(u != null) { %>
+                if(utente != null) { %>
                     flag = true;
             <%}%>
 

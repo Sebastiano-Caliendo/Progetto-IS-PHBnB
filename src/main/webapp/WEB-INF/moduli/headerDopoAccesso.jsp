@@ -1,3 +1,4 @@
+<%@ page import="Storage.Host.Host" %>
 <html>
 <head>
 </head>
@@ -7,6 +8,10 @@
         String header = "Interface/";
         if(callByServlet == 0)
             header = "";
+
+        Utente u = (Utente) session.getAttribute("utente");
+        Host h = (Host) session.getAttribute("host");
+        Utente a = (Utente) session.getAttribute("admin");
     %>
 
     <div id="header">
@@ -19,7 +24,13 @@
             </div>
             <div class="dropdown">
                 <div class="dropdownElem">
-                    <a href="<%=header%>areaUtenteGUI.jsp" id="linkAreaUtente" class="normal-small-text">Area utente</a>
+                    <% if(u != null) { %>
+                        <a href="<%=header%>areaUtenteGUI.jsp" id="linkAreaUtente" class="normal-small-text">Area Utente</a>
+                    <%}else if(h != null) {%>
+                        <a href="<%=header%>areaHostGUI.jsp" id="linkAreaUtente" class="normal-small-text">Area Host</a>
+                    <%}else if(a != null) {%>
+                        <a href="<%=header%>areaAdminGUI.jsp" id="linkAreaUtente" class="normal-small-text">Area Admin</a>
+                    <% }%>
                 </div>
                 <div class="dropdownElem">
                     <a href="#" onclick="openWindow()" id="linkLogout" class="normal-small-text">Logout</a>

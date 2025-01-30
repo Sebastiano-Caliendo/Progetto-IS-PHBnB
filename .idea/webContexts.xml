@@ -5,6 +5,7 @@
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Interface/RecensioniStrutturaGUI.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Interface" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Interface/VisAlloggiStruttureGUI.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Interface" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/Interface/alloggiPrenotabiliGUI.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Interface" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Interface/dettagliAlloggioGUI.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Interface" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Interface/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Interface" />
       </map>
