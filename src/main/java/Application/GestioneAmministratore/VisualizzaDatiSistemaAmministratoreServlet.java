@@ -24,12 +24,12 @@ public class VisualizzaDatiSistemaAmministratoreServlet extends HttpServlet {
 
         req.setAttribute("callByServlet", "yes");
         req.getSession().setAttribute("admin", 1);
-        List<Alloggio> alloggi = facade.visualizzaDatiSistemaAlloggio(req.getSession());
-        List<Host> hosts = facade.visualizzaDatiSistemaHost(req.getSession());
-        List<Prenotazione> prenotazioni = facade.visualizzaDatiSistemaPrenotazione(req.getSession());
-        List<Recensione> recensioni = facade.visualizzaDatiSistemaRecensione(req.getSession());
-        List<Struttura> strutture = facade.visualizzaDatiSistemaStruttura(req.getSession());
-        List<Utente> utenti = facade.visualizzaDatiSistemaUtente(req.getSession());
+        List<Alloggio> alloggi = facade.visualizzaDatiSistemaAlloggio();
+        List<Host> hosts = facade.visualizzaDatiSistemaHost();
+        List<Prenotazione> prenotazioni = facade.visualizzaDatiSistemaPrenotazione();
+        List<Recensione> recensioni = facade.visualizzaDatiSistemaRecensione();
+        List<Struttura> strutture = facade.visualizzaDatiSistemaStruttura();
+        List<Utente> utenti = facade.visualizzaDatiSistemaUtente();
 
         req.setAttribute("alloggi", alloggi);
         req.setAttribute("hosts", hosts);

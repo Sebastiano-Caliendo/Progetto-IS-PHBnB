@@ -20,7 +20,7 @@ public class VisualizzaRecensioniRicevuteServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("callByServlet", "yes");
         // prendo l'id della struttura
-        int idStruttura = Integer.parseInt(req.getParameter("idStruttura"));
+        String idStruttura = req.getParameter("idStruttura");
 
         // ottengo il nome della struttura
         gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
@@ -30,7 +30,7 @@ public class VisualizzaRecensioniRicevuteServlet extends HttpServlet {
 
         // prendo tutte le recensioni effettuate su alloggi di una struttura
         InserimentoRecensioneFacade inserimentoRecensioneFacade = new InserimentoRecensioneFacade();
-        recensioniStruttura = inserimentoRecensioneFacade.visualizzaRecensioniRicevute(req.getSession(), idStruttura);
+        recensioniStruttura = inserimentoRecensioneFacade.visualizzaRecensioniRicevute(idStruttura);
 
         // calcolo la media delle recensioni
         float totale = 0;

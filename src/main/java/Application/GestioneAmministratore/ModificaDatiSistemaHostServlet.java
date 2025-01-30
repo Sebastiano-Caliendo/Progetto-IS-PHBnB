@@ -17,6 +17,8 @@ import java.util.Date;
 public class ModificaDatiSistemaHostServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        String oldEmailHost = req.getParameter("oldEmailHost");
         String email = req.getParameter("emailHost");
         String nome = req.getParameter("nomeHost");
         String cognome = req.getParameter("cognomeHost");
@@ -25,15 +27,15 @@ public class ModificaDatiSistemaHostServlet extends HttpServlet {
 
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
 
-        Host host = new Host();
+        /*Host host = new Host();
 
         host.setEmail(email);
         host.setNome(nome);
         host.setCognome(cognome);
         host.setPassword(password);
-        host.setRecapitoTelefonico(recapitoTelefonico);
+        host.setRecapitoTelefonico(recapitoTelefonico);*/
 
-        gestioneAmministratoreFacade.modificaDatiSistemaHost(host, email, nome, cognome, password, recapitoTelefonico, req.getSession());
+        gestioneAmministratoreFacade.modificaDatiSistemaHost(oldEmailHost, email, nome, cognome, password, recapitoTelefonico);
 
         resp.sendRedirect(req.getContextPath() + "/Interface/indexAdmin.jsp");
 

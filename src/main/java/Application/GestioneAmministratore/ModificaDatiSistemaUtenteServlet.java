@@ -16,6 +16,8 @@ import java.text.SimpleDateFormat;
 public class ModificaDatiSistemaUtenteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        String oldEmailUtente = req.getParameter("oldEmailUtente");
         String email = req.getParameter("emailUtente");
         String nome = req.getParameter("nomeUtente");
         String cognome = req.getParameter("cognomeUtente");
@@ -24,9 +26,8 @@ public class ModificaDatiSistemaUtenteServlet extends HttpServlet {
         String numeroCivico = req.getParameter("numeroCivicoUtente");
         String via = req.getParameter("viaUtente");
         String recapitoTelefonico = req.getParameter("recapitoTelefonicoUtente");
-        boolean isAdmin = Boolean.parseBoolean(req.getParameter("isAdminUtente"));
 
-        Utente utente = new Utente();
+        /*Utente utente = new Utente();
 
         utente.setAdmin(isAdmin);
         utente.setCitta(citta);
@@ -36,10 +37,10 @@ public class ModificaDatiSistemaUtenteServlet extends HttpServlet {
         utente.setPassword(password);
         utente.setNumeroCivico(numeroCivico);
         utente.setVia(via);
-        utente.setRecapitoTelefonico(recapitoTelefonico);
+        utente.setRecapitoTelefonico(recapitoTelefonico);*/
 
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
-        gestioneAmministratoreFacade.modificaDatiSistemaUtente(utente, email, nome, cognome, password, citta, numeroCivico, via, recapitoTelefonico, req.getSession());
+        gestioneAmministratoreFacade.modificaDatiSistemaUtente(oldEmailUtente, email, nome, cognome, password, citta, numeroCivico, via, recapitoTelefonico);
 
 
         resp.sendRedirect(req.getContextPath() + "/Interface/indexAdmin.jsp");

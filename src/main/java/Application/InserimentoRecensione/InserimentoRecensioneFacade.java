@@ -8,41 +8,38 @@ import Storage.Recensione.Recensione;
 import Storage.Recensione.RecensioneDAO;
 import Storage.Utente.Utente;
 import Storage.Utente.UtenteDAO;
+import Utility.Validator;
 import jakarta.servlet.http.HttpSession;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public class InserimentoRecensioneFacade {
-    private InserimentoRecensioneProxy proxy;
+    private Validator validator;
 
     public InserimentoRecensioneFacade() {
-        this.proxy = new InserimentoRecensioneProxy();
+        this.validator = new Validator();
     }
 
-    public void inserisciRecensione(HttpSession session, String email, String descrizione, int votoRecensione, LocalDate dataRecensione, int codicePrenotazione, int numeroAlloggio, int idStruttura){
-        boolean successo = false;
+    public boolean inserisciRecensione(HttpSession session, String descrizione, String votoRecensione, String codicePrenotazione, String numeroAlloggio, String idStruttura){
 
-        if(proxy.isUser(session)){
-            successo = true;
-        }
-        else{
-            System.out.println("Operazione non ammessa");
-        }
-
-        if(successo){
+        try {
             RecensioneDAO recensioneDAO = new RecensioneDAO();
             AlloggioDAO alloggioDAO = new AlloggioDAO();
             PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
             Recensione recensione = new Recensione();
 
             recensione.setUtente((Utente) session.getAttribute("utente"));
-            recensione.setDescrizione(descrizione);
-            recensione.setVotoRecensione(votoRecensione);
-            recensione.setDataRecensione(dataRecensione);
-            recensione.setAlloggio(alloggioDAO.doRetrieveById(numeroAlloggio, idStruttura));
-            recensione.setPrenotazione(prenotazioneDAO.doRetrieveById(codicePrenotazione));
+            recensione.setDescrizione(validator.validateDescrizione(descrizione));
+            recensione.setVotoRecensione(validator.validateInt(votoRecensione));
+            recensione.setDataRecensione(LocalDate.now());
+            recensione.setAlloggio(alloggioDAO.doRetrieveById(validator.validateInt(numeroAlloggio), validator.validateInt(idStruttura)));
+            recensione.setPrenotazione(prenotazioneDAO.doRetrieveById(validator.validateInt(codicePrenotazione)));
             recensioneDAO.doSave(recensione);
+
+            return true;
+        } catch (RuntimeException e) {
+            return false;
         }
     }
 
@@ -63,59 +60,43 @@ public class InserimentoRecensioneFacade {
         }
     }*/
 
-    public void eliminaRecensione(HttpSession session, int idRecensione){
-        boolean successo = false;
+    public boolean eliminaRecensione(HttpSession session, String idRecensione){
 
-        if(proxy.isUser(session)){
-            successo = true;
-        }
-        else{
-            System.out.println("Operazione non ammessa");
-        }
-
-        if(successo){
+        try {
             RecensioneDAO recensioneDAO = new RecensioneDAO();
-            recensioneDAO.doDelete(idRecensione);
+            recensioneDAO.doDelete(validator.validateInt(idRecensione));
+
+            return true;
+        } catch (RuntimeException e) {
+            return false;
         }
     }
 
     // email = fk_utente in recensione
-    public List<Recensione> visualizzaRecensioniPubblicate(HttpSession session, String email){
-        boolean successo = false;
-        List<Recensione> recensioniPubblicate;
+    public List<Recensione> visualizzaRecensioniPubblicate(String email){
 
-        if(proxy.isUser(session)){
-            successo = true;
-        }
-        else{
-            System.out.println("Operazione non ammessa");
-        }
+        try {
+            List<Recensione> recensioniPubblicate;
 
-        if(successo){
             RecensioneDAO recensioneDAO = new RecensioneDAO();
-            recensioniPubblicate = recensioneDAO.doRetrieveByEmail(email);
+            recensioniPubblicate = recensioneDAO.doRetrieveByEmail(validator.validateEmail(email));
             return recensioniPubblicate;
+        } catch (RuntimeException e) {
+            return null;
         }
-        return null;
     }
 
     // controlli commentati per testare il servizio (parte HOST e UTENTE ancora non fatta)
-    public List<Recensione> visualizzaRecensioniRicevute(HttpSession session, int idStruttura){
-        //boolean successo = false;
-        List<Recensione> recensioniRicevute;
+    public List<Recensione> visualizzaRecensioniRicevute(String idStruttura){
 
-        /*if(proxy.isHost(session)){
-            successo = true;
-        }
-        else{
-            System.out.println("Operazione non ammessa");
-        }*/
+        try {
+            List<Recensione> recensioniRicevute;
 
-        //if(successo){
             RecensioneDAO recensioneDAO = new RecensioneDAO();
-            recensioniRicevute = recensioneDAO.doRetrieveByStruttura(idStruttura);
+            recensioniRicevute = recensioneDAO.doRetrieveByStruttura(validator.validateInt(idStruttura));
             return recensioniRicevute;
-        //}
-        //return null;
+        } catch (RuntimeException e) {
+            return null;
+        }
     }
 }

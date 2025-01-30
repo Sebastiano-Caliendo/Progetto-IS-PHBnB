@@ -13,10 +13,10 @@ import java.io.IOException;
 public class CancellazioneDatiSistemaStrutturaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int idStruttura = Integer.parseInt(req.getParameter("idStruttura"));
+        String idStruttura = req.getParameter("idStruttura");
 
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
-        gestioneAmministratoreFacade.cancellazioneDatiSistemaStruttura(idStruttura, req.getSession());
+        gestioneAmministratoreFacade.cancellazioneDatiSistemaStruttura(idStruttura);
 
         resp.sendRedirect(req.getContextPath() + "/Interface/indexAdmin.jsp");
     }

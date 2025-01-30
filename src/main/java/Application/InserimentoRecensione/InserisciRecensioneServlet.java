@@ -19,16 +19,15 @@ import java.util.Date;
 public class InserisciRecensioneServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String emailRecensore = req.getParameter("emailRecensore"); // type = "hidden" nella jsp
+
         String descrizioneRecensione = req.getParameter("descrizioneRecensione");
-        int votoRecensione = Integer.parseInt(req.getParameter("votoRecensione"));
-        LocalDate dataRecensione = LocalDate.parse(req.getParameter("dataRecensione"));
-        int codicePrenotazione = Integer.parseInt(req.getParameter("codicePrenotazione")); // type = "hidden" nella jsp
-        int numeroAlloggio = Integer.parseInt(req.getParameter("numeroAlloggio")); // type = "hidden" nella jsp
-        int idStruttura = Integer.parseInt(req.getParameter("idStruttura")); // type = "hidden" nella jsp
+        String votoRecensione = req.getParameter("votoRecensione");
+        String codicePrenotazione = req.getParameter("codicePrenotazione"); // type = "hidden" nella jsp
+        String numeroAlloggio = req.getParameter("numeroAlloggio"); // type = "hidden" nella jsp
+        String idStruttura = req.getParameter("idStruttura"); // type = "hidden" nella jsp
 
         InserimentoRecensioneFacade inserimentoRecensioneFacade = new InserimentoRecensioneFacade();
-        inserimentoRecensioneFacade.inserisciRecensione(req.getSession(), emailRecensore, descrizioneRecensione, votoRecensione, dataRecensione, codicePrenotazione, numeroAlloggio, idStruttura);
+        inserimentoRecensioneFacade.inserisciRecensione(req.getSession(), descrizioneRecensione, votoRecensione, codicePrenotazione, numeroAlloggio, idStruttura);
 
         String nameAlloggio = req.getParameter("nameAlloggio");
 

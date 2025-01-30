@@ -22,10 +22,10 @@ public class VisualizzaRecensioniPubblicateServlet extends HttpServlet {
         Utente utente = (Utente) req.getSession().getAttribute("utente");
         String emailRecensore = utente.getEmail();
 
-        List<Recensione> recensioniUtente = new ArrayList<>();
+        List<Recensione> recensioniUtente;
 
         InserimentoRecensioneFacade inserimentoRecensioneFacade = new InserimentoRecensioneFacade();
-        recensioniUtente = inserimentoRecensioneFacade.visualizzaRecensioniPubblicate(req.getSession(), emailRecensore);
+        recensioniUtente = inserimentoRecensioneFacade.visualizzaRecensioniPubblicate(emailRecensore);
 
         req.setAttribute("recensioniUtente", recensioniUtente);
 
