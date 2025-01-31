@@ -82,9 +82,9 @@
       </div>
       <div id="divAccedi">
         <% if(callByServlet == 0) { %>
-        <button id="linkAccedi" onclick="window.location.href='<%= jsp %>loginUtenteGUI.jsp';" class="small-text buttons">Accedi</button>
+        <button id="linkAccedi" onclick="apriSceltaLogin()" class="small-text buttons">Accedi</button>
         <% } else { %>
-        <button id="linkAccedi" onclick="window.location.href='<%= jsp %>loginUtenteGUI.jsp';" class="small-text buttons">Accedi</button>
+        <button id="linkAccedi" onclick="apriSceltaLogin()" class="small-text buttons">Accedi</button>
         <% } %>
       </div>
     </div>
@@ -132,18 +132,69 @@
       </div>
     </div>
 
-<!--index momentanea, dal riepilogo strutture possiamo accedere a tutta la parte relativa a : GESTIONE STRUTTURE e ALLOGGI
-<a href="RiepilogoStruttureGUI.jsp">riepilogoStruttre</a>
- <a href="Interface/VisAlloggiStruttureGUI.jsp">riepilogoAlloggiStruttura</a>
- <a href="PrenotazioniStrutturaGUI.jsp">Prenotazioni Struttura</a>
-<a href="InserisciStrutturaGUI.jsp">Inserisci Struttura</a>
-<a href="ModificaStrutturaGUI.jsp">Modifica Struttura</a>
-<a href="InserisciAlloggioGUI.jsp">Inserisci Alloggio</a>
-<a href="ModificaAlloggioGUI.jsp">Modifica Alloggio</a>
-<a href = "VisDatiSistemaGUI.jsp">Visualizza dati sistema</a>
-<a href = "loginUtenteGUI.jsp">Login utente</a>
-<a href = "loginHostGUI.jsp">Login host</a>
-<a href = "registrazioneUtenteGUI.jsp">Registrazione utente</a>
-<a href = "areaUtenteGUI.jsp">Area utente</a>-->
+  <!-- scelta login -->
+  <div id="divSceltaLogin" style="display: none">
+    <div id = "formSceltaLogin">
+      <div class="divSceltaLogin">
+        <p><b>Seleziona la tipologia di accesso</b></p>
+      </div>
+      <div class="divSceltaLogin">
+        <input type="submit" onclick="reindirizzaUtente()" class="buttons" value = "Utente">
+        <input type="submit" onclick="reindirizzaHost()" class="buttons" value = "Host">
+        <input type="submit" onclick="reindirizzaAdmin()" class="buttons" value = "Admin">
+      </div>
+    </div>
+  </div>
+
+
+  <!--index momentanea, dal riepilogo strutture possiamo accedere a tutta la parte relativa a : GESTIONE STRUTTURE e ALLOGGI
+  <a href="RiepilogoStruttureGUI.jsp">riepilogoStruttre</a>
+   <a href="Interface/VisAlloggiStruttureGUI.jsp">riepilogoAlloggiStruttura</a>
+   <a href="PrenotazioniStrutturaGUI.jsp">Prenotazioni Struttura</a>
+  <a href="InserisciStrutturaGUI.jsp">Inserisci Struttura</a>
+  <a href="ModificaStrutturaGUI.jsp">Modifica Struttura</a>
+  <a href="InserisciAlloggioGUI.jsp">Inserisci Alloggio</a>
+  <a href="ModificaAlloggioGUI.jsp">Modifica Alloggio</a>
+  <a href = "VisDatiSistemaGUI.jsp">Visualizza dati sistema</a>
+  <a href = "loginUtenteGUI.jsp">Login utente</a>
+  <a href = "loginHostGUI.jsp">Login host</a>
+  <a href = "registrazioneUtenteGUI.jsp">Registrazione utente</a>
+  <a href = "areaUtenteGUI.jsp">Area utente</a>-->
+
+  <script>
+    function apriSceltaLogin(){
+
+      let flag = false;
+
+      <%
+        if(utente == null && host == null){
+      %>
+      flag = true;
+      <%}%>
+
+      if(flag){
+        document.getElementById("divSceltaLogin").style.display = "block";
+      }
+    }
+
+    document.addEventListener("keydown", function (event){
+      if(event.key === "Escape"){
+        document.getElementById("divSceltaLogin").style.display = "none";
+      }
+    });
+
+    function reindirizzaUtente(){
+      window.location.href = 'loginUtenteGUI.jsp';
+    }
+
+    function reindirizzaHost(){
+      window.location.href = 'loginHostGUI.jsp';
+    }
+
+    function reindirizzaAdmin(){
+      window.location.href = 'loginAdmin.jsp';
+    }
+  </script>
+
 </body>
 </html>

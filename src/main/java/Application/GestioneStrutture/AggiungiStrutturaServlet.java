@@ -13,6 +13,7 @@ import jakarta.servlet.http.Part;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "AggiungiStrutturaServlet", value = "/aggiungiStrutturaServlet")
 public class AggiungiStrutturaServlet extends HttpServlet {
@@ -74,7 +75,11 @@ public class AggiungiStrutturaServlet extends HttpServlet {
 
         // inseriamo la struttura nel DB
         gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
+
         strutturaFacade.aggiungiStruttura(host, nomeStruttura, via, citta, numCivico, descrizione, urlImmagine);
+
+        List<Struttura> strutture = strutturaFacade.visualizzaStrutture(host);
+        req.setAttribute("listaStrutture", strutture);
 
         // passo il controllo alla jsp che mostrerà il riepilogo delle strutture
         RequestDispatcher dispatcher = req.getRequestDispatcher("Interface/RiepilogoStruttureGUI.jsp");

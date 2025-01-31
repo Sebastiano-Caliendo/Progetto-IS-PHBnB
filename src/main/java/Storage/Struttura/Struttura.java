@@ -15,7 +15,7 @@ public class Struttura {
     private String urlImmagine;
 
     public Struttura() {
-
+        this.numAlloggi = 0;
     }
 
     public Struttura(int idStruttura, Host host, String nomeStruttura, String via, String numCivico, String citta, String descrizione, String urlImmagine) {

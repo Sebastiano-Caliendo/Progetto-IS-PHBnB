@@ -1,5 +1,5 @@
 body {
-    margin: 0;
+    margin: 0 !important;
     padding: 0;
 }
 
@@ -16,23 +16,23 @@ body {
     display: flex;
     flex-direction: column;
     background-color: rgba(255, 255, 255, 0.9);
-    width: 25%;
+    width: 30%;
     height: 75%;
     border: 1px solid black;
     border-radius: 25px;
     margin: auto;
 }
 
-#emailLabel, #pwdLabel, #vecchiaPasswordLabel, #nuovaPasswordLabel, #confermaPasswordLabel, #nomeLabel, #cognomeLabel, #cittaLabel, #numCivicoLabel, #viaLabel, #dataNascitaLabel, #recapitoTelefonicoLabel, #parModificaDati {
+/*#emailLabel, #pwdLabel, #vecchiaPasswordLabel, #nuovaPasswordLabel, #confermaPasswordLabel, #nomeLabel, #cognomeLabel, #cittaLabel, #numCivicoLabel, #viaLabel, #dataNascitaLabel, #recapitoTelefonicoLabel, #parModificaDati {
     font-weight: bold;
     font-size: 16pt;
-}
+}*/
 
-#email, #vecchiaPassword, #nuovaPassword, #confermaPassword, #nome, #cognome, #citta, #numCivico, #via, #dataNascita, #recapitoTelefonico {
+/*#email, #vecchiaPassword, #nuovaPassword, #confermaPassword, #nome, #cognome, #citta, #numCivico, #via, #dataNascita, #recapitoTelefonico {
     text-align: center;
     width: 150px;
     height: 35px;
-}
+}*/
 
 #submitButtom {
     width: 150px;
@@ -51,19 +51,76 @@ body {
     text-align: center;
 }
 
+/*.buttonModifica {
+    height: 20%;
+}*/
+
 #divForm {
+    height: 80%;
+    width: 100%;
     display: flex;
     flex-direction: column;
+    row-gap: 20px;
+}
+
+form{
+    align-content: center;
+    height: 100%;
+}
+
+label{
+    width: 50%;
+}
+
+input{
+    height: 30px;
+    text-align: center;
+    width: 49%;
+    margin-right: 1%;
 }
 
 .formElements {
-    width: 400px;
-    margin: 10px auto 10px auto;
+    width: 100%;
+    /*margin: 10px auto 10px auto;*/
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
 }
 
 #parModificaDati, #formModificaDati {
     text-align: center;
+}
+
+#parModificaDati {
+    margin-top: 3%;
+}
+
+@media only screen and (max-width: 950px){
+    #divModificaDati {
+        width: 40%;
+    }
+}
+
+@media only screen and (max-width: 700px){
+    #divModificaDati {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 600px){
+    #divModificaDati {
+        width: 60%;
+    }
+}
+
+@media only screen and (max-width: 400px){
+    #divModificaDati {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 350px){
+    #divModificaDati {
+        width: 85%;
+    }
 }

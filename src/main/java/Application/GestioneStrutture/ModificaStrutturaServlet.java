@@ -15,6 +15,7 @@ import jakarta.servlet.http.Part;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 @WebServlet(name = "ModificaStrutturaServlet", value = "/modificaStrutturaServlet")
 public class ModificaStrutturaServlet extends HttpServlet {
@@ -43,7 +44,7 @@ public class ModificaStrutturaServlet extends HttpServlet {
         String nomeStruttura = req.getParameter("nomeStruttura");
         String via = req.getParameter("via");
         String citta = req.getParameter("citta");
-        String numCivico = req.getParameter("numAlloggi");
+        String numCivico = req.getParameter("numCivico");
         String descrizione = req.getParameter("descrizione");
         //String urlImmagine = req.getParameter("urlImmagine");
 
@@ -82,6 +83,9 @@ public class ModificaStrutturaServlet extends HttpServlet {
         // elimino la vecchia struttura dal DB ed inserisco la struttura modificata
         gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
         strutturaFacade.modificaStruttura(host, nomeStruttura, via, citta, numCivico, descrizione, urlImmagine, oldIdStruttura);
+
+        List<Struttura> strutture = strutturaFacade.visualizzaStrutture(host);
+        req.setAttribute("listaStrutture", strutture);
 
         // ritorno alla jsp che mi fa vedere tutti gli alloggi della struttura
         RequestDispatcher dispatcher = req.getRequestDispatcher("Interface/RiepilogoStruttureGUI.jsp");

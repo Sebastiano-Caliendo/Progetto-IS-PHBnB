@@ -231,6 +231,42 @@ input {
 a.logoHref {text-decoration: none; color: var(--color-primary);}
 p {overflow-wrap : normal;}
 
+/* div scelta */
+#divSceltaLogin {
+    position: fixed;
+    height: 15%;
+    width: 40%;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid var(--color-primary);
+    border-radius: 25px;
+}
+
+#divSceltaLogin p{
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#formSceltaLogin {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    width: 90%;
+}
+
+.divSceltaLogin {
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    height: 20%;
+}
+
 @media only screen and (max-width: 850px) {
     .imgIndex {
         display: flex;

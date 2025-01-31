@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
             flag = autenticazioneFacade.login(email, password, tipo);
 
             if(flag) //URL DA CAMBIARE
-                address = "riepilogoStruttureServlet";
+                address = "Interface/areaHostGUI.jsp";
             else
                 address = "Interface/loginHostGUI.jsp?error=1";
         } else if(tipo.equals("admin")){

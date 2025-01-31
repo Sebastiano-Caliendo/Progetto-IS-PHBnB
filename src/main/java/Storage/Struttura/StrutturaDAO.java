@@ -170,6 +170,7 @@ public class StrutturaDAO {
     }
 
     public void doUpdate(Struttura struttura, int idStruttura) {
+        System.out.println("sto modificando id numero = " +idStruttura);
         try (Connection con = Connessione.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
                     "UPDATE struttura SET fk_host=?, nome_struttura=?, via=?, numero_civico=?, citta=?, numero_alloggi=?, descrizione=?, url_immagine=? WHERE id_struttura=?");
@@ -177,7 +178,7 @@ public class StrutturaDAO {
             ps.setString(1, struttura.getHost().getEmail());
             ps.setString(2, struttura.getNomeStruttura());
             ps.setString(3, struttura.getVia());
-            ps.setString(4, String.valueOf(struttura.getNumCivico()));
+            ps.setString(4, struttura.getNumCivico());
             ps.setString(5, struttura.getCitta());
             ps.setInt(6, struttura.getNumAlloggi());
             ps.setString(7, struttura.getDescrizione());

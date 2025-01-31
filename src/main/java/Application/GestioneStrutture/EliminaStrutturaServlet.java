@@ -1,6 +1,7 @@
 package Application.GestioneStrutture;
 
 import Application.GestioneAlloggi.gestioneAlloggioFacade;
+import Storage.Host.Host;
 import Storage.Struttura.Struttura;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -10,6 +11,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.List;
+
 @WebServlet(name = "EliminaStrutturaServlet", value = "/eliminaStrutturaServlet")
 public class EliminaStrutturaServlet extends HttpServlet {
     @Override
@@ -22,6 +25,9 @@ public class EliminaStrutturaServlet extends HttpServlet {
         // elimino la struttura dal DB
         gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
         strutturaFacade.eliminaStruttura(idStruttura);
+
+        List<Struttura> strutture = strutturaFacade.visualizzaStrutture(((Host) req.getSession().getAttribute("host")));
+        req.setAttribute("listaStrutture", strutture);
 
         // passo il controllo alla jsp ModificaAlloggio
         RequestDispatcher dispatcher = req.getRequestDispatcher("Interface/RiepilogoStruttureGUI.jsp");

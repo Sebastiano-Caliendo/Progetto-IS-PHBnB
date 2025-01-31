@@ -60,8 +60,18 @@ public class gestioneStrutturaFacade {
     public int modificaStruttura(Host host, String nomeStruttura, String via, String citta, String numCivico, String descrizione, String urlImmagine, String idStruttura) {
         try {
             StrutturaDAO strutturaDAO = new StrutturaDAO();
-            strutturaDAO.doDelete(validator.validateInt(idStruttura));
-            return aggiungiStruttura(host, nomeStruttura, via, citta, numCivico, descrizione, urlImmagine);
+            Struttura struttura = new Struttura();
+            struttura.setHost(host);
+            struttura.setDescrizione(validator.validateDescrizione(descrizione));
+            struttura.setNumCivico(validator.validateNumeroCivico(numCivico));
+            struttura.setNomeStruttura(validator.validateNomeStruttura(nomeStruttura));
+            struttura.setCitta(validator.validateCittaVia(citta));
+            struttura.setVia(validator.validateCittaVia(via));
+            struttura.setUrlImmagine(urlImmagine);
+            strutturaDAO.doUpdate(struttura, validator.validateInt(idStruttura));
+            /*strutturaDAO.doDelete(validator.validateInt(idStruttura));
+            aggiungiStruttura(host, nomeStruttura, via, citta, numCivico, descrizione, urlImmagine);*/
+            return 1;
         } catch (RuntimeException e) {
             return 0;
         }

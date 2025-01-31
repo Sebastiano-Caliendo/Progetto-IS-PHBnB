@@ -25,6 +25,7 @@
 body {
     margin-bottom: 10vh;
     overflow-x: hidden ;  /* nascondi tutto ciò che supera il 100vw */
+    /*overflow-y: hidden;*/
 }
 
 form input[type = submit] {

@@ -34,13 +34,24 @@
     <%@ include file="../WEB-INF/moduli/headerDopoAccesso.jsp"%>
 
     <%
-        Utente u = (Utente) request.getSession().getAttribute("utente");
+        String servlet = "";
+        String jsp = "";
+        if(callByServlet == 0) { // chiamata da jsp
+            servlet = "../";
+            jsp = "";
+        }
+        else  {  // chiamata da servlet
+            servlet = "";
+            jsp = "Interface/";
+        }
+
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
     %>
 
     <div id="mainContainer">
         <div id="leftContainer">
             <div id="divAreaAccount"><a href="" id="linkAreaAccount" class="normal-small-text">Area account</a></div>
-            <div id="divPrenotazioni"><a href="../visualizzaPrenotazioni" id="linkPrenotazioni" class="normal-small-text">Storico prenotazioni</a></div>
+            <div id="divPrenotazioni"><a href="<%= servlet %>visualizzaPrenotazioni" id="linkPrenotazioni" class="normal-small-text">Storico prenotazioni</a></div>
         </div>
         <div id="rightContainer">
             <div id="topContainer">
@@ -48,42 +59,42 @@
             </div>
 
             <div id="midContainer">
-                <div id="divDatiUtente">
+                <div id="divDatiUtente" class="normal-small-text">
                     <%
-                        if(u != null) {
+                        if(utente != null) {
                     %>
 
                             <div class="divDati">
                                 <p class="parDati"><b>Email</b></p>
-                                <p class="parDati"><%=u.getEmail()%></p>
+                                <p class="parDati"><%=utente.getEmail()%></p>
                             </div>
                             <div class="divDati">
                                 <p class="parDati"><b>Nome</b></p>
-                                <p class="parDati"><%=u.getNome()%></p>
+                                <p class="parDati"><%=utente.getNome()%></p>
                             </div>
                             <div class="divDati">
                                 <p class="parDati"><b>Cognome</b></p>
-                                <p class="parDati"><%=u.getCognome()%></p>
+                                <p class="parDati"><%=utente.getCognome()%></p>
                             </div>
                             <div class="divDati">
                                 <p class="parDati"><b>Città</b></p>
-                                <p class="parDati"><%=u.getCitta()%></p>
+                                <p class="parDati"><%=utente.getCitta()%></p>
                             </div>
                             <div class="divDati">
                                 <p class="parDati"><b>Numero civico</b></p>
-                                <p class="parDati"><%=u.getNumeroCivico()%></p>
+                                <p class="parDati"><%=utente.getNumeroCivico()%></p>
                             </div>
                             <div class="divDati">
                                 <p class="parDati"><b>Via</b></p>
-                                <p class="parDati"><%=u.getVia()%></p>
+                                <p class="parDati"><%=utente.getVia()%></p>
                             </div>
                             <div class="divDati">
                                 <p class="parDati"><b>Data nascita</b></p>
-                                <p class="parDati"><%=u.getDataNascita()%></p>
+                                <p class="parDati"><%=utente.getDataNascita()%></p>
                             </div>
                             <div class="divDati" id="ultimo">
                                 <p class="parDati"><b>Recapito telefonico</b></p>
-                                <p class="parDati"><%=u.getRecapitoTelefonico()%></p>
+                                <p class="parDati"><%=utente.getRecapitoTelefonico()%></p>
                             </div>
 
                     <%
@@ -93,7 +104,7 @@
             </div>
 
             <div id="bottomContainer">
-                <a href="modificaDatiUtenteGUI.jsp" id="linkModificaDati" class="normal-text"><b>Modifica dati account ></b></a>
+                <a href="<%= jsp %>modificaDatiUtenteGUI.jsp" id="linkModificaDati" class="normal-text"><b>Modifica dati account ></b></a>
             </div>
         </div>
     </div>

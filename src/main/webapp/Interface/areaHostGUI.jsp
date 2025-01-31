@@ -1,4 +1,5 @@
 <%@ page import="Storage.Host.Host" %>
+<%@ page import="Storage.Utente.Utente" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -9,6 +10,21 @@
         String isCallByServlet = (String) request.getAttribute("callByServlet");
         if(isCallByServlet != null && isCallByServlet.equalsIgnoreCase("yes"))
             callByServlet = 1;
+
+        //Utente utente = (Utente) session.getAttribute("utente");
+        Host host = (Host) session.getAttribute("host");
+        //Utente admin = (Utente) session.getAttribute("admin");
+
+        String servlet = "";
+        String jsp = "";
+        if(callByServlet == 0) { // chiamata da jsp
+            servlet = "../";
+            jsp = "";
+        }
+        else  {  // chiamata da servlet
+            servlet = "";
+            jsp = "Interface/";
+        }
     %>
 
     <meta charset="UTF-8">
@@ -33,14 +49,11 @@
 <body>
 <%@ include file="../WEB-INF/moduli/headerDopoAccesso.jsp"%>
 
-<%
-    Host h = (Host) request.getSession().getAttribute("host");
-%>
 
 <div id="mainContainer">
     <div id="leftContainer">
-        <div id="divAreaAccount"><a href="" id="linkAreaAccount" class="normal-small-text">Area account</a></div>
-        <div id="divPrenotazioni"><a href="../riepilogoStruttureServlet" id="linkPrenotazioni" class="normal-small-text">Riepilogo Strutture</a></div>
+        <div id="divAreaAccount"><a href="<%= jsp %>modificaDatiHost.jsp" id="linkAreaAccount" class="normal-small-text">Area Host</a></div>
+        <div id="divPrenotazioni"><a href="<%= servlet %>riepilogoStruttureServlet" id="linkPrenotazioni" class="normal-small-text">Riepilogo Strutture</a></div>
     </div>
     <div id="rightContainer">
         <div id="topContainer">
@@ -48,30 +61,30 @@
         </div>
 
         <div id="midContainer">
-            <div id="divDatiUtente">
+            <div id="divDatiUtente" class="normal-small-text">
                 <%
                     if(h != null) {
                 %>
 
                 <div class="divDati">
                     <p class="parDati"><b>Email</b></p>
-                    <p class="parDati"><%=h.getEmail()%></p>
+                    <p class="parDati"><%=host.getEmail()%></p>
                 </div>
                 <div class="divDati">
                     <p class="parDati"><b>Nome</b></p>
-                    <p class="parDati"><%=h.getNome()%></p>
+                    <p class="parDati"><%=host.getNome()%></p>
                 </div>
                 <div class="divDati">
                     <p class="parDati"><b>Cognome</b></p>
-                    <p class="parDati"><%=h.getCognome()%></p>
+                    <p class="parDati"><%=host.getCognome()%></p>
                 </div>
                 <div class="divDati">
                     <p class="parDati"><b>Data nascita</b></p>
-                    <p class="parDati"><%=h.getDataNascita()%></p>
+                    <p class="parDati"><%=host.getDataNascita()%></p>
                 </div>
                 <div class="divDati" id="ultimo">
                     <p class="parDati"><b>Recapito telefonico</b></p>
-                    <p class="parDati"><%=h.getRecapitoTelefonico()%></p>
+                    <p class="parDati"><%=host.getRecapitoTelefonico()%></p>
                 </div>
 
                 <%
@@ -81,7 +94,7 @@
         </div>
 
         <div id="bottomContainer">
-            <a href="modificaDatiUtenteGUI.jsp" id="linkModificaDati" class="normal-text"><b>Modifica dati account ></b></a>
+            <a href="<%= jsp %>modificaDatiHostGUI.jsp" id="linkModificaDati" class="normal-text"><b>Modifica dati account ></b></a>
         </div>
     </div>
 </div>

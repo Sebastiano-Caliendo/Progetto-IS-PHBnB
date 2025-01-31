@@ -22,6 +22,12 @@ body {
     margin: auto 200px auto auto;
 }
 
+@media only screen and (max-width: 750px){
+    #divLogin {
+        margin: auto;
+    }
+}
+
 #divRegistrazione {
     display: flex;
     flex-direction: column;
