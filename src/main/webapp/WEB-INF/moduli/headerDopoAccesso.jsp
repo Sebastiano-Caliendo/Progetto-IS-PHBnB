@@ -29,7 +29,7 @@
                     <%}else if(h != null) {%>
                         <a href="<%=header%>areaHostGUI.jsp" id="linkAreaUtente" class="normal-small-text">Area Host</a>
                     <%}else if(a != null) {%>
-                        <a href="<%=header%>areaAdminGUI.jsp" id="linkAreaUtente" class="normal-small-text">Area Admin</a>
+                        <a href="<%=header%>indexAdmin.jsp" id="linkAreaUtente" class="normal-small-text">Area Admin</a>
                     <% }%>
                 </div>
                 <div class="dropdownElem">
