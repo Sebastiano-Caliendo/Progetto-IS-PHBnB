@@ -13,8 +13,8 @@
       callByServlet = 1;
 
     Utente utente = (Utente) session.getAttribute("utente");
-    Host host = (Host) session.getAttribute("host");
     Utente admin = (Utente) session.getAttribute("admin");
+    Host host = (Host) session.getAttribute("host");
 
     boolean loggato = false;
     if(utente == null && host == null && admin == null)

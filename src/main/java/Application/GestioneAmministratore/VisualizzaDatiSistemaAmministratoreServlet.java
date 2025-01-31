@@ -23,7 +23,7 @@ public class VisualizzaDatiSistemaAmministratoreServlet extends HttpServlet {
         GestioneAmministratoreFacade facade = new GestioneAmministratoreFacade();
 
         req.setAttribute("callByServlet", "yes");
-        req.getSession().setAttribute("admin", 1);
+
         List<Alloggio> alloggi = facade.visualizzaDatiSistemaAlloggio();
         List<Host> hosts = facade.visualizzaDatiSistemaHost();
         List<Prenotazione> prenotazioni = facade.visualizzaDatiSistemaPrenotazione();
@@ -32,7 +32,7 @@ public class VisualizzaDatiSistemaAmministratoreServlet extends HttpServlet {
         List<Utente> utenti = facade.visualizzaDatiSistemaUtente();
 
         req.setAttribute("alloggi", alloggi);
-        req.setAttribute("hosts", hosts);
+        req.setAttribute("proprietari", hosts);
         req.setAttribute("prenotazioni", prenotazioni);
         req.setAttribute("recensioni", recensioni);
         req.setAttribute("strutture", strutture);

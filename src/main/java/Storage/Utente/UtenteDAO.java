@@ -44,7 +44,7 @@ public class UtenteDAO {
                 u.setVia(rs.getString(7));
                 u.setDataNascita(rs.getDate(8).toLocalDate());
                 u.setRecapitoTelefonico(rs.getString(9));
-                u.setAdmin(false);
+                u.setAdmin(rs.getBoolean(10));
 
                 return u;
             }

@@ -24,7 +24,7 @@ public class VisualizzaRecensioniRicevuteServlet extends HttpServlet {
 
         // ottengo il nome della struttura
         gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
-        String nomeStruttura = strutturaFacade.returnStruttura(idStruttura).getNomeStruttura();
+        String nomeStruttura = strutturaFacade.returnStruttura(String.valueOf(idStruttura)).getNomeStruttura();
 
         List<Recensione> recensioniStruttura = new ArrayList<>();
 

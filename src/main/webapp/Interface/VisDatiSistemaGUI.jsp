@@ -158,9 +158,6 @@
         <td><input type = "submit" value = "Cancella" class = "buttonDati" style = "width: 75px" formaction = "cancellazioneDatiSistemaStrutturaServlet"></form></td>
     </tr>
     <%
-        HostDAO hostDAO = new HostDAO();
-        Host h = hostDAO.doRetrieveById(s.getHost().getEmail());
-        session.setAttribute("host", h);
         }%>
 </table>
 </div>
@@ -212,7 +209,7 @@
         <th>Recapito Telefonico</th>
     </tr>
     <%
-        List<Host> hosts = (List<Host>) request.getAttribute("hosts");
+        List<Host> hosts = (List<Host>) request.getAttribute("proprietari");
 
         for(Host h: hosts){
     %>

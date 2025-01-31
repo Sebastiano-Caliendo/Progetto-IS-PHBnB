@@ -50,6 +50,8 @@ public class LoginServlet extends HttpServlet {
                 address = "Interface/indexAdmin.jsp";
             else
                 address = "Interface/loginHostGUI.jsp?error=1";
+
+            System.out.println("Admin" + req.getSession().getAttribute("admin").toString());
         }
 
         resp.sendRedirect(address);
