@@ -142,16 +142,16 @@ public class RecensioneDAO {
     public void doSave(Recensione recensione) {
         try (Connection con = Connessione.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO recensioni (fk_utente, descrizione, votorecensione, datarecensione, fk_codiceprenotazione, fk_numeroalloggio, fk_codicestruttura) VALUES(?,?,?,?,?,?,?)",
+                    "INSERT INTO recensioni (fk_utente, descrizione, votorecensione, data_recensione, fk_numeroalloggio, fk_codicestruttura, fk_codiceprenotazione) VALUES (?,?,?,?,?,?,?)",
                     Statement.RETURN_GENERATED_KEYS);
 
             ps.setString(1, recensione.getUtente().getEmail());
             ps.setString(2, recensione.getDescrizione());
             ps.setInt(3, recensione.getVotoRecensione());
             ps.setDate(4, Date.valueOf(recensione.getDataRecensione()));
-            ps.setInt(5, recensione.getPrenotazione().getCodicePrenotazione());
-            ps.setInt(6, recensione.getAlloggio().getNumeroAlloggio());
-            ps.setInt(7, recensione.getAlloggio().getStruttura().getIdStruttura());
+            ps.setInt(5, recensione.getAlloggio().getNumeroAlloggio());
+            ps.setInt(6, recensione.getAlloggio().getStruttura().getIdStruttura());
+            ps.setInt(7, recensione.getPrenotazione().getCodicePrenotazione());
 
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
@@ -159,6 +159,22 @@ public class RecensioneDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public List<Integer> codiciPrenotazioniRecensite(Utente utente) {
+        List<Integer> list = new ArrayList<>();
+        try (Connection con = Connessione.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("select recensioni.fk_codiceprenotazione from recensioni where recensioni.fk_utente = ?");
+            ps.setString(1, utente.getEmail());
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                list.add(rs.getInt(1));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
     }
 
     public List<Recensione> doRetrieveAll() {

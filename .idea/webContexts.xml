@@ -7,8 +7,10 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Interface/VisAlloggiStruttureGUI.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Interface" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Interface/alloggiPrenotabiliGUI.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Interface" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Interface/areaHostGUI.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Interface" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/Interface/areaUtenteGUI.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Interface" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Interface/dettagliAlloggioGUI.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Interface" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Interface/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Interface" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/Interface/inserisciRecensioneGUI.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Interface" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Interface/modificaDatiHost.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Interface" />
       </map>
     </option>

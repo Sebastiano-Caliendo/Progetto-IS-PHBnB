@@ -18,6 +18,8 @@ public class ModificaDatiPersonaliUtenteServlet extends HttpServlet {
 
         resp.setContentType("text/html");
 
+        req.setAttribute("callByServlet", "yes");
+
         String email = req.getParameter("email");
         String nome = req.getParameter("nome");
         String cognome = req.getParameter("cognome");
@@ -36,7 +38,7 @@ public class ModificaDatiPersonaliUtenteServlet extends HttpServlet {
         if(autenticazioneFacade.modificaDatiPersonaliUtente(u, email, nome, cognome, nuovaPassword, citta, numeroCivico, via, recapitoTelefonico)) {
             address = "Interface/areaUtenteGUI.jsp";
         } else {
-            address = "Interface/areaUtenteGUI.jsp?error=1";
+            address = "Interface/modificaDatiUtenteGUI.jsp?error=1";
         }
 
         resp.sendRedirect(address);

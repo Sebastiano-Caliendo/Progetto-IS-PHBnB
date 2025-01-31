@@ -24,6 +24,8 @@ public class RegistrazioneHostServlet extends HttpServlet {
 
         resp.setContentType("text/html");
 
+        req.setAttribute("callByServlet", "yes");
+
         String email = req.getParameter("email");
         String nome = req.getParameter("nome");
         String cognome = req.getParameter("cognome");

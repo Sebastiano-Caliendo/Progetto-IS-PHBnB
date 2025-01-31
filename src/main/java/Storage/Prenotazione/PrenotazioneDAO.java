@@ -71,6 +71,41 @@ public class PrenotazioneDAO {
         }
     }
 
+   /*public List<Prenotazione> doRetrievePrenotazioniRecensite(Utente utente){
+        List<Prenotazione> list = new ArrayList<>();
+
+        try (Connection con = Connessione.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("select distinct * from (prenotazione join utente on prenotazione.fk_utente = utente.email) join " +
+                            "occupa on prenotazione.codice_prenotazione = occupa.fk_prenotazione where occupa.fk_alloggio = ? and occupa.fk_strutturaAlloggio = ?");
+
+            ps.setInt(1, alloggio.getNumeroAlloggio());
+            ps.setInt(2, alloggio.getStruttura().getIdStruttura());
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Prenotazione p = new Prenotazione();
+                Utente utente = new Utente(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password_"), rs.getString("citta"), rs.getString("numero_civico"), rs.getString("via"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"), rs.getBoolean("isAdmin"));
+
+                p.setCodicePrenotazione(rs.getInt("codice_prenotazione"));
+                p.setUtente(utente);
+                p.setCheckIn(rs.getDate("check_in").toLocalDate());
+                p.setCheckOut(rs.getDate("check_out").toLocalDate());
+                p.setNumeroPersone(rs.getInt("numero_persone"));
+                p.setNumeroCartaCredito(rs.getString("numero_carta"));
+                p.setDataScadenzaCarta(rs.getDate("data_scadenza_carta").toLocalDate());
+                p.setCviCarta(rs.getString("cvi_carta"));
+
+                list.add(p);
+            }
+
+            return list;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }*/
+
     public List<Prenotazione> doRetrievePrenotazioniByAlloggio(Alloggio alloggio) {
         List<Prenotazione> list = new ArrayList<>();
 

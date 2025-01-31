@@ -19,6 +19,8 @@ public class ModificaDatiPersonaliHostServlet extends HttpServlet {
 
         resp.setContentType("text/html");
 
+        req.setAttribute("callByServlet", "yes");
+
         String email = req.getParameter("email");
         String nome = req.getParameter("nome");
         String cognome = req.getParameter("cognome");
@@ -34,7 +36,7 @@ public class ModificaDatiPersonaliHostServlet extends HttpServlet {
         if(autenticazioneFacade.modificaDatiPersonaliHost(h, email, nome, cognome, password, recapitoTelefonico)) {
             address = "Interface/areaHostGUI.jsp";
         } else {
-            address = "Interface/areaHostGUI.jsp?error=1";
+            address = "Interface/modificaDatiHostGUI.jsp?error=1";
         }
 
         resp.sendRedirect(address);

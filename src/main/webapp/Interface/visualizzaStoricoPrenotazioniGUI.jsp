@@ -2,6 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.time.LocalDate" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="Storage.Utente.Utente" %>
 <html>
 <head>
     <title>Storico prenotazioni</title>
@@ -11,6 +12,17 @@
         String isCallByServlet = (String) request.getAttribute("callByServlet");
         if(isCallByServlet != null && isCallByServlet.equalsIgnoreCase("yes"))
             callByServlet = 1;
+
+        String servlet = "";
+        String jsp = "";
+        if(callByServlet == 0) { // chiamata da jsp
+            servlet = "../";
+            jsp = "";
+        }
+        else  {  // chiamata da servlet
+            servlet = "";
+            jsp = "Interface/";
+        }
     %>
 
     <meta charset="UTF-8">
@@ -32,17 +44,18 @@
     <% } %>
 
 </head>
-<body>
+<body style="overflow-y: auto; height: 100%;">
 
 <%@ include file="../WEB-INF/moduli/headerDopoAccesso.jsp"%>
 
 <%
     List<Occupa> prenotazioni = (List<Occupa>) request.getAttribute("prenotazioni");
+    List<Integer> prenotazioniRecensite = (List<Integer>) request.getAttribute("codiciPrenotazioniRecensite");
 %>
 
 <div id="mainContainer">
     <div id="leftContainer">
-        <div id="divAreaAccount"><a href="Interface/areaUtenteGUI.jsp" id="linkAreaAccount" class="normal-small-text">Area account</a></div>
+        <div id="divAreaAccount"><a href="<%= jsp %>areaUtenteGUI.jsp" id="linkAreaAccount" class="normal-small-text">Area account</a></div>
         <div id="divPrenotazioni"><a href="" id="linkPrenotazioni" class="normal-small-text">Storico prenotazioni</a></div>
     </div>
     <div id="rightContainer">
@@ -66,7 +79,7 @@
                                 <p class="parDatiPr small-text"><b>Costo: </b><%=pr.getCostoPrenotazione()%> €</p>
                             </div>
                             <div class="divImg"><img src="<%=pr.getAlloggio().getStruttura().getUrlImmagine()%>" alt="img struttura" class="imgStruttura"></div>
-                            <div class="divButtons">
+                            <div class="divButtons ">
                                 <%
 
                                     LocalDate dataAttuale = LocalDate.now();
@@ -76,8 +89,8 @@
                                         <a href="#" class="buttons" onclick="confermaCancellazione(<%=pr.getPrenotazione().getCodicePrenotazione()%>)">Elimina</a>
                                     <%}%>
 
-                                    <%if(dataAttuale.isAfter(pr.getPrenotazione().getCheckOut())) {%>
-                                        <a href="" class="buttons">Recensisci</a>
+                                    <%if(dataAttuale.isAfter(pr.getPrenotazione().getCheckOut()) && !prenotazioniRecensite.contains(pr.getPrenotazione().getCodicePrenotazione())) {%>
+                                        <a href="<%= jsp %>inserisciRecensioneGUI.jsp?codicePrenotazione=<%=pr.getPrenotazione().getCodicePrenotazione()%>&idStruttura=<%=pr.getAlloggio().getStruttura().getIdStruttura()%>&numeroAlloggio=<%=pr.getAlloggio().getNumeroAlloggio()%>" class="buttons">Recensisci</a>
                                     <%}
                                         i++;
                                     %>
@@ -89,7 +102,7 @@
 </div>
 
 <div id="divModificaPrenotazione" style="display: none">
-    <form id="formModificaPrenotazione" action="modificaPrenotazione">
+    <form id="formModificaPrenotazione" action="<%= servlet %>modificaPrenotazione">
         <div class="divModPrenotazione small-text">
             <b>Check-in</b>
         </div>

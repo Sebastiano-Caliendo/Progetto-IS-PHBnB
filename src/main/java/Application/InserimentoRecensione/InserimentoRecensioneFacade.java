@@ -29,6 +29,7 @@ public class InserimentoRecensioneFacade {
             PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
             Recensione recensione = new Recensione();
 
+
             recensione.setUtente((Utente) session.getAttribute("utente"));
             recensione.setDescrizione(validator.validateDescrizione(descrizione));
             recensione.setVotoRecensione(validator.validateInt(votoRecensione));
@@ -59,6 +60,11 @@ public class InserimentoRecensioneFacade {
             recensioneDAO.doUpdate(recensione, idRecensione);
         }
     }*/
+
+    public List<Integer> visualizzaRecensioniUtente(Utente utente){
+        RecensioneDAO recensioneDAO = new RecensioneDAO();
+        return recensioneDAO.codiciPrenotazioniRecensite(utente);
+    }
 
     public boolean eliminaRecensione(HttpSession session, String idRecensione){
 

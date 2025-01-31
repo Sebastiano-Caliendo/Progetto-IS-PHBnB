@@ -1,5 +1,6 @@
 package Application.PrenotazioneAlloggio;
 
+import Application.InserimentoRecensione.InserimentoRecensioneFacade;
 import Storage.Occupa.Occupa;
 import Storage.Prenotazione.Prenotazione;
 import Storage.Utente.Utente;
@@ -24,11 +25,17 @@ public class VisualizzaPrenotazioniServlet extends HttpServlet {
         Utente u = (Utente) req.getSession().getAttribute("utente");
 
         PrenotazioneAlloggioFacade prenotazioneAlloggioFacade = new PrenotazioneAlloggioFacade();
+        InserimentoRecensioneFacade inserimentoRecensioneFacade = new InserimentoRecensioneFacade();
 
         List<Occupa> prenotazioni = prenotazioneAlloggioFacade.visualizzaPrenotazioni(u.getEmail());
+        List<Integer> codiciPrenotazione = inserimentoRecensioneFacade.visualizzaRecensioniUtente(u);
 
         if(!prenotazioni.isEmpty()) {
             req.setAttribute("prenotazioni", prenotazioni);
+        }
+
+        if(!codiciPrenotazione.isEmpty()) {
+            req.setAttribute("codiciPrenotazioniRecensite", codiciPrenotazione);
         }
 
         String address = "Interface/visualizzaStoricoPrenotazioniGUI.jsp";

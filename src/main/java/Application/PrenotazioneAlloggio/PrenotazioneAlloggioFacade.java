@@ -10,6 +10,7 @@ import Storage.Utente.Utente;
 import Utility.Validator;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 
@@ -38,17 +39,28 @@ public class PrenotazioneAlloggioFacade {
         return alloggio;
     }
 
-    public int finalizzaPrenotazione(Utente utente, String checkIn, String checkOut, String numPostiLetto, String fkUtente, String numAlloggio, String codStruttura, String costoPrenotazione, String numeroCarta, String dataScadenza, String cviCarta) {
+    public void finalizzaPrenotazione(Utente utente, String checkIn, String checkOut, String numPostiLetto, String fkUtente, String numAlloggio, String codStruttura, String numeroCarta, String dataScadenza, String cviCarta) {
+
+        LocalDate checkInDate = validator.validateData(checkIn);
+        LocalDate checkOutDate = validator.validateData(checkOut);
 
         PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
-        Prenotazione p = new Prenotazione(validator.validateData(checkIn), validator.validateData(checkOut), utente, validator.validateInt(numPostiLetto), validator.validateNumeroCarta(numeroCarta), validator.validateData(dataScadenza), validator.validateCVICarta(cviCarta));
-        prenotazioneDAO.doSave(p);
+        Prenotazione p = new Prenotazione(checkInDate, checkOutDate, utente, validator.validateInt(numPostiLetto), validator.validateNumeroCarta(numeroCarta), validator.validateData(dataScadenza), validator.validateCVICarta(cviCarta));
+        int codicePrenotazione = prenotazioneDAO.doSave(p);
+        p.setCodicePrenotazione(codicePrenotazione);
+
+        double costoPrenotazione = 0.0;
 
         AlloggioDAO alloggioDAO = new AlloggioDAO();
+        Alloggio alloggio = alloggioDAO.doRetrieveById(validator.validateInt(numAlloggio), validator.validateInt(codStruttura));
+
+        int diffGiorni = (int) ChronoUnit.DAYS.between(checkInDate, checkOutDate);
+
+        costoPrenotazione = diffGiorni * alloggio.getPrezzoNotte();
 
         OccupaDAO occupaDAO = new OccupaDAO();
-        Occupa o = new Occupa(p, alloggioDAO.doRetrieveById(validator.validateInt(numAlloggio), validator.validateInt(codStruttura)), validator.validateDouble(costoPrenotazione));
-        return occupaDAO.doSave(o);
+        Occupa o = new Occupa(p, alloggio , costoPrenotazione);
+        occupaDAO.doSave(o);
     }
 
     public void modificaPrenotazione(String checkIn, String checkOut, String numPostiLetto, String codPrenotazione) {

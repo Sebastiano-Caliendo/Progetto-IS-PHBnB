@@ -1,5 +1,6 @@
 package Application.PrenotazioneAlloggio;
 
+import Application.InserimentoRecensione.InserimentoRecensioneFacade;
 import Storage.Occupa.Occupa;
 import Storage.Utente.Utente;
 import jakarta.servlet.RequestDispatcher;
@@ -31,6 +32,13 @@ public class EliminaPrenotazioneServlet extends HttpServlet {
 
         if(!prenotazioni.isEmpty()) {
             req.setAttribute("prenotazioni", prenotazioni);
+        }
+
+        InserimentoRecensioneFacade inserimentoRecensioneFacade = new InserimentoRecensioneFacade();
+        List<Integer> codiciPrenotazione = inserimentoRecensioneFacade.visualizzaRecensioniUtente(u);
+
+        if(!codiciPrenotazione.isEmpty()) {
+            req.setAttribute("codiciPrenotazioniRecensite", codiciPrenotazione);
         }
 
         String address = "Interface/visualizzaStoricoPrenotazioniGUI.jsp";

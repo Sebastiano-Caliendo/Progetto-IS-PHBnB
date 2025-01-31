@@ -108,10 +108,10 @@ public class OccupaDAO {
         return occupa;
     }
 
-    public int doSave(Occupa occupa) {
+    public void doSave(Occupa occupa) {
         try (Connection con = Connessione.getConnection()) {
 
-            PreparedStatement ps = con.prepareStatement("insert into occupa (fk_prenotazione, fk_alloggio, fk_strutturaAlloggio, costo_prenotazione) values (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement("insert into occupa (fk_prenotazione, fk_alloggio, fk_strutturaAlloggio, costo_prenotazione) values (?, ?, ?, ?)");
 
             ps.setInt(1, occupa.getPrenotazione().getCodicePrenotazione());
             ps.setInt(2, occupa.getAlloggio().getNumeroAlloggio());
@@ -122,9 +122,9 @@ public class OccupaDAO {
                 throw new RuntimeException("INSERT error.");
             }
 
-            ResultSet rs = ps.getGeneratedKeys();
+            /*ResultSet rs = ps.getGeneratedKeys();
             rs.next();
-            return rs.getInt(1);
+            return rs.getInt(1);*/
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

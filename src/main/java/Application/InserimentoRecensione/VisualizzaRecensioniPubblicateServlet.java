@@ -22,6 +22,8 @@ public class VisualizzaRecensioniPubblicateServlet extends HttpServlet {
         Utente utente = (Utente) req.getSession().getAttribute("utente");
         String emailRecensore = utente.getEmail();
 
+        req.setAttribute("callByServlet", "yes");
+
         List<Recensione> recensioniUtente;
 
         InserimentoRecensioneFacade inserimentoRecensioneFacade = new InserimentoRecensioneFacade();

@@ -44,8 +44,6 @@
             servlet = "";
             jsp = "Interface/";
         }
-
-        Utente utente = (Utente) request.getSession().getAttribute("utente");
     %>
 
     <div id="mainContainer">
@@ -61,40 +59,40 @@
             <div id="midContainer">
                 <div id="divDatiUtente" class="normal-small-text">
                     <%
-                        if(utente != null) {
+                        if(u != null) {
                     %>
 
                             <div class="divDati">
                                 <p class="parDati"><b>Email</b></p>
-                                <p class="parDati"><%=utente.getEmail()%></p>
+                                <p class="parDati"><%=u.getEmail()%></p>
                             </div>
                             <div class="divDati">
                                 <p class="parDati"><b>Nome</b></p>
-                                <p class="parDati"><%=utente.getNome()%></p>
+                                <p class="parDati"><%=u.getNome()%></p>
                             </div>
                             <div class="divDati">
                                 <p class="parDati"><b>Cognome</b></p>
-                                <p class="parDati"><%=utente.getCognome()%></p>
+                                <p class="parDati"><%=u.getCognome()%></p>
                             </div>
                             <div class="divDati">
                                 <p class="parDati"><b>Città</b></p>
-                                <p class="parDati"><%=utente.getCitta()%></p>
+                                <p class="parDati"><%=u.getCitta()%></p>
                             </div>
                             <div class="divDati">
                                 <p class="parDati"><b>Numero civico</b></p>
-                                <p class="parDati"><%=utente.getNumeroCivico()%></p>
+                                <p class="parDati"><%=u.getNumeroCivico()%></p>
                             </div>
                             <div class="divDati">
                                 <p class="parDati"><b>Via</b></p>
-                                <p class="parDati"><%=utente.getVia()%></p>
+                                <p class="parDati"><%=u.getVia()%></p>
                             </div>
                             <div class="divDati">
                                 <p class="parDati"><b>Data nascita</b></p>
-                                <p class="parDati"><%=utente.getDataNascita()%></p>
+                                <p class="parDati"><%=u.getDataNascita()%></p>
                             </div>
                             <div class="divDati" id="ultimo">
                                 <p class="parDati"><b>Recapito telefonico</b></p>
-                                <p class="parDati"><%=utente.getRecapitoTelefonico()%></p>
+                                <p class="parDati"><%=u.getRecapitoTelefonico()%></p>
                             </div>
 
                     <%

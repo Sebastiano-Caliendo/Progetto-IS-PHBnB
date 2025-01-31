@@ -18,6 +18,8 @@ public class FinalizzaPrenotazioneServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        req.setAttribute("callByServlet", "yes");
+
         String nome = req.getParameter("nome");
         String cognome = req.getParameter("cognome");
         String dataCheckIn = req.getParameter("dataCheckIn");
@@ -25,7 +27,7 @@ public class FinalizzaPrenotazioneServlet extends HttpServlet {
         String numOspiti = req.getParameter("numOspiti");
         String numAlloggio = req.getParameter("numAlloggio");
         String codStruttura = req.getParameter("codStruttura");
-        String costoPrenotazione = req.getParameter("costoPrenotazione");
+        /*String costoPrenotazione = req.getParameter("costoPrenotazione");*/
         String numeroCarta = req.getParameter("numeroCarta");
         String dataScadenza = req.getParameter("dataScadenzaCarta");
         String cvvCarta = req.getParameter("cvvCarta");
@@ -33,7 +35,7 @@ public class FinalizzaPrenotazioneServlet extends HttpServlet {
         Utente u = (Utente) req.getSession().getAttribute("utente");
 
         PrenotazioneAlloggioFacade prenotazioneAlloggioFacade = new PrenotazioneAlloggioFacade();
-        prenotazioneAlloggioFacade.finalizzaPrenotazione(u, dataCheckIn, dataCheckOut, numOspiti, u.getEmail(), numAlloggio, codStruttura, costoPrenotazione, numeroCarta, dataScadenza, cvvCarta);
+        prenotazioneAlloggioFacade.finalizzaPrenotazione(u, dataCheckIn, dataCheckOut, numOspiti, u.getEmail(), numAlloggio, codStruttura, numeroCarta, dataScadenza, cvvCarta);
 
         String address = "Interface/visualizzaStoricoPrenotazioniGUI.jsp";
 
