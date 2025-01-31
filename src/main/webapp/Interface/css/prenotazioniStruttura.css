@@ -11,7 +11,7 @@ body {
     margin-top: 5%;
     text-align: center;
     margin-bottom: 2%;
-    width : 90%;
+    width : 93%;
     margin-left: 3%;
 }
 
@@ -31,7 +31,7 @@ body {
     justify-content: space-around;
     align-items: center;
     margin-left: 3%;
-    width : 90%;
+    width : 93%;
     background-color: white;
     height : 10%;
 }
@@ -55,7 +55,7 @@ body {
     margin-bottom: 1%;
     margin-left: 3%;
     position: absolute;
-    width: 90%;
+    width: 93%;
     border: 1px solid var(--color-primary);
     height: 1px; /* Spessore della linea */
     background-color: #b8860b; /* Colore gold scuro */

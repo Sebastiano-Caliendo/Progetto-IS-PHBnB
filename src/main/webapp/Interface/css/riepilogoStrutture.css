@@ -26,7 +26,7 @@ body {
 /* prima sezione utilizzata da più pagine */
 .sezione-aggiungi {
     align-items: center;
-    width : 90%;
+    width : 93%;
     margin: 2% 3% 2% 3%;
     display: flex;
     flex-direction: row;
@@ -60,7 +60,7 @@ body {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 90%;
+    width: 93%;
     height: 200px;
 }
 
@@ -255,6 +255,31 @@ body {
 }
 
 /* MEDIA QUERY */
+@media only screen and (max-width: 1700px) {
+
+    /* button andranno sotto la riga e non a destra */
+
+    #containerStrutture {
+        row-gap: 80px;
+    }
+
+    #containerAlloggi {
+        row-gap: 40px;
+    }
+
+    #containerRecensioni {
+        row-gap: 40px;
+    }
+
+    .buttonRigaStruttura {
+        column-gap: 20px;
+        margin-top: 250px;
+        margin-left: 0;
+        width: 90%;
+        flex-direction: row;
+
+    }
+}
 
 @media only screen and (max-width: 1350px) {
 
