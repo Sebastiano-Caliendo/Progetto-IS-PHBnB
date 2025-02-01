@@ -36,7 +36,7 @@
 
     <title>Visualizza Dati Sistema</title>
 </head>
-<body>
+<body style="overflow-x: auto;">
 <%@ include file ="../WEB-INF/moduli/header.jsp"%>
 <br>
     <div class = "big-text" id = "areaAdmin" style = "text-align: center">AREA AMMINISTRATORE</div>
@@ -53,7 +53,7 @@
             jsp = "Interface/";
         }
     %>
-<div class = "rigaStruttura">
+<div class = "rigaStruttura areaAdminRiga">
 <h1 style = "margin-right: auto; margin-left: auto;">Users</h1>
     <table style="margin-left: auto; margin-right: auto;">
     <tr>
@@ -94,7 +94,7 @@
 </div>
 <br>
 <br>
-<div class = "rigaStruttura">
+<div class = "rigaStruttura areaAdminRiga">
     <h1 style = "margin-right: auto; margin-left: auto;">Alloggi</h1>
 <table style = "margin-right: auto; margin-left: auto;">
     <tr>
@@ -127,7 +127,7 @@
 </div>
 <br>
 <br>
-<div class = "rigaStruttura">
+<div class = "rigaStruttura areaAdminRiga">
     <h1 style = "margin-right: auto; margin-left: auto;">Strutture</h1>
     <table style = "margin-right: auto; margin-left: auto;">
     <tr>
@@ -163,7 +163,7 @@
 </div>
     <br>
     <br>
-<div class = "rigaStruttura">
+<div class = "rigaStruttura areaAdminRiga">
     <h1 style = "margin-right: auto; margin-left: auto;">Recensioni</h1>
     <table style = "margin-right: auto; margin-left: auto;">
         <tr>
@@ -197,7 +197,7 @@
 </div>
 <br>
 <br>
-<div class = "rigaStruttura">
+<div class = "rigaStruttura areaAdminRiga">
     <h1 style = "margin-right: auto; margin-left: auto;">Hosts</h1>
     <table style = "margin-left: auto; margin-right: auto;">
     <tr>
@@ -228,7 +228,7 @@
 </div>
 <br>
 <br>
-<div class = "rigaStruttura">
+<div class = "rigaStruttura areaAdminRiga">
     <h1 style = "margin-right: auto; margin-left: auto;">Prenotazioni</h1>
     <table style = "margin-left: auto; margin-right: auto;">
         <tr>

@@ -51,7 +51,7 @@
 
 <div id="mainContainer">
     <div id="leftContainer">
-        <div id="divAreaAccount"><a href="<%= jsp %>modificaDatiHost.jsp" id="linkAreaAccount" class="normal-small-text">Area Host</a></div>
+        <div id="divAreaAccount"><a href="#" id="linkAreaAccount" class="normal-small-text">Area Host</a></div>
         <div id="divPrenotazioni"><a href="<%= servlet %>riepilogoStruttureServlet" id="linkPrenotazioni" class="normal-small-text">Riepilogo Strutture</a></div>
     </div>
     <div id="rightContainer">

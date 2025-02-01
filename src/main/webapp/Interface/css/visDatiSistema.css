@@ -47,6 +47,11 @@ th {
     color: var(--color-primary);
 }
 
+.areaAdminRiga {
+    background-color: var(--rosa-bianchissimo);
+    border: none;
+}
+
 table{
     border: 1px solid;
 }

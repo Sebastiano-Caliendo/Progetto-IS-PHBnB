@@ -78,16 +78,18 @@
                     for(Occupa pr : prenotazioni) {%>
 
                         <div class="divPrenotazione">
+                            <div class="primaRiga">
                             <div class="divInfoPrenotazione">
-                                <p class="parDatiPr normal-small-text"><b><%=pr.getAlloggio().getStruttura().getNomeStruttura()%></b></p>
-                                <p class="parDatiPr small-text"><b>Numero alloggio: </b><%=pr.getAlloggio().getNumeroAlloggio()%></p>
-                                <p class="parDatiPr small-text"><b>Check-in: </b><%=pr.getPrenotazione().getCheckIn()%></p>
-                                <p class="parDatiPr small-text"><b>Check-out: </b><%=pr.getPrenotazione().getCheckOut()%></p>
-                                <p class="parDatiPr small-text"><b>Numero persone: </b><%=pr.getPrenotazione().getNumeroPersone()%></p>
-                                <p class="parDatiPr small-text"><b>Costo: </b><%=pr.getCostoPrenotazione()%> €</p>
+                                    <p class="parDatiPr normal-small-text"><b><%=pr.getAlloggio().getStruttura().getNomeStruttura()%></b></p>
+                                    <p class="parDatiPr small-text"><b>Numero alloggio: </b><%=pr.getAlloggio().getNumeroAlloggio()%></p>
+                                    <p class="parDatiPr small-text"><b>Check-in: </b><%=pr.getPrenotazione().getCheckIn()%></p>
+                                    <p class="parDatiPr small-text"><b>Check-out: </b><%=pr.getPrenotazione().getCheckOut()%></p>
+                                    <p class="parDatiPr small-text"><b>Numero persone: </b><%=pr.getPrenotazione().getNumeroPersone()%></p>
+                                    <p class="parDatiPr small-text"><b>Costo: </b><%=pr.getCostoPrenotazione()%> €</p>
+                                </div>
+                                <div class="divImg"><img src="<%=pr.getAlloggio().getStruttura().getUrlImmagine()%>" alt="img struttura" class="imgStruttura"></div>
                             </div>
-                            <div class="divImg"><img src="<%=pr.getAlloggio().getStruttura().getUrlImmagine()%>" alt="img struttura" class="imgStruttura"></div>
-                            <div class="divButtons ">
+                            <div class="divButtons small-text">
                                 <%
 
                                     LocalDate dataAttuale = LocalDate.now();
@@ -134,7 +136,6 @@
         </div>
     </form>
 </div>
-
 
 <script>
     function confermaCancellazione(codPrenotazione) {

@@ -13,14 +13,14 @@
     <link rel = "stylesheet" href = "css/index.css">
     <link rel = "stylesheet" href = "css/style.css">
   </head>
-  <body>
+  <body style="height: 100%;">
   <div id="topContainer">
     <div id="divLogo">
       <p id="parLogo" class="mid-text">PHB&B</p>
     </div>
   </div>
   <form method = "post">
-    <div id = "bottomContainerConferma">
+    <div id = "bottomContainerConferma" style="align-content: center; height: 80%;">
       <p class = "small-text, parScrittaAdmin">Premi il pulsante per visualizzare i dati</p>
     <br>
     <input type = "submit" formaction="../visualizzaDatiSistemaAmministratoreServlet" value = "Conferma">

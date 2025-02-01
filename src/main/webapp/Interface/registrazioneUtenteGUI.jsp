@@ -5,7 +5,7 @@
 
     <link rel="stylesheet" href="css/loginRegistrazione.css">
 </head>
-<body>
+<body style="height: 150vh;">
     <%
         String error =  request.getParameter("error");
     %>

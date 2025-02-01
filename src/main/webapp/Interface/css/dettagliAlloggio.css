@@ -120,6 +120,72 @@
     border-radius: 25px;
 }
 
+@media only screen and (max-width: 1000px) {
+    #divConfermaPrenotazione {
+        width: 40%;
+    }
+
+    #linkPrenota {
+        width: 100px;
+    }
+
+    .divDatiPrenotazione button {
+        width: 100px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    #divConfermaPrenotazione {
+        width: 45%;
+    }
+
+    #linkPrenota {
+        width: 80px;
+    }
+
+    .divDatiPrenotazione button {
+        width: 80px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #divConfermaPrenotazione {
+        width: 50%;
+    }
+
+    #linkPrenota {
+        width: 60px;
+    }
+
+    .divDatiPrenotazione button {
+        width: 70px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    #divConfermaPrenotazione {
+        width: 65%;
+    }
+
+    #linkPrenota {
+        width: 40px;
+    }
+
+    .divDatiPrenotazione button {
+        width: 60px;
+    }
+}
+
+@media only screen and (max-width: 300px) {
+    #divConfermaPrenotazione {
+        width: 80%;
+    }
+
+    .divDatiPrenotazione button {
+        width: 50px;
+    }
+}
+
 #formConfermaPrenotazione {
     margin: auto;
     display: flex;
@@ -133,7 +199,7 @@
     justify-content: space-between;
     display: flex;
     flex-direction: row;
-    width: 90%;
+    width: 100%;
     height: 20%;
 }
 

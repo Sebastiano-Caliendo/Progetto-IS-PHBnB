@@ -1,4 +1,5 @@
-<%--
+<%@ page import="Storage.Utente.Utente" %>
+<%@ page import="Storage.Host.Host" %><%--
   Created by IntelliJ IDEA.
   User: ciril
   Date: 03/01/2025
@@ -18,6 +19,11 @@
                     String header = "Interface/";
                     if(callByServlet == 0)
                         header = "";
+
+                    Utente utente = (Utente) session.getAttribute("utente");
+                    Host host = (Host) session.getAttribute("host");
+                    Utente admin = (Utente) session.getAttribute("admin");
+
                 %>
                 <a href="<%= header %>index.jsp" title="home">PHB<span class="normal-text">&</span>B</a>
             </div>
@@ -36,7 +42,13 @@
                 </div>
                 <div class="dropdown">
                     <div class="dropdownElem">
+                        <% if(utente != null) { %>
+                        <a href="<%=header%>areaUtenteGUI.jsp" id="linkAreaUtente" class="normal-small-text">Area Utente</a>
+                        <%}else if(host != null) {%>
                         <a href="<%=header%>areaHostGUI.jsp" id="linkAreaUtente" class="normal-small-text">Area Host</a>
+                        <%}else if(admin != null) {%>
+                        <a href="<%=header%>indexAdmin.jsp" id="linkAreaUtente" class="normal-small-text">Area Admin</a>
+                        <% }%>
                     </div>
                     <div class="dropdownElem">
                         <a href="#" onclick="openWindow()" id="linkLogout" class="normal-small-text">Logout</a>

@@ -13,9 +13,33 @@ html, body {
 }
 
 #leftContainer {
-    height: inherit;
+    height: 100vh;
     width: 15%;
     border-right: 2px solid var(--color-primary);
+}
+
+@media only screen and (min-height: 100vh){
+    #leftContainer{
+        height: 150vh;
+    }
+}
+
+@media only screen and (min-height: 120vh){
+    #leftContainer{
+        height: 200vh;
+    }
+}
+
+@media only screen and (min-height: 150vh){
+    #leftContainer{
+        height: 250vh;
+    }
+}
+
+@media only screen and (min-height: 200vh){
+    #leftContainer{
+        height: 300vh;
+    }
 }
 
 #rightContainer {
@@ -101,10 +125,21 @@ html, body {
     border-bottom: none;
 }
 
-.divPrenotazione {
-    margin: 30px;
-    display: flex;
+.primaRiga {
+    height: 100%;
+    justify-content: space-evenly;
+    align-items: center;
     flex-direction: row;
+    display: flex;
+    width: 100%;
+}
+
+.divPrenotazione {
+    /*margin: 30px;*/
+    margin-top: 5%;
+    /*row-gap: 20px;
+    display: flex;
+    flex-direction: row;*/
     width: 60%;
     height: 20%;
     border: 1px solid var(--color-primary);
@@ -112,6 +147,7 @@ html, body {
 }
 
 #prContainer {
+    row-gap: 40px;
     align-items: center;
     height: 100%;
     display: flex;
@@ -119,7 +155,7 @@ html, body {
 }
 
 .divInfoPrenotazione {
-    padding-left: 25px;
+    /*padding-left: 25px;*/
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -138,11 +174,11 @@ html, body {
 }
 
 .divButtons {
-    border-left: 1px solid var(--color-primary);
-    height: 100%;
-    width: 20%;
+    /*margin-top: 5%;*/
+    height: 50%;
+    width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-content: center;
     text-align: center;
 }
@@ -154,6 +190,14 @@ html, body {
 }
 
 #formModificaPrenotazione {
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    border-radius: 20px;
+    border: 1px solid var(--color-primary);
+    z-index: 999;
+    background-color: white;
     display: flex;
     flex-direction: column;
 }
@@ -166,9 +210,51 @@ input {
     width: 60%;
 }
 
-@media only screen and (max-width: 1000px){
+@media only screen and (max-width: 1200px) {
+    .buttons {
+        width: 100px !important;
+    }
+}
+
+@media only screen and(max-width: 850px) {
+    .divButtons {
+        margin-top: 7.5%;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
     #divDatiUtente {
         width: 50% !important;
+    }
+
+    /*.divImg {
+        margin-left: 40%;
+        justify-content: end;
+        align-items: center;
+        display: flex;
+        height: 7%;
+        width: 30%;
+        border-left: none;
+        position: absolute;
+    }
+
+    .imgStruttura {
+        height: 100%;
+        width: 20%;
+    }
+
+    .divPrenotazione {
+        flex-direction: column;
+    }
+
+    .divButtons {
+        width: 100%;
+        border-left: none;
+        flex-direction: row;
+    }*/
+
+    .buttons {
+        width: 80px !important;
     }
 }
 
@@ -176,10 +262,18 @@ input {
     #divDatiUtente {
         width: 70% !important;
     }
+
+    .buttons {
+        width: 60px !important;
+    }
 }
 
 @media only screen and (max-width: 400px){
     #divDatiUtente {
         width: 80% !important;
+    }
+
+    .buttons {
+        width: 40px !important;
     }
 }

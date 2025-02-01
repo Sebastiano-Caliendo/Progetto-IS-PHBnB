@@ -64,6 +64,11 @@ body {
     height: 200px;
 }
 
+.rigaStruttura #areaAdminRiga{
+    background-color: var(--rosa-bianchissimo);
+    border: none;
+}
+
 /* nome della struttura nella rigaStruttura */
 .title {
     margin-top: 1%;

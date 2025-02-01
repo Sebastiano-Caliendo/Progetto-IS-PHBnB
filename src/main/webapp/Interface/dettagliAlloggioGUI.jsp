@@ -168,7 +168,7 @@
                 </div>
             </div>
 
-            <div id="divConfermaPrenotazione" style="display: none">
+            <div id="divConfermaPrenotazione" class="normal-small-text" style="display: none">
                 <form id="formConfermaPrenotazione" action="<%= servlet %>finalizzaPrenotazione" method="POST">
                     <div class="divDatiPrenotazione">
                         <p><b>Nome</b></p>
