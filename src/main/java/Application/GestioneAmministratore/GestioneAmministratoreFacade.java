@@ -1,6 +1,6 @@
 package Application.GestioneAmministratore;
 
-import Application.GestioneStrutture.gestioneStrutturaFacade;
+import Application.GestioneStrutture.GestioneStrutturaFacade;
 import Storage.Alloggio.Alloggio;
 import Storage.Alloggio.AlloggioDAO;
 import Storage.Host.Host;
@@ -14,15 +14,7 @@ import Storage.Struttura.StrutturaDAO;
 import Storage.Utente.Utente;
 import Storage.Utente.UtenteDAO;
 import Utility.Validator;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
-import java.io.IOException;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class GestioneAmministratoreFacade {
@@ -85,7 +77,7 @@ public class GestioneAmministratoreFacade {
     public boolean modificaDatiSistemaAlloggio(String numeroAlloggio, String prezzoNotte, String postiLetto, String tipoAlloggio , String descrizione, String oldNumAlloggio, String fkStruttura){
 
         try {
-            gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
+            GestioneStrutturaFacade strutturaFacade = new GestioneStrutturaFacade();
             Alloggio alloggio = new Alloggio();
 
             alloggio.setNumeroAlloggio(validator.validateInt(numeroAlloggio));

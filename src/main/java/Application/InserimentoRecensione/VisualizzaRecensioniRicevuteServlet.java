@@ -1,6 +1,6 @@
 package Application.InserimentoRecensione;
 
-import Application.GestioneStrutture.gestioneStrutturaFacade;
+import Application.GestioneStrutture.GestioneStrutturaFacade;
 import Storage.Recensione.Recensione;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -23,7 +23,7 @@ public class VisualizzaRecensioniRicevuteServlet extends HttpServlet {
         String idStruttura = req.getParameter("idStruttura");
 
         // ottengo il nome della struttura
-        gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
+        GestioneStrutturaFacade strutturaFacade = new GestioneStrutturaFacade();
         String nomeStruttura = strutturaFacade.returnStruttura(String.valueOf(idStruttura)).getNomeStruttura();
 
         List<Recensione> recensioniStruttura = new ArrayList<>();

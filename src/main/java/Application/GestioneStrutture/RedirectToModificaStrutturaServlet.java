@@ -1,7 +1,6 @@
 package Application.GestioneStrutture;
 
 import Storage.Struttura.Struttura;
-import Storage.Struttura.StrutturaDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -24,7 +23,7 @@ public class RedirectToModificaStrutturaServlet extends HttpServlet {
         String idStruttura = req.getParameter("idStruttura");
 
         //prendiamo i dati della struttura che vogliamo modificare
-        gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
+        GestioneStrutturaFacade strutturaFacade = new GestioneStrutturaFacade();
         Struttura struttura = strutturaFacade.returnStruttura(idStruttura);
 
         //System.out.println("url Immagine in redirect : " + struttura.getUrlImmagine());

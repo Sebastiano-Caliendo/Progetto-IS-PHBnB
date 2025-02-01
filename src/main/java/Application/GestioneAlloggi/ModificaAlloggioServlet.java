@@ -1,6 +1,6 @@
 package Application.GestioneAlloggi;
 
-import Application.GestioneStrutture.gestioneStrutturaFacade;
+import Application.GestioneStrutture.GestioneStrutturaFacade;
 import Storage.Alloggio.Alloggio;
 import Storage.Struttura.Struttura;
 import jakarta.servlet.RequestDispatcher;
@@ -76,7 +76,7 @@ public class ModificaAlloggioServlet extends HttpServlet {
         alloggioFacade.modificaAlloggio(numeroAlloggio, idStruttura, prezzoNotte, numPostiLetto, tipoAlloggio, descrizione, urlImmagine, oldNumeroAlloggio, idStruttura);
 
         // prendiamo la struttura che servirà alla jsp VisAlloggiStruttureGUI.jsp
-        gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
+        GestioneStrutturaFacade strutturaFacade = new GestioneStrutturaFacade();
         Struttura struttura = strutturaFacade.returnStruttura(idStruttura);
 
         req.setAttribute("struttura", struttura);

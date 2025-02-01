@@ -1,7 +1,6 @@
 package Application.GestioneStrutture;
 
 import Storage.Alloggio.Alloggio;
-import Storage.Alloggio.AlloggioDAO;
 import Storage.Host.Host;
 import Storage.Occupa.Occupa;
 import Storage.Occupa.OccupaDAO;
@@ -10,17 +9,15 @@ import Storage.Prenotazione.PrenotazioneDAO;
 import Storage.Struttura.Struttura;
 import Storage.Struttura.StrutturaDAO;
 import Utility.Validator;
-import jakarta.servlet.http.HttpSession;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class gestioneStrutturaFacade {
+public class GestioneStrutturaFacade {
 
     private Validator validator;
 
-    public gestioneStrutturaFacade() {
+    public GestioneStrutturaFacade() {
         this.validator = new Validator();
     }
 
@@ -45,13 +42,9 @@ public class gestioneStrutturaFacade {
             struttura.setUrlImmagine(urlImmagine);
 
             StrutturaDAO strutturaDAO = new StrutturaDAO();
+            strutturaDAO.doSave(struttura);
 
-            int idStruttura = strutturaDAO.doSave(struttura);
-
-            if(idStruttura == struttura.getIdStruttura())
-                return 1;
-            else
-                return 0;
+            return 1;
         } catch (RuntimeException e) {
             return 0;
         }

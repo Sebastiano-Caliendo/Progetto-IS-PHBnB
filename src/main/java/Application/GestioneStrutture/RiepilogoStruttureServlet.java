@@ -1,7 +1,6 @@
 package Application.GestioneStrutture;
 
 import Storage.Host.Host;
-import Storage.Host.HostDAO;
 import Storage.Struttura.Struttura;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -27,7 +26,7 @@ public class RiepilogoStruttureServlet extends HttpServlet {
         Host host = hostDAO.doRetrieveById("pintocarlo09@gmail.com");*/
 
         // cerco tutte le strutture associate all'host
-        gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
+        GestioneStrutturaFacade strutturaFacade = new GestioneStrutturaFacade();
         List<Struttura> strutture = strutturaFacade.visualizzaStrutture(host);
 
         // inserisco le strutture nella richiesta, serviranno alla prossima jsp che dovrà mostrate tutte le strutture

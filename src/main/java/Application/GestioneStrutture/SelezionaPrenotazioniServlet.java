@@ -11,9 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 @WebServlet(value = "/selezionaPrenotazioniServlet")
 public class SelezionaPrenotazioniServlet extends HttpServlet {
@@ -23,7 +21,7 @@ public class SelezionaPrenotazioniServlet extends HttpServlet {
         // prendo l'id della struttura, in modo da poter prendere tutte le prenotazioni associate a quella struttura
         String idStruttura = req.getParameter("idStruttura");
 
-        gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
+        GestioneStrutturaFacade strutturaFacade = new GestioneStrutturaFacade();
 
         // prendo la struttura
         Struttura struttura = strutturaFacade.returnStruttura(idStruttura);

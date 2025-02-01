@@ -128,13 +128,12 @@ public class StrutturaDAO {
     public int doSave(Struttura struttura) {
         try (Connection con = Connessione.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "insert into struttura (fk_host, nome_struttura, via, numero_civico, citta, numero_alloggi, descrizione, url_immagine) " +
-                            "values (?, ?, ?, ?, ?, ?, ?, ?)",
-                    Statement.RETURN_GENERATED_KEYS);
+                    "insert into struttura (fk_host, nome_struttura, via, numero_civico, citta, numero_alloggi, descrizione, url_immagine) values (?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+
             ps.setString(1, struttura.getHost().getEmail());
             ps.setString(2, struttura.getNomeStruttura());
             ps.setString(3, struttura.getVia());
-            ps.setString(4, String.valueOf(struttura.getNumCivico()));
+            ps.setString(4, struttura.getNumCivico());
             ps.setString(5, struttura.getCitta());
             ps.setInt(6, struttura.getNumAlloggi());
             ps.setString(7, struttura.getDescrizione());
@@ -143,9 +142,11 @@ public class StrutturaDAO {
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
             }
+
             ResultSet rs = ps.getGeneratedKeys();
             rs.next();
             return rs.getInt(1);
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

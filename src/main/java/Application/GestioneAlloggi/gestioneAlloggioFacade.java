@@ -1,13 +1,12 @@
 package Application.GestioneAlloggi;
 
-import Application.GestioneStrutture.gestioneStrutturaFacade;
+import Application.GestioneStrutture.GestioneStrutturaFacade;
 import Storage.Alloggio.Alloggio;
 import Storage.Alloggio.AlloggioDAO;
 import Storage.Struttura.Struttura;
 import Storage.Struttura.StrutturaDAO;
 import Utility.Validator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class gestioneAlloggioFacade {
@@ -32,7 +31,7 @@ public class gestioneAlloggioFacade {
     public int aggiungiAlloggio(String numeroAlloggio, String idStruttura, String prezzoNotte, String numPostiLetto, String tipoAlloggio, String descrizione, String urlImmagine) {
 
         try {
-            gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
+            GestioneStrutturaFacade strutturaFacade = new GestioneStrutturaFacade();
             // creo l'alloggio che voglio inserire
             Alloggio alloggio = new Alloggio(validator.validateInt(numeroAlloggio),
                                             strutturaFacade.returnStruttura(idStruttura),
@@ -66,7 +65,7 @@ public class gestioneAlloggioFacade {
     public int modificaAlloggio(String numeroAlloggio, String idStruttura, String prezzoNotte, String numPostiLetto, String tipoAlloggio, String descrizione, String urlImmagine, String oldNumeroAlloggio, String fkStruttura) {
 
         try {
-            gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
+            GestioneStrutturaFacade strutturaFacade = new GestioneStrutturaFacade();
             Alloggio alloggio = new Alloggio(validator.validateInt(numeroAlloggio),
                                             strutturaFacade.returnStruttura(idStruttura),
                                             validator.validateDouble(prezzoNotte),
@@ -100,7 +99,7 @@ public class gestioneAlloggioFacade {
         try {
             AlloggioDAO alloggioDAO = new AlloggioDAO();
 
-            gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
+            GestioneStrutturaFacade strutturaFacade = new GestioneStrutturaFacade();
             Struttura struttura = strutturaFacade.returnStruttura(fkStruttura);
             StrutturaDAO strutturaDAO = new StrutturaDAO();
             strutturaDAO.doUpdateNumeroAlloggi((((struttura.getNumAlloggi())-1)), validator.validateInt(fkStruttura));

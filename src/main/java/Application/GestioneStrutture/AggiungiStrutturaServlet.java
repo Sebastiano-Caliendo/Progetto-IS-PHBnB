@@ -1,7 +1,6 @@
 package Application.GestioneStrutture;
 
 import Storage.Host.Host;
-import Storage.Host.HostDAO;
 import Storage.Struttura.Struttura;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -11,7 +10,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -74,7 +72,7 @@ public class AggiungiStrutturaServlet extends HttpServlet {
         //prodottoDAO.setUrlImmagineByid(p.getId_Prodotto(), p.getUrlImmagine());
 
         // inseriamo la struttura nel DB
-        gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
+        GestioneStrutturaFacade strutturaFacade = new GestioneStrutturaFacade();
 
         strutturaFacade.aggiungiStruttura(host, nomeStruttura, via, citta, numCivico, descrizione, urlImmagine);
 

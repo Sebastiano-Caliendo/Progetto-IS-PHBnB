@@ -1,6 +1,5 @@
 package Application.GestioneStrutture;
 
-import Application.GestioneAlloggi.gestioneAlloggioFacade;
 import Storage.Host.Host;
 import Storage.Struttura.Struttura;
 import jakarta.servlet.RequestDispatcher;
@@ -23,7 +22,7 @@ public class EliminaStrutturaServlet extends HttpServlet {
         String idStruttura = req.getParameter("idStruttura");
 
         // elimino la struttura dal DB
-        gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
+        GestioneStrutturaFacade strutturaFacade = new GestioneStrutturaFacade();
         strutturaFacade.eliminaStruttura(idStruttura);
 
         List<Struttura> strutture = strutturaFacade.visualizzaStrutture(((Host) req.getSession().getAttribute("host")));

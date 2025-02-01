@@ -11,7 +11,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "SelezionaStrutturaServlet", value = "/selezionaStrutturaServlet")
@@ -24,7 +23,7 @@ public class SelezionaStrutturaServlet extends HttpServlet {
         // prendo l'id della struttura che voglio selezionare (voglio visualizzare i suoi alloggi)
         String idStruttura = req.getParameter("idStruttura");
 
-        gestioneStrutturaFacade strutturaFacade = new gestioneStrutturaFacade();
+        GestioneStrutturaFacade strutturaFacade = new GestioneStrutturaFacade();
         gestioneAlloggioFacade alloggioFacade = new gestioneAlloggioFacade();
 
         // prendo la struttura che voglio selezionare
