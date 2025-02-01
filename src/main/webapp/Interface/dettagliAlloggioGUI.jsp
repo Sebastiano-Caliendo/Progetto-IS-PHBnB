@@ -172,31 +172,31 @@
                 <form id="formConfermaPrenotazione" action="<%= servlet %>finalizzaPrenotazione" method="POST">
                     <div class="divDatiPrenotazione">
                         <p><b>Nome</b></p>
-                        <input type="text" name="nome" class="datiPrenotazione">
+                        <input type="text" name="nome" id="nome" class="datiPrenotazione" required>
                     </div>
                     <div class="divDatiPrenotazione">
                         <p><b>Cognome</b></p>
-                        <input type="text" name="cognome" class="datiPrenotazione">
+                        <input type="text" name="cognome" id="cognome" class="datiPrenotazione" required>
                     </div>
                     <div class="divDatiPrenotazione">
                         <p><b>Check-in</b></p>
-                        <input type="date" name="dataCheckIn" class="datiPrenotazione">
+                        <input type="date" name="dataCheckIn" id="checkInData" class="datiPrenotazione" value = "<%=request.getParameter("check-in")%>" required>
                     </div>
                     <div class="divDatiPrenotazione">
                         <p><b>Check-out</b></p>
-                        <input type="date" name="dataCheckOut" class="datiPrenotazione">
+                        <input type="date" name="dataCheckOut" id="checkOutData" class="datiPrenotazione" value = "<%=request.getParameter("check-out")%>" required>
                     </div>
                     <div class="divDatiPrenotazione">
                         <p><b>Numero carta</b></p>
-                        <input type="text" name="numeroCarta" class="datiPrenotazione">
+                        <input type="text" name="numeroCarta" id="numeroCarta" class="datiPrenotazione" minlength = "16" maxlength="16" required>
                     </div>
                     <div class="divDatiPrenotazione">
                         <p><b>Data scadenza</b></p>
-                        <input type="date" name="dataScadenzaCarta" class="datiPrenotazione">
+                        <input type="date" name="dataScadenzaCarta" id="dataScadenzaCarta" class="datiPrenotazione" required>
                     </div>
                     <div class="divDatiPrenotazione">
                         <p><b>CVV</b></p>
-                        <input type="text" name="cvvCarta" class="datiPrenotazione">
+                        <input type="text" name="cvvCarta" class="datiPrenotazione" minlength="3" maxlength="3" required>
                     </div>
                     <input type="hidden" value="<%=alloggio.getNumeroAlloggio()%>" name="numAlloggio">
                     <input type="hidden" value="<%=alloggio.getStruttura().getIdStruttura()%>" name="codStruttura">
@@ -204,7 +204,7 @@
                 </form>
 
                 <div class="divDatiPrenotazione">
-                    <input type="submit" form="formConfermaPrenotazione" class="buttons" value="Conferma">
+                    <input type="submit" form="formConfermaPrenotazione" class="buttons" value="Conferma" onsubmit="generatePDF(event)">
                     <button onclick="chiudiConferma()" class="buttons">Annulla</button>
                 </div>
             </div>
@@ -213,6 +213,35 @@
 
 
     <script>
+
+        function generatePDF(event) {
+            event.preventDefault();
+
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF();
+
+            const nome = document.getElementById('nome').value;
+            const cognome = document.getElementById('cognomeLabel').value;
+            const dataCheckIn = document.getElementById('dataCheckIn').value;
+            const dataCheckOut = document.getElementById('dataCheckOut').value;
+            const nCarta = document.getElementById('numeroCarta').value;
+            const scadenza = document.getElementById('dataScadenzaCarta').value;
+
+            pdf.setFont("helvetica", "bold");
+            pdf.setFontSize(16);
+            pdf.text(20, 10, "Scontrino elettronico");
+
+            pdf.setFont("times", "normal");
+            pdf.text(20, 20, `Nome: ` + nome);
+            pdf.text(20, 30, `Cognome: ` + cognome);
+            pdf.text(20, 40, `Data Check In: ` + dataCheckIn);
+            pdf.text(20, 50, `Data Check Out: ` + dataCheckOut);
+            pdf.text(20, 60, `Numero Carta: ` + nCarta);
+            pdf.text(20, 70, `Data di Scadenza: ` + scadenza);
+
+            pdf.save("scontrino.pdf");
+        }
+
         function apriConferma() {
 
             let flag = false;
