@@ -31,7 +31,7 @@ public class ModificaPrenotazioneServlet extends HttpServlet {
         Utente u = (Utente) req.getSession().getAttribute("utente");
 
         PrenotazioneAlloggioFacade prenotazioneAlloggioFacade = new PrenotazioneAlloggioFacade();
-        prenotazioneAlloggioFacade.modificaPrenotazione(dataCheckIn, dataCheckOut, numPostiLetto, codPrenotazione);
+        boolean flag = prenotazioneAlloggioFacade.modificaPrenotazione(dataCheckIn, dataCheckOut, numPostiLetto, codPrenotazione);
 
         List<Occupa> prenotazioni = prenotazioneAlloggioFacade.visualizzaPrenotazioni(u.getEmail());
 
@@ -47,7 +47,13 @@ public class ModificaPrenotazioneServlet extends HttpServlet {
             req.setAttribute("codiciPrenotazioniRecensite", codiciPrenotazione);
         }
 
-        String address = "Interface/visualizzaStoricoPrenotazioniGUI.jsp";
+        String address;
+
+        if(flag) {
+            address = "Interface/visualizzaStoricoPrenotazioniGUI.jsp";
+        } else {
+            address = "Interface/visualizzaStoricoPrenotazioniGUI.jsp?error=1";
+        }
 
         RequestDispatcher rd = req.getRequestDispatcher(address);
         rd.forward(req, resp);

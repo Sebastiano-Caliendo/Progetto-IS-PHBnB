@@ -27,7 +27,6 @@ public class FinalizzaPrenotazioneServlet extends HttpServlet {
         String numOspiti = req.getParameter("numOspiti");
         String numAlloggio = req.getParameter("numAlloggio");
         String codStruttura = req.getParameter("codStruttura");
-        /*String costoPrenotazione = req.getParameter("costoPrenotazione");*/
         String numeroCarta = req.getParameter("numeroCarta");
         String dataScadenza = req.getParameter("dataScadenzaCarta");
         String cvvCarta = req.getParameter("cvvCarta");
@@ -35,12 +34,17 @@ public class FinalizzaPrenotazioneServlet extends HttpServlet {
         Utente u = (Utente) req.getSession().getAttribute("utente");
 
         PrenotazioneAlloggioFacade prenotazioneAlloggioFacade = new PrenotazioneAlloggioFacade();
-        prenotazioneAlloggioFacade.finalizzaPrenotazione(u, dataCheckIn, dataCheckOut, numOspiti, u.getEmail(), numAlloggio, codStruttura, numeroCarta, dataScadenza, cvvCarta);
+        boolean flag = prenotazioneAlloggioFacade.finalizzaPrenotazione(u, nome, cognome, dataCheckIn, dataCheckOut, numOspiti, numAlloggio, codStruttura, numeroCarta, dataScadenza, cvvCarta);
 
-        String address = "Interface/visualizzaStoricoPrenotazioniGUI.jsp";
+        String address;
 
-        RequestDispatcher rd = req.getRequestDispatcher(address);
-        rd.forward(req, resp);
+        if(flag) {
+            address = "Interface/visualizzaStoricoPrenotazioniGUI.jsp";
+        } else {
+            address = "Interface/dettagliAlloggioGUI.jsp?error=1";
+        }
+
+        resp.sendRedirect(address);
     }
 
     @Override

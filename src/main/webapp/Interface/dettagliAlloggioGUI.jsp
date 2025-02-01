@@ -37,6 +37,8 @@
 
     <div id="topContainer">
         <%
+            String error = request.getParameter("error");
+
             Utente utente = (Utente) session.getAttribute("utente");
             Host host = (Host) session.getAttribute("host");
             Utente admin = (Utente) session.getAttribute("admin");
@@ -81,6 +83,11 @@
 
         <%
             }
+
+
+            if(error != null && error.equals("1")) { %>
+                <script>alert("Prenotazione non effettuata!")</script>
+            <%}
         %>
     </div>
 
@@ -93,11 +100,11 @@
             <div id="divFiltroDate">
                 <div id="divCheckIn">
                     <p class="small-text"><b>Check-in</b></p>
-                    <input form="formRicerca" type="date" name="dataCheckIn" style="width: 98%;" required>
+                    <input form="formRicerca" type="date" name="dataCheckIn" id="dataCheckIn" style="width: 98%;" required onchange="getNextDate()">
                 </div>
                 <div id="divCheckOut">
                     <p class="small-text"><b>Check-out</b></p>
-                    <input form="formRicerca" type="date" name="dataCheckOut" style="width: 98%;" required>
+                    <input form="formRicerca" type="date" name="dataCheckOut" id="dataCheckOut" style="width: 98%;" required>
                 </div>
             </div>
             <div id="divFiltroOspiti">
@@ -224,6 +231,24 @@
 
         function chiudiConferma() {
             document.getElementById("divConfermaPrenotazione").style.display = "none";
+        }
+
+        document.getElementById("dataCheckIn").setAttribute("min", getTodayDate());
+
+        function getNextDate() {
+            let date = document.getElementById("dataCheckIn").value;
+
+            let minDate = new Date(date);
+            minDate.setDate(minDate.getDate() + 1); // Aggiunge 1 giorno
+            document.getElementById("dataCheckOut").setAttribute("min", minDate.toISOString().split("T")[0]); // Restituisce la data in formato YYYY-MM-DD
+        }
+
+        function getTodayDate() {
+            let today = new Date();
+            let year = today.getFullYear();
+            let month = String(today.getMonth() + 1).padStart(2, '0'); // Mese da 1 a 12
+            let day = String(today.getDate()).padStart(2, '0'); // Giorno con due cifre
+            return year + "-" + month + "-" + day;
         }
     </script>
 </body>

@@ -9,6 +9,8 @@ import java.time.LocalDate;
 public class Prenotazione {
 
     private int codicePrenotazione;
+    private String nomeIntestatario;
+    private String cognomeIntestatario;
     private LocalDate checkIn;
     private LocalDate checkOut;
     private Utente utente;
@@ -20,7 +22,9 @@ public class Prenotazione {
     public Prenotazione() {
     }
 
-    public Prenotazione(LocalDate checkIn, LocalDate checkOut, Utente utente, int numeroPersone, String numeroCartaCredito, LocalDate dataScadenzaCarta, String cviCarta) {
+    public Prenotazione(String nomeIntestatario, String cognomeIntestatario, LocalDate checkIn, LocalDate checkOut, Utente utente, int numeroPersone, String numeroCartaCredito, LocalDate dataScadenzaCarta, String cviCarta) {
+        this.nomeIntestatario = nomeIntestatario;
+        this.cognomeIntestatario = cognomeIntestatario;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.utente = utente;
@@ -36,6 +40,22 @@ public class Prenotazione {
 
     public void setCodicePrenotazione(int codicePrenotazione) {
         this.codicePrenotazione = codicePrenotazione;
+    }
+
+    public String getNomeIntestatario() {
+        return nomeIntestatario;
+    }
+
+    public void setNomeIntestatario(String nomeIntestatario) {
+        this.nomeIntestatario = nomeIntestatario;
+    }
+
+    public String getCognomeIntestatario() {
+        return cognomeIntestatario;
+    }
+
+    public void setCognomeIntestatario(String cognomeIntestatario) {
+        this.cognomeIntestatario = cognomeIntestatario;
     }
 
     public LocalDate getCheckIn() {

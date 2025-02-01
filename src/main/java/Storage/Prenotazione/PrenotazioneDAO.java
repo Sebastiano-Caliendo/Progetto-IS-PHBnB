@@ -24,6 +24,8 @@ public class PrenotazioneDAO {
                 Utente utente = new Utente(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password_"), rs.getString("citta"), rs.getString("numero_civico"), rs.getString("via"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"), rs.getBoolean("isAdmin"));
 
                 p.setCodicePrenotazione(rs.getInt("codice_prenotazione"));
+                p.setNomeIntestatario(rs.getString("nomeIntestatario"));
+                p.setCognomeIntestatario(rs.getString("cognomeIntestatario"));
                 p.setCheckIn(rs.getDate("check_in").toLocalDate());
                 p.setCheckOut(rs.getDate("check_out").toLocalDate());
                 p.setUtente(utente);
@@ -55,6 +57,8 @@ public class PrenotazioneDAO {
                 Utente utente = new Utente(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password_"), rs.getString("citta"), rs.getString("numero_civico"), rs.getString("via"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"), rs.getBoolean("isAdmin"));
 
                 p.setCodicePrenotazione(rs.getInt("codice_prenotazione"));
+                p.setNomeIntestatario(rs.getString("nomeIntestatario"));
+                p.setCognomeIntestatario(rs.getString("cognomeIntestatario"));
                 p.setUtente(utente);
                 p.setCheckIn(rs.getDate("check_in").toLocalDate());
                 p.setCheckOut(rs.getDate("check_out").toLocalDate());
@@ -70,41 +74,6 @@ public class PrenotazioneDAO {
             throw new RuntimeException(e);
         }
     }
-
-   /*public List<Prenotazione> doRetrievePrenotazioniRecensite(Utente utente){
-        List<Prenotazione> list = new ArrayList<>();
-
-        try (Connection con = Connessione.getConnection()) {
-            PreparedStatement ps =
-                    con.prepareStatement("select distinct * from (prenotazione join utente on prenotazione.fk_utente = utente.email) join " +
-                            "occupa on prenotazione.codice_prenotazione = occupa.fk_prenotazione where occupa.fk_alloggio = ? and occupa.fk_strutturaAlloggio = ?");
-
-            ps.setInt(1, alloggio.getNumeroAlloggio());
-            ps.setInt(2, alloggio.getStruttura().getIdStruttura());
-
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                Prenotazione p = new Prenotazione();
-                Utente utente = new Utente(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password_"), rs.getString("citta"), rs.getString("numero_civico"), rs.getString("via"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"), rs.getBoolean("isAdmin"));
-
-                p.setCodicePrenotazione(rs.getInt("codice_prenotazione"));
-                p.setUtente(utente);
-                p.setCheckIn(rs.getDate("check_in").toLocalDate());
-                p.setCheckOut(rs.getDate("check_out").toLocalDate());
-                p.setNumeroPersone(rs.getInt("numero_persone"));
-                p.setNumeroCartaCredito(rs.getString("numero_carta"));
-                p.setDataScadenzaCarta(rs.getDate("data_scadenza_carta").toLocalDate());
-                p.setCviCarta(rs.getString("cvi_carta"));
-
-                list.add(p);
-            }
-
-            return list;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }*/
 
     public List<Prenotazione> doRetrievePrenotazioniByAlloggio(Alloggio alloggio) {
         List<Prenotazione> list = new ArrayList<>();
@@ -124,6 +93,8 @@ public class PrenotazioneDAO {
                 Utente utente = new Utente(rs.getString("email"), rs.getString("nome"), rs.getString("cognome"), rs.getString("password_"), rs.getString("citta"), rs.getString("numero_civico"), rs.getString("via"), rs.getDate("data_nascita").toLocalDate(), rs.getString("recapito_telefonico"), rs.getBoolean("isAdmin"));
 
                 p.setCodicePrenotazione(rs.getInt("codice_prenotazione"));
+                p.setNomeIntestatario(rs.getString("nomeIntestatario"));
+                p.setCognomeIntestatario(rs.getString("cognomeIntestatario"));
                 p.setUtente(utente);
                 p.setCheckIn(rs.getDate("check_in").toLocalDate());
                 p.setCheckOut(rs.getDate("check_out").toLocalDate());
@@ -144,15 +115,17 @@ public class PrenotazioneDAO {
     public int doSave(Prenotazione prenotazione) {
         try (Connection con = Connessione.getConnection()) {
 
-            PreparedStatement ps = con.prepareStatement("insert into prenotazione (check_in, check_out, fk_utente, numero_persone, numero_carta, data_scadenza_carta, cvi_carta) values (?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement("insert into prenotazione (nomeIntestatario, cognomeIntestatario, check_in, check_out, fk_utente, numero_persone, numero_carta, data_scadenza_carta, cvi_carta) values (?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 
-            ps.setDate(1, Date.valueOf(prenotazione.getCheckIn()));
-            ps.setDate(2, Date.valueOf(prenotazione.getCheckOut()));
-            ps.setString(3, prenotazione.getUtente().getEmail());
-            ps.setInt(4, prenotazione.getNumeroPersone());
-            ps.setString(5, prenotazione.getNumeroCartaCredito());
-            ps.setDate(6, Date.valueOf(prenotazione.getDataScadenzaCarta()));
-            ps.setString(7, prenotazione.getCviCarta());
+            ps.setString(1, prenotazione.getNomeIntestatario());
+            ps.setString(2, prenotazione.getCognomeIntestatario());
+            ps.setDate(3, Date.valueOf(prenotazione.getCheckIn()));
+            ps.setDate(4, Date.valueOf(prenotazione.getCheckOut()));
+            ps.setString(5, prenotazione.getUtente().getEmail());
+            ps.setInt(6, prenotazione.getNumeroPersone());
+            ps.setString(7, prenotazione.getNumeroCartaCredito());
+            ps.setDate(8, Date.valueOf(prenotazione.getDataScadenzaCarta()));
+            ps.setString(9, prenotazione.getCviCarta());
 
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");

@@ -8,6 +8,8 @@
     <title>Storico prenotazioni</title>
 
     <%
+        String error = request.getParameter("error");
+
         int callByServlet = 0;
         String isCallByServlet = (String) request.getAttribute("callByServlet");
         if(isCallByServlet != null && isCallByServlet.equalsIgnoreCase("yes"))
@@ -51,7 +53,13 @@
 <%
     List<Occupa> prenotazioni = (List<Occupa>) request.getAttribute("prenotazioni");
     List<Integer> prenotazioniRecensite = (List<Integer>) request.getAttribute("codiciPrenotazioniRecensite");
-%>
+
+    if(error != null && error.equals("1")) {%>
+        <script>alert("Prenotazione non modificata!")</script>
+    <%} else if(error != null && error.equals("2")) {%>
+        <script>alert("Prenotazione non eliminata!")</script>
+    <%}
+    %>
 
 <div id="mainContainer">
     <div id="leftContainer">
