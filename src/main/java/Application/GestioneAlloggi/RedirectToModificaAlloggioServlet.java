@@ -1,9 +1,6 @@
 package Application.GestioneAlloggi;
 
 import Storage.Alloggio.Alloggio;
-import Storage.Alloggio.AlloggioDAO;
-import Storage.Struttura.Struttura;
-import Storage.Struttura.StrutturaDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -26,7 +23,7 @@ public class RedirectToModificaAlloggioServlet extends HttpServlet {
         String fkStruttura = req.getParameter("idStruttura");
 
         //prendiamo i dati dell'alloggio che vogliamo modificare
-        gestioneAlloggioFacade alloggioFacade = new gestioneAlloggioFacade();
+        GestioneAlloggioFacade alloggioFacade = new GestioneAlloggioFacade();
         Alloggio alloggio = alloggioFacade.returnAlloggio(numeroAlloggio, fkStruttura);
 
         //aggiungiamo l'alloggio nella richiesta

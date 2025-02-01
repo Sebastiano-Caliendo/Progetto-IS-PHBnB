@@ -204,28 +204,31 @@
                 </form>
 
                 <div class="divDatiPrenotazione">
-                    <input type="submit" form="formConfermaPrenotazione" class="buttons" value="Conferma" onsubmit="generatePDF(event)">
+                    <button type="submit" class="buttons" onclick="handleConfirm()">Conferma</button>
                     <button onclick="chiudiConferma()" class="buttons">Annulla</button>
                 </div>
             </div>
 
     <%}%>
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
     <script>
 
-        function generatePDF(event) {
-            event.preventDefault();
+        async function handleConfirm(){
+            await generatePDF();
+            document.getElementById("formConfermaPrenotazione").submit();
+        }
 
+         async function generatePDF() {
             const { jsPDF } = window.jspdf;
             const pdf = new jsPDF();
 
-            const nome = document.getElementById('nome').value;
-            const cognome = document.getElementById('cognomeLabel').value;
-            const dataCheckIn = document.getElementById('dataCheckIn').value;
-            const dataCheckOut = document.getElementById('dataCheckOut').value;
-            const nCarta = document.getElementById('numeroCarta').value;
-            const scadenza = document.getElementById('dataScadenzaCarta').value;
+            const nome = document.getElementById("nome").value;
+            const cognome = document.getElementById("cognome").value;
+            const dataCheckIn = document.getElementById("dataCheckIn").value;
+            const dataCheckOut = document.getElementById("dataCheckOut").value;
+            const nCarta = document.getElementById("numeroCarta").value;
+            const scadenza = document.getElementById("dataScadenzaCarta").value;
 
             pdf.setFont("helvetica", "bold");
             pdf.setFontSize(16);
@@ -239,7 +242,7 @@
             pdf.text(20, 60, `Numero Carta: ` + nCarta);
             pdf.text(20, 70, `Data di Scadenza: ` + scadenza);
 
-            pdf.save("scontrino.pdf");
+            pdf.save('scontrino.pdf');
         }
 
         function apriConferma() {

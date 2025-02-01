@@ -65,7 +65,7 @@ public class AggiungiAlloggioServlet extends HttpServlet {
         //prodottoDAO.setUrlImmagineByid(p.getId_Prodotto(), p.getUrlImmagine());
 
         // inserisco l'alloggio nel DB
-        gestioneAlloggioFacade alloggioFacade = new gestioneAlloggioFacade();
+        GestioneAlloggioFacade alloggioFacade = new GestioneAlloggioFacade();
         alloggioFacade.aggiungiAlloggio(numeroAlloggio, idStruttura, prezzoNotte, numPostiLetto, tipoAlloggio, descrizione, urlImmagine);
 
         // prendiamo la struttura che servirà alla jsp VisAlloggiStruttureGUI.jsp
