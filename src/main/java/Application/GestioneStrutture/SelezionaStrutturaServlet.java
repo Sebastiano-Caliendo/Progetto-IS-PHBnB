@@ -1,6 +1,6 @@
 package Application.GestioneStrutture;
 
-import Application.GestioneAlloggi.gestioneAlloggioFacade;
+import Application.GestioneAlloggi.GestioneAlloggioFacade;
 import Storage.Alloggio.Alloggio;
 import Storage.Struttura.Struttura;
 import jakarta.servlet.RequestDispatcher;
@@ -24,7 +24,7 @@ public class SelezionaStrutturaServlet extends HttpServlet {
         String idStruttura = req.getParameter("idStruttura");
 
         GestioneStrutturaFacade strutturaFacade = new GestioneStrutturaFacade();
-        gestioneAlloggioFacade alloggioFacade = new gestioneAlloggioFacade();
+        GestioneAlloggioFacade alloggioFacade = new GestioneAlloggioFacade();
 
         // prendo la struttura che voglio selezionare
         Struttura struttura = strutturaFacade.returnStruttura(idStruttura);
