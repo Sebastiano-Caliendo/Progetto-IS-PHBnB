@@ -25,7 +25,7 @@ public class EliminaAlloggioServlet extends HttpServlet {
         String idStruttura = req.getParameter("idStruttura");
 
         // elimino l'alloggio dal DB
-        gestioneAlloggioFacade alloggioFacade = new gestioneAlloggioFacade();
+        GestioneAlloggioFacade alloggioFacade = new GestioneAlloggioFacade();
         alloggioFacade.eliminaAlloggio(numeroAlloggio, idStruttura);
 
         // prendiamo la struttura che servirà alla jsp VisAlloggiStruttureGUI.jsp

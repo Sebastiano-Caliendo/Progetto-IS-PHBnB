@@ -1,6 +1,5 @@
 package Application.GestioneStrutture;
 
-import Application.GestioneAlloggi.gestioneAlloggioFacade;
 import Storage.Host.Host;
 import Storage.Struttura.Struttura;
 import jakarta.servlet.RequestDispatcher;

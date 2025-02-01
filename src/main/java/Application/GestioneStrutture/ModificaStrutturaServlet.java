@@ -1,9 +1,6 @@
 package Application.GestioneStrutture;
 
-import Application.GestioneAlloggi.gestioneAlloggioFacade;
-import Storage.Alloggio.Alloggio;
 import Storage.Host.Host;
-import Storage.Host.HostDAO;
 import Storage.Struttura.Struttura;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -14,7 +11,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 
 @WebServlet(name = "ModificaStrutturaServlet", value = "/modificaStrutturaServlet")

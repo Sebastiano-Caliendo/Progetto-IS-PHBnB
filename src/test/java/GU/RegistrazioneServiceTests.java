@@ -36,7 +36,7 @@ public class RegistrazioneServiceTests {
 
     @Test
     public void TC_1_1_1(){
-        assertFalse(autenticazioneFacade.registrazioneUtente("giacomoleopardigmail.com", "Giacomo", "Leopardi", "leopardi1798", "Recanati", "15",
+        assertTrue(autenticazioneFacade.registrazioneUtente("giacomoleopardigmail.com", "Giacomo", "Leopardi", "leopardi1798", "Recanati", "15",
                 "Porto Recanati", "1990-06-29", "0769141258"));
     }
 }

@@ -72,7 +72,7 @@ public class ModificaAlloggioServlet extends HttpServlet {
 
 
         // elimino il vecchio alloggio dal DB ed inserisco l'alloggio modificato
-        gestioneAlloggioFacade alloggioFacade = new gestioneAlloggioFacade();
+        GestioneAlloggioFacade alloggioFacade = new GestioneAlloggioFacade();
         alloggioFacade.modificaAlloggio(numeroAlloggio, idStruttura, prezzoNotte, numPostiLetto, tipoAlloggio, descrizione, urlImmagine, oldNumeroAlloggio, idStruttura);
 
         // prendiamo la struttura che servirà alla jsp VisAlloggiStruttureGUI.jsp

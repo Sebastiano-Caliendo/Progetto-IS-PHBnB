@@ -7,14 +7,13 @@ import Storage.Struttura.Struttura;
 import Storage.Struttura.StrutturaDAO;
 import Utility.Validator;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class gestioneAlloggioFacade {
+public class GestioneAlloggioFacade {
 
     private Validator validator;
 
-    public gestioneAlloggioFacade() {
+    public GestioneAlloggioFacade() {
         this.validator = new Validator();
     }
 
@@ -50,8 +49,8 @@ public class gestioneAlloggioFacade {
 
 
             List<Integer> verifica = alloggioDAO.doSave(alloggio);
-            if(verifica.get(1) == alloggio.getNumeroAlloggio()){
-                if(verifica.get(2) == alloggio.getStruttura().getIdStruttura())
+            if(verifica.get(0) == alloggio.getNumeroAlloggio()){
+                if(verifica.get(1) == alloggio.getStruttura().getIdStruttura())
                     return 1;
                 else
                     return 0;
