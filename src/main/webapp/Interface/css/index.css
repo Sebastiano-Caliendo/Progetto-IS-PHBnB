@@ -13,6 +13,10 @@ body, html {
     border-bottom: 1px solid lightgray;
 }
 
+::-webkit-scrollbar{
+    display: none;
+}
+
 .descrizioneIndex {
     margin-left: 2%;
     align-content: center;

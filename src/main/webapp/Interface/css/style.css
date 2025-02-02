@@ -22,6 +22,10 @@
     overflow-wrap: break-word;
 }
 
+::-webkit-scrollbar{
+    display: none;
+}
+
 body {
     margin-bottom: 10vh;
     overflow-x: hidden ;  /* nascondi tutto ciò che supera il 100vw */
