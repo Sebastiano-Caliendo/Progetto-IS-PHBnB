@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"Application.Autenticazione"},{"l":"Application.GestioneAlloggi"},{"l":"Application.GestioneAmministratore"},{"l":"Application.GestioneStrutture"},{"l":"Application.InserimentoRecensione"},{"l":"Application.PrenotazioneAlloggio"},{"l":"Utility"}];updateSearchResults();
