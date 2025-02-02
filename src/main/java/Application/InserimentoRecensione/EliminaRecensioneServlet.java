@@ -19,7 +19,7 @@ public class EliminaRecensioneServlet extends HttpServlet {
         String idRecensione = req.getParameter("idRecensione"); // type = "hidden" nella jsp
 
         InserimentoRecensioneFacade inserimentoRecensioneFacade = new InserimentoRecensioneFacade();
-        inserimentoRecensioneFacade.eliminaRecensione(req.getSession(), idRecensione);
+        inserimentoRecensioneFacade.eliminaRecensione(idRecensione);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("Interface/VisDatiSistemaGUI.jsp");
         dispatcher.forward(req, resp);

@@ -13,7 +13,9 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-
+/*
+ * Classe che contiene tutti i metodi per effettuare la prenotazione di un alloggio
+ **/
 public class PrenotazioneAlloggioFacade {
 
     private Validator validator;
@@ -22,6 +24,16 @@ public class PrenotazioneAlloggioFacade {
         this.validator = new Validator();
     }
 
+    /*
+     * Gestisce la logica di visualizzazione di alloggi secondo i criteri specificati
+     *
+     * @param checkIn stringa che rappresenta la data di check-in
+     * @param checkOut stringa che rappresenta la data di check-out
+     * @param destinazione stringa che rappresenta la destinazione
+     * @param numPostiLetto stringa che rappresenta il numero di posti letto
+     *
+     * @returns restituisce una lista di alloggi
+     **/
     public List<Alloggio> visualizzaListaAlloggi(String checkIn, String checkOut, String destinazione, String numPostiLetto) {
 
         try {
@@ -34,6 +46,14 @@ public class PrenotazioneAlloggioFacade {
         }
     }
 
+    /*
+     * Gestisce la logica di visualizzazione dei dettagli di uno specifico alloggio
+     *
+     * @param numAlloggio stringa che rappresenta il numero dell'alloggio
+     * @param fkStruttura stringa che rappresenta l'id della struttura a cui appartiene l'alloggio
+     *
+     * @returns restituisce un alloggio
+     **/
     public Alloggio visualizzaDettagliAlloggio(String numAlloggio, String fkStruttura) {
 
         try {
@@ -47,7 +67,24 @@ public class PrenotazioneAlloggioFacade {
         }
     }
 
-    public boolean finalizzaPrenotazione(Utente utente,String nome, String cognome, String checkIn, String checkOut, String numPostiLetto, String numAlloggio, String codStruttura, String numeroCarta, String dataScadenza, String cviCarta) {
+    /*
+     * Gestisce la logica di finalizzazione di una prenotazione per uno specifico utente
+     *
+     * @param utente oggetto Utente che rappresenta l'utente che sta effettuando la prenotazione
+     * @param nome stringa che rappresenta il nome dell'intestatario della prenotazione
+     * @param cognome stringa che rappresenta il cognome dell'intestatario della prenotazione
+     * @param checkIn stringa che rappresenta la data di check-in
+     * @param checkOut stringa che rappresenta la data di check-out
+     * @param numPostiLetto stringa che rappresenta il numero di posti letto
+     * @param numAlloggio stringa che rappresenta il numero dell'alloggio
+     * @param codStruttura stringa che rappresenta l'id della struttura a cui appartiene l'alloggio
+     * @param numeroCarta stringa che rappresenta il numero della carta di credito
+     * @param dataScadenza stringa che rappresenta la data di scadenza della carta di credito
+     * @param cvvCarta stringa che rappresenta il CVV della carta di credito
+     *
+     * @returns restituisce true se la prenotazione è andata a buon fine, false altrimenti
+     **/
+    public boolean finalizzaPrenotazione(Utente utente,String nome, String cognome, String checkIn, String checkOut, String numPostiLetto, String numAlloggio, String codStruttura, String numeroCarta, String dataScadenza, String cvvCarta) {
 
         try {
             LocalDate checkInDate = validator.validateData(checkIn);
@@ -64,7 +101,7 @@ public class PrenotazioneAlloggioFacade {
                                             validator.validateInt(numPostiLetto),
                                             validator.validateNumeroCarta(numeroCarta),
                                             validator.validateData(dataScadenza),
-                                            validator.validateCVICarta(cviCarta));
+                                            validator.validateCVVCarta(cvvCarta));
 
             int codicePrenotazione = prenotazioneDAO.doSave(p);
             p.setCodicePrenotazione(codicePrenotazione);
@@ -88,6 +125,16 @@ public class PrenotazioneAlloggioFacade {
         }
     }
 
+    /*
+     * Gestisce la logica di modifica di una specifica prenotazione
+     *
+     * @param checkIn stringa che rappresenta la data di check-in
+     * @param checkOut stringa che rappresenta la data di check-out
+     * @param numPostiLetto stringa che rappresenta il numero di posti letto
+     * @param codPrenotazione stringa che rappresenta il codice della prenotazione
+     *
+     * @returns restituisce true se la modifica della prenotazione è andata a buon fine, false altrimenti
+     **/
     public boolean modificaPrenotazione(String checkIn, String checkOut, String numPostiLetto, String codPrenotazione) {
 
         try {
@@ -111,6 +158,13 @@ public class PrenotazioneAlloggioFacade {
         }
     }
 
+    /*
+     * Gestisce la logica di eliminazione di una specifica prenotazione
+     *
+     * @param codPrenotazione stringa che rappresenta il codice della prenotazione
+     *
+     * @returns restituisce true se l'eliminazione della prenotazione è andata a buon fine, false altrimenti
+     **/
     public boolean eliminaPrenotazione(String codPrenotazione) {
 
         try {
@@ -132,6 +186,13 @@ public class PrenotazioneAlloggioFacade {
         }
     }
 
+    /*
+     * Gestisce la logica di visualizzazione delle prenotazione di uno specifico utente
+     *
+     * @param emailUtente stringa che rappresenta l'id dell'utente
+     *
+     * @returns restituisce una lista di prenotazioni
+     **/
     public List<Occupa> visualizzaPrenotazioni(String emailUtente) {
 
         try {

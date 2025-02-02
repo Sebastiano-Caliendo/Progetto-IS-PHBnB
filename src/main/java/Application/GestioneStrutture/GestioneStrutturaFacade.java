@@ -13,6 +13,10 @@ import Utility.Validator;
 import java.util.HashMap;
 import java.util.List;
 
+
+/*
+* Classe che contiene tutti i metodi per la gestione di una struttura
+ **/
 public class GestioneStrutturaFacade {
 
     private Validator validator;
@@ -21,11 +25,32 @@ public class GestioneStrutturaFacade {
         this.validator = new Validator();
     }
 
+    /*
+    * Gestisce la logica di visualizzazione delle strutture relative ad uno specifico host
+    *
+    * @param host oggetto Host che rappresenta l'host a cui appartengono le strutture
+    *
+    * @returns restituisce una lista di strutture
+     **/
     public List<Struttura> visualizzaStrutture(Host host) {
         StrutturaDAO strutturaDAO = new StrutturaDAO();
         return strutturaDAO.doRetrieveByCriteria("fk_host", host.getEmail());
     }
 
+
+    /*
+     * Gestisce la logica di aggiunta di una struttura per uno specifico host
+     *
+     * @param host oggetto Host che rappresenta l'host a cui appartiene la struttura
+     * @param nomeStruttura stringa che rappresenta il nome della struttura
+     * @param via stringa che rappresenta la via dove si trova la struttura
+     * @param citta stringa che rappresenta la città dove si trova la struttura
+     * @param numCivico stringa che rappresenta il numero civico della struttura
+     * @param descrizione stringa che rappresenta la descrizione della struttura
+     * @param urlImmagine stringa che rappresenta l'url dell'immagine della struttura
+     *
+     * @returns restituisce 1 se l'aggiunta è andata a buon fine, 0 altrimenti
+     **/
     public int aggiungiStruttura(Host host, String nomeStruttura, String via, String citta, String numCivico, String descrizione, String urlImmagine) {
 
         if(host == null) return 0;
@@ -50,6 +75,20 @@ public class GestioneStrutturaFacade {
         }
     }
 
+    /*
+     * Gestisce la logica di modifica di una struttura per uno specifico host
+     *
+     * @param host oggetto Host che rappresenta l'host a cui appartiene la struttura
+     * @param nomeStruttura stringa che rappresenta il nome della struttura
+     * @param via stringa che rappresenta la via dove si trova la struttura
+     * @param citta stringa che rappresenta la città dove si trova la struttura
+     * @param numCivico stringa che rappresenta il numero civico della struttura
+     * @param descrizione stringa che rappresenta la descrizione della struttura
+     * @param urlImmagine stringa che rappresenta l'url dell'immagine della struttura
+     * @param idStruttura stringa che rappresenta l'id della struttura da modificare
+     *
+     * @returns restituisce 1 se la modifica è andata a buon fine, 0 altrimenti
+     **/
     public int modificaStruttura(Host host, String nomeStruttura, String via, String citta, String numCivico, String descrizione, String urlImmagine, String idStruttura) {
         try {
             StrutturaDAO strutturaDAO = new StrutturaDAO();
@@ -70,6 +109,13 @@ public class GestioneStrutturaFacade {
         }
     }
 
+    /*
+     * Gestisce la logica di eliminazione di una struttura
+     *
+     * @param idStruttura stringa che rappresenta l'id della struttura da eliminare
+     *
+     * @returns restituisce l'id della struttura se l'eliminazione è andata a buon fine, 0 altrimenti
+     **/
     public int eliminaStruttura(String idStruttura) {
         try {
             StrutturaDAO strutturaDAO =  new StrutturaDAO();
@@ -79,6 +125,13 @@ public class GestioneStrutturaFacade {
         }
     }
 
+    /*
+     * Gestisce la logica di visualizzazione delle prenotazione di una specifica struttura
+     *
+     * @param struttura oggetto Struttura che rappresenta la struttura a cui fanno riferimento le prenotazioni da visualizzare
+     *
+     * @returns restituisce un'hashmap contenente tutte le prenotazioni
+     **/
     public HashMap<Prenotazione, Occupa> visualizzaPrenotazioni(Struttura struttura) {
         // per ogni prenotazione associo un' occupa che contiene altri dati che servono
         HashMap<Prenotazione, Occupa> prenotazioniOccupa = new HashMap<Prenotazione, Occupa>();
@@ -111,6 +164,13 @@ public class GestioneStrutturaFacade {
         return prenotazioniOccupa;
     }
 
+    /*
+     * Gestisce la logica di visualizzazione di una specifica struttura
+     *
+     * @param idStruttura stringa che rappresenta l'id della struttura da visualizzare
+     *
+     * @returns restituisce la struttura avente l'id specificato, null altrimenti
+     **/
     public Struttura returnStruttura(String idStruttura) {
         try {
             StrutturaDAO strutturaDAO = new StrutturaDAO();
