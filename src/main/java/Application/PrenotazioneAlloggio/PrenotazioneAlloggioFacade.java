@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-/*
+/**
  * Classe che contiene tutti i metodi per effettuare la prenotazione di un alloggio
  **/
 public class PrenotazioneAlloggioFacade {
@@ -24,7 +24,7 @@ public class PrenotazioneAlloggioFacade {
         this.validator = new Validator();
     }
 
-    /*
+    /**
      * Gestisce la logica di visualizzazione di alloggi secondo i criteri specificati
      *
      * @param checkIn stringa che rappresenta la data di check-in
@@ -32,7 +32,7 @@ public class PrenotazioneAlloggioFacade {
      * @param destinazione stringa che rappresenta la destinazione
      * @param numPostiLetto stringa che rappresenta il numero di posti letto
      *
-     * @returns restituisce una lista di alloggi
+     * @return restituisce una lista di alloggi
      **/
     public List<Alloggio> visualizzaListaAlloggi(String checkIn, String checkOut, String destinazione, String numPostiLetto) {
 
@@ -46,13 +46,13 @@ public class PrenotazioneAlloggioFacade {
         }
     }
 
-    /*
+    /**
      * Gestisce la logica di visualizzazione dei dettagli di uno specifico alloggio
      *
      * @param numAlloggio stringa che rappresenta il numero dell'alloggio
      * @param fkStruttura stringa che rappresenta l'id della struttura a cui appartiene l'alloggio
      *
-     * @returns restituisce un alloggio
+     * @return restituisce un alloggio
      **/
     public Alloggio visualizzaDettagliAlloggio(String numAlloggio, String fkStruttura) {
 
@@ -67,7 +67,7 @@ public class PrenotazioneAlloggioFacade {
         }
     }
 
-    /*
+    /**
      * Gestisce la logica di finalizzazione di una prenotazione per uno specifico utente
      *
      * @param utente oggetto Utente che rappresenta l'utente che sta effettuando la prenotazione
@@ -82,7 +82,7 @@ public class PrenotazioneAlloggioFacade {
      * @param dataScadenza stringa che rappresenta la data di scadenza della carta di credito
      * @param cvvCarta stringa che rappresenta il CVV della carta di credito
      *
-     * @returns restituisce true se la prenotazione è andata a buon fine, false altrimenti
+     * @return restituisce true se la prenotazione è andata a buon fine, false altrimenti
      **/
     public boolean finalizzaPrenotazione(Utente utente,String nome, String cognome, String checkIn, String checkOut, String numPostiLetto, String numAlloggio, String codStruttura, String numeroCarta, String dataScadenza, String cvvCarta) {
 
@@ -125,7 +125,7 @@ public class PrenotazioneAlloggioFacade {
         }
     }
 
-    /*
+    /**
      * Gestisce la logica di modifica di una specifica prenotazione
      *
      * @param checkIn stringa che rappresenta la data di check-in
@@ -133,7 +133,7 @@ public class PrenotazioneAlloggioFacade {
      * @param numPostiLetto stringa che rappresenta il numero di posti letto
      * @param codPrenotazione stringa che rappresenta il codice della prenotazione
      *
-     * @returns restituisce true se la modifica della prenotazione è andata a buon fine, false altrimenti
+     * @return restituisce true se la modifica della prenotazione è andata a buon fine, false altrimenti
      **/
     public boolean modificaPrenotazione(String checkIn, String checkOut, String numPostiLetto, String codPrenotazione) {
 
@@ -158,12 +158,12 @@ public class PrenotazioneAlloggioFacade {
         }
     }
 
-    /*
+    /**
      * Gestisce la logica di eliminazione di una specifica prenotazione
      *
      * @param codPrenotazione stringa che rappresenta il codice della prenotazione
      *
-     * @returns restituisce true se l'eliminazione della prenotazione è andata a buon fine, false altrimenti
+     * @return restituisce true se l'eliminazione della prenotazione è andata a buon fine, false altrimenti
      **/
     public boolean eliminaPrenotazione(String codPrenotazione) {
 
@@ -186,12 +186,12 @@ public class PrenotazioneAlloggioFacade {
         }
     }
 
-    /*
+    /**
      * Gestisce la logica di visualizzazione delle prenotazione di uno specifico utente
      *
      * @param emailUtente stringa che rappresenta l'id dell'utente
      *
-     * @returns restituisce una lista di prenotazioni
+     * @return restituisce una lista di prenotazioni
      **/
     public List<Occupa> visualizzaPrenotazioni(String emailUtente) {
 

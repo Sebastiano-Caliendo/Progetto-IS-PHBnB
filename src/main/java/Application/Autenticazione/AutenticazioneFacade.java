@@ -7,6 +7,9 @@ import Storage.Utente.UtenteDAO;
 import Utility.Validator;
 import jakarta.servlet.http.HttpSession;
 
+/**
+ * classe che contiene tutti i metodi necessari per effettuare autenticazione
+ */
 public class AutenticazioneFacade {
 
     private HttpSession session;
@@ -17,6 +20,20 @@ public class AutenticazioneFacade {
         this.validator = new Validator();
     }
 
+    /**
+     * gestisce la logica relativa alla registrazione di un utente
+     * @param email campo email di utente
+     * @param nome campo nome di utente
+     * @param cognome campo cognome di utente
+     * @param password campo password di utente
+     * @param citta campo citta di utente
+     * @param numeroCivico campo numeroCivico di utente
+     * @param via campo via di utente
+     * @param dataNascita campo dataNascita di utente
+     * @param recapitoTelefonico campo recapitoTelefonico di utente
+     * @throws RuntimeException eccezione generica di java.lang
+     * @return il metodo restituisce un valore booleano (true o false) rispetto a se è stata effettuata o meno la registrazione
+     */
     public boolean registrazioneUtente(String email, String nome, String cognome, String password, String citta, String numeroCivico, String via, String dataNascita, String recapitoTelefonico) {
 
         UtenteDAO utenteDAO = new UtenteDAO();
@@ -46,6 +63,18 @@ public class AutenticazioneFacade {
         }
     }
 
+    /**
+     * gestisce la logica relativa alla registrazione di un host
+     * @param email campo email di host
+     * @param nome campo nome di host
+     * @param cognome campo cognome di host
+     * @param password campo password di host
+     * @param dataNascita campo dataNascita di host
+     * @param recapitoTelefonico campo recapitoTelefonico
+     * @throws RuntimeException eccezione generica di java.lang
+     * @return il metodo restituisce un valore booleano (true o false) rispetto a se è stata effettuata o meno la registrazione
+     */
+
     public boolean registrazioneHost(String email, String nome, String cognome, String password, String dataNascita, String recapitoTelefonico) {
 
         HostDAO hostDAO = new HostDAO();
@@ -71,6 +100,13 @@ public class AutenticazioneFacade {
         }
     }
 
+    /**
+     * gestisce la logica relativa al login di un utente
+     * @param email campo email preso da form di login
+     * @param password campo password preso da form di login
+     * @param tipo campo tipo preso da form di login (user, host, admin)
+     * @return il metodo restituisce un valore booleano (true o false) rispetto a se è stato effettuato o meno il login
+     */
     public boolean login(String email, String password, String tipo) {
 
         if(tipo.equals("user")) {
@@ -108,10 +144,27 @@ public class AutenticazioneFacade {
         return true;
     }
 
+    /**
+     * gestisce la logica relativa al logout di un utente
+     */
     public void logout() {
         session.invalidate();
     }
 
+    /**
+     * gestisce la logica relativa alla modifica dei dati personali di un utente
+     * @param u oggetto Utente dove verranno modificati i dati
+     * @param email campo Email di utente
+     * @param nome campo Nome di utente
+     * @param cognome campo Cognome di utente
+     * @param newPwd campo Nuova Password aggiornata di utente
+     * @param citta campo Città di utente
+     * @param nCivico campo Numero Civico di utente
+     * @param via campo Via di utente
+     * @param recTel campo Recapito Telefonico di utente
+     * @throws RuntimeException eccezione generica di java.lang
+     * @return il metodo restituisce un valore booleano (true o false) rispetto a se è stata effettuata o meno la modifica dei dati dell'utente
+     */
     public boolean modificaDatiPersonaliUtente(Utente u, String email, String nome, String cognome, String newPwd, String citta, String nCivico, String via, String recTel) {
 
         UtenteDAO utenteDAO = new UtenteDAO();
@@ -138,6 +191,17 @@ public class AutenticazioneFacade {
         }
     }
 
+    /**
+     * gestisce la logica relativa alla modifica dei dati personali di un host
+     * @param h oggetto Utente dove verranno modificati i dati
+     * @param email campo Email di host
+     * @param nome campo Nome di host
+     * @param cognome campo Cognome di host
+     * @param pwd campo Nuova Password aggiornata di host
+     * @param recTel campo Recapito Telefonico di host
+     * @throws RuntimeException eccezione generica di java.lang
+     * @return il metodo restituisce un valore booleano (true o false) rispetto a se è stata effettuata o meno la modifica dei dati dell'host
+     */
     public boolean modificaDatiPersonaliHost(Host h, String email, String nome, String cognome, String pwd, String recTel) {
 
         HostDAO hostDAO = new HostDAO();
@@ -161,7 +225,9 @@ public class AutenticazioneFacade {
         }
     }
 
-
+    /**
+     * gestisce la logica relativa all'eliminazione di un account
+     */
     public void eliminaAccount(){
 
         Utente u = (Utente) session.getAttribute("utente");

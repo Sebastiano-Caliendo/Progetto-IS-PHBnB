@@ -17,6 +17,9 @@ import Utility.Validator;
 
 import java.util.List;
 
+/**
+ * classe che contiene tutti i metodi necessari per gestione amministratore
+ */
 public class GestioneAmministratoreFacade {
 
     private Validator validator;
@@ -25,6 +28,10 @@ public class GestioneAmministratoreFacade {
         this.validator = new Validator();
     }
 
+    /**
+     * gestisce la logica relativa alla visualizzazione di tutti gli alloggi
+     * @return il metodo restituisce una lista di tutti gli alloggi del sistema
+     */
     public List<Alloggio> visualizzaDatiSistemaAlloggio(){
 
         AlloggioDAO alloggioDAO = new AlloggioDAO();
@@ -33,6 +40,10 @@ public class GestioneAmministratoreFacade {
         return alloggi;
     }
 
+    /**
+     * gestisce la logica relativa alla visualizzazione di tutti gli host
+     * @return il metodo restituisce una lista di tutti gli host del sistema
+     */
     public List<Host> visualizzaDatiSistemaHost(){
 
         HostDAO hostDAO = new HostDAO();
@@ -41,6 +52,10 @@ public class GestioneAmministratoreFacade {
         return hosts;
     }
 
+    /**
+     * gestisce la logica relativa alla visualizzazione di tutte le prenotazioni
+     * @return il metodo restituisce una lista di tutte le prenotazioni del sistema
+     */
     public List<Prenotazione> visualizzaDatiSistemaPrenotazione(){
 
         PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
@@ -50,6 +65,10 @@ public class GestioneAmministratoreFacade {
     }
 
 
+    /**
+     * gestisce la logica relativa alla visualizzazione di tutte le recensioni
+     * @return il metodo restituisce una lista di tutte le recensioni del sistema
+     */
     public List<Recensione> visualizzaDatiSistemaRecensione(){
 
         RecensioneDAO recensioneDAO = new RecensioneDAO();
@@ -58,6 +77,10 @@ public class GestioneAmministratoreFacade {
         return recensioni;
     }
 
+    /**
+     * gestisce la logica relativa alla visualizzazione di tutte le strutture
+     * @return il metodo restituisce una lista di tutte le strutture del sistema
+     */
     public List<Struttura> visualizzaDatiSistemaStruttura(){
 
         StrutturaDAO strutturaDAO = new StrutturaDAO();
@@ -66,6 +89,10 @@ public class GestioneAmministratoreFacade {
         return strutture;
     }
 
+    /**
+     * gestisce la logica relativa alla visualizzazione di tutti gli utenti registrati
+     * @return il metodo restituisce una lista di tutti gli utenti registrati del sistema
+     */
     public List<Utente> visualizzaDatiSistemaUtente(){
 
         UtenteDAO utenteDAO = new UtenteDAO();
@@ -74,6 +101,18 @@ public class GestioneAmministratoreFacade {
         return utenti;
     }
 
+    /**
+     * gestisce la logica relativa alla modifica di un alloggio
+     * @param numeroAlloggio campo che contiene il nuovo numero dell'alloggio
+     * @param prezzoNotte campo che contiene il nuovo prezzo per notte dell'alloggio
+     * @param postiLetto campo che contiene il nuovo numero dei posti letto dell'alloggio
+     * @param tipoAlloggio campo che contiene il nuovo tipo dell'alloggio
+     * @param descrizione campo che contiene la nuova descrizione dell'alloggio
+     * @param oldNumAlloggio campo che contiene il vecchio numero dell'alloggio da eliminare
+     * @param fkStruttura campo che contiene l'id della struttura dove modificare l'alloggio
+     * @throws RuntimeException eccezione generica di java.lang
+     * @return il metodo restituisce un valore booleano (true o false) rispetto a se è stata effettuata o meno la modifica
+     */
     public boolean modificaDatiSistemaAlloggio(String numeroAlloggio, String prezzoNotte, String postiLetto, String tipoAlloggio , String descrizione, String oldNumAlloggio, String fkStruttura){
 
         try {
@@ -96,6 +135,17 @@ public class GestioneAmministratoreFacade {
         }
     }
 
+    /**
+     * gestisce la logica relativa alla modifica di un host
+     * @param oldEmailHost campo che contiene la vecchia email dell'host
+     * @param email campo che contiene la nuova email dell'host
+     * @param nome campo che contiene il nuovo nome dell'host
+     * @param cognome campo che contiene il nuovo cognome dell'host
+     * @param password campo che contiene la nuova password dell'host
+     * @param recapitoTelefonico campo che contiene il nuovo recapito telefonico dell'host
+     * @throws RuntimeException eccezione generica di java.lang
+     * @return il metodo restituisce un valore booleano (true o false) rispetto a se è stata effettuata o meno la modifica
+     */
     public boolean modificaDatiSistemaHost(String oldEmailHost, String email, String nome, String cognome, String password, String recapitoTelefonico){
 
         try {
@@ -114,6 +164,15 @@ public class GestioneAmministratoreFacade {
         }
     }
 
+    /**
+     * gestisce la logica relativa alla modifica di una prenotazione
+     * @param codPrenotazione campo che contiene il codice della prenotazione
+     * @param checkIn campo che contiene la nuova data di check-in
+     * @param checkOut campo che contiene la nuova data di check-out
+     * @param numPersone campo che contiene il nuovo numero di persone di una prenotazione
+     * @throws RuntimeException eccezione generica di java.lang
+     * @return il metodo restituisce un valore booleano (true o false) rispetto a se è stata effettuata o meno la modifica
+     */
     public boolean modificaDatiSistemaPrenotazione(String codPrenotazione, String checkIn, String checkOut, String numPersone){
 
         try {
@@ -146,6 +205,20 @@ public class GestioneAmministratoreFacade {
         }
     }*/
 
+    /**
+     * gestisce la logica relativa alla modifica di una struttura
+     * @param fkHost campo che contiene l'host della struttura
+     * @param nomeStruttura campo che contiene il nuovo nome della struttura
+     * @param via campo che contiene la nuova via della struttura
+     * @param citta campo che contiene la nuova città della struttura
+     * @param numAlloggi campo che contiene il nuovo numero degli alloggi della struttura
+     * @param numCivico campo che contiene il nuovo numero civico della struttura
+     * @param descrizione campo che contiene la nuova descrizione della struttura
+     * @param urlImmagine campo che contiene l'url della nuova immagine della struttura
+     * @param idStruttura campo che contiene l'id della struttura
+     * @throws RuntimeException eccezione generica di java.lang
+     * @return il metodo restituisce un valore booleano (true o false) rispetto a se è stata effettuata o meno la modifica
+     */
     public boolean modificaDatiSistemaStruttura(String fkHost, String nomeStruttura, String via, String citta, String numAlloggi, String numCivico, String descrizione, String urlImmagine, String idStruttura){
 
         try {
@@ -173,6 +246,20 @@ public class GestioneAmministratoreFacade {
         }
     }
 
+    /**
+     * gestisce la logica relativa alla modifica di un utente
+     * @param oldEmailUtente campo che contiene la vecchia email dell'utente
+     * @param email campo che contiene la nuova email dell'utente
+     * @param nome campo che contiene il nuovo nome dell'utente
+     * @param cognome campo che contiene il nuovo cognome dell'utente
+     * @param password campo che contiene la nuova password dell'utente
+     * @param citta campo che contiene la nuova città dell'utente
+     * @param numeroCivico campo che contiene il nuovo numero civico dell'utente
+     * @param via campo che contiene la nuova via dell'utente
+     * @param recapitoTelefonico campo che contiene il nuovo recapito telefonico dell'utente
+     * @throws RuntimeException eccezione generica di java.lang
+     * @return il metodo restituisce un valore booleano (true o false) rispetto a se è stata effettuata o meno la modifica
+     */
     public boolean modificaDatiSistemaUtente(String oldEmailUtente, String email, String nome, String cognome, String password, String citta, String numeroCivico, String via, String recapitoTelefonico) {
 
         try {
@@ -195,8 +282,13 @@ public class GestioneAmministratoreFacade {
         }
     }
 
-
-
+    /**
+     * gestisce la logica relativa alla cancellazione di un alloggio
+     * @param numAlloggio campo che contiene il numero dell'alloggio da eliminare
+     * @param fkStruttura campo che contiene il numero della struttura che contiene l'alloggio
+     * @throws RuntimeException eccezione generica di java.lang
+     * @return il metodo restituisce un valore booleano (true o false) rispetto a se è stata effettuata o meno la cancellazione
+     */
     public boolean cancellazioneDatiSitemaAlloggio(String numAlloggio, String fkStruttura){
 
         try {
@@ -209,6 +301,12 @@ public class GestioneAmministratoreFacade {
         }
     }
 
+    /**
+     * gestisce la logica relativa alla cancellazione di una recensione
+     * @param idRecensione campo che contiene l'id della recensione da eliminare
+     * @throws RuntimeException eccezione genercia di java.lang
+     * @return il metodo restituisce un valore booleano (true o false) rispetto a se è stata effettuata o meno la cancellazione
+     */
     public boolean cancellazioneDatiSitemaRecensione(String idRecensione){
 
         try {
@@ -220,6 +318,13 @@ public class GestioneAmministratoreFacade {
             return false;
         }
     }
+
+    /**
+     * gestisce la logica relativa alla cancellazione di una struttura
+     * @param idStruttura campo che contiene l'id della struttura da eliminare
+     * @throws RuntimeException eccezione generica di java.lang
+     * @return il metodo restituisce un valore booleano (true o false) rispetto a se è stata effettuata o meno la cancellazione
+     */
     public boolean cancellazioneDatiSistemaStruttura(String idStruttura){
 
         try {

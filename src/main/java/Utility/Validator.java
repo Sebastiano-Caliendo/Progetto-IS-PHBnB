@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/*
+/**
  * Classe che contiene tutti i metodi per effettuare la validazione dei valori ricevuti in input
  **/
 public class Validator {
@@ -12,12 +12,12 @@ public class Validator {
     public Validator() {
     }
 
-    /*
+    /**
      * Effettua la validazione di un indirizzo mail
      *
      * @param email stringa da validare
      *
-     * @returns restituisce la stringa ricevuta in input se rispetta il formato, lancia un'eccezione altrimenti
+     * @return restituisce la stringa ricevuta in input se rispetta il formato, lancia un'eccezione altrimenti
      **/
     public String validateEmail(String email) {
         String regex = "^[A-z0-9._%+-]+@[A-z0-9.-]+\\.[A-z]{2,10}$";
@@ -34,12 +34,12 @@ public class Validator {
             throw new RuntimeException();
     }
 
-    /*
+    /**
      * Effettua la validazione di una password
      *
      * @param password stringa da validare
      *
-     * @returns restituisce la stringa ricevuta in input se rispetta il formato, lancia un'eccezione altrimenti
+     * @return restituisce la stringa ricevuta in input se rispetta il formato, lancia un'eccezione altrimenti
      **/
     public String validatePassword(String password) {
 
@@ -49,12 +49,12 @@ public class Validator {
             throw new RuntimeException();
     }
 
-    /*
+    /**
      * Effettua la validazione di nome e cognome
      *
      * @param s stringa da validare
      *
-     * @returns restituisce la stringa ricevuta in input se rispetta il formato, lancia un'eccezione altrimenti
+     * @return restituisce la stringa ricevuta in input se rispetta il formato, lancia un'eccezione altrimenti
      **/
     public String validateNomeCognome(String s) {
         String regex = "^[A-zÀ-ù ‘-]{2,20}$";
@@ -68,12 +68,12 @@ public class Validator {
             throw new RuntimeException();
     }
 
-    /*
+    /**
      * Effettua la validazione di città e via
      *
      * @param s stringa da validare
      *
-     * @returns restituisce la stringa ricevuta in input se rispetta il formato, lancia un'eccezione altrimenti
+     * @return restituisce la stringa ricevuta in input se rispetta il formato, lancia un'eccezione altrimenti
      **/
     public String validateCittaVia(String s) {
         String regex = "^[A-zÀ-ù ‘-]{2,50}$";
@@ -87,12 +87,12 @@ public class Validator {
             throw new RuntimeException();
     }
 
-    /*
+    /**
      * Effettua la validazione di un numero civico
      *
      * @param numeroCivico stringa da validare
      *
-     * @returns restituisce la stringa ricevuta in input se rispetta il formato, lancia un'eccezione altrimenti
+     * @return restituisce la stringa ricevuta in input se rispetta il formato, lancia un'eccezione altrimenti
      **/
     public String validateNumeroCivico(String numeroCivico) {
         String regex = "^[0-9A-z ‘-]{1,5}$";
@@ -106,12 +106,12 @@ public class Validator {
             throw new RuntimeException();
     }
 
-    /*
+    /**
      * Effettua la validazione di un recapito telefonico
      *
      * @param recapitoTelefonico stringa da validare
      *
-     * @returns restituisce la stringa ricevuta in input se rispetta il formato, lancia un'eccezione altrimenti
+     * @return restituisce la stringa ricevuta in input se rispetta il formato, lancia un'eccezione altrimenti
      **/
     public String validateRecapitoTelefonico(String recapitoTelefonico) {
         String regex = "^\\d{10}$";
@@ -125,12 +125,12 @@ public class Validator {
             throw new RuntimeException();
     }
 
-    /*
+    /**
      * Effettua la validazione di una data
      *
      * @param data stringa da validare
      *
-     * @returns restituisce un oggetto LocalDate se la stringa rispetta il formato, lancia un'eccezione altrimenti
+     * @return restituisce un oggetto LocalDate se la stringa rispetta il formato, lancia un'eccezione altrimenti
      **/
     public LocalDate validateData(String data) {
         String regex = "^(19[0-9]{2}|20[0-9]{2})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$";
@@ -145,12 +145,12 @@ public class Validator {
             throw new RuntimeException();
     }
 
-    /*
+    /**
      * Effettua la validazione di un intero
      *
      * @param integerValue stringa da validare
      *
-     * @returns restituisce un intero se la stringa rispetta il formato, lancia un'eccezione altrimenti
+     * @return restituisce un intero se la stringa rispetta il formato, lancia un'eccezione altrimenti
      **/
     public int validateInt(String integerValue) {
         String regex = "^\\d+$";
@@ -165,12 +165,12 @@ public class Validator {
             throw new RuntimeException();
     }
 
-    /*
+    /**
      * Effettua la validazione di un double
      *
-     * @param integerValue stringa da validare
+     * @param doubleValue stringa da validare
      *
-     * @returns restituisce un double se la stringa rispetta il formato, lancia un'eccezione altrimenti
+     * @return restituisce un double se la stringa rispetta il formato, lancia un'eccezione altrimenti
      **/
     public double validateDouble(String doubleValue) {
         String regex = "^\\d+(\\.\\d+)?$";
@@ -185,12 +185,12 @@ public class Validator {
             throw new RuntimeException();
     }
 
-    /*
+    /**
      * Effettua la validazione di un tipo alloggio
      *
      * @param tipoAlloggio stringa da validare
      *
-     * @returns restituisce la stringa ricevuta in input se rispetta il formato, lancia un'eccezione altrimenti
+     * @return restituisce la stringa ricevuta in input se rispetta il formato, lancia un'eccezione altrimenti
      **/
     public String validateTipoAlloggio(String tipoAlloggio) {
 
@@ -201,12 +201,12 @@ public class Validator {
         }
     }
 
-    /*
+    /**
      * Effettua la validazione di un numero di carta di credito
      *
      * @param numeroCarta stringa da validare
      *
-     * @returns restituisce la stringa ricevuta in input se rispetta il formato, lancia un'eccezione altrimenti
+     * @return restituisce la stringa ricevuta in input se rispetta il formato, lancia un'eccezione altrimenti
      **/
     public String validateNumeroCarta(String numeroCarta) {
         String regex = "^\\d{16}$";
@@ -221,12 +221,12 @@ public class Validator {
             throw new RuntimeException();
     }
 
-    /*
+    /**
      * Effettua la validazione di un CVV di una carta di credito
      *
      * @param cvvCarta stringa da validare
      *
-     * @returns restituisce la stringa ricevuta in input se rispetta il formato, lancia un'eccezione altrimenti
+     * @return restituisce la stringa ricevuta in input se rispetta il formato, lancia un'eccezione altrimenti
      **/
     public String validateCVVCarta(String cvvCarta) {
         String regex = "^\\d{3}$";
@@ -241,12 +241,12 @@ public class Validator {
             throw new RuntimeException();
     }
 
-    /*
+    /**
      * Effettua la validazione di una descrizione
      *
      * @param descrizione stringa da validare
      *
-     * @returns restituisce la stringa ricevuta in input se rispetta il formato, lancia un'eccezione altrimenti
+     * @return restituisce la stringa ricevuta in input se rispetta il formato, lancia un'eccezione altrimenti
      **/
     public String validateDescrizione(String descrizione) {
 
@@ -257,12 +257,12 @@ public class Validator {
         }
     }
 
-    /*
+    /**
      * Effettua la validazione di un nome struttura
      *
      * @param nomeStruttura stringa da validare
      *
-     * @returns restituisce la stringa ricevuta in input se rispetta il formato, lancia un'eccezione altrimenti
+     * @return restituisce la stringa ricevuta in input se rispetta il formato, lancia un'eccezione altrimenti
      **/
     public String validateNomeStruttura(String nomeStruttura) {
 
