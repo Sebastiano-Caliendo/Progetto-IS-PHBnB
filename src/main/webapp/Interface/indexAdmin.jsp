@@ -26,5 +26,19 @@
     <input type = "submit" formaction="../visualizzaDatiSistemaAmministratoreServlet" value = "Conferma">
     </div>
   </form>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function (){
+      Swal.fire({
+        title: 'Attendi...',
+        text: 'I dati saranno caricati a breve',
+        icon: 'success',
+        timer: 4000, // Il popup dura 4 secondi
+        showConfirmButton: false,
+        allowOutsideClick: false
+      });
+    })
+  </script>
   </body>
 </html>

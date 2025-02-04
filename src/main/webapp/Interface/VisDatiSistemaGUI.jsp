@@ -72,7 +72,7 @@
 
         for(Utente u: utenti){
     %>
-        <form method = "post" id = "formUtente">
+        <form method = "post">
     <tr>
         <td><input type = "text" value = "<%=u.getEmail()%>" name = "emailUtente"></td>
         <td><input type = "text" value = "<%=u.getNome()%>" name = "nomeUtente"></td>
@@ -85,7 +85,7 @@
         <input type = "hidden" value = <%=u.getEmail()%> name = "oldEmailUtente">
         <td><input type = "text" value = "<%=u.getRecapitoTelefonico()%>" name = "recapitoTelefonicoUtente"></td>
         <input type = "hidden" value = "<%=u.isAdmin()%>" name = "isAdminUtente">
-        <td><input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" formaction = "modificaDatiSistemaUtenteServlet" id = "modificaUtente"></form></td>
+        <td><input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" formaction = "modificaDatiSistemaUtenteServlet"></form></td>
     </tr>
     <%}%>
 </table>
@@ -120,8 +120,8 @@
         <td><input type = "text" value = "<%=a.getPostiletto()%>" name = "postiLetto"></td>
         <td><input type = "text" value = "<%=a.getTipoAlloggio()%>" name = "tipoAlloggio"></td>
         <td><input type = "text" value = "<%=a.getDescrizione()%>" name = "descAlloggio"></td>
-        <td><input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" id = "modificaAlloggio"></td>
-        <td><input type = "submit" value = "Cancella" class = "buttonDati" style = "width: 75px;" id = "cancellaAlloggio"></form></td>
+        <td><input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" formaction="modificaDatiSistemaAlloggioServlet"></td>
+        <td><input type = "submit" value = "Cancella" class = "buttonDati" style = "width: 75px;" formaction="cancellazioneDatiSistemaAlloggioServlet"></form></td>
     </tr>
     <%}%>
 </table>
@@ -148,15 +148,15 @@
         <form method="post">
     <tr>
         <input type = "hidden" value = "<%=s.getIdStruttura()%>" name = "idStruttura">
-        <td><%=s.getHost().getEmail()%></td>
+        <td><input type = "text" value ="<%=s.getHost().getEmail()%>" name = "fkHost" readonly></td>
         <td><input type = "text" value = "<%=s.getNomeStruttura()%>" name = "nomeStruttura"></td>
         <td><input type = "text" value = "<%=s.getVia()%>" name = "viaStruttura"></td>
         <td><input type = "text" value = "<%=s.getNumCivico()%>" name = "numCivicoStruttura"></td>
         <td><input type = "text" value = "<%=s.getCitta()%>" name = "cittaStruttura"></td>
         <td><input type = "text" value = "<%=s.getNumAlloggi()%>" name = "numAlloggiStruttura"></td>
         <td><input type = "text" value = "<%=s.getDescrizione()%>" name = "descrizioneStruttura"></td>
-        <td><input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" id = "modificaStruttura"></td>
-        <td><input type = "submit" value = "Cancella" class = "buttonDati" style = "width: 75px" id = "cancellaStruttura"></form></td>
+        <td><input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" formaction="modificaDatiSistemaStrutturaServlet"></td>
+        <td><input type = "submit" value = "Cancella" class = "buttonDati" style = "width: 75px" formaction = "cancellazioneDatiSistemaStrutturaServlet"></form></td>
     </tr>
     <%
         }%>
@@ -191,7 +191,7 @@
             <td><%=r.getPrenotazione().getCodicePrenotazione()%></td>
             <td><%=r.getAlloggio().getNumeroAlloggio()%></td>
             <td><%=r.getAlloggio().getStruttura().getIdStruttura()%></td>
-            <td><input type = "submit" value = "Cancella" class = "buttonDati" style = "width: 75px;" id = "cancellaRecensione"></form></td>
+            <td><input type = "submit" value = "Cancella" class = "buttonDati" style = "width: 75px;" formaction="cancellazioneDatiSistemaRecensioneServlet"></form></td>
         </tr>
         <%}%>
     </table>
@@ -216,13 +216,14 @@
     %>
         <form method = "post">
     <tr>
+        <input type = "hidden" value = "<%=h.getEmail()%>" name = "oldEmailHost">
         <td><input type = "text" value = "<%=h.getEmail()%>" name = "emailHost"></td>
         <td><input type = "text" value = "<%=h.getNome()%>" name = "nomeHost"></td>
         <td><input type = "text" value = "<%=h.getCognome()%>" name = "cognomeHost"></td>
         <td><input type = "text" value = "<%=h.getPassword()%>" name = "passwordHost"></td>
         <td><%=h.getDataNascita()%></td>
         <td><input type = "text" value = "<%=h.getRecapitoTelefonico()%>" name = "recapitoTelHost"></td>
-        <td><input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" id = "modificaHost"></form></td>
+        <td><input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" formaction="modificaDatiSistemaHostServlet"></form></td>
     </tr>
     <%}%>
 </table>
@@ -253,7 +254,7 @@
             <input type = "hidden" value = "<%=p.getNumeroCartaCredito()%>" name = "numeroCartaPrenotazione">
             <input type = "hidden" value = "<%=p.getDataScadenzaCarta()%>" name = "dataScadenzaCartaPrenotazione">
             <input type = "hidden" value = "<%=p.getCviCarta()%>" name = "cviCartaPrenotazione">
-            <td><input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px" id = "modificaPrenotazione"></td>
+            <td><input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px" formaction="modificaDatiSistemaPrenotazioneServlet"></td>
         </tr>
         <%}%>
     </table>
@@ -262,7 +263,7 @@
     <%@ include file="../WEB-INF/moduli/footer.jsp"%>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<script>
+<!--<script>
     document.querySelectorAll('[id^="modificaAlloggio"]').forEach(function (input) {
         input.addEventListener("click", function (event) {
             event.preventDefault();
@@ -302,8 +303,7 @@
     });
 
     document.querySelectorAll('[id^="modificaUtente"]').forEach(function (input) {
-        input.addEventListener("click", function (event) {
-            event.preventDefault();
+        input.addEventListener("click", function () {
 
             Swal.fire({
                 title: 'Attendi...',
@@ -315,6 +315,8 @@
             });
         })
     });
+
+
 
     document.querySelectorAll('[id^="modificaStruttura"]').forEach(function (input) {
         input.addEventListener("click", function (event) {
@@ -410,6 +412,6 @@
             }, 2500);
         })
     });
-</script>
+</script>-->
 </body>
 </html>
