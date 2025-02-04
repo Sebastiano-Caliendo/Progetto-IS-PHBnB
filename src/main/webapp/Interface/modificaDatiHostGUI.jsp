@@ -57,7 +57,7 @@
         <%}%>
 
         <%if(host != null) {%>
-        <form id="formModificaDati" action="<%= servlet %>modificaDatiPersonaliUtente" method="POST">
+        <form id="formModificaDati" action="<%= servlet %>modificaDatiPersonaliHost" method="POST">
             <div id="divForm" class="normal-small-text">
                 <div class="formElements">
                     <label for="email" id="emailLabel">Email</label>
@@ -96,12 +96,31 @@
             </div>
 
             <!--<div class="buttonModifica">-->
-                <input type="submit" id="submitButtom" value="Modifica">
+                <input type="submit" id="submitButton" value="Modifica">
             <!--</div>-->
         </form>
         <%}%>
-
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    document.getElementById("submitButton").addEventListener("click", function(event){
+        event.preventDefault();
+
+        Swal.fire({
+            title: 'Attendi...',
+            text: 'I dati saranno modificati a breve',
+            icon: 'success',
+            timer: 4000, // Il popup dura 4 secondi
+            showConfirmButton: false,
+            allowOutsideClick: false
+        });
+
+        setTimeout(function () {
+            document.querySelector("form").submit();
+        }, 4000);
+    });
+</script>
 </body>
 </html>

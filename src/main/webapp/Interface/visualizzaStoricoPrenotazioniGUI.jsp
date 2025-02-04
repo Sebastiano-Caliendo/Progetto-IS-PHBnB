@@ -134,6 +134,9 @@
         <div class="divModPrenotazione">
             <input class="buttons" type="submit" value="Conferma">
         </div>
+        <div class = "divModPrenotazione">
+            <input class = "buttons" type = "submit" value = "Chiudi">
+        </div>
     </form>
 </div>
 
@@ -205,7 +208,7 @@
     function abilitaModifica(indice, codPrenotazione) {
 
         //oscuro i tasti modifica e elimina
-        document.getElementsByClassName("divButtons")[indice].style.display = "none";
+        //document.getElementsByClassName("divButtons")[indice].style.display = "none";
 
         //rendo visibile il form di modifica
         var divModifica = document.getElementById("divModificaPrenotazione");
@@ -226,6 +229,12 @@
         var divPrenotazione = document.getElementsByClassName("divPrenotazione")[indice];
         divPrenotazione.appendChild(divModifica);
     }
+
+    document.addEventListener("keydown", function (event){
+        if(event.key === "Escape"){
+            document.getElementById("divModificaPrenotazione").style.display = "none";
+        }
+    });
 </script>
 </body>
 </html>

@@ -109,5 +109,25 @@
 
         </div>
 </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    document.getElementById("submitButtom").addEventListener("click", function(event){
+        event.preventDefault();
+
+        Swal.fire({
+            title: 'Attendi...',
+            text: 'I dati saranno modificati a breve',
+            icon: 'success',
+            timer: 4000, // Il popup dura 4 secondi
+            showConfirmButton: false,
+            allowOutsideClick: false
+        });
+
+        setTimeout(function () {
+            document.querySelector("form").submit();
+        }, 4000);
+    });
+</script>
 </body>
 </html>
