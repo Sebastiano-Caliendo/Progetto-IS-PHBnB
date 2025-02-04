@@ -17,13 +17,12 @@ public class EliminaAccountServlet extends HttpServlet {
 
         resp.setContentType("text/html");
 
-        String address = "index.jsp";
+        String address = "Interface/index.jsp";
 
         AutenticazioneFacade autenticazioneFacade = new AutenticazioneFacade(req.getSession());
         autenticazioneFacade.eliminaAccount();
 
-        RequestDispatcher rd = req.getRequestDispatcher(address);
-        rd.forward(req, resp);
+        resp.sendRedirect(address);
     }
 
     @Override

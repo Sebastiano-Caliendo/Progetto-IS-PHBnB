@@ -11,7 +11,6 @@ public class Struttura {
     private String citta;
     private int numAlloggi;
     private String descrizione;
-
     private String urlImmagine;
 
     public Struttura() {

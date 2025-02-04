@@ -104,12 +104,32 @@
                     <textarea id="descrizione" name="descrizione" rows="10" cols="50" placeholder="Scrivi qui la tua descrizione dettagliata..." required></textarea>
                 </div>
 
-                <input type="submit" value="Aggiungi" style="border : 2px solid var(--color-primary); width : 50%; height : 30px; color: black; background-color: var(--rosa-bianchissimo);">
+                <input id = "aggiungiStruttura" type="submit" value="Aggiungi" style="border : 2px solid var(--color-primary); width : 50%; height : 30px; color: black; background-color: var(--rosa-bianchissimo);">
             </form>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
+
+        document.getElementById("aggiungiStruttura").addEventListener("click", function (event) {
+            event.preventDefault(); // Blocca il submit immediato
+
+            Swal.fire({
+                title: 'Attendi...',
+                text: 'La struttura verrà aggiunta tra 4 secondi.',
+                icon: 'success',
+                timer: 4000, // Il popup dura 4 secondi
+                showConfirmButton: false,
+                allowOutsideClick: false
+            });
+
+            setTimeout(function () {
+                document.querySelector("form").submit(); // Dopo 4 secondi invia il form
+            }, 4000);
+        });
+
         // Funzione per aggiornare l'anteprima dell'immagine selezionata
         document.getElementById('urlImmagine').addEventListener('change', function(event) {
             var reader = new FileReader();  // FileReader per leggere il file selezionato

@@ -72,7 +72,7 @@
 
         for(Utente u: utenti){
     %>
-        <form method = "post">
+        <form method = "post" id = "formUtente">
     <tr>
         <td><input type = "text" value = "<%=u.getEmail()%>" name = "emailUtente"></td>
         <td><input type = "text" value = "<%=u.getNome()%>" name = "nomeUtente"></td>
@@ -82,9 +82,10 @@
         <td><input type = "text" value = "<%=u.getNumeroCivico()%>" name = "numeroCivicoUtente"></td>
         <td><input type = "text" value = "<%=u.getVia()%>" name = "viaUtente"></td>
         <td><%=u.getDataNascita()%></td>
+        <input type = "hidden" value = <%=u.getEmail()%> name = "oldEmailUtente">
         <td><input type = "text" value = "<%=u.getRecapitoTelefonico()%>" name = "recapitoTelefonicoUtente"></td>
         <input type = "hidden" value = "<%=u.isAdmin()%>" name = "isAdminUtente">
-        <td><input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" formaction="modificaDatiSistemaUtenteServlet"></form></td>
+        <td><input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" formaction = "modificaDatiSistemaUtenteServlet" id = "modificaUtente"></form></td>
     </tr>
     <%}%>
 </table>
@@ -119,8 +120,8 @@
         <td><input type = "text" value = "<%=a.getPostiletto()%>" name = "postiLetto"></td>
         <td><input type = "text" value = "<%=a.getTipoAlloggio()%>" name = "tipoAlloggio"></td>
         <td><input type = "text" value = "<%=a.getDescrizione()%>" name = "descAlloggio"></td>
-        <td><input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" formaction = "modificaDatiSistemaAlloggioServlet"></td>
-        <td><input type = "submit" value = "Cancella" class = "buttonDati" style = "width: 75px;" formaction = "cancellazioneDatiSistemaAlloggioServlet"></form></td>
+        <td><input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" id = "modificaAlloggio"></td>
+        <td><input type = "submit" value = "Cancella" class = "buttonDati" style = "width: 75px;" id = "cancellaAlloggio"></form></td>
     </tr>
     <%}%>
 </table>
@@ -154,8 +155,8 @@
         <td><input type = "text" value = "<%=s.getCitta()%>" name = "cittaStruttura"></td>
         <td><input type = "text" value = "<%=s.getNumAlloggi()%>" name = "numAlloggiStruttura"></td>
         <td><input type = "text" value = "<%=s.getDescrizione()%>" name = "descrizioneStruttura"></td>
-        <td><input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" formaction = "modificaDatiSistemaStrutturaServlet"></td>
-        <td><input type = "submit" value = "Cancella" class = "buttonDati" style = "width: 75px" formaction = "cancellazioneDatiSistemaStrutturaServlet"></form></td>
+        <td><input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" id = "modificaStruttura"></td>
+        <td><input type = "submit" value = "Cancella" class = "buttonDati" style = "width: 75px" id = "cancellaStruttura"></form></td>
     </tr>
     <%
         }%>
@@ -190,7 +191,7 @@
             <td><%=r.getPrenotazione().getCodicePrenotazione()%></td>
             <td><%=r.getAlloggio().getNumeroAlloggio()%></td>
             <td><%=r.getAlloggio().getStruttura().getIdStruttura()%></td>
-            <td><input type = "submit" value = "Cancella" class = "buttonDati" style = "width: 75px;" formaction = "cancellazioneDatiSistemaRecensioneServlet"></form></td>
+            <td><input type = "submit" value = "Cancella" class = "buttonDati" style = "width: 75px;" id = "cancellaRecensione"></form></td>
         </tr>
         <%}%>
     </table>
@@ -221,7 +222,7 @@
         <td><input type = "text" value = "<%=h.getPassword()%>" name = "passwordHost"></td>
         <td><%=h.getDataNascita()%></td>
         <td><input type = "text" value = "<%=h.getRecapitoTelefonico()%>" name = "recapitoTelHost"></td>
-        <td><input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" formaction = "modificaDatiSistemaHostServlet"></form></td>
+        <td><input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" id = "modificaHost"></form></td>
     </tr>
     <%}%>
 </table>
@@ -252,13 +253,163 @@
             <input type = "hidden" value = "<%=p.getNumeroCartaCredito()%>" name = "numeroCartaPrenotazione">
             <input type = "hidden" value = "<%=p.getDataScadenzaCarta()%>" name = "dataScadenzaCartaPrenotazione">
             <input type = "hidden" value = "<%=p.getCviCarta()%>" name = "cviCartaPrenotazione">
-            <td><input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px" formaction = "modificaDatiSistemaPrenotazioneServlet"></td>
+            <td><input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px" id = "modificaPrenotazione"></td>
         </tr>
         <%}%>
     </table>
     </form>
 </div>
     <%@ include file="../WEB-INF/moduli/footer.jsp"%>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<script>
+    document.querySelectorAll('[id^="modificaAlloggio"]').forEach(function (input) {
+        input.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Attendi...',
+                text: 'I dati saranno modificati a breve',
+                icon: 'success',
+                timer: 2500, // Il popup dura 4 secondi
+                showConfirmButton: false,
+                allowOutsideClick: false
+            });
+
+            setTimeout(function () {
+                window.location.href = "<%=servlet%>modificaDatiSistemaAlloggioServlet"
+            }, 2500);
+        })
+    });
+
+    document.querySelectorAll('[id^="cancellaAlloggio"]').forEach(function (input) {
+        input.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Attendi...',
+                text: 'I dati saranno modificati a breve',
+                icon: 'success',
+                timer: 2500, // Il popup dura 4 secondi
+                showConfirmButton: false,
+                allowOutsideClick: false
+            });
+
+            setTimeout(function () {
+                window.location.href = "<%=servlet%>cancellazioneDatiSistemaAlloggioServlet"
+            }, 2500);
+        })
+    });
+
+    document.querySelectorAll('[id^="modificaUtente"]').forEach(function (input) {
+        input.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Attendi...',
+                text: 'I dati saranno modificati a breve',
+                icon: 'success',
+                timer: 2500,
+                showConfirmButton: false,
+                allowOutsideClick: false
+            });
+        })
+    });
+
+    document.querySelectorAll('[id^="modificaStruttura"]').forEach(function (input) {
+        input.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Attendi...',
+                text: 'I dati saranno modificati a breve',
+                icon: 'success',
+                timer: 2500, // Il popup dura 4 secondi
+                showConfirmButton: false,
+                allowOutsideClick: false
+            });
+
+            setTimeout(function () {
+                window.location.href = "<%=servlet%>modificaDatiSistemaStrutturaServlet"
+            }, 2500);
+        })
+    });
+
+    document.querySelectorAll('[id^="cancellaStruttura"]').forEach(function (input) {
+        input.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Attendi...',
+                text: 'I dati saranno modificati a breve',
+                icon: 'success',
+                timer: 2500, // Il popup dura 4 secondi
+                showConfirmButton: false,
+                allowOutsideClick: false
+            });
+
+            setTimeout(function () {
+                window.location.href = "<%=servlet%>cancellazioneDatiSistemaStrutturaServlet"
+            }, 2500);
+        })
+    });
+
+    document.querySelectorAll('[id^="cancellaRecensione"]').forEach(function (input) {
+        input.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Attendi...',
+                text: 'I dati saranno modificati a breve',
+                icon: 'success',
+                timer: 2500, // Il popup dura 4 secondi
+                showConfirmButton: false,
+                allowOutsideClick: false
+            });
+
+            setTimeout(function () {
+                window.location.href = "<%=servlet%>cancellazioneDatiSistemaRecensioneServlet"
+            }, 2500);
+        })
+    });
+
+    document.querySelectorAll('[id^="modificaHost"]').forEach(function (input) {
+        input.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Attendi...',
+                text: 'I dati saranno modificati a breve',
+                icon: 'success',
+                timer: 2500, // Il popup dura 4 secondi
+                showConfirmButton: false,
+                allowOutsideClick: false
+            });
+
+            setTimeout(function () {
+                window.location.href = "<%=servlet%>modificaDatiSistemaHostServlet"
+            }, 2500);
+        })
+    });
+
+    document.querySelectorAll('[id^="modificaPrenotazione"]').forEach(function (input) {
+        input.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Attendi...',
+                text: 'I dati saranno modificati a breve',
+                icon: 'success',
+                timer: 2500, // Il popup dura 4 secondi
+                showConfirmButton: false,
+                allowOutsideClick: false
+            });
+
+            setTimeout(function () {
+                window.location.href = "<%=servlet%>modificaDatiSistemaPrenotazioneServlet"
+            }, 2500);
+        })
+    });
+</script>
 </body>
 </html>

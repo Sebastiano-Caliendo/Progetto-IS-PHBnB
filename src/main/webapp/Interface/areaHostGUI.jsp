@@ -53,6 +53,7 @@
     <div id="leftContainer">
         <div id="divAreaAccount"><a href="#" id="linkAreaAccount" class="normal-small-text">Area Host</a></div>
         <div id="divPrenotazioni"><a href="<%= servlet %>riepilogoStruttureServlet" id="linkPrenotazioni" class="normal-small-text">Riepilogo Strutture</a></div>
+        <div id = "divElimina"><a href = "#" onclick="apriForm()" id = "linkEliminaAccount" class = "normal-small-text">Elimina Account</a></div>
     </div>
     <div id="rightContainer">
         <div id="topContainer">
@@ -62,7 +63,9 @@
         <div id="midContainer">
             <div id="divDatiUtente" class="normal-small-text">
                 <%
+                    boolean loggato = false;
                     if(h != null) {
+                        loggato = true;
                 %>
 
                 <div class="divDati">
@@ -96,6 +99,62 @@
             <a href="<%= jsp %>modificaDatiHostGUI.jsp" id="linkModificaDati" class="normal-text"><b>Modifica dati account ></b></a>
         </div>
     </div>
+    <div id="divEliminaAccount" style="display: none">
+        <div id = "formEliminaAccount">
+            <div class="divEliminaAccount">
+                <p><b>Sei sicuro di voler eliminare il tuo account?</b></p>
+            </div>
+            <div class="divEliminaAccount">
+                <input type="submit" id = "premiElimina" class="buttons" value = "Si">
+                <input type="submit" onclick="chiudiForm()" class="buttons" value = "No">
+            </div>
+        </div>
+    </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+    document.getElementById("premiElimina").addEventListener("click", function (event) {
+        event.preventDefault();
+
+        Swal.fire({
+            title: 'Attendi...',
+            text: 'L\'account verrà eliminato a breve',
+            icon: 'success',
+            timer: 4000, // Il popup dura 4 secondi
+            showConfirmButton: false,
+            allowOutsideClick: false
+        });
+
+        setTimeout(function () {
+            reindirizzaServlet();
+        }, 4000);
+
+    });
+
+    function apriForm(){
+        document.getElementById("divEliminaAccount").style.display = "block";
+    }
+
+    function reindirizzaServlet(){
+        window.location.href = "<%=servlet%>eliminaAccount";
+    }
+
+    function chiudiForm(){
+        document.getElementById("divEliminaAccount").style.display = "none";
+    }
+
+    let loggedIn = <%=loggato%>
+    if(loggedIn) {
+        Swal.fire({
+            title: 'Benvenuto <%=h.getNome()%>',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            customClass:{
+                confirmButton: 'btn-custom'
+            }
+        });
+    }
+</script>
 </body>
 </html>

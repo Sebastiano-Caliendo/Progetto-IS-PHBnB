@@ -32,6 +32,11 @@ body {
     /*overflow-y: hidden;*/
 }
 
+.btn-custom{
+    background-color: var(--color-primary);
+    color: white;
+}
+
 form input[type = submit] {
     border: 1px solid black;
     height : 20px;

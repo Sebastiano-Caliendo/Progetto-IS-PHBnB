@@ -1,5 +1,10 @@
 <%@ page import="Storage.Alloggio.Alloggio" %>
 <%@ page import="Storage.Utente.Utente" %>
+<%@ page import="Storage.Prenotazione.Prenotazione" %>
+<%@ page import="Storage.Occupa.Occupa" %>
+<%@ page import="java.time.temporal.ChronoUnit" %>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="Utility.Validator" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -39,6 +44,7 @@
         <%
             String error = request.getParameter("error");
 
+            Validator validator = new Validator();
             Utente utente = (Utente) session.getAttribute("utente");
             Host host = (Host) session.getAttribute("host");
             Utente admin = (Utente) session.getAttribute("admin");
@@ -121,7 +127,13 @@
 
 
     <%
-        if(alloggio != null) { %>
+        if(alloggio != null) {
+            LocalDate checkIn = validator.validateData(request.getParameter("check-in"));
+            LocalDate checkOut = validator.validateData(request.getParameter("check-out"));
+
+
+            int differenzaGiorni = (int) ChronoUnit.DAYS.between(checkIn, checkOut);
+    %>
 
             <div id="alloggioSelezionatoContainer">
                 <div id="leftContainer">
@@ -198,15 +210,15 @@
                         <p><b>CVV</b></p>
                         <input type="text" name="cvvCarta" class="datiPrenotazione" minlength="3" maxlength="3" required>
                     </div>
+                    <input type = "hidden" value = "<%=alloggio.getPrezzoNotte() * differenzaGiorni%>" id = "prezzoNotteCalcolato">
                     <input type="hidden" value="<%=alloggio.getNumeroAlloggio()%>" name="numAlloggio">
                     <input type="hidden" value="<%=alloggio.getStruttura().getIdStruttura()%>" name="codStruttura">
                     <input type="hidden" value="<%=request.getParameter("numOspiti")%>" name="numOspiti">
-                </form>
-
                 <div class="divDatiPrenotazione">
-                    <button type="submit" class="buttons" onclick="handleConfirm()">Conferma</button>
+                    <button type="submit" class="buttons" onclick="handleConfirm()" id = "buttonConferma">Conferma</button>
                     <button onclick="chiudiConferma()" class="buttons">Annulla</button>
                 </div>
+                </form>
             </div>
 
     <%}%>
@@ -225,22 +237,24 @@
 
             const nome = document.getElementById("nome").value;
             const cognome = document.getElementById("cognome").value;
-            const dataCheckIn = document.getElementById("dataCheckIn").value;
-            const dataCheckOut = document.getElementById("dataCheckOut").value;
+            const dataCheckIn = document.getElementById("checkInData").value;
+            const dataCheckOut = document.getElementById("checkOutData").value;
             const nCarta = document.getElementById("numeroCarta").value;
             const scadenza = document.getElementById("dataScadenzaCarta").value;
+            const prezzoNotte = document.getElementById("prezzoNotteCalcolato").value;
 
             pdf.setFont("helvetica", "bold");
             pdf.setFontSize(16);
             pdf.text(20, 10, "Scontrino elettronico");
 
             pdf.setFont("times", "normal");
-            pdf.text(20, 20, `Nome: ` + nome);
-            pdf.text(20, 30, `Cognome: ` + cognome);
-            pdf.text(20, 40, `Data Check In: ` + dataCheckIn);
-            pdf.text(20, 50, `Data Check Out: ` + dataCheckOut);
-            pdf.text(20, 60, `Numero Carta: ` + nCarta);
-            pdf.text(20, 70, `Data di Scadenza: ` + scadenza);
+            pdf.text(20, 30, `Nome: ` + nome);
+            pdf.text(20, 40, `Cognome: ` + cognome);
+            pdf.text(20, 50, `Data Check In: ` + dataCheckIn);
+            pdf.text(20, 60, `Data Check Out: ` + dataCheckOut);
+            pdf.text(20, 70, `Numero Carta: ` + nCarta);
+            pdf.text(20, 80, `Data di Scadenza: ` + scadenza);
+            pdf.text(20, 90, `Prezzo totale prenotazione: ` + prezzoNotte);
 
             pdf.save('scontrino.pdf');
         }
