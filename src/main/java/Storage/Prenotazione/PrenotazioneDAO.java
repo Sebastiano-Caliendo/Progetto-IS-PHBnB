@@ -115,7 +115,7 @@ public class PrenotazioneDAO {
     public int doSave(Prenotazione prenotazione) {
         try (Connection con = Connessione.getConnection()) {
 
-            PreparedStatement ps = con.prepareStatement("insert into prenotazione (nomeIntestatario, cognomeIntestatario, check_in, check_out, fk_utente, numero_persone, numero_carta, data_scadenza_carta, cvi_carta) values (?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement("insert into prenotazione (nomeIntestatario, cognomeIntestatario, check_in, check_out, fk_utente, numero_persone, numero_carta, data_scadenza_carta, cvi_carta) values (?, ?, ?, ?, ?, ?, ?, ?, SHA1(?))", Statement.RETURN_GENERATED_KEYS);
 
             ps.setString(1, prenotazione.getNomeIntestatario());
             ps.setString(2, prenotazione.getCognomeIntestatario());

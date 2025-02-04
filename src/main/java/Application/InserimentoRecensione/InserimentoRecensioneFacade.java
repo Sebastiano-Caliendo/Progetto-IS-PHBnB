@@ -84,7 +84,7 @@ public class InserimentoRecensioneFacade {
      *
      * @return restituisce una lista di codici delle prenotazioni recensite
      **/
-    public List<Integer> visualizzaRecensioniUtente(Utente utente){
+    public List<Integer> visualizzaRecensioniUtente(Utente utente) {
         RecensioneDAO recensioneDAO = new RecensioneDAO();
         return recensioneDAO.codiciPrenotazioniRecensite(utente);
     }
