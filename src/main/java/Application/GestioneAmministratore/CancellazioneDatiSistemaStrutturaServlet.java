@@ -16,9 +16,17 @@ public class CancellazioneDatiSistemaStrutturaServlet extends HttpServlet {
         String idStruttura = req.getParameter("idStruttura");
 
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
-        gestioneAmministratoreFacade.cancellazioneDatiSistemaStruttura(idStruttura);
+        boolean flag = gestioneAmministratoreFacade.cancellazioneDatiSistemaStruttura(idStruttura);
 
-        resp.sendRedirect(req.getContextPath() + "/Interface/indexAdmin.jsp");
+        String address;
+
+        if(flag) {
+            address = "Interface/indexAdminGUI.jsp?op=ok";
+        } else {
+            address = "Interface/indexAdminGUI.jsp?error=1";
+        }
+
+        resp.sendRedirect(address);
     }
 
     @Override

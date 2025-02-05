@@ -214,12 +214,11 @@ public class GestioneAmministratoreFacade {
      * @param numAlloggi campo che contiene il nuovo numero degli alloggi della struttura
      * @param numCivico campo che contiene il nuovo numero civico della struttura
      * @param descrizione campo che contiene la nuova descrizione della struttura
-     * @param urlImmagine campo che contiene l'url della nuova immagine della struttura
      * @param idStruttura campo che contiene l'id della struttura
      * @throws RuntimeException eccezione generica di java.lang
      * @return il metodo restituisce un valore booleano (true o false) rispetto a se è stata effettuata o meno la modifica
      */
-    public boolean modificaDatiSistemaStruttura(String fkHost, String nomeStruttura, String via, String citta, String numAlloggi, String numCivico, String descrizione, String urlImmagine, String idStruttura){
+    public boolean modificaDatiSistemaStruttura(String fkHost, String nomeStruttura, String via, String citta, String numAlloggi, String numCivico, String descrizione, String idStruttura){
 
         try {
             HostDAO hostDAO = new HostDAO();

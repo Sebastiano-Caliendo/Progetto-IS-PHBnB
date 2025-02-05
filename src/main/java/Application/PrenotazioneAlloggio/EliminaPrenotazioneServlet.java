@@ -28,11 +28,7 @@ public class EliminaPrenotazioneServlet extends HttpServlet {
         PrenotazioneAlloggioFacade prenotazioneAlloggioFacade = new PrenotazioneAlloggioFacade();
         boolean flag = prenotazioneAlloggioFacade.eliminaPrenotazione(codPrenotazione);
 
-        List<Occupa> prenotazioni = prenotazioneAlloggioFacade.visualizzaPrenotazioni(u.getEmail());
-
-        if(!prenotazioni.isEmpty()) {
-            req.setAttribute("prenotazioni", prenotazioni);
-        }
+        req.getSession().setAttribute("prenotazioni", prenotazioneAlloggioFacade.visualizzaPrenotazioni(u.getEmail()));
 
         InserimentoRecensioneFacade inserimentoRecensioneFacade = new InserimentoRecensioneFacade();
         List<Integer> codiciPrenotazione = inserimentoRecensioneFacade.visualizzaRecensioniUtente(u);

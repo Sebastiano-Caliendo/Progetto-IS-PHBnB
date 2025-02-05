@@ -145,7 +145,8 @@
     }
 
     let loggedIn = <%=loggato%>
-    if(loggedIn) {
+    // Controlla se l'utente è loggato e se il popup è già stato mostrato
+    if (loggedIn && !localStorage.getItem('welcomePopupShown')) {
         Swal.fire({
             title: 'Benvenuto <%=h.getNome()%>',
             icon: 'success',
@@ -154,6 +155,9 @@
                 confirmButton: 'btn-custom'
             }
         });
+
+        // Imposta un flag nel localStorage per evitare che il popup venga mostrato di nuovo
+        localStorage.setItem('welcomePopupShown', 'true');
     }
 </script>
 </body>

@@ -4,6 +4,7 @@ import Application.Autenticazione.AutenticazioneFacade;
 import Application.PrenotazioneAlloggio.PrenotazioneAlloggioFacade;
 import Storage.Alloggio.Alloggio;
 import Storage.Utente.Utente;
+import Storage.Utente.UtenteDAO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.junit.Before;
@@ -34,7 +35,7 @@ public class PrenotazioneAlloggioServiceTests {
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute("utente")).thenReturn(utente);
 
-        prenotazioneAlloggioFacade = Mockito.mock(PrenotazioneAlloggioFacade.class);
+        prenotazioneAlloggioFacade = new PrenotazioneAlloggioFacade();
     }
 
     @Test
@@ -64,7 +65,7 @@ public class PrenotazioneAlloggioServiceTests {
     @Test
     public void TC_3_1_5() {
         assertFalse(prenotazioneAlloggioFacade.finalizzaPrenotazione(utente, "Mario", "Rossi", "2024-03-10", "2024-03-15",
-                "1", "101", "2", "1111222233334444", "2026-01-31", "111"));
+                "1", "101", "2", "11112222333344445", "2026-01-31", "111"));
     }
 
     @Test
@@ -81,7 +82,7 @@ public class PrenotazioneAlloggioServiceTests {
 
     @Test
     public void TC_3_1_8() {
-        assertTrue(prenotazioneAlloggioFacade.finalizzaPrenotazione(utente, "Mario", "Rossi", "2024-03-10", "2024-03-15",
-                "1", "101", "2", "1111222233334444", "2026-01-31", "111"));
+        assertTrue(prenotazioneAlloggioFacade.finalizzaPrenotazione(utente, "Mario", "Rossi", "2026-03-10", "2026-03-15",
+                "1", "101", "2", "1111222233334444", "2027-01-31", "111"));
     }
 }

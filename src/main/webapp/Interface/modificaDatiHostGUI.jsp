@@ -80,12 +80,7 @@
                 </div>
 
                 <div class="formElements">
-                    <label for="dataNascita" id="dataNascitaLabel">Città</label>
-                    <input type="text" id="dataNascita" name="dataNascita" value="<%=host.getDataNascita()%>">
-                </div>
-
-                <div class="formElements">
-                    <label for="recapitoTelefonico" id="recapitoTelefonicoLabel">Numero civico</label>
+                    <label for="recapitoTelefonico" id="recapitoTelefonicoLabel">Recapito telefonico</label>
                     <input type="text" id="recapitoTelefonico" name="recapitoTelefonico" value="<%=host.getRecapitoTelefonico()%>">
                 </div>
 
@@ -112,14 +107,14 @@
             title: 'Attendi...',
             text: 'I dati saranno modificati a breve',
             icon: 'success',
-            timer: 4000, // Il popup dura 4 secondi
+            timer: 2000, // Il popup dura 2 secondi
             showConfirmButton: false,
             allowOutsideClick: false
         });
 
         setTimeout(function () {
             document.querySelector("form").submit();
-        }, 4000);
+        }, 2000);
     });
 </script>
 </body>

@@ -24,19 +24,13 @@ public class VisualizzaPrenotazioniServlet extends HttpServlet {
 
         Utente u = (Utente) req.getSession().getAttribute("utente");
 
-        PrenotazioneAlloggioFacade prenotazioneAlloggioFacade = new PrenotazioneAlloggioFacade();
         InserimentoRecensioneFacade inserimentoRecensioneFacade = new InserimentoRecensioneFacade();
 
-        List<Occupa> prenotazioni = prenotazioneAlloggioFacade.visualizzaPrenotazioni(u.getEmail());
+        List<Occupa> prenotazioni = (List<Occupa>) req.getSession().getAttribute("prenotazioni");
         List<Integer> codiciPrenotazione = inserimentoRecensioneFacade.visualizzaRecensioniUtente(u);
 
-        if(!prenotazioni.isEmpty()) {
-            req.setAttribute("prenotazioni", prenotazioni);
-        }
-
-        if(!codiciPrenotazione.isEmpty()) {
-            req.setAttribute("codiciPrenotazioniRecensite", codiciPrenotazione);
-        }
+        req.setAttribute("prenotazioni", prenotazioni);
+        req.setAttribute("codiciPrenotazioniRecensite", codiciPrenotazione);
 
         String address = "Interface/visualizzaStoricoPrenotazioniGUI.jsp";
 

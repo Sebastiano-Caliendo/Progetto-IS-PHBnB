@@ -17,9 +17,17 @@ public class CancellazioneDatiSistemaAlloggioServlet extends HttpServlet {
         String fkStruttura = req.getParameter("fkStruttura");
 
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
-        gestioneAmministratoreFacade.cancellazioneDatiSitemaAlloggio(numAlloggio, fkStruttura);
+        boolean flag = gestioneAmministratoreFacade.cancellazioneDatiSitemaAlloggio(numAlloggio, fkStruttura);
 
-        resp.sendRedirect(req.getContextPath() + "/Interface/indexAdmin.jsp");
+        String address;
+
+        if(flag) {
+            address = "Interface/indexAdminGUI.jsp?op=ok";
+        } else {
+            address = "Interface/indexAdminGUI.jsp?error=1";
+        }
+
+        resp.sendRedirect(address);
     }
 
     @Override

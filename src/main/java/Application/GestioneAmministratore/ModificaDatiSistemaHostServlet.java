@@ -26,19 +26,17 @@ public class ModificaDatiSistemaHostServlet extends HttpServlet {
         String recapitoTelefonico = req.getParameter("recapitoTelHost");
 
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
+        boolean flag = gestioneAmministratoreFacade.modificaDatiSistemaHost(oldEmailHost, email, nome, cognome, password, recapitoTelefonico);
 
-        /*Host host = new Host();
+        String address;
 
-        host.setEmail(email);
-        host.setNome(nome);
-        host.setCognome(cognome);
-        host.setPassword(password);
-        host.setRecapitoTelefonico(recapitoTelefonico);*/
+        if(flag) {
+            address = "Interface/indexAdminGUI.jsp?op=ok";
+        } else {
+            address = "Interface/indexAdminGUI.jsp?error=1";
+        }
 
-        gestioneAmministratoreFacade.modificaDatiSistemaHost(oldEmailHost, email, nome, cognome, password, recapitoTelefonico);
-
-        resp.sendRedirect(req.getContextPath() + "/Interface/indexAdmin.jsp");
-
+        resp.sendRedirect(address);
     }
 
     @Override

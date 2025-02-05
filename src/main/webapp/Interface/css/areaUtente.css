@@ -81,7 +81,7 @@ a#linkEliminaAccount:hover{
     color: var(--color-primary);
 }
 
-#divEliminaAccount {
+#divEliminaAccount, #divVisualizzaScontrino {
     position: fixed;
     height: 15%;
     width: 40%;
@@ -91,6 +91,15 @@ a#linkEliminaAccount:hover{
     transform: translate(-50%, -50%);
     border: 1px solid var(--color-primary);
     border-radius: 25px;
+}
+
+#divVisualizzaScontrino {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 20% !important;
+    width: 20% !important;
+    background-color: white !important;
+    border: 2px solid darkgoldenrod !important;
 }
 
 #divEliminaAccount p{

@@ -24,10 +24,10 @@ public class ModificaDatiPersonaliHostServlet extends HttpServlet {
         String email = req.getParameter("email");
         String nome = req.getParameter("nome");
         String cognome = req.getParameter("cognome");
-        String password = req.getParameter("password");
+        String password = req.getParameter("nuovaPassword");
         String recapitoTelefonico = req.getParameter("recapitoTelefonico");
 
-        Host h = (Host) req.getSession().getAttribute("Utente");
+        Host h = (Host) req.getSession().getAttribute("host");
 
         String address;
 

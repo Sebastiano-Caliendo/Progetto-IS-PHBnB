@@ -27,23 +27,18 @@ public class ModificaDatiSistemaUtenteServlet extends HttpServlet {
         String via = req.getParameter("viaUtente");
         String recapitoTelefonico = req.getParameter("recapitoTelefonicoUtente");
 
-        /*Utente utente = new Utente();
-
-        utente.setAdmin(isAdmin);
-        utente.setCitta(citta);
-        utente.setCognome(cognome);
-        utente.setNome(nome);
-        utente.setEmail(email);
-        utente.setPassword(password);
-        utente.setNumeroCivico(numeroCivico);
-        utente.setVia(via);
-        utente.setRecapitoTelefonico(recapitoTelefonico);*/
-
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
-        gestioneAmministratoreFacade.modificaDatiSistemaUtente(oldEmailUtente, email, nome, cognome, password, citta, numeroCivico, via, recapitoTelefonico);
+        boolean flag = gestioneAmministratoreFacade.modificaDatiSistemaUtente(oldEmailUtente, email, nome, cognome, password, citta, numeroCivico, via, recapitoTelefonico);
 
+        String address;
 
-        resp.sendRedirect(req.getContextPath() + "/Interface/indexAdmin.jsp");
+        if(flag) {
+            address = "Interface/indexAdminGUI.jsp?op=ok";
+        } else {
+            address = "Interface/indexAdminGUI.jsp?error=1";
+        }
+
+        resp.sendRedirect(address);
     }
 
     @Override

@@ -1,4 +1,3 @@
-<%@ page import="Storage.Utente.Utente" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -132,14 +131,14 @@
                 title: 'Attendi...',
                 text: 'L\'account verrà eliminato a breve',
                 icon: 'success',
-                timer: 4000, // Il popup dura 4 secondi
+                timer: 2000, // Il popup dura 2 secondi
                 showConfirmButton: false,
                 allowOutsideClick: false
             });
 
             setTimeout(function () {
                 reindirizzaServlet();
-            }, 4000);
+            }, 2000);
 
         });
 
@@ -156,7 +155,9 @@
         }
 
         let loggedIn = <%=loggato%>
-            if(loggedIn) {
+
+            // Controlla se l'utente è loggato e se il popup è già stato mostrato
+            if (loggedIn && !localStorage.getItem('welcomePopupShown')) {
                 Swal.fire({
                     title: 'Benvenuto <%=u.getNome()%>',
                     icon: 'success',
@@ -165,6 +166,9 @@
                         confirmButton: 'btn-custom'
                     }
                 });
+
+                // Imposta un flag nel localStorage per evitare che il popup venga mostrato di nuovo
+                localStorage.setItem('welcomePopupShown', 'true');
             }
     </script>
 </body>

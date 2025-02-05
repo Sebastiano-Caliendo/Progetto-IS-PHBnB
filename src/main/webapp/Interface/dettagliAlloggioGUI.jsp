@@ -87,15 +87,11 @@
             <button id="linkAccedi" onclick="window.location.href='<%= jsp %>loginUtenteGUI.jsp';" class="small-text buttons">Accedi</button>
         </div>
 
-        <%
-            }
+        <%}%>
 
-
-            if(error != null && error.equals("1")) { %>
-                <script>alert("Prenotazione non effettuata!")</script>
-            <%}
-        %>
     </div>
+
+    <p id="parErrore" style="display: none">Prenotazione non effettuata! Dati non inseriti correttamente</p>
 
     <div id="midContainer">
         <div id="containerFiltri">
@@ -118,7 +114,7 @@
                 <input form="formRicerca" type="text" name="numOspiti" placeholder="Aggiungi ospiti" class="small-text" style="width: 90%;" required>
             </div>
             <div id="divCerca" class="normal-small-text">
-                <form id="formRicerca" action="visualizzaAlloggi">
+                <form id="formRicerca" action="<%= servlet %>visualizzaAlloggi">
                     <input type="submit" value="Cerca" id="buttonCerca">
                 </form>
             </div>
@@ -169,7 +165,7 @@
                                 </div>
                                 <div class="prezzo">
                                     <!--<p class="normal-text parDatiPrenotazione"></p>-->
-                                    <p><b><%=alloggio.getPrezzoNotte()%></b></p>
+                                    <p><b><%=alloggio.getPrezzoNotte() * differenzaGiorni%></b></p>
                                 </div>
                             <!--</div>-->
                         </div>
@@ -214,51 +210,19 @@
                     <input type="hidden" value="<%=alloggio.getNumeroAlloggio()%>" name="numAlloggio">
                     <input type="hidden" value="<%=alloggio.getStruttura().getIdStruttura()%>" name="codStruttura">
                     <input type="hidden" value="<%=request.getParameter("numOspiti")%>" name="numOspiti">
+
                 <div class="divDatiPrenotazione">
-                    <button type="submit" class="buttons" onclick="handleConfirm()" id = "buttonConferma">Conferma</button>
+                    <input type="submit" class="buttons" id = "buttonConferma" value="Conferma">
                     <button onclick="chiudiConferma()" class="buttons">Annulla</button>
                 </div>
+
                 </form>
             </div>
 
     <%}%>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+
     <script>
-
-        async function handleConfirm(){
-            await generatePDF();
-            document.getElementById("formConfermaPrenotazione").submit();
-        }
-
-         async function generatePDF() {
-            const { jsPDF } = window.jspdf;
-            const pdf = new jsPDF();
-
-            const nome = document.getElementById("nome").value;
-            const cognome = document.getElementById("cognome").value;
-            const dataCheckIn = document.getElementById("checkInData").value;
-            const dataCheckOut = document.getElementById("checkOutData").value;
-            const nCarta = document.getElementById("numeroCarta").value;
-            const scadenza = document.getElementById("dataScadenzaCarta").value;
-            const prezzoNotte = document.getElementById("prezzoNotteCalcolato").value;
-
-            pdf.setFont("helvetica", "bold");
-            pdf.setFontSize(16);
-            pdf.text(20, 10, "Scontrino elettronico");
-
-            pdf.setFont("times", "normal");
-            pdf.text(20, 30, `Nome: ` + nome);
-            pdf.text(20, 40, `Cognome: ` + cognome);
-            pdf.text(20, 50, `Data Check In: ` + dataCheckIn);
-            pdf.text(20, 60, `Data Check Out: ` + dataCheckOut);
-            pdf.text(20, 70, `Numero Carta: ` + nCarta);
-            pdf.text(20, 80, `Data di Scadenza: ` + scadenza);
-            pdf.text(20, 90, `Prezzo totale prenotazione: ` + prezzoNotte);
-
-            pdf.save('scontrino.pdf');
-        }
-
         function apriConferma() {
 
             let flag = false;

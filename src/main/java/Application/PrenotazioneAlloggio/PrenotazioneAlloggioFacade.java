@@ -8,6 +8,7 @@ import Storage.Prenotazione.Prenotazione;
 import Storage.Prenotazione.PrenotazioneDAO;
 import Storage.Utente.Utente;
 import Utility.Validator;
+import jakarta.servlet.http.HttpSession;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -118,6 +119,8 @@ public class PrenotazioneAlloggioFacade {
             OccupaDAO occupaDAO = new OccupaDAO();
             Occupa o = new Occupa(p, alloggio , costoPrenotazione);
             occupaDAO.doSave(o);
+
+
 
             return true;
         } catch (RuntimeException e) {

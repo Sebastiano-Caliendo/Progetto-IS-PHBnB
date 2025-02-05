@@ -22,17 +22,19 @@ public class ModificaDatiSistemaAlloggioServlet extends HttpServlet {
         String tipoAlloggio = req.getParameter("tipoAlloggio");
         String descrizione = req.getParameter("descAlloggio");
 
-        /*Alloggio alloggio = new Alloggio();
-
-        alloggio.setTipoAlloggio(tipoAlloggio);
-        alloggio.setDescrizione(descrizione);
-        alloggio.setPostiletto(postiLetto);
-        alloggio.setPrezzoNotte(prezzoNotte);*/
 
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
-        gestioneAmministratoreFacade.modificaDatiSistemaAlloggio(numeroAlloggio, prezzoNotte, postiLetto, tipoAlloggio, descrizione, oldNumeroAlloggio, fkStruttura);
+        boolean flag = gestioneAmministratoreFacade.modificaDatiSistemaAlloggio(numeroAlloggio, prezzoNotte, postiLetto, tipoAlloggio, descrizione, oldNumeroAlloggio, fkStruttura);
 
-        resp.sendRedirect(req.getContextPath() + "/Interface/indexAdmin.jsp");
+        String address;
+
+        if(flag) {
+            address = "Interface/indexAdminGUI.jsp?op=ok";
+        } else {
+            address = "Interface/indexAdminGUI.jsp?error=1";
+        }
+
+        resp.sendRedirect(address);
     }
 
     @Override

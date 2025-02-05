@@ -26,25 +26,17 @@ public class ModificaDatiSistemaPrenotazioneServlet extends HttpServlet {
         String numeroPersone = req.getParameter("numeroPersonePrenotazione");
 
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
+        boolean flag = gestioneAmministratoreFacade.modificaDatiSistemaPrenotazione(codicePrenotazione, checkIn, checkOut, numeroPersone);
 
-        /*Prenotazione p = new Prenotazione();
-        p.setCodicePrenotazione(codicePrenotazione);
-        p.setCheckIn(LocalDate.parse(checkIn));
-        p.setCheckOut(LocalDate.parse(checkOut));
-        p.setNumeroPersone(numeroPersone);
-        p.setCviCarta(cviCarta);
-        p.setDataScadenzaCarta(dataScadenzaCarta);
+        String address;
 
-        UtenteDAO utenteDAO = new UtenteDAO();
-        Utente utente = utenteDAO.doRetrieveById(fkUtente);
+        if(flag) {
+            address = "Interface/indexAdminGUI.jsp?op=ok";
+        } else {
+            address = "Interface/indexAdminGUI.jsp?error=1";
+        }
 
-        p.setUtente(utente);
-        p.setNumeroCartaCredito(numeroCarta);*/
-
-        gestioneAmministratoreFacade.modificaDatiSistemaPrenotazione(codicePrenotazione, checkIn, checkOut, numeroPersone);
-
-        resp.sendRedirect(req.getContextPath() + "/Interface/indexAdmin.jsp");
-
+        resp.sendRedirect(address);
     }
 
     @Override

@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
             flag = autenticazioneFacade.login(email, password, tipo);
 
             if(flag)
-                address = "Interface/indexAdmin.jsp";
+                address = "Interface/indexAdminGUI.jsp";
             else
                 address = "Interface/loginHostGUI.jsp?error=1";
 

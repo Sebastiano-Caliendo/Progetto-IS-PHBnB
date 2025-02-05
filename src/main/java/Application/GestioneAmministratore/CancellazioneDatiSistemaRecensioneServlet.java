@@ -17,10 +17,17 @@ public class CancellazioneDatiSistemaRecensioneServlet extends HttpServlet {
         String idRecensione = req.getParameter("idRecensione");
 
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
-        gestioneAmministratoreFacade.cancellazioneDatiSitemaRecensione(idRecensione);
+        boolean flag = gestioneAmministratoreFacade.cancellazioneDatiSitemaRecensione(idRecensione);
 
-        resp.sendRedirect(req.getContextPath() + "/Interface/indexAdmin.jsp");
+        String address;
 
+        if(flag) {
+            address = "Interface/indexAdminGUI.jsp?op=ok";
+        } else {
+            address = "Interface/indexAdminGUI.jsp?error=1";
+        }
+
+        resp.sendRedirect(address);
     }
 
     @Override

@@ -115,6 +115,8 @@ public class HostDAO {
     public void doUpdate(Host host, String email, String nome, String cognome, String password, String recapitoTelefonico) {
         try (Connection con = Connessione.getConnection()) {
 
+            System.out.println("sono in update");
+
             PreparedStatement ps = con.prepareStatement("UPDATE host SET email=?, nome=?, cognome=?, password_=SHA1(?), recapito_telefonico=? WHERE email=?");
 
             ps.setString(1, email);

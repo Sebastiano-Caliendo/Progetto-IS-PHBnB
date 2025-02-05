@@ -2,10 +2,14 @@ package Application.Autenticazione;
 
 import Storage.Host.Host;
 import Storage.Host.HostDAO;
+import Storage.Occupa.Occupa;
+import Storage.Occupa.OccupaDAO;
 import Storage.Utente.Utente;
 import Storage.Utente.UtenteDAO;
 import Utility.Validator;
 import jakarta.servlet.http.HttpSession;
+
+import java.util.List;
 
 /**
  * classe che contiene tutti i metodi necessari per effettuare autenticazione
@@ -112,11 +116,15 @@ public class AutenticazioneFacade {
         if(tipo.equals("user")) {
             Utente u;
 
+            OccupaDAO occupaDAO = new OccupaDAO();
             UtenteDAO utenteDAO = new UtenteDAO();
             u = utenteDAO.doRetrieveByEmailAndPassword(email, password);
 
-            if(u != null)
+            if(u != null) {
+                List<Occupa> prenotazioni = occupaDAO.doRetrieveByUtente(email);
+                session.setAttribute("prenotazioni", prenotazioni);
                 session.setAttribute("utente", u);
+            }
             else
                 return false;
         } else if(tipo.equals("host")){
@@ -204,11 +212,19 @@ public class AutenticazioneFacade {
      */
     public boolean modificaDatiPersonaliHost(Host h, String email, String nome, String cognome, String pwd, String recTel) {
 
+        System.out.println("sono in modifica dati host");
+
         HostDAO hostDAO = new HostDAO();
 
-        if(h == null) return false;
+        if(h == null) {
+            System.out.println("host = null");
+            return false;
+        }
 
         try {
+
+            System.out.println("sto per chiamare update");
+
             hostDAO.doUpdate(h,
                             validator.validateEmail(email),
                             validator.validateNomeCognome(nome),

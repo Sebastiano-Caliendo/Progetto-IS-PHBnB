@@ -1,7 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="Storage.Alloggio.Alloggio" %>
 <%@ page import="Storage.Recensione.Recensione" %>
-<%@ page import="Storage.Host.HostDAO" %>
 <%@ page import="Storage.Host.Host" %>
 <%@ page import="Storage.Prenotazione.Prenotazione" %>
 <%@ page import="Storage.Struttura.Struttura" %>
@@ -70,9 +69,10 @@
     <%
         List<Utente> utenti = (List<Utente>) request.getAttribute("utenti");
 
+
         for(Utente u: utenti){
     %>
-        <form method = "post" id = "formUtente">
+        <form method = "post" action="<%= servlet %>modificaDatiSistemaUtenteServlet">
     <tr>
         <td><input type = "text" value = "<%=u.getEmail()%>" name = "emailUtente"></td>
         <td><input type = "text" value = "<%=u.getNome()%>" name = "nomeUtente"></td>
@@ -82,10 +82,10 @@
         <td><input type = "text" value = "<%=u.getNumeroCivico()%>" name = "numeroCivicoUtente"></td>
         <td><input type = "text" value = "<%=u.getVia()%>" name = "viaUtente"></td>
         <td><%=u.getDataNascita()%></td>
-        <input type = "hidden" value = <%=u.getEmail()%> name = "oldEmailUtente">
+        <input type = "hidden" value = "<%=u.getEmail()%>" name = "oldEmailUtente">
         <td><input type = "text" value = "<%=u.getRecapitoTelefonico()%>" name = "recapitoTelefonicoUtente"></td>
         <input type = "hidden" value = "<%=u.isAdmin()%>" name = "isAdminUtente">
-        <td><input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" formaction = "modificaDatiSistemaUtenteServlet" id = "modificaUtente"></form></td>
+        <td><input type = "submit" value = "Modifica" class = "buttonDati modificaUtente" style = "width: 75px;" onclick=""></form></td>
     </tr>
     <%}%>
 </table>
@@ -111,7 +111,7 @@
 
         for(Alloggio a: alloggi){
     %>
-    <form method="post">
+    <form method="post" action="<%= servlet %>modificaDatiSistemaAlloggioServlet">
     <tr>
         <input type = "hidden" value = "<%=a.getNumeroAlloggio()%>" name = "oldNumAlloggio">
         <td><input type = "text" value = "<%=a.getNumeroAlloggio()%>" name = "numAlloggio"></td>
@@ -120,8 +120,8 @@
         <td><input type = "text" value = "<%=a.getPostiletto()%>" name = "postiLetto"></td>
         <td><input type = "text" value = "<%=a.getTipoAlloggio()%>" name = "tipoAlloggio"></td>
         <td><input type = "text" value = "<%=a.getDescrizione()%>" name = "descAlloggio"></td>
-        <td><input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" id = "modificaAlloggio"></td>
-        <td><input type = "submit" value = "Cancella" class = "buttonDati" style = "width: 75px;" id = "cancellaAlloggio"></form></td>
+        <td><input type = "submit" value = "Modifica" class = "buttonDati modificaAlloggio" style = "width: 75px;"></td>
+        <td><input type = "submit" value = "Cancella" class = "buttonDati cancellaAlloggio" style = "width: 75px;" formaction = "<%= servlet %>cancellazioneDatiSistemaAlloggioServlet"></form></td>
     </tr>
     <%}%>
 </table>
@@ -145,21 +145,23 @@
 
         for(Struttura s: strutture){
     %>
-        <form method="post">
+        <form method="post" action="<%= servlet %>modificaDatiSistemaStrutturaServlet">
     <tr>
         <input type = "hidden" value = "<%=s.getIdStruttura()%>" name = "idStruttura">
+        <input type = "hidden" value = "<%=s.getHost().getEmail()%>" name = "fkHost">
+        <input type = "hidden" value = "<%=s.getNumAlloggi()%>" name = "numAlloggiStruttura">
+
         <td><%=s.getHost().getEmail()%></td>
         <td><input type = "text" value = "<%=s.getNomeStruttura()%>" name = "nomeStruttura"></td>
         <td><input type = "text" value = "<%=s.getVia()%>" name = "viaStruttura"></td>
         <td><input type = "text" value = "<%=s.getNumCivico()%>" name = "numCivicoStruttura"></td>
         <td><input type = "text" value = "<%=s.getCitta()%>" name = "cittaStruttura"></td>
-        <td><input type = "text" value = "<%=s.getNumAlloggi()%>" name = "numAlloggiStruttura"></td>
+        <td><%=s.getNumAlloggi()%></td>
         <td><input type = "text" value = "<%=s.getDescrizione()%>" name = "descrizioneStruttura"></td>
-        <td><input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" id = "modificaStruttura"></td>
-        <td><input type = "submit" value = "Cancella" class = "buttonDati" style = "width: 75px" id = "cancellaStruttura"></form></td>
+        <td><input type = "submit" value = "Modifica" class = "buttonDati modificaStruttura" style = "width: 75px;"></td>
+        <td><input type = "submit" value = "Cancella" class = "buttonDati cancellaStruttura" style = "width: 75px" formaction="<%= servlet %>cancellazioneDatiSistemaStrutturaServlet"></form></td>
     </tr>
-    <%
-        }%>
+    <%}%>
 </table>
 </div>
     <br>
@@ -181,7 +183,7 @@
 
             for(Recensione r: recensioni){
         %>
-        <form method = "post">
+        <form method = "post" action="<%= servlet %>cancellazioneDatiSistemaRecensioneServlet">
         <tr>
             <input type = "hidden" value = "<%=r.getIdRecensione()%>" name = "idRecensione">
             <td><%=r.getUtente().getEmail()%></td>
@@ -191,7 +193,7 @@
             <td><%=r.getPrenotazione().getCodicePrenotazione()%></td>
             <td><%=r.getAlloggio().getNumeroAlloggio()%></td>
             <td><%=r.getAlloggio().getStruttura().getIdStruttura()%></td>
-            <td><input type = "submit" value = "Cancella" class = "buttonDati" style = "width: 75px;" id = "cancellaRecensione"></form></td>
+            <td><input type = "submit" value = "Cancella" class = "buttonDati cancellaRecensione" style = "width: 75px;"></form></td>
         </tr>
         <%}%>
     </table>
@@ -214,15 +216,16 @@
 
         for(Host h: hosts){
     %>
-        <form method = "post">
+        <form method = "post" action="<%= servlet %>modificaDatiSistemaHostServlet">
     <tr>
+        <input type="hidden" value="<%=h.getEmail()%>" name="oldEmailHost">
         <td><input type = "text" value = "<%=h.getEmail()%>" name = "emailHost"></td>
         <td><input type = "text" value = "<%=h.getNome()%>" name = "nomeHost"></td>
         <td><input type = "text" value = "<%=h.getCognome()%>" name = "cognomeHost"></td>
         <td><input type = "text" value = "<%=h.getPassword()%>" name = "passwordHost"></td>
         <td><%=h.getDataNascita()%></td>
         <td><input type = "text" value = "<%=h.getRecapitoTelefonico()%>" name = "recapitoTelHost"></td>
-        <td><input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px;" id = "modificaHost"></form></td>
+        <td><input type = "submit" value = "Modifica" class = "buttonDati modificaHost" style = "width: 75px;"></form></td>
     </tr>
     <%}%>
 </table>
@@ -243,7 +246,7 @@
 
             for(Prenotazione p: prenotazioni){
         %>
-        <form method = "post">
+        <form method = "post" action="<%= servlet %>modificaDatiSistemaPrenotazioneServlet">
         <tr>
             <input type = "hidden" value = "<%=p.getCodicePrenotazione()%>" name = "codicePrenotazione">
             <td><input type = "date" value = "<%=p.getCheckIn()%>" name = "checkInPrenotazione"></td>
@@ -253,163 +256,13 @@
             <input type = "hidden" value = "<%=p.getNumeroCartaCredito()%>" name = "numeroCartaPrenotazione">
             <input type = "hidden" value = "<%=p.getDataScadenzaCarta()%>" name = "dataScadenzaCartaPrenotazione">
             <input type = "hidden" value = "<%=p.getCviCarta()%>" name = "cviCartaPrenotazione">
-            <td><input type = "submit" value = "Modifica" class = "buttonDati" style = "width: 75px" id = "modificaPrenotazione"></td>
+            <td><input type = "submit" value = "Modifica" class = "buttonDati modificaPrenotazione" style = "width: 75px"></td>
         </tr>
         <%}%>
     </table>
     </form>
 </div>
+
     <%@ include file="../WEB-INF/moduli/footer.jsp"%>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<script>
-    document.querySelectorAll('[id^="modificaAlloggio"]').forEach(function (input) {
-        input.addEventListener("click", function (event) {
-            event.preventDefault();
-
-            Swal.fire({
-                title: 'Attendi...',
-                text: 'I dati saranno modificati a breve',
-                icon: 'success',
-                timer: 2500, // Il popup dura 4 secondi
-                showConfirmButton: false,
-                allowOutsideClick: false
-            });
-
-            setTimeout(function () {
-                window.location.href = "<%=servlet%>modificaDatiSistemaAlloggioServlet"
-            }, 2500);
-        })
-    });
-
-    document.querySelectorAll('[id^="cancellaAlloggio"]').forEach(function (input) {
-        input.addEventListener("click", function (event) {
-            event.preventDefault();
-
-            Swal.fire({
-                title: 'Attendi...',
-                text: 'I dati saranno modificati a breve',
-                icon: 'success',
-                timer: 2500, // Il popup dura 4 secondi
-                showConfirmButton: false,
-                allowOutsideClick: false
-            });
-
-            setTimeout(function () {
-                window.location.href = "<%=servlet%>cancellazioneDatiSistemaAlloggioServlet"
-            }, 2500);
-        })
-    });
-
-    document.querySelectorAll('[id^="modificaUtente"]').forEach(function (input) {
-        input.addEventListener("click", function (event) {
-            event.preventDefault();
-
-            Swal.fire({
-                title: 'Attendi...',
-                text: 'I dati saranno modificati a breve',
-                icon: 'success',
-                timer: 2500,
-                showConfirmButton: false,
-                allowOutsideClick: false
-            });
-        })
-    });
-
-    document.querySelectorAll('[id^="modificaStruttura"]').forEach(function (input) {
-        input.addEventListener("click", function (event) {
-            event.preventDefault();
-
-            Swal.fire({
-                title: 'Attendi...',
-                text: 'I dati saranno modificati a breve',
-                icon: 'success',
-                timer: 2500, // Il popup dura 4 secondi
-                showConfirmButton: false,
-                allowOutsideClick: false
-            });
-
-            setTimeout(function () {
-                window.location.href = "<%=servlet%>modificaDatiSistemaStrutturaServlet"
-            }, 2500);
-        })
-    });
-
-    document.querySelectorAll('[id^="cancellaStruttura"]').forEach(function (input) {
-        input.addEventListener("click", function (event) {
-            event.preventDefault();
-
-            Swal.fire({
-                title: 'Attendi...',
-                text: 'I dati saranno modificati a breve',
-                icon: 'success',
-                timer: 2500, // Il popup dura 4 secondi
-                showConfirmButton: false,
-                allowOutsideClick: false
-            });
-
-            setTimeout(function () {
-                window.location.href = "<%=servlet%>cancellazioneDatiSistemaStrutturaServlet"
-            }, 2500);
-        })
-    });
-
-    document.querySelectorAll('[id^="cancellaRecensione"]').forEach(function (input) {
-        input.addEventListener("click", function (event) {
-            event.preventDefault();
-
-            Swal.fire({
-                title: 'Attendi...',
-                text: 'I dati saranno modificati a breve',
-                icon: 'success',
-                timer: 2500, // Il popup dura 4 secondi
-                showConfirmButton: false,
-                allowOutsideClick: false
-            });
-
-            setTimeout(function () {
-                window.location.href = "<%=servlet%>cancellazioneDatiSistemaRecensioneServlet"
-            }, 2500);
-        })
-    });
-
-    document.querySelectorAll('[id^="modificaHost"]').forEach(function (input) {
-        input.addEventListener("click", function (event) {
-            event.preventDefault();
-
-            Swal.fire({
-                title: 'Attendi...',
-                text: 'I dati saranno modificati a breve',
-                icon: 'success',
-                timer: 2500, // Il popup dura 4 secondi
-                showConfirmButton: false,
-                allowOutsideClick: false
-            });
-
-            setTimeout(function () {
-                window.location.href = "<%=servlet%>modificaDatiSistemaHostServlet"
-            }, 2500);
-        })
-    });
-
-    document.querySelectorAll('[id^="modificaPrenotazione"]').forEach(function (input) {
-        input.addEventListener("click", function (event) {
-            event.preventDefault();
-
-            Swal.fire({
-                title: 'Attendi...',
-                text: 'I dati saranno modificati a breve',
-                icon: 'success',
-                timer: 2500, // Il popup dura 4 secondi
-                showConfirmButton: false,
-                allowOutsideClick: false
-            });
-
-            setTimeout(function () {
-                window.location.href = "<%=servlet%>modificaDatiSistemaPrenotazioneServlet"
-            }, 2500);
-        })
-    });
-</script>
 </body>
 </html>

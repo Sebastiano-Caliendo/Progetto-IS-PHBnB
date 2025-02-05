@@ -192,7 +192,7 @@
     }
 
     function reindirizzaAdmin(){
-      window.location.href = 'loginAdmin.jsp';
+      window.location.href = 'loginAdminGUI.jsp';
     }
 
     document.getElementById("dataCheckIn").setAttribute("min", getTodayDate());

@@ -119,14 +119,14 @@
             title: 'Attendi...',
             text: 'I dati saranno modificati a breve',
             icon: 'success',
-            timer: 4000, // Il popup dura 4 secondi
+            timer: 2000, // Il popup dura 2 secondi
             showConfirmButton: false,
             allowOutsideClick: false
         });
 
         setTimeout(function () {
             document.querySelector("form").submit();
-        }, 4000);
+        }, 2000);
     });
 </script>
 </body>

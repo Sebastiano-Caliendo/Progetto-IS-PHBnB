@@ -1,5 +1,7 @@
 package Application.PrenotazioneAlloggio;
 
+import Storage.Occupa.Occupa;
+import Storage.Prenotazione.Prenotazione;
 import Storage.Utente.Utente;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -39,7 +41,8 @@ public class FinalizzaPrenotazioneServlet extends HttpServlet {
         String address;
 
         if(flag) {
-            address = "Interface/visualizzaStoricoPrenotazioniGUI.jsp";
+            address = "Interface/visualizzaStoricoPrenotazioniGUI.jsp?scontrino=true";
+            req.getSession().setAttribute("prenotazioni", prenotazioneAlloggioFacade.visualizzaPrenotazioni(u.getEmail()));
         } else {
             address = "Interface/dettagliAlloggioGUI.jsp?error=1";
         }

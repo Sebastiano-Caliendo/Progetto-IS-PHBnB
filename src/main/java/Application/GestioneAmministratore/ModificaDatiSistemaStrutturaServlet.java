@@ -23,12 +23,19 @@ public class ModificaDatiSistemaStrutturaServlet extends HttpServlet {
         String citta = req.getParameter("cittaStruttura");
         String numAlloggi = req.getParameter("numAlloggiStruttura");
         String descrizione = req.getParameter("descrizioneStruttura");
-        String urlImmagine = req.getParameter("urlImmagine");
 
         GestioneAmministratoreFacade gestioneAmministratoreFacade = new GestioneAmministratoreFacade();
-        gestioneAmministratoreFacade.modificaDatiSistemaStruttura(fkHost, nomeStruttura, via, citta, numAlloggi ,numCivico, descrizione, urlImmagine, idStruttura);
+        boolean flag = gestioneAmministratoreFacade.modificaDatiSistemaStruttura(fkHost, nomeStruttura, via, citta, numAlloggi ,numCivico, descrizione, idStruttura);
 
-        resp.sendRedirect(req.getContextPath() + "/Interface/indexAdmin.jsp");
+        String address;
+
+        if(flag) {
+            address = "Interface/indexAdminGUI.jsp?op=ok";
+        } else {
+            address = "Interface/indexAdminGUI.jsp?error=1";
+        }
+
+        resp.sendRedirect(address);
     }
 
     @Override

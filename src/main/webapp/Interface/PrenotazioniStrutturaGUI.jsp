@@ -1,11 +1,5 @@
 <%@ page import="Storage.Prenotazione.Prenotazione" %>
-<%@ page import="java.util.List" %>
 <%@ page import="Storage.Struttura.Struttura" %>
-<%@ page import="Storage.Prenotazione.PrenotazioneDAO" %>
-<%@ page import="Storage.Alloggio.Alloggio" %>
-<%@ page import="Storage.Alloggio.AlloggioDAO" %>
-<%@ page import="Application.GestioneStrutture.GestioneStrutturaFacade" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="Storage.Occupa.Occupa" %>
 <%@ page import="java.util.Map" %><%--
@@ -73,7 +67,7 @@
             <div class="valore"> <%= occupa.getAlloggio().getNumeroAlloggio() %> </div>
             <div class="valore"> <%= prenotazione.getCheckIn() %> </div>
             <div class="valore"> <%= prenotazione.getCheckOut() %></div>
-            <div class="valore"> <%= prenotazione.getUtente().getNome() + " " + prenotazione.getUtente().getCognome() %> </div>
+            <div class="valore"> <%= prenotazione.getNomeIntestatario() + " " + prenotazione.getCognomeIntestatario() %> </div>
             <div class="valore"> <%= prenotazione.getNumeroPersone() %></div>
             <div class="valore"> <%= occupa.getCostoPrenotazione() %> </div>
         </div>
