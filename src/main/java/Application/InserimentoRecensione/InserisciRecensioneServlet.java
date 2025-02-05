@@ -20,7 +20,9 @@ public class InserisciRecensioneServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String descrizioneRecensione = req.getParameter("descrizioneRecensione");
+        req.setAttribute("callByServlet", "yes");
+
+        String descrizioneRecensione = req.getParameter("descrizione");
         String votoRecensione = req.getParameter("votoRecensione");
         String codicePrenotazione = req.getParameter("codicePrenotazione"); // type = "hidden" nella jsp
         String numeroAlloggio = req.getParameter("numeroAlloggio"); // type = "hidden" nella jsp
@@ -29,9 +31,10 @@ public class InserisciRecensioneServlet extends HttpServlet {
         InserimentoRecensioneFacade inserimentoRecensioneFacade = new InserimentoRecensioneFacade();
         inserimentoRecensioneFacade.inserisciRecensione(req.getSession(), descrizioneRecensione, votoRecensione, codicePrenotazione, numeroAlloggio, idStruttura);
 
-        String nameAlloggio = req.getParameter("nameAlloggio");
+        Utente u = (Utente) req.getSession().getAttribute("utente");
+        req.setAttribute("codiciPrenotazioniRecensite", inserimentoRecensioneFacade.visualizzaRecensioniUtente(u));
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("viewAlloggio.jsp?nameAlloggio=" + nameAlloggio);
+        RequestDispatcher dispatcher = req.getRequestDispatcher("Interface/visualizzaStoricoPrenotazioniGUI.jsp");
         dispatcher.forward(req, resp);
     }
 

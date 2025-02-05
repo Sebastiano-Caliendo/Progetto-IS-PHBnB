@@ -40,19 +40,29 @@ public class InserimentoRecensioneFacade {
     public boolean inserisciRecensione(HttpSession session, String descrizione, String votoRecensione, String codicePrenotazione, String numeroAlloggio, String idStruttura){
 
         try {
+            System.out.println("inizio inserisci recensiome facade");
             RecensioneDAO recensioneDAO = new RecensioneDAO();
             AlloggioDAO alloggioDAO = new AlloggioDAO();
             PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
             Recensione recensione = new Recensione();
 
 
+            System.out.println("1");
             recensione.setUtente((Utente) session.getAttribute("utente"));
+            System.out.println("2");
             recensione.setDescrizione(validator.validateDescrizione(descrizione));
+            System.out.println("3");
             recensione.setVotoRecensione(validator.validateInt(votoRecensione));
+            System.out.println("4");
             recensione.setDataRecensione(LocalDate.now());
+            System.out.println("5");
             recensione.setAlloggio(alloggioDAO.doRetrieveById(validator.validateInt(numeroAlloggio), validator.validateInt(idStruttura)));
+            System.out.println("6");
             recensione.setPrenotazione(prenotazioneDAO.doRetrieveById(validator.validateInt(codicePrenotazione)));
+            System.out.println("7");
             recensioneDAO.doSave(recensione);
+
+            System.out.println("fine dopo il doSave inserisci recensiome facade");
 
             return true;
         } catch (RuntimeException e) {

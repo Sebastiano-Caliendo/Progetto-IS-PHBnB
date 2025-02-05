@@ -37,21 +37,21 @@ public class ModificaPrenotazioneAlloggioServiceTests {
 
     @Test
     public void TC_3_2_1(){
-        assertFalse(prenotazioneAlloggioFacade.modificaPrenotazione("2024-03-10", "2024-03-09", "2", "3"));
+        assertFalse(prenotazioneAlloggioFacade.modificaPrenotazione("2024-03-10", "2024-03-09", "2", "3", "101", "1"));
     }
 
     @Test
     public void TC_3_2_2(){
-        assertFalse(prenotazioneAlloggioFacade.modificaPrenotazione("2024-04-10", "2024-04-12", "3", "3"));
+        assertFalse(prenotazioneAlloggioFacade.modificaPrenotazione("2024-04-10", "2024-04-12", "3", "3", "101", "1"));
     }
 
     @Test
     public void TC_3_2_3(){
-        assertFalse(prenotazioneAlloggioFacade.modificaPrenotazione("2024-10-19", "2024-10-21","4", "Ciao"));
+        assertFalse(prenotazioneAlloggioFacade.modificaPrenotazione("2024-10-19", "2024-10-21","4", "Ciao", "101", "1"));
     }
 
     @Test
     public void TC_3_2_4(){
-        assertTrue(prenotazioneAlloggioFacade.modificaPrenotazione("2025-10-19", "2025-10-21", "4", "12"));
+        assertTrue(prenotazioneAlloggioFacade.modificaPrenotazione("2025-10-19", "2025-10-21", "4", "12", "101", "1"));
     }
 }

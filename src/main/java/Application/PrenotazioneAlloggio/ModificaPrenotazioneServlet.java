@@ -26,12 +26,14 @@ public class ModificaPrenotazioneServlet extends HttpServlet {
         String dataCheckIn = req.getParameter("dataCheckIn");
         String dataCheckOut = req.getParameter("dataCheckOut");
         String numPostiLetto = req.getParameter("numPostiLetto");
+        String numAlloggio = req.getParameter("numAlloggio");
+        String idStruttura = req.getParameter("idStruttura");
 
 
         Utente u = (Utente) req.getSession().getAttribute("utente");
 
         PrenotazioneAlloggioFacade prenotazioneAlloggioFacade = new PrenotazioneAlloggioFacade();
-        boolean flag = prenotazioneAlloggioFacade.modificaPrenotazione(dataCheckIn, dataCheckOut, numPostiLetto, codPrenotazione);
+        boolean flag = prenotazioneAlloggioFacade.modificaPrenotazione(dataCheckIn, dataCheckOut, numPostiLetto, codPrenotazione, numAlloggio, idStruttura);
 
         req.getSession().setAttribute("prenotazioni", prenotazioneAlloggioFacade.visualizzaPrenotazioni(u.getEmail()));
 

@@ -263,6 +263,5 @@
     </form>
 </div>
 
-    <%@ include file="../WEB-INF/moduli/footer.jsp"%>
 </body>
 </html>

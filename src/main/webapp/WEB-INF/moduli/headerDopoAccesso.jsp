@@ -1,4 +1,5 @@
 <%@ page import="Storage.Host.Host" %>
+<%@ page import="Storage.Utente.Utente" %>
 <html>
 <head>
 </head>
@@ -16,7 +17,13 @@
 
     <div id="header">
         <div id="divLogo">
-            <a href="<%=header%>index.jsp" id="parLogo" class="mid-text">PHB&B</a>
+            <% if(u != null) { %>
+                <a href="<%=header%>index.jsp" id="parLogo" class="mid-text">PHB&B</a>
+            <% } else if(h != null) { %>
+                <a href="<%=header%>areaHostGUI.jsp" id="parLogo" class="mid-text">PHB&B</a>
+            <% } else if(a != null) { %>
+                <a href="<%=header%>indexAdminGUI.jsp" id="parLogo" class="mid-text">PHB&B</a>
+            <% } %>
         </div>
         <div id="container">
             <div id="divImg">

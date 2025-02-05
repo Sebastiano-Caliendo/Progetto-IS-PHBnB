@@ -25,7 +25,13 @@
                     Utente admin = (Utente) session.getAttribute("admin");
 
                 %>
-                <a href="<%= header %>index.jsp" title="home">PHB<span class="normal-text">&</span>B</a>
+                <% if(utente != null) { %>
+                    <a href="<%= header %>index.jsp" title="home">PHB<span class="normal-text">&</span>B</a>
+                <% } else if(host != null) { %>
+                    <a href="<%= header %>areaHostGUI.jsp" title="home">PHB<span class="normal-text">&</span>B</a>
+                <% } else if(admin != null) { %>
+                    <a href="<%= header %>indexAdminGUI.jsp" title="home">PHB<span class="normal-text">&</span>B</a>
+                <% } %>
             </div>
             <!-- <div class="buttonHeader">
                 <div class="buttonRegistrazione">

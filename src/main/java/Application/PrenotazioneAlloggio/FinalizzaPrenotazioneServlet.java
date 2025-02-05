@@ -37,7 +37,7 @@ public class FinalizzaPrenotazioneServlet extends HttpServlet {
 
         PrenotazioneAlloggioFacade prenotazioneAlloggioFacade = new PrenotazioneAlloggioFacade();
         boolean flag = prenotazioneAlloggioFacade.finalizzaPrenotazione(u, nome, cognome, dataCheckIn, dataCheckOut, numOspiti, numAlloggio, codStruttura, numeroCarta, dataScadenza, cvvCarta);
-
+        System.out.println(flag);
         String address;
 
         if(flag) {

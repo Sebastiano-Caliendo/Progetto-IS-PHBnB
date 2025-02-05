@@ -6,7 +6,7 @@ html, body {
 #header {
     width: 100vw;
     height: 15vh;
-    background-color: #fff4f6;
+    background-color: white;
     display: flex;
     justify-content: space-between;
     align-content: center;

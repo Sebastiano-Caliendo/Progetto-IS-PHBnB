@@ -145,6 +145,8 @@ public class RecensioneDAO {
                     "INSERT INTO recensioni (fk_utente, descrizione, votorecensione, data_recensione, fk_numeroalloggio, fk_codicestruttura, fk_codiceprenotazione) VALUES (?,?,?,?,?,?,?)",
                     Statement.RETURN_GENERATED_KEYS);
 
+
+            System.out.println("inizio RecensioneDAO");
             ps.setString(1, recensione.getUtente().getEmail());
             ps.setString(2, recensione.getDescrizione());
             ps.setInt(3, recensione.getVotoRecensione());
@@ -153,7 +155,10 @@ public class RecensioneDAO {
             ps.setInt(6, recensione.getAlloggio().getStruttura().getIdStruttura());
             ps.setInt(7, recensione.getPrenotazione().getCodicePrenotazione());
 
+            System.out.println("stiamo salvando");
+
             if (ps.executeUpdate() != 1) {
+                System.out.println("errore inserimento recensione");
                 throw new RuntimeException("INSERT error.");
             }
         } catch (SQLException e) {

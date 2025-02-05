@@ -12,6 +12,7 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Interface/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Interface" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Interface/inserisciRecensioneGUI.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Interface" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Interface/modificaDatiHost.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Interface" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/moduli/footer.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/moduli" />
       </map>
     </option>
   </component>

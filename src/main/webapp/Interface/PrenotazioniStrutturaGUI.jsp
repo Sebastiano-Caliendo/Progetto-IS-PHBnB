@@ -74,6 +74,5 @@
         <hr class="prenotazione">
     <% } %>
 
-    <%@ include file="../WEB-INF/moduli/footer.jsp"%>
 </body>
 </html>

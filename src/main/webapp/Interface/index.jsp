@@ -28,21 +28,21 @@
   <% if(callByServlet == 1) { %>
   <link rel="stylesheet" href="Interface/css/index.css">
   <link rel="stylesheet" href="Interface/css/headerDopoAccesso.css">
-  <!--<link rel="stylesheet" href="Interface/css/headerDopoAccesso.css">
-  <link rel="stylesheet" href="Interface/css/footer.css">-->
+  <!--<link rel="stylesheet" href="Interface/css/headerDopoAccesso.css">-->
+  <link rel="stylesheet" href="Interface/css/footer.css">
   <link rel="stylesheet" href="Interface/css/style.css">
   <%
   }
   else { %>
   <link rel="stylesheet" href="css/index.css">
   <link rel="stylesheet" href="css/headerDopoAccesso.css">
-  <!--<link rel="stylesheet" href="css/headerDopoAccesso.css">
-  <link rel="stylesheet" href="css/footer.css"> -->
+  <!--<link rel="stylesheet" href="css/headerDopoAccesso.css"> -->
+  <link rel="stylesheet" href="css/footer.css">
   <link rel="stylesheet" href="css/style.css">
   <% } %>
 
 </head>
-<body>
+<body style="margin : 0;">
 
   <%
     String servlet = "";
@@ -160,7 +160,7 @@
   <a href = "loginHostGUI.jsp">Login host</a>
   <a href = "registrazioneUtenteGUI.jsp">Registrazione utente</a>
   <a href = "areaUtenteGUI.jsp">Area utente</a>-->
-
+  <%@ include file="../WEB-INF/moduli/footer.jsp"%>
   <script>
     function apriSceltaLogin(){
 

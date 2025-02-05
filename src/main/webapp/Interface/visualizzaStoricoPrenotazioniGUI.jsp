@@ -54,11 +54,11 @@
     List<Occupa> prenotazioni = (List<Occupa>) session.getAttribute("prenotazioni");
     List<Integer> prenotazioniRecensite = (List<Integer>) request.getAttribute("codiciPrenotazioniRecensite");
 
-    if(error != null && error.equals("1")) {%>
-        <script>alert("Prenotazione non modificata!")</script>
-    <%} else if(error != null && error.equals("2")) {%>
-        <script>alert("Prenotazione non eliminata!")</script>
-    <%}
+    //if(error != null && error.equals("1")) {%>
+        <!--<script>alert("Prenotazione non modificata!")</script>
+    <%//} else if(error != null && error.equals("2")) {%>
+        <script>alert("Prenotazione non eliminata!")</script> -->
+    <%//}
 
     String scontrino = request.getParameter("scontrino");
 
@@ -66,7 +66,7 @@
     if(scontrino != null && scontrino.equals("true")) {%>
         <div id="divVisualizzaScontrino">
             <p class="normal-small-text" style="text-align: center; margin-top: 10%;">Prenotazione effettuata con successo!</p>
-            <button class="buttons" onclick="generatePDF()">Visualizza scontrino</button>
+            <button class="buttons" onclick="generatePDF()">Visualizza</button>
             <button class="buttons" onclick="window.location.href = '<%= jsp %>visualizzaStoricoPrenotazioniGUI.jsp'">Chiudi</button>
         </div>
     <%}%>
@@ -117,7 +117,7 @@
                                     LocalDate dataAttuale = LocalDate.now();
 
                                     if(dataAttuale.plusDays(7).isBefore(pr.getPrenotazione().getCheckIn())) { %>
-                                        <a href="#" class="buttons" onclick="abilitaModifica(<%=i%>, <%=pr.getPrenotazione().getCodicePrenotazione()%>)">Modifica</a>
+                                        <a href="#" class="buttons" onclick="abilitaModifica(<%=i%>, <%=pr.getPrenotazione().getCodicePrenotazione()%>, <%=pr.getAlloggio().getNumeroAlloggio()%>, <%=pr.getAlloggio().getStruttura().getIdStruttura()%>)">Modifica</a>
                                         <a href="#" class="buttons" onclick="confermaCancellazione(<%=pr.getPrenotazione().getCodicePrenotazione()%>)">Elimina</a>
                                     <%}%>
 
@@ -168,7 +168,10 @@
 <script>
     async function generatePDF() {
 
-        <%Occupa pr = prenotazioni.getLast();%>
+        <%
+            if(prenotazioni != null && !prenotazioni.isEmpty()) {
+                Occupa pr = prenotazioni.getLast();
+        %>
 
         const { jsPDF } = window.jspdf;
         const pdf = new jsPDF();
@@ -191,6 +194,8 @@
 
         pdf.save('scontrino.pdf');
     }
+
+    <% } %>
 
     function confermaCancellazione(codPrenotazione) {
 
@@ -231,7 +236,7 @@
         buttonSi.style.width = "20%";
         //associa al button il percorso della pagine jsp da raggiungere dopo il click
         buttonSi.addEventListener("click", function() {
-            window.location.href = "eliminaPrenotazione?codPrenotazione=" + codPrenotazione;
+            window.location.href = "<%= servlet %>eliminaPrenotazione?codPrenotazione=" + codPrenotazione;
         });
 
         buttonNo.textContent = "No";
@@ -256,7 +261,7 @@
         cancellazioneDiv.style.display = "none";
     }
 
-    function abilitaModifica(indice, codPrenotazione) {
+    function abilitaModifica(indice, codPrenotazione, numAlloggio, idStruttura) {
 
         //oscuro i tasti modifica e elimina
         //document.getElementsByClassName("divButtons")[indice].style.display = "none";
@@ -268,12 +273,27 @@
 
         //setto il codice prenotazione come attributo del form da inviare alla servlet
         var inputCodPrenotazione = document.createElement("input");
+        var inputNumAlloggio = document.createElement("input");
+        var inputIdStruttura = document.createElement("input");
+
         inputCodPrenotazione.type = "text";
         inputCodPrenotazione.hidden = true;
         inputCodPrenotazione.value = codPrenotazione;
         inputCodPrenotazione.name = "codPrenotazione";
 
+        inputNumAlloggio.type = "text";
+        inputNumAlloggio.hidden = true;
+        inputNumAlloggio.value = numAlloggio;
+        inputNumAlloggio.name = "numAlloggio";
+
+        inputIdStruttura.type = "text";
+        inputIdStruttura.hidden = true;
+        inputIdStruttura.value = idStruttura;
+        inputIdStruttura.name = "idStruttura";
+
         document.getElementById("formModificaPrenotazione").appendChild(inputCodPrenotazione);
+        document.getElementById("formModificaPrenotazione").appendChild(inputNumAlloggio);
+        document.getElementById("formModificaPrenotazione").appendChild(inputIdStruttura);
 
 
         //lo appendo alla prenotazione da modificare

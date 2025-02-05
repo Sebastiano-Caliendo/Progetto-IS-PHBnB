@@ -88,11 +88,12 @@ public class PrenotazioneAlloggioFacade {
     public boolean finalizzaPrenotazione(Utente utente,String nome, String cognome, String checkIn, String checkOut, String numPostiLetto, String numAlloggio, String codStruttura, String numeroCarta, String dataScadenza, String cvvCarta) {
 
         try {
+            System.out.println("sono in finalizza");
             LocalDate checkInDate = validator.validateData(checkIn);
             LocalDate checkOutDate = validator.validateData(checkOut);
 
             if(checkInDate.isAfter(checkOutDate)) return false;
-
+            System.out.println("prima dei validatore");
             PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
             Prenotazione p = new Prenotazione(validator.validateNomeCognome(nome),
                                             validator.validateNomeCognome(cognome),
@@ -103,7 +104,7 @@ public class PrenotazioneAlloggioFacade {
                                             validator.validateNumeroCarta(numeroCarta),
                                             validator.validateData(dataScadenza),
                                             validator.validateCVVCarta(cvvCarta));
-
+            System.out.println("dopo dei validatore");
             int codicePrenotazione = prenotazioneDAO.doSave(p);
             p.setCodicePrenotazione(codicePrenotazione);
 
@@ -118,7 +119,9 @@ public class PrenotazioneAlloggioFacade {
 
             OccupaDAO occupaDAO = new OccupaDAO();
             Occupa o = new Occupa(p, alloggio , costoPrenotazione);
+            System.out.println("prima del save");
             occupaDAO.doSave(o);
+            System.out.println("dopo il save");
 
 
 
@@ -138,7 +141,7 @@ public class PrenotazioneAlloggioFacade {
      *
      * @return restituisce true se la modifica della prenotazione è andata a buon fine, false altrimenti
      **/
-    public boolean modificaPrenotazione(String checkIn, String checkOut, String numPostiLetto, String codPrenotazione) {
+    public boolean modificaPrenotazione(String checkIn, String checkOut, String numPostiLetto, String codPrenotazione, String numAlloggio, String codStruttura) {
 
         try {
             PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
@@ -149,6 +152,22 @@ public class PrenotazioneAlloggioFacade {
             LocalDate dataCheckIn = validator.validateData(checkIn);
             LocalDate dataCheckOut = validator.validateData(checkOut);
             int postiLetto = validator.validateInt(numPostiLetto);
+
+            double costoPrenotazione = 0.0;
+
+            AlloggioDAO alloggioDAO = new AlloggioDAO();
+            Alloggio alloggio = alloggioDAO.doRetrieveById(validator.validateInt(numAlloggio), validator.validateInt(codStruttura));
+
+            int diffGiorni = (int) ChronoUnit.DAYS.between(dataCheckIn, dataCheckOut);
+
+            costoPrenotazione = diffGiorni * alloggio.getPrezzoNotte();
+
+            OccupaDAO occupaDAO = new OccupaDAO();
+            Occupa o = new Occupa(p, alloggio , costoPrenotazione);
+            System.out.println("prima del save");
+            occupaDAO.doUpdate(o);
+            System.out.println("dopo il save");
+
 
             if(dataAttuale.isBefore(p.getCheckIn().minusDays(7)) && dataCheckIn.isBefore(dataCheckOut)) {
                 prenotazioneDAO.doUpdate(p, dataCheckIn, dataCheckOut, postiLetto);

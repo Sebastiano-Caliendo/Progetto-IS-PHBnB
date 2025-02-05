@@ -130,4 +130,23 @@ public class OccupaDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public void doUpdate(Occupa occupa) {
+        //System.out.println("sto modificando id numero = " +idStruttura);
+        try (Connection con = Connessione.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(
+                    "UPDATE occupa SET costo_prenotazione=? WHERE fk_prenotazione=? and fk_alloggio=? and fk_strutturaAlloggio=?");
+
+            ps.setDouble(1, occupa.getCostoPrenotazione());
+            ps.setInt(2, occupa.getPrenotazione().getCodicePrenotazione());
+            ps.setInt(3, occupa.getAlloggio().getNumeroAlloggio());
+            ps.setInt(4, occupa.getAlloggio().getStruttura().getIdStruttura());
+
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("UPDATE error.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

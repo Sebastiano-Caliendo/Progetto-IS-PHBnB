@@ -112,8 +112,6 @@
             </div>
     <%  }  %>
 
-    <%@ include file="../WEB-INF/moduli/footer.jsp"%>
-
     <!-- Script utilizzato per inviare il form nascosto quando clicchi su una struttura -->
     <script>
         function submitForm(index) {

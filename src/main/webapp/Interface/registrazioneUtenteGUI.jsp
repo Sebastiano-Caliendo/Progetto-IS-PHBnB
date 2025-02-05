@@ -15,7 +15,7 @@
             <p id="parRegistrazione">REGISTRATI A PHB&B<p/>
 
             <%if(error != null && error.equals("1")) {%>
-                <p id="parErrore">Utente già registrato</p>
+                <p id="parErrore">Errore nella registrazione</p>
             <%}%>
 
             <form id="formLogin" action="../registrazioneUtente" method="POST">

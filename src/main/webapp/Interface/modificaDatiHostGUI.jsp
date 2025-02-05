@@ -53,7 +53,7 @@
         <p id="parModificaDati" class="normal-text">MODIFICA DATI HOST<p/>
 
         <%if(error != null && error.equals("1")) {%>
-            <p id="parErrore" class="loginElements">Credenziali errate</p>
+            <p id="parErrore" class="loginElements">Errore nella modifica</p>
         <%}%>
 
         <%if(host != null) {%>

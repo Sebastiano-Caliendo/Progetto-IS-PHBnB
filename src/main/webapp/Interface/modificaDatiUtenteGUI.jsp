@@ -54,7 +54,7 @@
             <p id="parModificaDati" class="normal-text">MODIFICA DATI UTENTE<p/>
 
             <%if(error != null && error.equals("1")) {%>
-                <p id="parErrore" class="loginElements">Credenziali errate</p>
+                <p id="parErrore" class="loginElements">Errore nella modifica</p>
             <%}%>
 
             <%if(utente != null) {%>

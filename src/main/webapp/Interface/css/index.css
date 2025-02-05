@@ -199,7 +199,8 @@ input {
     text-align: center;
     height: 60%;
     width: 10%;
-    background-color: #2C2C2C;
+    background-color: black;
+    /*background-color: #2C2C2C;*/
     border-radius: 5px;
     margin: auto auto auto 10px;
 }
@@ -207,7 +208,8 @@ input {
 #buttonCerca {
     width: 100% !important;
     border: none;
-    background-color: #2C2C2C;
+    background-color: black;
+    /*background-color: #2C2C2C;*/
     color: white;
 }
 

@@ -142,7 +142,7 @@ public class PrenotazioneDAO {
 
     public void doUpdate(Prenotazione prenotazione, LocalDate checkIn, LocalDate checkOut, int numeroPersone) {
         try (Connection con = Connessione.getConnection()) {
-
+            System.out.println("sono in update");
             PreparedStatement ps = con.prepareStatement("UPDATE prenotazione SET check_in=?, check_out=?, numero_persone=? WHERE codice_prenotazione=?");
 
             ps.setDate(1, Date.valueOf(checkIn));
@@ -151,6 +151,7 @@ public class PrenotazioneDAO {
             ps.setInt(4, prenotazione.getCodicePrenotazione());
 
             if (ps.executeUpdate() != 1) {
+                System.out.println("errore update");
                 throw new RuntimeException("UPDATE error.");
             }
         } catch (SQLException e) {

@@ -57,7 +57,6 @@ public class GestioneAmministratoreFacade {
      * @return il metodo restituisce una lista di tutte le prenotazioni del sistema
      */
     public List<Prenotazione> visualizzaDatiSistemaPrenotazione(){
-
         PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
         List<Prenotazione> prenotazioni;
         prenotazioni = prenotazioneDAO.doRetrieveAll();
@@ -174,16 +173,17 @@ public class GestioneAmministratoreFacade {
      * @return il metodo restituisce un valore booleano (true o false) rispetto a se è stata effettuata o meno la modifica
      */
     public boolean modificaDatiSistemaPrenotazione(String codPrenotazione, String checkIn, String checkOut, String numPersone){
-
+        System.out.println("Sono nel facade del modifica dati");
         try {
             PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAO();
             Prenotazione p = prenotazioneDAO.doRetrieveById(validator.validateInt(codPrenotazione));
 
+            System.out.println("prima dell'update");
             prenotazioneDAO.doUpdate(p,
                                     validator.validateData(checkIn),
                                     validator.validateData(checkOut),
                                     validator.validateInt(numPersone));
-
+            System.out.println("dopo l'update");
             return true;
         } catch (RuntimeException e) {
             return false;
