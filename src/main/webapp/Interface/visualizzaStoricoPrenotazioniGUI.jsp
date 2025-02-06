@@ -169,31 +169,60 @@
     async function generatePDF() {
 
         <%
-            if(prenotazioni != null && !prenotazioni.isEmpty()) {
+            if (prenotazioni != null && !prenotazioni.isEmpty()) {
                 Occupa pr = prenotazioni.getLast();
         %>
 
         const { jsPDF } = window.jspdf;
         const pdf = new jsPDF();
 
+        // Centrare il titolo
+        const title = "Scontrino elettronico";
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const titleWidth = pdf.getTextWidth(title);
+        const centerX = (pageWidth - titleWidth) / 2;
+
         pdf.setFont("helvetica", "bold");
         pdf.setFontSize(16);
-        pdf.text(20, 10, "Scontrino elettronico");
+        pdf.text(title, centerX, 10);
 
-        pdf.setFont("times", "normal");
-        pdf.text(20, 30, `Nome: ` + "<%=pr.getPrenotazione().getNomeIntestatario()%>");
-        pdf.text(20, 40, `Cognome: ` + "<%=pr.getPrenotazione().getCognomeIntestatario()%>");
-        pdf.text(20, 50, `Data Check In: ` + "<%=pr.getPrenotazione().getCheckIn()%>");
-        pdf.text(20, 60, `Data Check Out: ` + "<%=pr.getPrenotazione().getCheckOut()%>");
-        pdf.text(20, 70, `Numero Carta: ` + "<%=pr.getPrenotazione().getNumeroCartaCredito()%>");
-        pdf.text(20, 80, `Data di Scadenza: ` + "<%=pr.getPrenotazione().getDataScadenzaCarta()%>");
-        pdf.text(20, 90, `Nome struttura: ` + "<%=pr.getAlloggio().getStruttura().getNomeStruttura()%>");
-        pdf.text(20, 100, `Indirizzo: ` + "<%=pr.getAlloggio().getStruttura().getVia()%>" + " <%=pr.getAlloggio().getStruttura().getNumCivico()%>" + " <%=pr.getAlloggio().getStruttura().getCitta()%>");
-        pdf.text(20, 110, `Numero alloggio: ` + "<%=pr.getAlloggio().getNumeroAlloggio()%>");
-        pdf.text(20, 120, `Prezzo totale prenotazione: ` + "<%=pr.getCostoPrenotazione()%>");
+        pdf.setFont("arial", "normal");
+        pdf.setFontSize(12);
+
+        pdf.setFillColor(255, 244, 246);
+        pdf.setDrawColor(184, 134, 11);
+        pdf.setLineWidth(0.5);
+        pdf.roundedRect(15, 25, 180, 60, 5, 5);
+
+        pdf.setFont("helvetica", "bold");
+        pdf.setTextColor(184, 134, 11);
+        pdf.text(20, 35, `Dettagli anagrifici`);
+        pdf.setFontSize(12);
+        pdf.setTextColor(0, 0, 0);
+
+        pdf.text(20, 45, `Nome: ` + "<%=pr.getPrenotazione().getNomeIntestatario()%>");
+        pdf.text(20, 55, `Cognome: ` + "<%=pr.getPrenotazione().getCognomeIntestatario()%>");
+        pdf.text(20, 65, `Numero Carta: ` + "<%=pr.getPrenotazione().getNumeroCartaCredito()%>");
+        pdf.text(20, 75, `Data di Scadenza: ` + "<%=pr.getPrenotazione().getDataScadenzaCarta()%>");
+
+        pdf.setFont("helvetica", "bold");
+        pdf.setTextColor(184, 134, 11);
+        pdf.text(20, 100, `Dettagli prenotazione`);
+        pdf.roundedRect(15, 90, 180, 90, 5, 5);
+        pdf.setTextColor(0, 0, 0);
+
+        pdf.text(20, 110, `Data Check In: ` + "<%=pr.getPrenotazione().getCheckIn()%>");
+        pdf.text(20, 120, `Data Check Out: ` + "<%=pr.getPrenotazione().getCheckOut()%>");
+        pdf.text(20, 130, `Nome struttura: ` + "<%=pr.getAlloggio().getStruttura().getNomeStruttura()%>");
+        pdf.text(20, 140, `Indirizzo: ` + "<%=pr.getAlloggio().getStruttura().getVia()%> " + "<%=pr.getAlloggio().getStruttura().getNumCivico()%> " + "<%=pr.getAlloggio().getStruttura().getCitta()%>");
+        pdf.text(20, 150, `Numero alloggio: ` + "<%=pr.getAlloggio().getNumeroAlloggio()%>");
+        pdf.text(20, 160, `Prezzo totale prenotazione: ` + "<%=pr.getCostoPrenotazione()%>");
 
         pdf.save('scontrino.pdf');
     }
+
+
+
 
     <% } %>
 
