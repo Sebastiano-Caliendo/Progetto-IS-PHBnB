@@ -182,39 +182,45 @@
                         <p><b>Nome</b></p>
                         <input type="text" name="nome" id="nome" class="datiPrenotazione" required>
                     </div>
+                    <hr>
                     <div class="divDatiPrenotazione">
                         <p><b>Cognome</b></p>
                         <input type="text" name="cognome" id="cognome" class="datiPrenotazione" required>
                     </div>
+                    <hr>
                     <div class="divDatiPrenotazione">
                         <p><b>Check-in</b></p>
                         <input type="date" name="dataCheckIn" id="checkInData" class="datiPrenotazione" value = "<%=request.getParameter("check-in")%>" required>
                     </div>
+                    <hr>
                     <div class="divDatiPrenotazione">
                         <p><b>Check-out</b></p>
                         <input type="date" name="dataCheckOut" id="checkOutData" class="datiPrenotazione" value = "<%=request.getParameter("check-out")%>" required>
                     </div>
+                    <hr>
                     <div class="divDatiPrenotazione">
                         <p><b>Numero carta</b></p>
                         <input type="text" name="numeroCarta" id="numeroCarta" class="datiPrenotazione" minlength = "16" maxlength="16" required>
                     </div>
+                    <hr>
                     <div class="divDatiPrenotazione">
                         <p><b>Data scadenza</b></p>
                         <input type="date" name="dataScadenzaCarta" id="dataScadenzaCarta" class="datiPrenotazione" required>
                     </div>
+                    <hr>
                     <div class="divDatiPrenotazione">
                         <p><b>CVV</b></p>
                         <input type="text" name="cvvCarta" class="datiPrenotazione" minlength="3" maxlength="3" required>
+                    </div>
+                    <br>
+                    <div class="divDatiPrenotazione">
+                        <input type="submit" class="buttons" id = "buttonConferma" value="Conferma">
+                        <button onclick="chiudiConferma()" class="buttons">Annulla</button>
                     </div>
                     <input type = "hidden" value = "<%=alloggio.getPrezzoNotte() * differenzaGiorni%>" id = "prezzoNotteCalcolato">
                     <input type="hidden" value="<%=alloggio.getNumeroAlloggio()%>" name="numAlloggio">
                     <input type="hidden" value="<%=alloggio.getStruttura().getIdStruttura()%>" name="codStruttura">
                     <input type="hidden" value="<%=request.getParameter("numOspiti")%>" name="numOspiti">
-
-                <div class="divDatiPrenotazione">
-                    <input type="submit" class="buttons" id = "buttonConferma" value="Conferma">
-                    <button onclick="chiudiConferma()" class="buttons">Annulla</button>
-                </div>
 
                 </form>
             </div>

@@ -181,13 +181,11 @@
         const pageWidth = pdf.internal.pageSize.getWidth();
         const titleWidth = pdf.getTextWidth(title);
         const centerX = (pageWidth - titleWidth) / 2;
+        let rightX = 190;
 
         pdf.setFont("helvetica", "bold");
         pdf.setFontSize(16);
         pdf.text(title, centerX, 10);
-
-        pdf.setFont("arial", "normal");
-        pdf.setFontSize(12);
 
         pdf.setFillColor(255, 244, 246);
         pdf.setDrawColor(184, 134, 11);
@@ -196,27 +194,47 @@
 
         pdf.setFont("helvetica", "bold");
         pdf.setTextColor(184, 134, 11);
-        pdf.text(20, 35, `Dettagli anagrifici`);
+        pdf.text(20, 35, `Dettagli Anagrifici`);
         pdf.setFontSize(12);
         pdf.setTextColor(0, 0, 0);
 
-        pdf.text(20, 45, `Nome: ` + "<%=pr.getPrenotazione().getNomeIntestatario()%>");
-        pdf.text(20, 55, `Cognome: ` + "<%=pr.getPrenotazione().getCognomeIntestatario()%>");
-        pdf.text(20, 65, `Numero Carta: ` + "<%=pr.getPrenotazione().getNumeroCartaCredito()%>");
-        pdf.text(20, 75, `Data di Scadenza: ` + "<%=pr.getPrenotazione().getDataScadenzaCarta()%>");
+        pdf.setFont("arial", "bold");
+        pdf.text(20, 50, `Nome:`);
+        pdf.text(20, 60, `Cognome:`);
+        pdf.text(20, 70, `Numero Carta:`);
+        pdf.text(20, 80, `Data di Scadenza:`);
+
+        pdf.setFont("arial", "normal");
+        pdf.text(rightX - pdf.getTextWidth("<%=pr.getPrenotazione().getNomeIntestatario()%>"), 50, "<%=pr.getPrenotazione().getNomeIntestatario()%>");
+        pdf.text(rightX - pdf.getTextWidth("<%=pr.getPrenotazione().getCognomeIntestatario()%>"), 60, "<%=pr.getPrenotazione().getCognomeIntestatario()%>");
+        pdf.text(rightX - pdf.getTextWidth("<%=pr.getPrenotazione().getNumeroCartaCredito()%>"), 70, "<%=pr.getPrenotazione().getNumeroCartaCredito()%>");
+        pdf.text(rightX - pdf.getTextWidth("<%=pr.getPrenotazione().getDataScadenzaCarta()%>"), 80, "<%=pr.getPrenotazione().getDataScadenzaCarta()%>");
 
         pdf.setFont("helvetica", "bold");
         pdf.setTextColor(184, 134, 11);
-        pdf.text(20, 100, `Dettagli prenotazione`);
-        pdf.roundedRect(15, 90, 180, 90, 5, 5);
+        pdf.setFontSize(16);
+        pdf.text(20, 100, `Dettagli Prenotazione`);
+        pdf.roundedRect(15, 90, 180, 80, 5, 5);
         pdf.setTextColor(0, 0, 0);
 
-        pdf.text(20, 110, `Data Check In: ` + "<%=pr.getPrenotazione().getCheckIn()%>");
-        pdf.text(20, 120, `Data Check Out: ` + "<%=pr.getPrenotazione().getCheckOut()%>");
-        pdf.text(20, 130, `Nome struttura: ` + "<%=pr.getAlloggio().getStruttura().getNomeStruttura()%>");
-        pdf.text(20, 140, `Indirizzo: ` + "<%=pr.getAlloggio().getStruttura().getVia()%> " + "<%=pr.getAlloggio().getStruttura().getNumCivico()%> " + "<%=pr.getAlloggio().getStruttura().getCitta()%>");
-        pdf.text(20, 150, `Numero alloggio: ` + "<%=pr.getAlloggio().getNumeroAlloggio()%>");
-        pdf.text(20, 160, `Prezzo totale prenotazione: ` + "<%=pr.getCostoPrenotazione()%>");
+        pdf.setFontSize(12);
+        pdf.setFont("arial", "bold");
+        pdf.text(20, 115, `Data Check In: `);
+        pdf.text(20, 125, `Data Check Out: `);
+        pdf.text(20, 135, `Nome struttura: `);
+        pdf.text(20, 145, `Indirizzo: `);
+        pdf.text(20, 155, `Numero alloggio: `);
+        pdf.text(20, 165, `Prezzo totale prenotazione: `);
+
+        let prezzoFormattato = parseFloat("<%=pr.getCostoPrenotazione()%>").toFixed(2) + "€";
+
+        pdf.setFont("arial", "normal");
+        pdf.text(rightX - pdf.getTextWidth("<%=pr.getPrenotazione().getCheckIn()%>"), 110, "<%=pr.getPrenotazione().getCheckIn()%>");
+        pdf.text(rightX - pdf.getTextWidth("<%=pr.getPrenotazione().getCheckOut()%>"), 120, "<%=pr.getPrenotazione().getCheckOut()%>");
+        pdf.text(rightX - pdf.getTextWidth("<%=pr.getAlloggio().getStruttura().getNomeStruttura()%>"), 130, "<%=pr.getAlloggio().getStruttura().getNomeStruttura()%>");
+        pdf.text(rightX - pdf.getTextWidth("<%=pr.getAlloggio().getStruttura().getVia()%> <%=pr.getAlloggio().getStruttura().getNumCivico()%> <%=pr.getAlloggio().getStruttura().getCitta()%>"), 140, "<%=pr.getAlloggio().getStruttura().getVia()%> <%=pr.getAlloggio().getStruttura().getNumCivico()%> <%=pr.getAlloggio().getStruttura().getCitta()%>");
+        pdf.text(rightX - pdf.getTextWidth("<%=pr.getAlloggio().getNumeroAlloggio()%>"), 150, "<%=pr.getAlloggio().getNumeroAlloggio()%>");
+        pdf.text(rightX - pdf.getTextWidth(prezzoFormattato), 160, prezzoFormattato);
 
         pdf.save('scontrino.pdf');
     }
