@@ -7,7 +7,7 @@ Offre anche agli host la possibilità di inserire e gestire le proprie strutture
 ### Il PHb&b Team
 
 - Sebastiano Caliendo - [Sebastiano-Caliendo](https://github.com/Sebastiano-Caliendo)
-- Niccolò Pio Tancredi - [neacc](https://github.com/neacc)
+- Niccolò Pio Tancredi - [nicotanc](https://github.com/nicotanc)
 - Domenico Cirillo - [DomenicoDC25](https://github.com/DomenicoDC25)
 
 ## Documentazione
